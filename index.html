@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-variant="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learning Machine builds models that learn and adapt at inference time.">
+  <title>Learning Machine | Build AI that truly Learns</title>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/figma-106/72b676755d023ede62355f1b8555e1a3f895ff17.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?rev=opaque-header-v10">
+</head>
+<body>
+  <header class="site-header" id="header">
+    <button id="variant-toggle" class="variant-toggle" type="button" aria-label="Switch to dark version" aria-pressed="false"></button>
+    <a href="#home" class="brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#approach">Approach</a><a href="#vision">Vision</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav>
+  </header>
+  <main>
+    <section id="home" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" src="assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" src="assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
+    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
+    <section id="approach" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="metadata" poster="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
+    <section id="join" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip" aria-describedby="role-tooltip" aria-expanded="false">See open roles</button><div id="role-tooltip" class="role-tooltip" role="status">Coming soon｜<a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self‑recommendation</a></div></div><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div></section>
+  </main>
+  <footer><div class="footer-main"><div><a href="#home" class="footer-brand">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#vision">Vision</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
+  <script>
+    const root = document.documentElement;
+    const variantToggle = document.querySelector('#variant-toggle');
+    const menuButton = document.querySelector('.menu-btn');
+    const mobileMenu = document.querySelector('#mobile-menu');
+    const roleTooltipWrap = document.querySelector('.role-tooltip-wrap');
+    const roleTooltipTrigger = document.querySelector('.role-tooltip-trigger');
+    const video = document.querySelector('#approach-video');
+    const media = document.querySelector('.device-media');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileViewport = matchMedia('(max-width: 1023px)');
+    let roleTooltipCloseTimer = 0;
+    const cancelRoleTooltipClose = () => { clearTimeout(roleTooltipCloseTimer); roleTooltipCloseTimer = 0; };
+    const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
+    const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
+    const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
+    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); };
+    const toggleVariant = () => setVariant(root.dataset.variant === 'light' ? 'dark' : 'light');
+    variantToggle.addEventListener('dblclick', toggleVariant);
+    variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleVariant(); } });
+    menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; mobileMenu.hidden = open; menuButton.setAttribute('aria-expanded', String(!open)); menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
+    mobileMenu.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
+    mobileViewport.addEventListener('change', (event) => { if (!event.matches) closeMenu(); });
+    roleTooltipWrap.addEventListener('pointerenter', () => { if (!mobileViewport.matches) { cancelRoleTooltipClose(); setRoleTooltipOpen(true); } });
+    roleTooltipWrap.addEventListener('pointerleave', () => { if (!mobileViewport.matches && !roleTooltipWrap.contains(document.activeElement)) scheduleRoleTooltipClose(); });
+    roleTooltipWrap.addEventListener('focusin', () => { if (!mobileViewport.matches) { cancelRoleTooltipClose(); setRoleTooltipOpen(true); } });
+    roleTooltipWrap.addEventListener('focusout', (event) => { if (!mobileViewport.matches && !roleTooltipWrap.contains(event.relatedTarget)) setRoleTooltipOpen(false); });
+    roleTooltipTrigger.addEventListener('click', () => { if (mobileViewport.matches) setRoleTooltipOpen(roleTooltipTrigger.getAttribute('aria-expanded') !== 'true'); });
+    addEventListener('click', (event) => { if (mobileViewport.matches && !roleTooltipWrap.contains(event.target)) setRoleTooltipOpen(false); });
+    addEventListener('keydown', (event) => { if (event.key === 'Escape' && !mobileMenu.hidden) { closeMenu(); menuButton.focus(); } });
+    let videoRevealScheduled = false;
+    const revealVideoAfterFrame = () => {
+      if (videoRevealScheduled || media.classList.contains('video-is-playing')) return;
+      videoRevealScheduled = true;
+      if ('requestVideoFrameCallback' in video) video.requestVideoFrameCallback(() => media.classList.add('video-is-playing'));
+      else {
+        const revealDecodedFrame = () => requestAnimationFrame(() => media.classList.add('video-is-playing'));
+        if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) revealDecodedFrame();
+        else video.addEventListener('loadeddata', revealDecodedFrame, { once: true });
+      }
+    };
+    const playVideo = () => { if (reducedMotion.matches) return; video.play().then(revealVideoAfterFrame).catch(() => {}); };
+    const observer = new IntersectionObserver((entries) => { if (entries.some((entry) => entry.isIntersecting)) { playVideo(); observer.disconnect(); } }, { rootMargin: '300px 0px' });
+    observer.observe(media);
+    video.addEventListener('playing', revealVideoAfterFrame, { once: true });
+  </script>
+</body>
+</html>
