@@ -176,13 +176,13 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .stack { inset:0; position:absolute; }
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
 .stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:442.361px; width:423.364px; }
-.card-wrap-a1 { height:479.066px; left:calc(50% - 19px); top:209.54px; width:461.877px; }
+.card-wrap-a1 { height:479.066px; left:calc(50% + 86px); top:209.54px; width:461.877px; }
 .card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); transform:rotate(-5.22deg); }
-.card-wrap-a2 { height:455.271px; left:calc(50% + 97.71px); top:321px; width:436.872px; }
+.card-wrap-a2 { height:455.271px; left:calc(50% + 105px); top:228.54px; width:436.872px; }
 .card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); transform:rotate(1.78deg); }
-.card-wrap-a3 { height:449.961px; left:calc(50% + 200px); top:408.67px; width:431.311px; }
+.card-wrap-a3 { height:449.961px; left:calc(50% + 101px); top:233.54px; width:431.311px; }
 .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
-.card-wrap-a4 { height:459.388px; left:calc(50% + 98.18px); top:452px; width:441.187px; }
+.card-wrap-a4 { height:459.388px; left:calc(50% + 96px); top:233.54px; width:441.187px; }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
 .card-wrap-b1 { height:479.066px; left:calc(50% + 125px); top:1282.54px; width:461.877px; }
 .card-wrap-b1 .stack-card { transform:rotate(-5.22deg); }
@@ -206,9 +206,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .approach-stage .light-inference-b { bottom:70px; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
   .card-wrap-a1 { top:calc(50vh - 351px); }
-  .card-wrap-a2 { top:calc(50vh - 239.54px); }
-  .card-wrap-a3 { top:calc(50vh - 151.87px); }
-  .card-wrap-a4 { top:calc(50vh - 108.54px); }
+  .card-wrap-a2 { top:calc(50vh - 332px); }
+  .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 327px); }
   .card-wrap-b1 { top:calc(50vh - 386px); }
   .card-wrap-b2 { top:calc(50vh - 324.54px); }
   .card-wrap-b3 { top:calc(50vh - 235.32px); }
