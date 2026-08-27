@@ -240,9 +240,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .motion-ready .light-main .light-hero h1 .motion-line { transition-duration:.2s,.3s; }
 .motion-ready .light-main .light-hero h1 .motion-line:nth-child(2) { transition-delay:.04s; }
 .motion-ready .light-main .light-hero-desc > .motion-reveal { transition-duration:.2s,.25s; }
-.motion-ready .light-main .light-hero .light-hero-desc .light-hero-kicker { transition-delay:.32s; }
-.motion-ready .light-main .light-hero .light-hero-desc > .motion-reveal:last-child { transition-delay:.62s; }
-.motion-ready .light-main .light-hero .light-hero-actions { transition-duration:.25s,.3s; transition-delay:.9s; }
+.motion-ready .light-main .light-hero .light-hero-desc .light-hero-kicker { transition-delay:.18s; }
+.motion-ready .light-main .light-hero .light-hero-desc > .motion-reveal:last-child { transition-delay:.42s; }
+.motion-ready .light-main .light-hero .light-hero-actions { transition-duration:.25s,.3s; transition-delay:.64s; }
 .motion-ready .light-main .motion-reveal.is-visible,
 .motion-ready .light-main .motion-line.is-visible { opacity:1; transform:none; }
 .motion-ready .light-main .motion-image.is-visible { opacity:1; transform:none; }
@@ -253,8 +253,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .motion-ready .light-main .card-wrap-p2.motion-card.is-visible { opacity:1; transform:none; }
 .kinetic-words .kinetic-word { display:inline-block; opacity:0; transform:translateY(.7em); }
 .kinetic-words.is-visible .kinetic-word { animation:word-reveal .48s cubic-bezier(.22,1,.36,1) forwards; animation-delay:calc(.18s + var(--word-index) * 38ms); }
-.light-hero-kicker.kinetic-words.is-visible .kinetic-word { animation-duration:.18s; animation-delay:calc(.32s + var(--word-index) * 10ms); }
-.light-hero-desc > .kinetic-words.is-visible:not(.light-hero-kicker) .kinetic-word { animation-duration:.18s; animation-delay:calc(.62s + var(--word-index) * 10ms); }
+.light-hero-kicker.kinetic-words.is-visible .kinetic-word { animation-duration:.18s; animation-delay:calc(.18s + var(--word-index) * 10ms); }
+.light-hero-desc > .kinetic-words.is-visible:not(.light-hero-kicker) .kinetic-word { animation-duration:.18s; animation-delay:calc(.42s + var(--word-index) * 10ms); }
 @keyframes word-reveal { to { opacity:1; transform:none; } }
 
 @media (max-width:1023px) {
