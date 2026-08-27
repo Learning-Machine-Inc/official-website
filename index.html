@@ -183,7 +183,7 @@
       let snapTimer = 0, lastScroll = 0, scrollDirection = 1, snapping = false, wheeling = false;
       const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapHero, delay); };
       const snapHero = () => {
-        const scroll = window.scrollY, boundary = beliefStart.offsetTop;
+        const scroll = window.scrollY, boundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
         if (snapping || document.documentElement.dataset.variant !== 'light' || scroll < 2 || scroll >= boundary - 2) { wheeling = false; return; }
         snapping = true;
         window.lenis.scrollTo(scrollDirection > 0 ? boundary : 0, { duration:.65, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
