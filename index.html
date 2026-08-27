@@ -216,7 +216,7 @@
         if (!wheeling) wheelStart = window.scrollY;
         wheeling = true;
         scrollDirection = event.deltaY > 0 ? 1 : -1;
-        scheduleSnap(120);
+        scheduleSnap(0);
       }, { passive:true });
       addEventListener('scroll', () => {
         const scroll = window.scrollY;
