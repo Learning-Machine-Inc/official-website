@@ -196,10 +196,11 @@
           : null;
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
         snapping = true;
-        window.lenis.scrollTo(target, { lerp:.05, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
+        window.lenis.scrollTo(target, { lerp:.05, onComplete:() => { snapping = false; wheeling = false; } });
       };
       addEventListener('wheel', (event) => {
-        if (!event.deltaY || snapping) return;
+        if (!event.deltaY) return;
+        snapping = false;
         wheeling = true;
         scrollDirection = event.deltaY > 0 ? 1 : -1;
         scheduleSnap(120);
