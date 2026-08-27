@@ -178,6 +178,32 @@
 
     window.lenis = new Lenis({ autoRaf:true, lerp:.08, respectReducedMotion:true, smoothWheel:true });
 
+    const beliefStart = document.querySelector('.light-belief');
+    if (beliefStart && innerWidth > 1023 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let snapTimer = 0, lastScroll = 0, scrollDirection = 1, snapping = false, wheeling = false;
+      const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapHero, delay); };
+      const snapHero = () => {
+        const scroll = window.scrollY, boundary = beliefStart.offsetTop;
+        if (snapping || document.documentElement.dataset.variant !== 'light' || scroll < 2 || scroll >= boundary - 2) { wheeling = false; return; }
+        snapping = true;
+        window.lenis.scrollTo(scrollDirection > 0 ? boundary : 0, { duration:.65, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
+      };
+      addEventListener('wheel', (event) => {
+        if (!event.deltaY || snapping) return;
+        wheeling = true;
+        scrollDirection = event.deltaY > 0 ? 1 : -1;
+        scheduleSnap(120);
+      }, { passive:true });
+      addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+        if (!snapping && Math.abs(scroll - lastScroll) > .5) {
+          scrollDirection = scroll > lastScroll ? 1 : -1;
+          lastScroll = scroll;
+          if (!wheeling) scheduleSnap(160);
+        }
+      }, { passive:true });
+    }
+
     // Mouse-follow drift on the hero art: viewport-center offset maps to a small inverse
     // translate with lerp smoothing. Engages only after the entrance transition has settled
     // (it owns the same transform property), and skips touch / reduced-motion users.
