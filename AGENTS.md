@@ -1,0 +1,58 @@
+# Learning Machine 官网 — 协作说明
+
+## 项目概况
+- 纯静态站点:只有 `index.html`、`styles.css`、`assets/`。无构建步骤、无依赖、无框架。
+- 部署:GitHub Pages,`main` 分支发布到 learning-machine.ai。当前开发分支 `feat/website-local`。
+- 本地预览(自带 live-reload,改文件浏览器自动刷新):
+
+```bash
+PORT=3002 node .claude/serve-official-website.js
+```
+
+浏览器打开 http://localhost:3002 (3001 已被其他进程占用,不要用)。
+
+## 页面结构
+- `<main class="light-main">`:**正在开发的新版**(浅色手绘工程图风格),四个区块:
+  `light-hero` → `light-belief` → `light-approach` → `light-join`
+- `<main class="dark-main">`:旧版,整块保留在 DOM 里,**勿动**。
+- 旧版相关 CSS(hero/vision/approach/join、`html[data-variant]` 等)也**勿动**。
+
+## 动效架构(重要,改之前先读完)
+所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):
+
+1. **第一个 script**:IntersectionObserver 驱动的一次性入场体系
+   (`motion-reveal` / `motion-line` / `kinetic-words` + `word-reveal` 关键帧),时间驱动。
+2. **第二个 module script**:Lenis 平滑滚动 + 滚动位置逐帧驱动(scrub)的动效:
+   hero 退场视差、belief 的墨水渐变与离场、approach 四卡分镜(IN_A/OUT_A/IN_B/OUT_B 时间窗)。
+
+修改动效请在现有体系内调参数/时间窗,**不要引入新动画库、不要另起一套并行系统**。
+
+## 已知坑(都真实踩过)
+- `.kinetic-word` 的基础 CSS 是 `opacity:0`,靠 `word-reveal` 动画补到 1。JS 里一旦
+  `style.animation='none'`,**必须同时** `style.opacity='1'`,否则整段文字直接消失。
+- `light-belief` 的文字是两层结构,职责不同,不要合并:
+  - 词级 span(`.kinetic-word`)= 入场动画(逐行上浮+淡入,时间过渡,一次性触发)+ 滚动驱动的逐行离场;
+  - 字母级 span(运行时拆出)= 滚动驱动的墨水渐变(30% → 100% opacity,颜色 #242E6F,20 字母宽过渡带,双向可逆)。
+- 把词拆成字母 span 会轻微改变词宽(字距/连字断开),可能挪动换行点——任何按行分组的
+  测量必须在拆分并强制回流**之后**做。
+- 滚动进度用 offsetTop 链(代码里的 `chain()` 函数)算文档坐标。sticky 区块
+  (`belief-stage` / `approach-stage`)pin 住时 `getBoundingClientRect().top` 恒定不变,
+  **不能**拿它当滚动进度,否则动效会"卡死"。
+- 桌面端 scrub 逻辑都有 `innerWidth > 1023` 守卫;≤1023 走另一套简化 CSS(文件末尾的
+  媒体查询),改桌面端时确认没有破坏移动端兜底。
+
+## 设计规范(用户的强规则,不可妥协)
+- **Figma 是唯一事实来源**:file `ZT09P2VnDxzakgLyVmMXlE`(公司-产品官网)。实现必须逐节点
+  读取精确 px 值(位置/尺寸/颜色/字号/行距/字距)1:1 还原;**禁止**按截图目测比例、
+  禁止"取整求美观"、禁止用近似百分比布局替代。
+- Figma 1440px 画布绝对坐标 → 响应式的既有惯例(沿用,别发明新写法):
+  `left:max(<Xpx>, calc(50% - <内容半宽>)); width:min(<Wpx>, calc(100% - 边距*2))`
+- 字体经 Google Fonts 引入:Gentium Plus / Inria Serif(300,400)/ Just Me Again Down Here。
+  要用新字重,先把它加进 `<head>` 里 fonts.googleapis 的请求参数,否则浏览器拿不到。
+- belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
+
+## 验收标准(每个改动都要过)
+1. 在 3002 端口实际滚一遍:入场、滚动 scrub(正向+反向)、离场都正常;
+2. 浏览器控制台无报错;
+3. `dark-main` 与旧版 CSS 未被改动;
+4. git 小步提交在 `feat/website-local`,提交信息说清楚改了哪个区块的什么。

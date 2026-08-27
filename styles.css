@@ -17,6 +17,9 @@
 :root { --paper:#f7f4f4; --ink:#1a1a1a; --blue:#1246ae; --warm:#a89f92; --footer:#0f0f0f; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
+html.lenis,html.lenis body { height:auto; }
+.lenis.lenis-smooth { scroll-behavior:auto !important; }
+.lenis.lenis-stopped { overflow:clip; }
 body { background:var(--paper); color:var(--ink); font-family:"Inter",sans-serif; margin:0; overflow-x:hidden; }
 a { color:inherit; }
 img { display:block; max-width:100%; }
@@ -106,6 +109,186 @@ footer { background:var(--footer); color:#b3aa9c; height:406px; }
 .footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px 184px 24px; }
 .footer-bottom span:last-child { display:flex; gap:24px; }
 .footer-bottom a { text-decoration:none; }
+
+/* White version — Figma node 1617:19731 */
+.light-main { display:none; }
+html[data-variant="light"] body { background:#f5f0ed; }
+html[data-variant="light"] .light-main { display:block; }
+html[data-variant="light"] .dark-main { display:none; }
+html[data-variant="dark"] .light-main { display:none; }
+
+html[data-variant="light"] .site-header { background:transparent; box-shadow:none; height:0; pointer-events:none; }
+html[data-variant="light"] .site-header .brand,
+html[data-variant="light"] .site-header .desktop-nav,
+html[data-variant="light"] .site-header .menu-btn,
+html[data-variant="light"] .site-header .mobile-menu { display:none; }
+html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-events:auto; width:44px; }
+
+.figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1440px; position:relative; z-index:2; }
+.light-hero .figma-frame,.light-approach .figma-frame { max-width:none; }
+
+.light-main { position:relative; }
+.light-header { align-items:center; backdrop-filter:blur(14.5px); background:rgb(245 240 237 / 3%); box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
+.light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
+.light-nav { align-items:center; display:flex; gap:30px; }
+.light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
+.light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
+.light-hero { background:#f5f0ed; height:100vh; min-height:761px; position:relative; }
+.light-hero-art { background:url("assets/figma-107/hero-group-48.png") center / cover no-repeat; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
+.light-hero-veil { background:linear-gradient(to top,#f5f0ed 0,#f5f0ed 70px,rgb(245 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
+.light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:50px; max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
+.light-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
+.light-hero h1 .motion-line:first-child { margin-bottom:0; }
+.light-hero h1 em { color:#4b72c1; font-style:normal; }
+.light-hero-desc { display:flex; flex-direction:column; padding:0 6px; width:904px; }
+.light-hero-desc p { font-family:"Inria Serif",Georgia,serif; font-size:24px; font-weight:400; line-height:32px; margin:0; }
+.light-hero-desc .light-hero-kicker { color:#242e6f; max-width:691px; opacity:.79; }
+.light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
+.light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
+.light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Inter",sans-serif; font-size:15px; font-weight:500; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
+.light-btn-dark { background:#292929; border:1px solid #5e5e5e; color:#e1eeff; gap:7.99px; width:204px; }
+.light-btn-dark img { height:17px; width:17px; }
+.light-btn-blue { background:linear-gradient(#5773a6,#98b0cd); border:1px solid rgb(255 255 255 / 37%); color:#fff; justify-content:center; width:109px; }
+
+.light-belief { background:#f5f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
+@media (min-width:1024px) {
+  .light-belief { height:calc(100vh + 2400px); overflow:visible; }
+  .belief-stage { height:100vh; overflow:hidden; position:sticky; top:-210px; }
+  .belief-stage .figma-frame { height:100%; }
+  .light-belief-copy { margin-bottom:110px; }
+}
+.light-belief-copy { color:#242e6f; font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
+.card-wrap { align-items:center; display:flex; justify-content:center; position:absolute; }
+.polaroid-card { border:.5px solid #bbb; border-radius:5px; box-shadow:0 4px 44px rgb(0 0 0 / 8%); flex-shrink:0; overflow:hidden; position:relative; }
+.polaroid-card img { height:100%; object-fit:cover; object-position:bottom; position:absolute; width:100%; }
+.polaroid-card-layered .polaroid-base { object-fit:cover; object-position:center; }
+.polaroid-card-layered .polaroid-overlay { object-fit:cover; object-position:bottom; }
+.card-wrap-p1 { height:328.755px; left:calc(50% - 297.963px); top:350px; width:292.963px; }
+.card-wrap-p1 .polaroid-card { height:277px; transform:rotate(-16.27deg); width:224.353px; }
+.card-wrap-p2 { height:224.005px; left:calc(50% + 70px); top:451px; width:224.005px; }
+.card-wrap-p2 .polaroid-card { height:200.954px; transform:rotate(7.02deg); width:200.954px; }
+
+.light-approach { background:#f5f0ed; height:calc(100vh + 2800px); margin-top:0; position:relative; }
+.light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:4000px; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
+.light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
+.light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
+.light-approach h2 .h2-muted { color:#cec4b6; }
+.stack { inset:0; position:absolute; }
+.stack .card-wrap { align-items:center; display:flex; justify-content:center; }
+.stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:442.361px; width:423.364px; }
+.card-wrap-a1 { height:479.066px; left:calc(50% - 19px); top:209.54px; width:461.877px; }
+.card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); transform:rotate(-5.22deg); }
+.card-wrap-a2 { height:455.271px; left:calc(50% + 97.71px); top:321px; width:436.872px; }
+.card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); transform:rotate(1.78deg); }
+.card-wrap-a3 { height:449.961px; left:calc(50% + 200px); top:408.67px; width:431.311px; }
+.card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
+.card-wrap-a4 { height:459.388px; left:calc(50% + 98.18px); top:452px; width:441.187px; }
+.card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
+.card-wrap-b1 { height:479.066px; left:calc(50% + 125px); top:1282.54px; width:461.877px; }
+.card-wrap-b1 .stack-card { transform:rotate(-5.22deg); }
+.card-wrap-b2 { height:455.271px; left:calc(50% + 17.71px); top:1344px; width:436.872px; }
+.card-wrap-b2 .stack-card { transform:rotate(1.78deg); }
+.card-wrap-b3 { height:481.481px; left:calc(50% + 100px); top:1433.22px; width:464.424px; }
+.card-wrap-b3 .stack-card { transform:rotate(-5.59deg); }
+.card-wrap-b4 { height:459.388px; left:calc(50% + 140.18px); top:1595px; width:441.187px; }
+.card-wrap-b4 .stack-card { transform:rotate(2.36deg); }
+.light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
+.light-inference b { display:block; font-family:"Just Me Again Down Here",cursive; font-size:98.889px; font-weight:400; letter-spacing:-.5494px; line-height:87.901px; }
+.light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
+.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
+.light-inference-b p { max-width:568px; }
+
+@media (min-width:1024px) {
+  .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
+  .light-approach .figma-frame { display:block; }
+  .light-approach-heading { top:calc(17vh - 40px); }
+  .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
+  .approach-stage .light-inference-b { bottom:70px; }
+  .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
+  .card-wrap-a1 { top:calc(50vh - 351px); }
+  .card-wrap-a2 { top:calc(50vh - 239.54px); }
+  .card-wrap-a3 { top:calc(50vh - 151.87px); }
+  .card-wrap-a4 { top:calc(50vh - 108.54px); }
+  .card-wrap-b1 { top:calc(50vh - 386px); }
+  .card-wrap-b2 { top:calc(50vh - 324.54px); }
+  .card-wrap-b3 { top:calc(50vh - 235.32px); }
+  .card-wrap-b4 { top:calc(50vh - 73.54px); }
+}
+
+.light-join { align-items:center; background:#f5f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
+.light-join-backdrop { background-image:linear-gradient(180deg,#f5f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png"); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
+.light-join-card { align-items:center; background:linear-gradient(#f0efed,rgb(241 240 237 / 70%)); border:.5px solid #666460; color:#1a1a1a; display:flex; flex-direction:column; max-width:720px; padding:65.25px 33px 60.99px; position:relative; text-align:center; width:720px; }
+.light-join-card .eyebrow { color:#628aa8; }
+.light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
+.light-join-card > p:not(.eyebrow) { color:#776f63; font-size:17px; line-height:27.2px; max-width:480px; }
+.light-join-card .join-actions { gap:14px; margin-top:14.7px; }
+.light-join-card .button-dark { color:#fff; min-width:136px; padding:0 30px; }
+
+/* Scroll-led reveals: restrained, long easing inspired by Ironhill's narrative pacing. */
+.motion-ready .light-main .motion-reveal,
+.motion-ready .light-main .motion-image,
+.motion-ready .light-main .motion-line,
+.motion-ready .light-main .motion-card { opacity:0; }
+.motion-ready .light-main .motion-reveal { transform:translateY(42px); transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1); }
+.motion-ready .light-main .motion-image { transform:translateY(28px) scale(1.035); transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.4s cubic-bezier(.22,1,.36,1); }
+.motion-ready .light-main .motion-line { display:block; transform:translateY(108%); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1); }
+.motion-ready .light-main .motion-line:nth-child(2) { transition-delay:.14s; }
+.motion-ready .light-main .motion-line:nth-child(3) { transition-delay:.28s; }
+.motion-ready .light-main .light-hero-desc .light-hero-kicker { transition-delay:.7s; }
+.motion-ready .light-main .light-hero-desc > .motion-reveal:last-child { transition-delay:1.4s; }
+.motion-ready .light-main .light-hero-actions { transition-delay:2.2s; }
+.motion-ready .light-main .motion-reveal.is-visible,
+.motion-ready .light-main .motion-line.is-visible { opacity:1; transform:none; }
+.motion-ready .light-main .motion-image.is-visible { opacity:1; transform:none; }
+.motion-ready .light-main .motion-card { transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1.9s cubic-bezier(.16,1,.3,1); }
+.motion-ready .light-main .card-wrap-p1.motion-card { transform:translate(-400px,-240px) scale(1.1); }
+.motion-ready .light-main .card-wrap-p2.motion-card { transform:translate(400px,-280px) scale(1.1); transition-delay:.12s; }
+.motion-ready .light-main .card-wrap-p1.motion-card.is-visible,
+.motion-ready .light-main .card-wrap-p2.motion-card.is-visible { opacity:1; transform:none; }
+.kinetic-words .kinetic-word { display:inline-block; opacity:0; transform:translateY(.7em); }
+.kinetic-words.is-visible .kinetic-word { animation:word-reveal .48s cubic-bezier(.22,1,.36,1) forwards; animation-delay:calc(.18s + var(--word-index) * 38ms); }
+.light-hero-kicker.kinetic-words.is-visible .kinetic-word { animation-delay:calc(.88s + var(--word-index) * 38ms); }
+.light-hero-desc > .kinetic-words.is-visible:not(.light-hero-kicker) .kinetic-word { animation-delay:calc(1.58s + var(--word-index) * 38ms); }
+@keyframes word-reveal { to { opacity:1; transform:none; } }
+
+@media (max-width:1023px) {
+  .light-header { left:0; padding:0 20px; width:100%; }
+  .light-hero { height:760px; }
+  .light-hero-art { background-position:70% top; height:760px; left:0; top:0; width:100%; }
+  .light-hero-veil { height:84%; left:0; top:22%; width:100%; }
+  .figma-frame { height:auto; max-width:none; min-height:100%; }
+  .light-hero-copy { gap:12px; left:32px; margin-left:0; padding:0; position:absolute; top:390px; width:calc(100% - 64px); }
+  .light-hero h1 { font-size:40px; letter-spacing:-.5px; line-height:1.05; }
+  .light-hero-desc { width:100%; }
+  .light-hero-desc .light-hero-kicker { font-size:17px; line-height:1.35; max-width:none; }
+  .light-hero-desc p { font-size:18px; line-height:1.3; max-width:none; }
+  .light-belief { height:820px; margin-top:0; }
+  .light-belief-copy { font-size:22px; left:32px; line-height:1.2; top:355px; width:calc(100% - 64px); }
+  .card-wrap-p1 { height:160px; left:12%; top:70px; width:160px; }
+  .card-wrap-p1 .polaroid-card { height:145px; width:145px; }
+  .card-wrap-p2 { height:134px; right:11%; left:auto; top:120px; width:134px; }
+  .card-wrap-p2 .polaroid-card { height:120px; width:120px; }
+  .light-approach { height:auto; margin-top:0; padding-top:130px; }
+  .light-approach-heading { left:32px; padding:0; position:absolute; top:48px; width:auto; }
+  .light-approach h2 { font-size:36px; line-height:1.05; }
+  .figma-frame { gap:32px; }
+  .stack { height:290px; margin:0 auto; position:relative; width:calc(100% - 48px); }
+  .stack-a { order:1; }
+  .light-inference-a { order:2; }
+  .stack-b { order:3; }
+  .light-inference-b { order:4; }
+  .stack .card-wrap { height:100% !important; left:0 !important; top:0 !important; width:100% !important; }
+  .stack .stack-card { height:100%; width:100%; }
+  .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
+  .light-inference b,.light-inference h3,.light-inference p { max-width:none; width:100%; }
+  .light-inference b { font-size:50px; }
+  .light-inference h3 { font-size:33px; }
+  .light-inference p { font-size:18px; }
+  .light-join { margin-top:0; padding:70px 20px; }
+  .light-join-card { padding:52px 24px; width:100%; }
+  .light-join-card .join-actions { flex-direction:column; width:100%; }
+  .light-join-card .button { width:100%; }
+}
 
 html[data-variant="dark"] { --paper:#000; --ink:#fff; --warm:#a89f92; --footer:#1a1a1a; color-scheme:dark; }
 html[data-variant="dark"] body { background:#000; }
@@ -207,4 +390,9 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .button,.device-poster { transition:none; }
   .device-media video { display:none; }
   .device-poster { opacity:1 !important; }
+  .motion-ready .light-main .motion-reveal,
+  .motion-ready .light-main .motion-image,
+  .motion-ready .light-main .motion-line,
+  .motion-ready .light-main .motion-card { opacity:1; transform:none; transition:none; }
+  .kinetic-words .kinetic-word { animation:none; opacity:1; transform:none; }
 }
