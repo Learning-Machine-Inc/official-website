@@ -187,8 +187,9 @@
         const scroll = window.scrollY;
         const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
         const approachBoundary = approachStart.offsetTop + (approachStart.offsetHeight - innerHeight) * .05;
+        const approachEntering = approachStart.getBoundingClientRect().top < innerHeight;
         const target = scroll > 2 && scroll < beliefBoundary - 2 ? (scrollDirection > 0 ? beliefBoundary : 0)
-          : scroll >= approachStart.offsetTop && scroll < approachBoundary - 2 ? (scrollDirection > 0 ? approachBoundary : beliefBoundary)
+          : approachEntering && scroll < approachBoundary - 2 ? (scrollDirection > 0 ? approachBoundary : beliefBoundary)
           : null;
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
         snapping = true;
