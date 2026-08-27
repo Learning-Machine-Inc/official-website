@@ -179,14 +179,20 @@
     window.lenis = new Lenis({ autoRaf:true, lerp:.08, respectReducedMotion:true, smoothWheel:true });
 
     const beliefStart = document.querySelector('.light-belief');
-    if (beliefStart && innerWidth > 1023 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const approachStart = document.querySelector('.light-approach');
+    if (beliefStart && approachStart && innerWidth > 1023 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       let snapTimer = 0, lastScroll = 0, scrollDirection = 1, snapping = false, wheeling = false;
-      const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapHero, delay); };
-      const snapHero = () => {
-        const scroll = window.scrollY, boundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
-        if (snapping || document.documentElement.dataset.variant !== 'light' || scroll < 2 || scroll >= boundary - 2) { wheeling = false; return; }
+      const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapScene, delay); };
+      const snapScene = () => {
+        const scroll = window.scrollY;
+        const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
+        const approachBoundary = approachStart.offsetTop + (approachStart.offsetHeight - innerHeight) * .12;
+        const target = scroll > 2 && scroll < beliefBoundary - 2 ? (scrollDirection > 0 ? beliefBoundary : 0)
+          : scroll >= approachStart.offsetTop && scroll < approachBoundary - 2 ? (scrollDirection > 0 ? approachBoundary : beliefBoundary)
+          : null;
+        if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
         snapping = true;
-        window.lenis.scrollTo(scrollDirection > 0 ? boundary : 0, { lerp:.05, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
+        window.lenis.scrollTo(target, { lerp:.05, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
       };
       addEventListener('wheel', (event) => {
         if (!event.deltaY || snapping) return;
