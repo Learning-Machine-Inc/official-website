@@ -189,22 +189,28 @@
         const projected = window.lenis.targetScroll;
         const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
         const approachSpan = approachStart.offsetHeight - innerHeight;
-        const approachBoundary = approachStart.offsetTop + approachSpan * .05;
-        const approachBBoundary = approachStart.offsetTop + approachSpan * .86;
         const approachEntry = approachStart.offsetTop - innerHeight;
-        const approachBEntry = approachStart.offsetTop + approachSpan * .58;
+        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79,.86].map(progress => approachStart.offsetTop + approachSpan * progress);
+        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress)];
+        const approachBoundary = approachStops[0];
         const approachExit = approachStart.offsetTop + approachSpan * .97;
+        const approachSnapEpsilon = 16;
         let target = null;
         if (scrollDirection > 0) {
           if (scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
-          else if (scroll < approachBoundary - 2 && projected > approachEntry) target = approachBoundary;
-          else if (scroll < approachBBoundary - 2 && projected > approachBEntry) target = approachBBoundary;
-          else if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+          else {
+            target = approachStops.find((stop, index) => scroll < stop - approachSnapEpsilon && projected > approachTriggers[index]) ?? null;
+            if (target === null && scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+          }
         } else {
-          if (scroll > approachExit && projected < joinStart.offsetTop) target = approachBBoundary;
-          else if (scroll > approachBEntry && projected < approachBBoundary) target = approachBoundary;
-          else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
-          else if (scroll > 2 && projected < beliefBoundary) target = 0;
+          if (scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
+          else for (let index = approachStops.length - 2; index >= 0; index--) {
+            if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
+          }
+          if (target === null) {
+            if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
+            else if (scroll > 2 && projected < beliefBoundary) target = 0;
+          }
         }
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
         snapping = true;
