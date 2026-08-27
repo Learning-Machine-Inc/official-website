@@ -186,7 +186,7 @@
         const scroll = window.scrollY, boundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
         if (snapping || document.documentElement.dataset.variant !== 'light' || scroll < 2 || scroll >= boundary - 2) { wheeling = false; return; }
         snapping = true;
-        window.lenis.scrollTo(scrollDirection > 0 ? boundary : 0, { duration:.65, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
+        window.lenis.scrollTo(scrollDirection > 0 ? boundary : 0, { lerp:.05, lock:true, onComplete:() => { snapping = false; wheeling = false; } });
       };
       addEventListener('wheel', (event) => {
         if (!event.deltaY || snapping) return;
