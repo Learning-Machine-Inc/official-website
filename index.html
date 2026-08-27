@@ -188,16 +188,21 @@
         const scroll = wheeling ? wheelStart : window.scrollY;
         const projected = window.lenis.targetScroll;
         const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
-        const approachBoundary = approachStart.offsetTop + (approachStart.offsetHeight - innerHeight) * .05;
+        const approachSpan = approachStart.offsetHeight - innerHeight;
+        const approachBoundary = approachStart.offsetTop + approachSpan * .05;
+        const approachBBoundary = approachStart.offsetTop + approachSpan * .86;
         const approachEntry = approachStart.offsetTop - innerHeight;
-        const approachExit = approachStart.offsetTop + (approachStart.offsetHeight - innerHeight) * .97;
+        const approachBEntry = approachStart.offsetTop + approachSpan * .58;
+        const approachExit = approachStart.offsetTop + approachSpan * .97;
         let target = null;
         if (scrollDirection > 0) {
           if (scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
           else if (scroll < approachBoundary - 2 && projected > approachEntry) target = approachBoundary;
+          else if (scroll < approachBBoundary - 2 && projected > approachBEntry) target = approachBBoundary;
           else if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
         } else {
-          if (scroll > approachExit && projected < joinStart.offsetTop) target = approachBoundary;
+          if (scroll > approachExit && projected < joinStart.offsetTop) target = approachBBoundary;
+          else if (scroll > approachBEntry && projected < approachBBoundary) target = approachBoundary;
           else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
           else if (scroll > 2 && projected < beliefBoundary) target = 0;
         }
