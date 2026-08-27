@@ -338,7 +338,7 @@
           // scroll-scrubbed, so it also plays backwards.
           const FADE_WIDTH = 20;
           const nC = beliefChars.length || 1;
-          const sweepPos = clamp01(bp / 0.44) * (nC - 1 + FADE_WIDTH);
+          const sweepPos = clamp01((bp - 0.38) / 0.44) * (nC - 1 + FADE_WIDTH);
           beliefChars.forEach((c, i) => {
             c.style.opacity = (0.3 + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * 0.7).toFixed(3);
           });
