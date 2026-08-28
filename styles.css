@@ -286,7 +286,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
      past the right edge at 375px. */
   .card-wrap-p2 { height:274.727235px; right:12px; left:auto; top:60.272765px; width:325.959268px; }
   .card-wrap-p2 .polaroid-card { height:240px; width:298.867925px; }
-  .light-approach { height:auto; margin-top:0; padding-top:100px; }
+  .light-approach { height:auto; margin-top:0; padding-top:50px; }
   /* P0-1: the legacy dark-main rule `.approach-stage { position:absolute; inset:0 }` also hits
      the light-main stage. Desktop is rescued by the ≥1024 sticky override; mobile had nothing,
      so the whole scene left the flow and collapsed the section to its 130px padding. */
