@@ -7,7 +7,8 @@
   <title>Learning Machine | Build AI that truly Learns</title>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:1024px)">
+  <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:1023px)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus&family=Inria+Serif:wght@300;400&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
@@ -46,8 +47,8 @@
     <section class="light-belief">
       <div class="belief-stage">
       <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><img src="assets/figma-user/belief-p1.png" alt=""></div></div>
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><img src="assets/figma-user/belief-p2.png" alt=""></div></div>
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:1023px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:1023px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
         <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
       </div>
       </div>
@@ -79,8 +80,8 @@
   </main>
   <main class="dark-main">
     <section id="home" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" src="assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" src="assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
-    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
-    <section id="approach" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="metadata" poster="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
+    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img loading="lazy" src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
+    <section id="approach" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
     <section id="join" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip" aria-describedby="role-tooltip" aria-expanded="false">See open roles</button><div id="role-tooltip" class="role-tooltip" role="status">Coming soon｜<a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self‑recommendation</a></div></div><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div></section>
   </main>
   <footer><div class="footer-main"><div><a href="#home" class="footer-brand">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#">Research</a><a href="#">Team</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
@@ -156,6 +157,9 @@
           if (frame++ < 18) requestAnimationFrame(tick);
         };
         tick();
+        // rAF pauses in background tabs — without this, tabbing away mid-animation freezes the
+        // heading as scrambled gibberish permanently.
+        setTimeout(() => { element.textContent = original; }, 1200);
       };
       const revealMotion = (element) => {
         element.classList.add('is-visible');
@@ -177,10 +181,19 @@
 
     window.lenis = new Lenis({ autoRaf:true, lerp:.08, respectReducedMotion:true, smoothWheel:true });
 
+    // Single source of truth for the desktop/mobile split — matches the CSS breakpoint exactly
+    // (innerWidth can disagree with media queries when overflow widens the layout viewport).
+    // Crossing the breakpoint reloads: the scrub/pin systems leave inline styles sized for the
+    // layout they initialized against, and a clean re-init is the only reliable reset.
+    const desktopMQ = matchMedia('(min-width:1024px)');
+    desktopMQ.addEventListener('change', () => location.reload());
+
     const beliefStart = document.querySelector('.light-belief');
     const approachStart = document.querySelector('.light-approach');
     const joinStart = document.querySelector('.light-join');
-    if (beliefStart && approachStart && joinStart && innerWidth > 1023 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Snap needs wheel events; touch scrolling only feeds the scroll fallback and fights the
+    // platform's momentum physics, so touch-first devices (iPad landscape included) skip it.
+    if (beliefStart && approachStart && joinStart && desktopMQ.matches && navigator.maxTouchPoints === 0 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       let snapTimer = 0, lastScroll = 0, wheelStart = 0, scrollDirection = 1, snapping = false, wheeling = false;
       const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapScene, delay); };
       const snapScene = () => {
@@ -309,6 +322,9 @@
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
       let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
       const onScroll = ({ scroll }) => {
+        // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
+        // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
+        if (!desktopMQ.matches) return;
         heroCopy.style.transform = `translateY(${Math.min(scroll, 1100) * 0.35}px)`;
         const p = clamp01((scroll - EXIT_START) / (EXIT_END - EXIT_START));
         if (p > 0 || exitEngaged) {
@@ -324,7 +340,7 @@
             });
           });
         }
-        if (beliefSec && beliefStage && cardP1 && cardP2 && innerWidth > 1023) {
+        if (beliefSec && beliefStage && cardP1 && cardP2 && desktopMQ.matches) {
           const chain = (el) => { let t = 0, n = el; while (n) { t += n.offsetTop; n = n.offsetParent; } return t; };
           if (!beliefSetup) {
             // Approach-heading-style entrance: each rendered line rises up from below and fades
@@ -387,7 +403,7 @@
           placeBelief(cardP1, easeOut(seg(bp, BELIEF_IN.p1[0], BELIEF_IN.p1[1]), 5), smooth(seg(bp, BELIEF_OUT.p1[0], BELIEF_OUT.p1[1])), -400, -240);
           placeBelief(cardP2, easeOut(seg(bp, BELIEF_IN.p2[0], BELIEF_IN.p2[1]), 5), smooth(seg(bp, BELIEF_OUT.p2[0], BELIEF_OUT.p2[1])), 400, -280);
         }
-        if (scene && innerWidth > 1023) {
+        if (scene && desktopMQ.matches) {
           const span = scene.offsetHeight - innerHeight;
           const sp = clamp01(-scene.getBoundingClientRect().top / span);
           sceneACards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_A[i][0], IN_A[i][1])), smooth(seg(sp, OUT_A[i][0], OUT_A[i][1])), -70));
