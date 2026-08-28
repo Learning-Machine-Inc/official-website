@@ -303,8 +303,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .stack { height:290px; margin:0 auto; position:relative; width:calc(100% - 48px); }
   .stack-a { order:1; }
   .light-inference-a { order:2; }
-  /* extra 30px breathing room between the A block and the B block (on top of the 32px gap) */
-  .stack-b { margin-top:30px; order:3; }
+  /* extra 60px breathing room between the A block and the B block (on top of the 32px gap) */
+  .stack-b { margin-top:60px; order:3; }
   .light-inference-b { order:4; }
   .stack .card-wrap { height:100% !important; left:0 !important; top:0 !important; width:100% !important; }
   .stack .stack-card { height:100%; width:100%; }
