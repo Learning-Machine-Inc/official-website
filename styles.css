@@ -153,17 +153,17 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-belief { background:#f5f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
 @media (min-width:1024px) {
   .light-belief { height:calc(100vh + 2400px); overflow:visible; }
-  .belief-stage { height:100vh; overflow:hidden; position:sticky; top:-210px; }
-  .belief-stage .figma-frame { height:100%; }
-  .light-belief-copy { margin-bottom:110px; }
+  .belief-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
+  .belief-stage .figma-frame { display:block; height:100%; }
+  .light-belief-copy { left:0; margin:0 auto; position:absolute; right:0; top:calc(50% + 154.031403px); }
 }
 .light-belief-copy { color:#242e6f; font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
 .card-wrap { align-items:center; display:flex; justify-content:center; position:absolute; }
 .polaroid-card { border:.5px solid #bbb; border-radius:5px; box-shadow:0 4px 44px rgb(0 0 0 / 8%); flex-shrink:0; overflow:hidden; position:relative; }
 .polaroid-card img { height:100%; object-fit:cover; object-position:bottom; position:absolute; width:100%; }
-.card-wrap-p1 { height:409.189644px; left:calc(50% - 406.849826px); top:calc(100vh - 601.189644px); width:401.849826px; }
+.card-wrap-p1 { height:409.189644px; left:calc(50% - 406.849826px); top:calc(50% - 275.158241px); width:401.849826px; }
 .card-wrap-p1 .polaroid-card { height:332.4px; transform:rotate(-16.27deg); width:321.602784px; }
-.card-wrap-p2 { height:460.062806px; left:50%; top:calc(100vh - 652.062806px); width:545.856823px; }
+.card-wrap-p2 { height:460.062806px; left:50%; top:calc(50% - 326.031403px); width:545.856823px; }
 .card-wrap-p2 .polaroid-card { height:401.908px; transform:rotate(7.02deg); width:500.489208px; }
 
 .light-approach { background:#f5f0ed; height:calc(100vh + 2800px); margin-top:0; position:relative; }
