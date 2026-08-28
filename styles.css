@@ -184,11 +184,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
 .card-wrap-a4 { height:459.388px; left:calc(50% + 96px); top:233.54px; width:441.187px; }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
-.card-wrap-b1 { height:479.066px; left:calc(50% + 125px); top:1282.54px; width:461.877px; }
+.card-wrap-b1 { height:479.066px; left:calc(50% + 105px); top:1282.54px; width:461.877px; }
 .card-wrap-b1 .stack-card { background-image:url("assets/figma-user/stack-b-1.jpg"); transform:rotate(-5.22deg); }
-.card-wrap-b2 { height:455.271px; left:calc(50% + 17.71px); top:1344px; width:436.872px; }
+.card-wrap-b2 { height:455.271px; left:calc(50% + 109px); top:1294.54px; width:436.872px; }
 .card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2.jpg"); transform:rotate(1.78deg); }
-.card-wrap-b3 { height:481.481px; left:calc(50% + 100px); top:1433.22px; width:464.424px; }
+.card-wrap-b3 { height:481.481px; left:calc(50% + 82px); top:1294.54px; width:464.424px; }
 .card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); background-position:right center; transform:rotate(-5.59deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference b { display:block; font-family:"Just Me Again Down Here",cursive; font-size:98.889px; font-weight:400; letter-spacing:-.5494px; line-height:87.901px; }
@@ -207,8 +207,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .card-wrap-a2 { top:calc(50vh - 332px); }
   .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 327px); }
   .card-wrap-b1 { top:calc(50vh - 386px); }
-  .card-wrap-b2 { top:calc(50vh - 324.54px); }
-  .card-wrap-b3 { top:calc(50vh - 235.32px); }
+  .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 374px); }
 }
 
 .light-join { align-items:center; background:#f5f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
