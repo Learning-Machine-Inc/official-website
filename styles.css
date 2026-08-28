@@ -146,9 +146,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
 .light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Inter",sans-serif; font-size:15px; font-weight:500; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
-.light-btn-dark { background:#292929; border:1px solid #5e5e5e; color:#e1eeff; gap:7.99px; width:204px; }
+.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f5f0ed; gap:7.99px; width:204px; }
 .light-btn-dark img { height:17px; width:17px; }
-.light-btn-blue { background:linear-gradient(#5773a6,#98b0cd); border:1px solid rgb(255 255 255 / 37%); color:#fff; justify-content:center; width:109px; }
+.light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; width:109px; }
 
 .light-belief { background:#f5f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
 @media (min-width:1024px) {
