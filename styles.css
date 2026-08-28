@@ -128,7 +128,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero .figma-frame,.light-approach .figma-frame { max-width:none; }
 
 .light-main { position:relative; }
-.light-header { align-items:center; backdrop-filter:blur(14.5px); background:rgb(245 240 237 / 3%); box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
+.light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .light-nav { align-items:center; display:flex; gap:30px; }
 .light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
