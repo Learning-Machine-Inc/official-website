@@ -279,12 +279,12 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-belief { height:820px; margin-top:0; }
   /* P0-2: this rule sets top/left but was missing position:absolute, so the copy sat at the top
      of the section underneath the cards. */
-  .light-belief-copy { font-size:20px; left:32px; line-height:1.45; position:absolute; top:385px; width:calc(100% - 64px); }
-  .card-wrap-p1 { height:214.196745px; left:calc(12% - 25.177301px); top:150.803255px; width:210.354602px; }
+  .light-belief-copy { font-size:20px; left:32px; line-height:1.45; position:absolute; top:395px; width:calc(100% - 64px); }
+  .card-wrap-p1 { height:214.196745px; left:calc(12% - 25.177301px); top:160.803255px; width:210.354602px; }
   .card-wrap-p1 .polaroid-card { height:174px; width:168.348028px; }
   /* P0-2: right:calc(11% - 95.98px) is negative below ~873px viewport width — card bled 55px
      past the right edge at 375px. */
-  .card-wrap-p2 { height:274.727235px; right:12px; left:auto; top:90.272765px; width:325.959268px; }
+  .card-wrap-p2 { height:274.727235px; right:12px; left:auto; top:100.272765px; width:325.959268px; }
   .card-wrap-p2 .polaroid-card { height:240px; width:298.867925px; }
   .light-approach { height:auto; margin-top:0; padding-top:20px; }
   /* P0-1: the legacy dark-main rule `.approach-stage { position:absolute; inset:0 }` also hits
