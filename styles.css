@@ -201,11 +201,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
   .approach-stage .light-inference-b { bottom:70px; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
-  .card-wrap-a1 { top:calc(50vh - 351px); }
-  .card-wrap-a2 { top:calc(50vh - 332px); }
-  .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 327px); }
-  .card-wrap-b1 { top:calc(50vh - 386px); }
-  .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 374px); }
+  .card-wrap-a1 { top:calc(50vh - 241.694px); }
+  .card-wrap-a2 { top:calc(50vh - 222.694px); }
+  .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 217.694px); }
+  .card-wrap-b1 { top:calc(50vh - 246.7405px); }
+  .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 234.7405px); }
 }
 
 .light-join { align-items:center; background:#f5f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
