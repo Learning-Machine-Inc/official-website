@@ -66,7 +66,6 @@
             <div class="card-wrap card-wrap-b1"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-b2"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-b3"><div class="stack-card"></div></div>
-            <div class="card-wrap card-wrap-b4"><div class="stack-card"></div></div>
           </div>
           <div class="light-inference light-inference-a"><b>A.</b><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div>
           <div class="light-inference light-inference-b"><b>B.</b><h3>No operation overhead</h3><p>No data-collection pipeline, no dedicated training infrastructure, no team of ML engineers to maintain. Connect the model to a workflow and it learns on the job.</p></div>
@@ -190,8 +189,8 @@
         const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
         const approachSpan = approachStart.offsetHeight - innerHeight;
         const approachEntry = approachStart.offsetTop - innerHeight;
-        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79,.86].map(progress => approachStart.offsetTop + approachSpan * progress);
-        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress)];
+        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress);
+        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72].map(progress => approachStart.offsetTop + approachSpan * progress)];
         const approachBoundary = approachStops[0];
         const approachExit = approachStart.offsetTop + approachSpan * .97;
         const approachSnapEpsilon = 16;
@@ -290,8 +289,8 @@
       const seg = (v, s, e) => clamp01((v - s) / (e - s));
       const IN_A = [[0.05,0.12],[0.12,0.19],[0.19,0.26],[0.26,0.33]];
       const OUT_A = [[0.38,0.43],[0.42,0.47],[0.46,0.51],[0.50,0.55]];
-      const IN_B = [[0.58,0.65],[0.65,0.72],[0.72,0.79],[0.79,0.86]];
-      const OUT_B = [[0.88,0.92],[0.905,0.945],[0.93,0.97],[0.955,0.995]];
+      const IN_B = [[0.58,0.65],[0.65,0.72],[0.72,0.79]];
+      const OUT_B = [[0.88,0.92],[0.905,0.945],[0.93,0.97]];
       const placeScene = (el, vIn, vOut, inOffset) => {
         el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
         el.style.transform = `translateY(${((1 - vIn) * inOffset + vOut * -40).toFixed(1)}px)`;
