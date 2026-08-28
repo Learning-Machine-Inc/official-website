@@ -174,14 +174,6 @@
         if (element.closest('.light-hero')) requestAnimationFrame(() => requestAnimationFrame(() => revealMotion(element)));
         else motionObserver.observe(element);
       });
-      // Mobile A/B build-up: fade the aligned frames in one by one when a stack scrolls into
-      // view (desktop tells this story with the scroll-scrubbed scene instead).
-      if (matchMedia('(max-width:1023px)').matches) {
-        const stackObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-          if (entry.isIntersecting) { entry.target.classList.add('stack-revealed'); stackObserver.unobserve(entry.target); }
-        }), { threshold: 0.35 });
-        document.querySelectorAll('.light-main .stack').forEach((element) => stackObserver.observe(element));
-      }
     }
   </script>
   <script type="module">

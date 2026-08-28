@@ -269,14 +269,17 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   /* P0-4: anchor the copy to the hero's bottom edge instead of a fixed top — a fixed top:390px
      plus natural content height pushed the buttons 21px past the 760px section. */
   .light-hero-copy { bottom:24px; gap:12px; left:32px; margin-left:0; padding:0; position:absolute; top:auto; width:calc(100% - 64px); }
-  .light-hero h1 { font-size:40px; letter-spacing:-.5px; line-height:1.05; }
+  /* Mobile type scale — exactly five sizes, hierarchy first:
+     34 display / 26 heading / 20 statement / 16 body / 14 caption+controls */
+  .light-hero h1 { font-size:34px; letter-spacing:-.5px; line-height:1.1; }
   .light-hero-desc { width:100%; }
-  .light-hero-desc .light-hero-kicker { font-size:17px; line-height:1.35; max-width:none; }
-  .light-hero-desc p { font-size:18px; line-height:1.3; max-width:none; }
+  .light-hero-desc .light-hero-kicker { font-size:16px; line-height:1.4; max-width:none; }
+  .light-hero-desc p { font-size:16px; line-height:1.4; max-width:none; }
+  .light-btn { font-size:14px; }
   .light-belief { height:820px; margin-top:0; }
   /* P0-2: this rule sets top/left but was missing position:absolute, so the copy sat at the top
      of the section underneath the cards. */
-  .light-belief-copy { font-size:22px; left:32px; line-height:1.2; position:absolute; top:355px; width:calc(100% - 64px); }
+  .light-belief-copy { font-size:20px; left:32px; line-height:1.45; position:absolute; top:355px; width:calc(100% - 64px); }
   .card-wrap-p1 { height:214.196745px; left:calc(12% - 25.177301px); top:120.803255px; width:210.354602px; }
   .card-wrap-p1 .polaroid-card { height:174px; width:168.348028px; }
   /* P0-2: right:calc(11% - 95.98px) is negative below ~873px viewport width — card bled 55px
@@ -291,7 +294,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   /* In flow (relative), a leftover left:32px shifts the box and widens the document — side
      spacing must come from margin instead. */
   .light-approach-heading { left:auto; margin:0 32px; padding:0; position:relative; top:auto; width:auto; }
-  .light-approach h2 { font-size:36px; line-height:1.05; }
+  .light-approach h2 { font-size:26px; line-height:1.15; }
+  .light-approach-heading .eyebrow { font-size:14px; letter-spacing:1.68px; line-height:1.4; }
+  .eyebrow { font-size:14px; }
   .figma-frame { gap:32px; }
   .light-approach .figma-frame { padding-bottom:48px; }
   .light-approach-heading { order:0; }
@@ -302,29 +307,34 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference-b { order:4; }
   .stack .card-wrap { height:100% !important; left:0 !important; top:0 !important; width:100% !important; }
   .stack .stack-card { height:100%; width:100%; }
-  /* Mobile A/B build-up: the frames share one canvas (1200×960, aligned), so stacking them
-     inset:0 and fading them in one after another reads as the drawing assembling — the same
-     story the desktop scroll-scrub tells, retimed as a one-shot reveal (a .stack-revealed
-     class added by an IntersectionObserver when the stack scrolls into view). */
+  /* Mobile A/B loop: one card per group (stacking doubles up the box-shadows), cycling its
+     background through the aligned frames like a flipbook — hard cuts, infinite loop.
+     background-image is non-interpolable, so paired keyframe stops (24%/26%) pin each cut. */
   .stack .stack-card { transform:none; }
-  .stack .card-wrap { opacity:0; transition:opacity .7s cubic-bezier(.22,1,.36,1); }
-  .stack-revealed .card-wrap-a1,.stack-revealed .card-wrap-b1 { opacity:1; }
-  .stack-revealed .card-wrap-a2,.stack-revealed .card-wrap-b2 { opacity:1; transition-delay:.55s; }
-  .stack-revealed .card-wrap-a3,.stack-revealed .card-wrap-b3 { opacity:1; transition-delay:1.1s; }
-  .stack-revealed .card-wrap-a4 { opacity:1; transition-delay:1.65s; }
-  .card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
-  .card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2-mobile.jpg"); }
-  .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3-mobile.jpg"); }
-  .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
-  /* b frames share a canvas too — one crop position for the whole group keeps them aligned */
-  .card-wrap-b1 .stack-card { background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); background-position:right center; }
-  .card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2-mobile.jpg"); background-position:right center; }
-  .card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); background-position:right center; }
+  .stack .card-wrap { display:none; }
+  .stack .card-wrap-a1,.stack .card-wrap-b1 { display:flex; }
+  .card-wrap-a1 .stack-card { animation:stack-a-cycle 5.2s infinite; background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
+  .card-wrap-b1 .stack-card { animation:stack-b-cycle 4s infinite; background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); background-position:right center; }
+  @keyframes stack-a-cycle {
+    0%,24% { background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
+    26%,49% { background-image:url("assets/figma-user/stack-a-2-mobile.jpg"); }
+    51%,74% { background-image:url("assets/figma-user/stack-a-3-mobile.jpg"); }
+    76%,100% { background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
+  }
+  @keyframes stack-b-cycle {
+    0%,31% { background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); }
+    34%,64% { background-image:url("assets/figma-user/stack-b-2-mobile.jpg"); }
+    67%,100% { background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); }
+  }
   .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
   .light-inference b,.light-inference h3,.light-inference p { max-width:none; width:100%; }
-  .light-inference b { font-size:50px; }
-  .light-inference h3 { font-size:33px; }
-  .light-inference p { font-size:18px; }
+  .light-inference b { font-size:34px; line-height:1.1; }
+  .light-inference h3 { font-size:26px; line-height:1.2; }
+  .light-inference p { font-size:16px; line-height:1.5; }
+  .light-join-card h2 { font-size:26px; line-height:1.2; }
+  .light-join-card > p:not(.eyebrow) { font-size:16px; line-height:1.5; }
+  .footer-brand { font-size:20px; }
+  .footer-bottom { font-size:14px; }
   /* The desktop entrance offsets (±400px) are wider than the phone screen itself and widen the
      layout viewport before the reveal fires — shrink them to an on-screen drift. */
   .motion-ready .light-main .card-wrap-p1.motion-card { transform:translate(-60px,-40px) scale(1.05); }
@@ -443,7 +453,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .kinetic-words .kinetic-word { animation:none; opacity:1; transform:none; }
 }
 
-/* Reduced motion on mobile: the stack observer never runs, so the frames must not stay hidden. */
+/* Reduced motion on mobile: stop the flipbook loop on the final, complete frame. */
 @media (prefers-reduced-motion:reduce) and (max-width:1023px) {
-  .stack .card-wrap { opacity:1; transition:none; }
+  .card-wrap-a1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
+  .card-wrap-b1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); }
 }
