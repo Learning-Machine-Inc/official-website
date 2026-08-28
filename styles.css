@@ -286,7 +286,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
      past the right edge at 375px. */
   .card-wrap-p2 { height:274.727235px; right:12px; left:auto; top:60.272765px; width:325.959268px; }
   .card-wrap-p2 .polaroid-card { height:240px; width:298.867925px; }
-  .light-approach { height:auto; margin-top:0; padding-top:130px; }
+  .light-approach { height:auto; margin-top:0; padding-top:100px; }
   /* P0-1: the legacy dark-main rule `.approach-stage { position:absolute; inset:0 }` also hits
      the light-main stage. Desktop is rescued by the ≥1024 sticky override; mobile had nothing,
      so the whole scene left the flow and collapsed the section to its 130px padding. */
@@ -313,7 +313,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .stack .stack-card { transform:none; }
   .stack .card-wrap { display:none; }
   .stack .card-wrap-a1,.stack .card-wrap-b1 { display:flex; }
-  .card-wrap-a1 .stack-card { animation:stack-a-cycle 5.2s infinite; background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
+  /* The a frames' subject sits small in the canvas center — zoom the shared crop so the early,
+     tiny frames read clearly; frames stay aligned since size/position live outside the keyframes. */
+  .card-wrap-a1 .stack-card { animation:stack-a-cycle 5.2s infinite; background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); background-size:190%; }
   .card-wrap-b1 .stack-card { animation:stack-b-cycle 4s infinite; background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); background-position:right center; }
   @keyframes stack-a-cycle {
     0%,24% { background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }

@@ -9,6 +9,15 @@
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:1024px)">
   <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:1023px)">
+  <!-- flipbook frames referenced only from @keyframes: browsers fetch those lazily per frame,
+       which flashes the blank card color mid-loop unless every frame is preloaded up front -->
+  <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:1023px)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus&family=Inria+Serif:wght@300;400&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
