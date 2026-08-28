@@ -330,9 +330,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference b,.light-inference h3,.light-inference p { max-width:none; width:100%; }
   .light-inference b { font-size:34px; line-height:1.1; }
   .light-inference h3 { font-size:26px; line-height:1.2; }
-  .light-inference p { font-size:16px; line-height:1.5; }
+  .light-inference p { font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:16px; line-height:1.5; }
   .light-join-card h2 { font-size:26px; line-height:1.2; }
-  .light-join-card > p:not(.eyebrow) { font-size:16px; line-height:1.5; }
+  .light-join-card > p:not(.eyebrow) { font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:16px; font-weight:300; line-height:1.5; }
   .footer-brand { font-size:20px; }
   .footer-bottom { font-size:14px; }
   /* The desktop entrance offsets (±400px) are wider than the phone screen itself and widen the
