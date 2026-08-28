@@ -302,13 +302,23 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference-b { order:4; }
   .stack .card-wrap { height:100% !important; left:0 !important; top:0 !important; width:100% !important; }
   .stack .stack-card { height:100%; width:100%; }
-  /* P1-6: the stacked storytelling cards all sat on top of one another at full opacity — only
-     the top one was visible while all seven images downloaded. Keep just the final, complete
-     illustration of each group, unrotated. */
-  .stack .card-wrap { display:none; }
-  .stack .card-wrap-a4,.stack .card-wrap-b3 { display:flex; }
+  /* Mobile A/B build-up: the frames share one canvas (1200×960, aligned), so stacking them
+     inset:0 and fading them in one after another reads as the drawing assembling — the same
+     story the desktop scroll-scrub tells, retimed as a one-shot reveal (a .stack-revealed
+     class added by an IntersectionObserver when the stack scrolls into view). */
   .stack .stack-card { transform:none; }
+  .stack .card-wrap { opacity:0; transition:opacity .7s cubic-bezier(.22,1,.36,1); }
+  .stack-revealed .card-wrap-a1,.stack-revealed .card-wrap-b1 { opacity:1; }
+  .stack-revealed .card-wrap-a2,.stack-revealed .card-wrap-b2 { opacity:1; transition-delay:.55s; }
+  .stack-revealed .card-wrap-a3,.stack-revealed .card-wrap-b3 { opacity:1; transition-delay:1.1s; }
+  .stack-revealed .card-wrap-a4 { opacity:1; transition-delay:1.65s; }
+  .card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
+  .card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2-mobile.jpg"); }
+  .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3-mobile.jpg"); }
   .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
+  /* b frames share a canvas too — one crop position for the whole group keeps them aligned */
+  .card-wrap-b1 .stack-card { background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); background-position:right center; }
+  .card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2-mobile.jpg"); background-position:right center; }
   .card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); background-position:right center; }
   .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
   .light-inference b,.light-inference h3,.light-inference p { max-width:none; width:100%; }
@@ -431,4 +441,9 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .motion-ready .light-main .motion-line,
   .motion-ready .light-main .motion-card { opacity:1; transform:none; transition:none; }
   .kinetic-words .kinetic-word { animation:none; opacity:1; transform:none; }
+}
+
+/* Reduced motion on mobile: the stack observer never runs, so the frames must not stay hidden. */
+@media (prefers-reduced-motion:reduce) and (max-width:1023px) {
+  .stack .card-wrap { opacity:1; transition:none; }
 }
