@@ -132,6 +132,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .light-nav { align-items:center; display:flex; gap:30px; }
 .light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
+.light-nav a:not(.light-nav-contact) { background:rgb(255 255 255 / 80%); border-radius:5px; padding:7.5px 20px 7.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
 .light-hero { background:#f5f0ed; height:100vh; min-height:761px; position:relative; }
 .light-hero-art { background:url("assets/figma-107/hero-group-48.png") center / cover no-repeat; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
