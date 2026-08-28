@@ -189,7 +189,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-b2 { height:455.271px; left:calc(50% + 17.71px); top:1344px; width:436.872px; }
 .card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2.jpg"); transform:rotate(1.78deg); }
 .card-wrap-b3 { height:481.481px; left:calc(50% + 100px); top:1433.22px; width:464.424px; }
-.card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); transform:rotate(-5.59deg); }
+.card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); background-position:right center; transform:rotate(-5.59deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference b { display:block; font-family:"Just Me Again Down Here",cursive; font-size:98.889px; font-weight:400; letter-spacing:-.5494px; line-height:87.901px; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
