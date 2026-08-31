@@ -349,6 +349,30 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-join-card .button { width:100%; }
 }
 
+/* Desktop type scale (spec 2026-08-28) — five tiers, desktop only, mobile keeps its own scale:
+   96/86 display · 40/48 heading · 32/48 statement · 24/32 body · 14/22 caption */
+@media (min-width:1024px) {
+  .light-inference b { font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
+  .light-approach h2 { font-size:96px; letter-spacing:-1.0451px; line-height:86px; text-transform:none; }
+  .light-inference h3 { font-size:40px; line-height:48px; }
+  .light-join-card h2 { font-size:40px; line-height:48px; }
+  .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:32px; line-height:48px; }
+  .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:24px; line-height:32px; }
+  .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:24px; font-weight:300; line-height:32px; }
+  .footer-brand { font-size:24px; }
+  .light-approach-heading .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:14px; letter-spacing:2.4px; line-height:22px; }
+  .light-join-card .eyebrow { font-family:"Roboto","Inter",sans-serif; }
+  .light-join-card .eyebrow { font-size:14px; line-height:22px; }
+  .light-join-card > p:not(.eyebrow) { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .light-btn { font-family:"Roboto","Inter",sans-serif; font-size:14px; }
+  .light-join-card .button { font-family:"Roboto","Inter",sans-serif; font-size:14px; }
+  .light-nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-main p { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-email { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-bottom { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+}
+
 html[data-variant="dark"] { --paper:#000; --ink:#fff; --warm:#a89f92; --footer:#1a1a1a; color-scheme:dark; }
 html[data-variant="dark"] body { background:#000; }
 html[data-variant="dark"] .site-header { background:#fffefc; color:#111; }
