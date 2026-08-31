@@ -334,7 +334,7 @@
       const beliefCopy = document.querySelector('.light-belief-copy');
       const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
-      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefInkStarted = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
       const onScroll = ({ scroll }) => {
         // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
         // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
@@ -382,6 +382,26 @@
             });
             beliefLineCount = lineTops.length || 1;
             beliefCopy.style.transition = 'none'; beliefCopy.style.opacity = '1'; beliefCopy.style.transform = 'none';
+            // Auto ink sweep: letters darken 30% → 100% in reading order, a ~20-letter blend
+            // band sliding across the paragraph over ~4.5s of ACCUMULATED VISIBLE time. It only
+            // runs while the paragraph is at least half on screen (IntersectionObserver) and
+            // pauses/resumes across exits, fast fling-throughs, and hidden tabs (frame-delta
+            // accumulation, not wall-clock) — so the user always witnesses the color arriving.
+            const FADE_WIDTH = 20, INK_DURATION = 4500, nC = beliefChars.length || 1;
+            let inkProgress = 0, inkRaf = 0, inkLast = 0;
+            const inkTick = (now) => {
+              inkProgress = Math.min(1, inkProgress + (now - inkLast) / INK_DURATION);
+              inkLast = now;
+              const sweepPos = inkProgress * (nC - 1 + FADE_WIDTH);
+              beliefChars.forEach((c, i) => {
+                c.style.opacity = (0.3 + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * 0.7).toFixed(3);
+              });
+              inkRaf = inkProgress < 1 ? requestAnimationFrame(inkTick) : 0;
+            };
+            new IntersectionObserver((entries) => entries.forEach((entry) => {
+              if (entry.isIntersecting && inkProgress < 1 && !inkRaf) { inkLast = performance.now(); inkRaf = requestAnimationFrame(inkTick); }
+              else if (!entry.isIntersecting && inkRaf) { cancelAnimationFrame(inkRaf); inkRaf = 0; }
+            }), { threshold: 0.5 }).observe(beliefCopy);
             beliefSetup = true;
           }
           const bSpan = beliefSec.offsetHeight - innerHeight;
@@ -391,27 +411,6 @@
           if (!beliefRevealed && beliefCopy.getBoundingClientRect().top < innerHeight * 0.88) {
             beliefRevealed = true;
             beliefWords.forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
-          }
-          // Ink sweep: letters darken from 30% to full opacity in reading order, a ~20-letter
-          // blend band sliding across the paragraph. Time-driven, not scroll-scrubbed: it starts
-          // the moment the pin parks the scene in view (bp crosses the snap resting point) and
-          // plays itself over a fixed duration, so the user always watches the color arrive —
-          // no wheel input needed. One-shot; the text simply stays dark afterwards.
-          if (!beliefInkStarted && bp > 0.3) {
-            beliefInkStarted = true;
-            const FADE_WIDTH = 20;
-            const nC = beliefChars.length || 1;
-            const INK_DURATION = 4500;
-            const inkStart = performance.now();
-            const inkTick = (now) => {
-              const p = Math.min(1, (now - inkStart) / INK_DURATION);
-              const sweepPos = p * (nC - 1 + FADE_WIDTH);
-              beliefChars.forEach((c, i) => {
-                c.style.opacity = (0.3 + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * 0.7).toFixed(3);
-              });
-              if (p < 1) requestAnimationFrame(inkTick);
-            };
-            requestAnimationFrame(inkTick);
           }
           // Scroll-scrubbed exit: lines float up and fade in order, reversible. Word transitions
           // are stripped on first engagement so the scrub tracks the wheel with no lag.
