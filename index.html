@@ -188,7 +188,7 @@
   <script type="module">
     import Lenis from 'https://unpkg.com/lenis@1.3.26/dist/lenis.mjs';
 
-    window.lenis = new Lenis({ autoRaf:true, lerp:.08, respectReducedMotion:true, smoothWheel:true });
+    window.lenis = new Lenis({ autoRaf:true, lerp:.14, respectReducedMotion:true, smoothWheel:true, wheelMultiplier:1.5 });
 
     // Single source of truth for the desktop/mobile split — matches the CSS breakpoint exactly
     // (innerWidth can disagree with media queries when overflow widens the layout viewport).
@@ -217,25 +217,30 @@
         const approachExit = approachStart.offsetTop + approachSpan * .97;
         const approachSnapEpsilon = 16;
         let target = null;
+        // Momentum-respecting snap: land on the FURTHEST stop the projected scroll has already
+        // passed, never drag the user back to the first one — a hard fling skips whole scenes
+        // and reaches the ends of the page, a gentle tick still aligns to the nearest stop.
         if (scrollDirection > 0) {
-          if (scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
+          if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
           else {
-            target = approachStops.find((stop, index) => scroll < stop - approachSnapEpsilon && projected > approachTriggers[index]) ?? null;
-            if (target === null && scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+            for (let index = approachStops.length - 1; index >= 0; index--) {
+              if (scroll < approachStops[index] - approachSnapEpsilon && projected > approachTriggers[index]) { target = approachStops[index]; break; }
+            }
+            if (target === null && scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
           }
         } else {
-          if (scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
-          else for (let index = approachStops.length - 2; index >= 0; index--) {
-            if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
-          }
-          if (target === null) {
-            if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
-            else if (scroll > 2 && projected < beliefBoundary) target = 0;
+          if (scroll > 2 && projected < beliefBoundary) target = 0;
+          else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
+          else {
+            for (let index = 0; index < approachStops.length - 1; index++) {
+              if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
+            }
+            if (target === null && scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
           }
         }
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
         snapping = true;
-        window.lenis.scrollTo(target, { lerp:.05, onComplete:() => { snapping = false; wheeling = false; } });
+        window.lenis.scrollTo(target, { lerp:.09, onComplete:() => { snapping = false; wheeling = false; } });
       };
       addEventListener('wheel', (event) => {
         if (!event.deltaY) return;
