@@ -354,7 +354,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference h3 { font-size:40px; line-height:48px; }
   .light-join-card h2 { font-size:40px; line-height:48px; }
   .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:32px; line-height:48px; }
-  .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:24px; line-height:32px; }
+  .light-hero-desc { gap:10px; }
+  .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:24px; font-weight:300; line-height:32px; }
+  .light-hero-desc .light-hero-kicker { color:#302925; opacity:1; }
   .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:24px; font-weight:300; line-height:32px; }
   .footer-brand { font-size:24px; }
   .light-approach-heading .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:14px; letter-spacing:2.4px; line-height:22px; }
