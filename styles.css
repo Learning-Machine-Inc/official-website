@@ -253,7 +253,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 @media (max-width:1023px) {
   /* P0-3: brand scales to 182px effective width; Careers loses its pill, Contact pill tightens —
      222+228+40 = 490px would overflow a 375px viewport. */
-  .light-header { left:0; padding:0 16px; width:100%; }
+  .light-header { background:#f4f0ed; left:0; padding:0 16px; width:100%; }
   .light-brand { margin-right:-40px; transform:scale(.82); transform-origin:left center; }
   .light-nav { gap:10px; }
   .light-nav a { letter-spacing:.5px; }
