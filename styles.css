@@ -190,7 +190,6 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-b3 { height:481.481px; left:calc(50% + 82px); top:1294.54px; width:464.424px; }
 .card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); background-position:right center; transform:rotate(-5.59deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
-.light-inference b { display:block; font-family:"Just Me Again Down Here",cursive; font-size:98.889px; font-weight:400; letter-spacing:-.5494px; line-height:87.901px; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
 .light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
 .light-inference-b p { max-width:568px; }
@@ -330,8 +329,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
     67%,100% { background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); }
   }
   .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
-  .light-inference b,.light-inference h3,.light-inference p { max-width:none; width:100%; }
-  .light-inference b { font-size:34px; line-height:1.1; }
+  .light-inference h3,.light-inference p { max-width:none; width:100%; }
   .light-inference h3 { font-size:26px; line-height:1.2; }
   .light-inference p { font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:16px; line-height:1.5; }
   .light-join-card h2 { font-size:26px; line-height:1.2; }
@@ -352,8 +350,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 /* Desktop type scale (spec 2026-08-28) — five tiers, desktop only, mobile keeps its own scale:
    96/86 display · 40/48 heading · 32/48 statement · 24/32 body · 14/22 caption */
 @media (min-width:1024px) {
-  .light-inference b { font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
-  .light-approach h2 { font-size:96px; letter-spacing:-1.0451px; line-height:86px; text-transform:none; }
+  .light-approach h2 { font-size:72px; letter-spacing:-1.0451px; line-height:64px; text-transform:none; }
   .light-inference h3 { font-size:40px; line-height:48px; }
   .light-join-card h2 { font-size:40px; line-height:48px; }
   .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:32px; line-height:48px; }
