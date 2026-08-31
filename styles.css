@@ -112,7 +112,7 @@ footer { background:var(--footer); color:#b3aa9c; height:406px; }
 
 /* White version — Figma node 1617:19731 */
 .light-main { display:none; }
-html[data-variant="light"] body { background:#f5f0ed; }
+html[data-variant="light"] body { background:#f4f0ed; }
 html[data-variant="light"] .light-main { display:block; }
 html[data-variant="light"] .dark-main { display:none; }
 html[data-variant="dark"] .light-main { display:none; }
@@ -134,9 +134,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
 .light-nav a:not(.light-nav-contact) { background:rgb(255 255 255 / 80%); border-radius:5px; padding:7.5px 20px 7.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
-.light-hero { background:#f5f0ed; height:100vh; min-height:761px; position:relative; }
+.light-hero { background:#f4f0ed; height:100vh; min-height:761px; position:relative; }
 .light-hero-art { background:url("assets/figma-107/hero-group-48.png") center / cover no-repeat; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
-.light-hero-veil { background:linear-gradient(to top,#f5f0ed 0,#f5f0ed 70px,rgb(245 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
+.light-hero-veil { background:linear-gradient(to top,#f4f0ed 0,#f4f0ed 70px,rgb(244 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
 .light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:50px; max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
 .light-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
 .light-hero h1 .motion-line:first-child { margin-bottom:0; }
@@ -147,11 +147,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
 .light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Inter",sans-serif; font-size:15px; font-weight:500; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
-.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f5f0ed; gap:7.99px; width:204px; }
+.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f4f0ed; gap:7.99px; width:204px; }
 .light-btn-dark img { height:17px; width:17px; }
 .light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; width:109px; }
 
-.light-belief { background:#f5f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
+.light-belief { background:#f4f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
 @media (min-width:1024px) {
   .light-belief { height:calc(100vh + 2400px); overflow:visible; }
   .belief-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
@@ -167,7 +167,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-p2 { height:460.062806px; left:50%; top:calc(50% - 326.031403px); width:545.856823px; }
 .card-wrap-p2 .polaroid-card { height:401.908px; transform:rotate(7.02deg); width:500.489208px; }
 
-.light-approach { background:#f5f0ed; height:calc(100vh + 2800px); margin-top:0; position:relative; }
+.light-approach { background:#f4f0ed; height:calc(100vh + 2800px); margin-top:0; position:relative; }
 .light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:4000px; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
@@ -208,8 +208,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 234.7405px); }
 }
 
-.light-join { align-items:center; background:#f5f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
-.light-join-backdrop { background-image:linear-gradient(180deg,#f5f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png"); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
+.light-join { align-items:center; background:#f4f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
+.light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png"); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
 .light-join-card { align-items:center; background:linear-gradient(#f0efed,rgb(241 240 237 / 70%)); border:.5px solid #666460; color:#1a1a1a; display:flex; flex-direction:column; max-width:720px; padding:65.25px 33px 60.99px; position:relative; text-align:center; width:720px; }
 .light-join-card .eyebrow { color:#628aa8; }
 .light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
@@ -341,7 +341,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .motion-ready .light-main .card-wrap-p1.motion-card { transform:translate(-60px,-40px) scale(1.05); }
   .motion-ready .light-main .card-wrap-p2.motion-card { transform:translate(60px,-40px) scale(1.05); }
   .light-join { margin-top:0; padding:70px 20px; }
-  .light-join-backdrop { background-image:linear-gradient(180deg,#f5f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-mobile.jpg"); }
+  .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-mobile.jpg"); }
   .light-join-card { padding:52px 24px; width:100%; }
   .light-join-card .join-actions { flex-direction:column; width:100%; }
   .light-join-card .button { width:100%; }
