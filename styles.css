@@ -347,6 +347,10 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-join-card .button { width:100%; }
 }
 
+@media (min-width:1024px) {
+  .light-header { background:#f4f0ed; }
+}
+
 /* Desktop type scale (spec 2026-08-28) — five tiers, desktop only, mobile keeps its own scale:
    96/86 display · 40/48 heading · 32/48 statement · 24/32 body · 14/22 caption */
 @media (min-width:1024px) {
