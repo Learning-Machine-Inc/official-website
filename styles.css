@@ -174,20 +174,20 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-approach h2 .h2-muted { color:#cec4b6; }
 .stack { inset:0; position:absolute; }
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
-.stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:442.361px; width:423.364px; }
-.card-wrap-a1 { height:479.066px; left:calc(50% + 86px); top:209.54px; width:461.877px; }
+.stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:49.151vh; width:47.04vh; }
+.card-wrap-a1 { height:53.23vh; left:calc(50% + 86px); top:209.54px; width:51.32vh; }
 .card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); transform:rotate(-5.22deg); }
-.card-wrap-a2 { height:455.271px; left:calc(50% + 105px); top:228.54px; width:436.872px; }
+.card-wrap-a2 { height:50.586vh; left:calc(50% + 105px); top:228.54px; width:48.541vh; }
 .card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); transform:rotate(1.78deg); }
-.card-wrap-a3 { height:449.961px; left:calc(50% + 101px); top:233.54px; width:431.311px; }
+.card-wrap-a3 { height:49.996vh; left:calc(50% + 101px); top:233.54px; width:47.923vh; }
 .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
-.card-wrap-a4 { height:459.388px; left:calc(50% + 96px); top:233.54px; width:441.187px; }
+.card-wrap-a4 { height:51.043vh; left:calc(50% + 96px); top:233.54px; width:49.021vh; }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
-.card-wrap-b1 { height:479.066px; left:calc(50% + 105px); top:1282.54px; width:461.877px; }
+.card-wrap-b1 { height:53.23vh; left:calc(50% + 105px); top:1282.54px; width:51.32vh; }
 .card-wrap-b1 .stack-card { background-image:url("assets/figma-user/stack-b-1.jpg"); transform:rotate(-5.22deg); }
-.card-wrap-b2 { height:455.271px; left:calc(50% + 109px); top:1294.54px; width:436.872px; }
+.card-wrap-b2 { height:50.586vh; left:calc(50% + 109px); top:1294.54px; width:48.541vh; }
 .card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2.jpg"); transform:rotate(1.78deg); }
-.card-wrap-b3 { height:481.481px; left:calc(50% + 82px); top:1294.54px; width:464.424px; }
+.card-wrap-b3 { height:53.498vh; left:calc(50% + 82px); top:1294.54px; width:51.603vh; }
 .card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); background-position:right center; transform:rotate(-5.59deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
@@ -201,11 +201,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
   .approach-stage .light-inference-b { bottom:70px; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
-  .card-wrap-a1 { top:calc(50vh - 241.694px); }
-  .card-wrap-a2 { top:calc(50vh - 222.694px); }
-  .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 217.694px); }
-  .card-wrap-b1 { top:calc(50vh - 246.7405px); }
-  .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 234.7405px); }
+  .card-wrap-a1 { top:calc(50vh - 26.855vh); }
+  .card-wrap-a2 { top:calc(50vh - 24.744vh); }
+  .card-wrap-a3,.card-wrap-a4 { top:calc(50vh - 24.188vh); }
+  .card-wrap-b1 { top:calc(50vh - 27.416vh); }
+  .card-wrap-b2,.card-wrap-b3 { top:calc(50vh - 26.082vh); }
 }
 
 .light-join { align-items:center; background:#f4f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
