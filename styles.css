@@ -268,6 +268,13 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .motion-ready .light-main .card-wrap-p2.motion-card { transform:translate(400px,-280px) scale(1.1); transition-delay:.12s; }
 .motion-ready .light-main .card-wrap-p1.motion-card.is-visible,
 .motion-ready .light-main .card-wrap-p2.motion-card.is-visible { opacity:1; transform:none; }
+/* Desktop belief cards re-arm every visit (see beliefCardsActive in the scroll script): entrance
+   reuses the diagonal offset above, exit is a plain fade-up — never retracing the entrance path.
+   motion-snap kills the transition for one frame so a re-triggered entrance can snap back to the
+   diagonal start state before animating in again. */
+.motion-ready .light-main .motion-card.motion-snap { transition:none; }
+.motion-ready .light-main .card-wrap-p1.motion-card.is-exiting,
+.motion-ready .light-main .card-wrap-p2.motion-card.is-exiting { opacity:0; transform:translateY(-60px); transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
 .kinetic-words .kinetic-word { display:inline-block; opacity:0; transform:translateY(.7em); }
 .kinetic-words.is-visible .kinetic-word { animation:word-reveal .48s cubic-bezier(.22,1,.36,1) forwards; animation-delay:calc(.18s + var(--word-index) * 38ms); }
 .light-hero-kicker.kinetic-words.is-visible .kinetic-word { animation-duration:.18s; animation-delay:calc(.18s + var(--word-index) * 10ms); }

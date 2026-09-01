@@ -326,10 +326,9 @@
       const WINDOWS = [[0, 0.25], [0.28, 0.55], [0.58, 0.82], [0.85, 1]];
       const clamp01 = (v) => Math.min(1, Math.max(0, v));
       const smooth = (t) => t * t * (3 - 2 * t);
-      const easeOut = (t, power) => 1 - Math.pow(1 - clamp01(t), power);
-      // Belief: text, then card 1, then card 2 cascade in; all three hold while the ink-fill
-      // plays, then cascade back out as the section releases into Approach. Driven entirely by
-      // bp (local scroll fraction through the pin) so nothing goes idle mid-pin.
+      // Belief: text cascades in, holds while the ink-fill plays, then cascades back out as the
+      // section releases. Driven entirely by bp (local scroll fraction through the pin) so
+      // nothing goes idle mid-pin. Cards (p1/p2) are handled separately — see beliefCardsActive.
       const beliefSec = document.querySelector('.light-belief');
       const beliefStage = document.querySelector('.belief-stage');
       const cardP1 = document.querySelector('.card-wrap-p1');
@@ -348,21 +347,21 @@
         el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
         el.style.transform = `translateY(${((1 - vIn) * inOffset + vOut * -40).toFixed(1)}px)`;
       };
-      // Belief entrance/exit windows on bp (0→1 across the pin). Card 1 follows card 1's own
-      // start, card 2 follows card 1.
-      // p1/p2 stagger widened so one settles before the next arrives, instead of both
-      // fading in almost together.
-      const BELIEF_IN = { p1: [0.05, 0.28], p2: [0.32, 0.55] };
-      const BELIEF_OUT = { copy: [0.88, 0.97], p1: [0.78, 0.87], p2: [0.89, 0.97] };
-      const placeBelief = (el, vIn, vOut, inX, inY) => {
-        const rest = 1 - vIn;
-        el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
-        el.style.transform = `translate(${(inX * rest).toFixed(1)}px, ${(inY * rest + vOut * -40).toFixed(1)}px) scale(${(1 + 0.1 * rest).toFixed(3)})`;
+      // Belief copy's own exit window on bp (0→1 across the pin) — unrelated to the cards below.
+      const BELIEF_OUT = { copy: [0.88, 0.97] };
+      // p1/p2 are enter-once-per-visit, not continuously scroll-scrubbed: crossing into the pin
+      // plays the diagonal entrance (shared with .motion-card elsewhere); crossing back out of
+      // it — either direction — plays a plain fade-up exit, never retracing the entrance path.
+      // Re-arms every time the section is re-entered (unlike the belief text's one-shot reveal).
+      const resetCards = (els) => {
+        els.forEach(el => { el.classList.add('motion-snap'); el.classList.remove('is-visible', 'is-exiting'); });
+        void els[0].offsetHeight;
+        els.forEach(el => el.classList.remove('motion-snap'));
       };
       const beliefCopy = document.querySelector('.light-belief-copy');
       const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
-      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefCardsActive = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
       const onScroll = ({ scroll }) => {
         // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
         // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
@@ -469,9 +468,23 @@
               w.style.transform = e ? `translateY(${(-40 * e).toFixed(1)}px)` : 'none';
             });
           }
-          // Cards still cascade in/out (unchanged).
-          placeBelief(cardP1, easeOut(seg(bp, BELIEF_IN.p1[0], BELIEF_IN.p1[1]), 5), smooth(seg(bp, BELIEF_OUT.p1[0], BELIEF_OUT.p1[1])), -400, -240);
-          placeBelief(cardP2, easeOut(seg(bp, BELIEF_IN.p2[0], BELIEF_IN.p2[1]), 5), smooth(seg(bp, BELIEF_OUT.p2[0], BELIEF_OUT.p2[1])), 400, -280);
+          // Cards: enter once per visit, exit once per visit — not scroll-scrubbed. `bp` above is
+          // clamped to [0,1], which reads as "inside" even from far away; use the raw fraction so
+          // the active/inactive edge only flips near the section's real boundaries.
+          const rawBp = (scroll - chain(beliefSec)) / bSpan;
+          const insideCardRange = rawBp > -0.06 && rawBp < 1.06;
+          if (insideCardRange && !beliefCardsActive) {
+            beliefCardsActive = true;
+            resetCards([cardP1, cardP2]);
+            cardP1.classList.add('is-visible');
+            cardP2.classList.add('is-visible');
+          } else if (!insideCardRange && beliefCardsActive) {
+            beliefCardsActive = false;
+            cardP1.classList.remove('is-visible');
+            cardP2.classList.remove('is-visible');
+            cardP1.classList.add('is-exiting');
+            cardP2.classList.add('is-exiting');
+          }
         }
         if (scene && desktopMQ.matches) {
           const span = scene.offsetHeight - innerHeight;
