@@ -3,12 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4F0ED">
   <meta name="description" content="Learning Machine builds models that learn and adapt at inference time.">
   <title>Learning Machine | Build AI that truly Learns</title>
-  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
+  <link rel="preload" href="assets/fonts/inria-serif-300-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
+  <link rel="preload" href="assets/fonts/inria-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/figma-106/72b676755d023ede62355f1b8555e1a3f895ff17.png" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?rev=opaque-header-v10">
+  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:768px)">
+  <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:767.98px)">
+  <!-- flipbook frames referenced only from @keyframes: browsers fetch those lazily per frame,
+       which flashes the blank card color mid-loop unless every frame is preloaded up front -->
+  <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin media="(min-width:768px)">
+  <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v34">
 </head>
 <body>
   <header class="site-header" id="header">
@@ -18,13 +36,69 @@
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#approach">Approach</a><a href="#vision">Vision</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav>
   </header>
-  <main>
-    <section id="home" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" src="assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" src="assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
-    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
-    <section id="approach" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="metadata" poster="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
-    <section id="join" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip" aria-describedby="role-tooltip" aria-expanded="false">See open roles</button><div id="role-tooltip" class="role-tooltip" role="status">Coming soon｜<a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self‑recommendation</a></div></div><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div></section>
+  <main class="light-main">
+    <header class="light-header">
+      <a href="#home" class="light-brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
+      <nav class="light-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
+    </header>
+    <section id="home" class="light-hero">
+      <div class="light-hero-art motion-image" aria-hidden="true"></div>
+      <div class="light-hero-veil" aria-hidden="true"></div>
+      <div class="figma-frame">
+        <div class="light-hero-copy">
+          <h1><span class="motion-line" data-scramble>Build AI</span><span class="motion-line">that truly <em>Learns</em></span></h1>
+          <div class="light-hero-desc">
+            <p class="light-hero-kicker motion-reveal kinetic-words" data-words>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work.</p>
+            <p class="motion-reveal kinetic-words" data-words>We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p>
+          </div>
+          <div class="light-hero-actions motion-reveal">
+            <a class="light-btn light-btn-dark" href="#approach">See our approach <img src="assets/figma-107/55e5bbb7e913989d3bc60ba2a0e65f7cb2ddb240.svg" alt=""></a>
+            <a class="light-btn light-btn-blue" href="mailto:contact@learning-machine.ai">Join us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="light-belief">
+      <div class="belief-stage">
+      <div class="figma-frame">
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
+        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
+      </div>
+      </div>
+    </section>
+    <section id="approach" class="light-approach">
+      <div class="approach-stage">
+        <div class="figma-frame">
+          <div class="light-approach-heading motion-reveal"><p class="eyebrow kinetic-words" data-words>What makes us different</p><h2><span class="motion-line" data-scramble>Models</span><span class="motion-line">that adapt,</span><span class="motion-line h2-muted">not just respond</span></h2></div>
+          <div class="stack stack-a" aria-hidden="true">
+            <div class="card-wrap card-wrap-a1"><div class="stack-card"></div></div>
+            <div class="card-wrap card-wrap-a2"><div class="stack-card"></div></div>
+            <div class="card-wrap card-wrap-a3"><div class="stack-card"></div></div>
+            <div class="card-wrap card-wrap-a4"><div class="stack-card"></div></div>
+          </div>
+          <div class="stack stack-b" aria-hidden="true">
+            <div class="card-wrap card-wrap-b1"><div class="stack-card"></div></div>
+            <div class="card-wrap card-wrap-b2"><div class="stack-card"></div></div>
+            <div class="card-wrap card-wrap-b3"><div class="stack-card"></div></div>
+          </div>
+          <div class="light-inference light-inference-a"><h3>A. Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div>
+          <div class="light-inference light-inference-b"><h3>B. No operation overhead</h3><p>No data-collection pipeline, no dedicated training infrastructure, no team of ML engineers to maintain. Connect the model to a workflow and it learns on the job.</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="join" class="light-join">
+      <div class="light-join-backdrop" aria-hidden="true"></div>
+      <div class="light-join-card motion-reveal"><p class="eyebrow">Careers</p><h2>Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="mailto:careers@learning-machine.ai">See open roles</a><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div>
+    </section>
   </main>
-  <footer><div class="footer-main"><div><a href="#home" class="footer-brand">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#vision">Vision</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
+  <main class="dark-main">
+    <section id="home-dark" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" loading="lazy" src="assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" loading="lazy" src="assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
+    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img loading="lazy" src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
+    <section id="approach-dark" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
+    <section id="join-dark" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip-dark" aria-describedby="role-tooltip-dark" aria-expanded="false">See open roles</button><div id="role-tooltip-dark" class="role-tooltip" role="status">Coming soon | <a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self-recommendation</a></div></div><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div></section>
+  </main>
+  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#">Research</a><a href="#">Team</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
   <script>
     const root = document.documentElement;
     const variantToggle = document.querySelector('#variant-toggle');
@@ -35,7 +109,7 @@
     const video = document.querySelector('#approach-video');
     const media = document.querySelector('.device-media');
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    const mobileViewport = matchMedia('(max-width: 1023px)');
+    const mobileViewport = matchMedia('(max-width: 767.98px)');
     let roleTooltipCloseTimer = 0;
     const cancelRoleTooltipClose = () => { clearTimeout(roleTooltipCloseTimer); roleTooltipCloseTimer = 0; };
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
@@ -70,6 +144,361 @@
     const observer = new IntersectionObserver((entries) => { if (entries.some((entry) => entry.isIntersecting)) { playVideo(); observer.disconnect(); } }, { rootMargin: '300px 0px' });
     observer.observe(media);
     video.addEventListener('playing', revealVideoAfterFrame, { once: true });
+    if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+      document.querySelectorAll('[data-words]').forEach((element) => {
+        const words = element.textContent.trim().split(/\s+/);
+        const offset = Number(element.dataset.wordOffset || 0);
+        element.replaceChildren();
+        words.forEach((word, index) => {
+          const span = document.createElement('span');
+          span.className = 'kinetic-word';
+          span.style.setProperty('--word-index', offset + index);
+          span.textContent = word;
+          element.append(span, document.createTextNode(' '));
+        });
+      });
+      root.classList.add('motion-ready');
+      const scrambled = new WeakSet();
+      const startScramble = (element) => {
+        if (scrambled.has(element)) return;
+        scrambled.add(element);
+        const original = element.textContent;
+        const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+        let frame = 0;
+        const tick = () => {
+          const resolved = frame / 18;
+          element.textContent = [...original].map((character, index) => character === ' ' || index / original.length < resolved ? character : glyphs[Math.floor(Math.random() * glyphs.length)]).join('');
+          if (frame++ < 18) requestAnimationFrame(tick);
+        };
+        tick();
+        // rAF pauses in background tabs — without this, tabbing away mid-animation freezes the
+        // heading as scrambled gibberish permanently.
+        setTimeout(() => { element.textContent = original; }, 1200);
+      };
+      const revealMotion = (element) => {
+        element.classList.add('is-visible');
+        element.querySelectorAll('.kinetic-words').forEach((k) => k.classList.add('is-visible'));
+        if (element.matches('[data-scramble]')) startScramble(element);
+        element.querySelectorAll('[data-scramble]').forEach(startScramble);
+      };
+      const motionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { revealMotion(entry.target); motionObserver.unobserve(entry.target); }
+      }), { rootMargin:'0px 0px -10% 0px', threshold:.12 });
+      document.querySelectorAll('.light-main .motion-reveal,.light-main .motion-image,.light-main .motion-line,.light-main .motion-card').forEach((element) => {
+        if (element.closest('.light-hero')) requestAnimationFrame(() => requestAnimationFrame(() => revealMotion(element)));
+        else motionObserver.observe(element);
+      });
+    }
+  </script>
+  <script type="module">
+    import Lenis from './assets/vendor/lenis-1.3.26.mjs';
+
+    window.lenis = new Lenis({ autoRaf:true, lerp:.14, respectReducedMotion:true, smoothWheel:true, wheelMultiplier:1.5 });
+
+    // Single source of truth for the desktop/mobile split — matches the CSS breakpoint exactly
+    // (innerWidth can disagree with media queries when overflow widens the layout viewport).
+    // Crossing the breakpoint reloads: the scrub/pin systems leave inline styles sized for the
+    // layout they initialized against, and a clean re-init is the only reliable reset.
+    const desktopMQ = matchMedia('(min-width:768px)');
+    desktopMQ.addEventListener('change', () => location.reload());
+    // Fluid type (clamp) resizes section heights with the window; scroll anchors are captured at
+    // init, so a settled width change inside the desktop range also needs a clean re-init.
+    let settledWidth = innerWidth, resizeTimer = 0;
+    addEventListener('resize', () => {
+      if (!desktopMQ.matches) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (Math.abs(innerWidth - settledWidth) > 2) location.reload();
+      }, 300);
+    });
+
+    const beliefStart = document.querySelector('.light-belief');
+    const approachStart = document.querySelector('.light-approach');
+    const joinStart = document.querySelector('.light-join');
+    // Snap needs wheel events; touch scrolling only feeds the scroll fallback and fights the
+    // platform's momentum physics, so touch-first devices (iPad landscape included) skip it.
+    if (beliefStart && approachStart && joinStart && desktopMQ.matches && navigator.maxTouchPoints === 0 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let snapTimer = 0, lastScroll = 0, wheelStart = 0, scrollDirection = 1, snapping = false, wheeling = false, snapStartedAt = 0;
+      const scheduleSnap = (delay) => { clearTimeout(snapTimer); snapTimer = setTimeout(snapScene, delay); };
+      const snapScene = () => {
+        const scroll = wheeling ? wheelStart : window.scrollY;
+        const projected = window.lenis.targetScroll;
+        const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
+        const approachSpan = approachStart.offsetHeight - innerHeight;
+        const approachEntry = approachStart.offsetTop - innerHeight;
+        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress);
+        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72].map(progress => approachStart.offsetTop + approachSpan * progress)];
+        const approachBoundary = approachStops[0];
+        const approachExit = approachStart.offsetTop + approachSpan * .97;
+        const approachSnapEpsilon = 16;
+        let target = null;
+        // Momentum-respecting snap: land on the FURTHEST stop the projected scroll has already
+        // passed, never drag the user back to the first one — a hard fling skips whole scenes
+        // and reaches the ends of the page, a gentle tick still aligns to the nearest stop.
+        if (scrollDirection > 0) {
+          if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+          else {
+            for (let index = approachStops.length - 1; index >= 0; index--) {
+              if (scroll < approachStops[index] - approachSnapEpsilon && projected > approachTriggers[index]) { target = approachStops[index]; break; }
+            }
+            if (target === null && scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
+          }
+        } else {
+          if (scroll > 2 && projected < beliefBoundary) target = 0;
+          else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
+          else {
+            for (let index = 0; index < approachStops.length - 1; index++) {
+              if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
+            }
+            if (target === null && scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
+          }
+        }
+        if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
+        snapping = true;
+        snapStartedAt = performance.now();
+        window.lenis.scrollTo(target, { lerp:.09, onComplete:() => { snapping = false; wheeling = false; } });
+      };
+      addEventListener('wheel', (event) => {
+        if (!event.deltaY) return;
+        if (snapping) { snapping = false; wheeling = false; }
+        if (!wheeling) wheelStart = window.scrollY;
+        wheeling = true;
+        scrollDirection = event.deltaY > 0 ? 1 : -1;
+        scheduleSnap(0);
+      }, { passive:true });
+      addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+        // Scrollbar drags and keyboard scrolling interrupt lenis.scrollTo without firing
+        // onComplete, which would leave `snapping` stuck true and kill snapping for good.
+        if (snapping && performance.now() - snapStartedAt > 2500) snapping = false;
+        if (!snapping && Math.abs(scroll - lastScroll) > .5) {
+          scrollDirection = scroll > lastScroll ? 1 : -1;
+          lastScroll = scroll;
+          if (!wheeling) scheduleSnap(160);
+        }
+      }, { passive:true });
+    }
+
+    // In-page anchors: route through lenis.scrollTo so smooth scrolling stays consistent with
+    // the wheel physics (native scroll-behavior:smooth and Lenis animate the same property and
+    // fight each other). Hidden targets (the inactive variant's sections) fall through untouched.
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || link.hash.length < 2) return;
+      const target = document.getElementById(link.hash.slice(1));
+      if (!target || !target.offsetHeight) return;
+      event.preventDefault();
+      history.pushState(null, '', link.hash);
+      window.lenis.scrollTo(target, { lerp:.09 });
+    });
+
+    // Mouse-follow drift on the hero art: viewport-center offset maps to a small inverse
+    // translate with lerp smoothing. Engages only after the entrance transition has settled
+    // (it owns the same transform property), and skips touch / reduced-motion users.
+    const heroArt = document.querySelector('.light-hero-art');
+    if (heroArt && matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const AMP_X = 12, AMP_Y = 8, EASE = 0.07;
+      let tx = 0, ty = 0, cx = 0, cy = 0, raf = null, engaged = false;
+      requestAnimationFrame(() => setTimeout(() => { heroArt.style.transition = 'opacity 1.1s cubic-bezier(.22,1,.36,1)'; engaged = true; }, 1700));
+      const tick = () => {
+        raf = requestAnimationFrame(() => {
+          cx += (tx - cx) * EASE; cy += (ty - cy) * EASE;
+          if (engaged) heroArt.style.transform = `translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px)`;
+          if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) tick(); else raf = null;
+        });
+      };
+      addEventListener('mousemove', (e) => {
+        tx = -(e.clientX / innerWidth - 0.5) * AMP_X * 2;
+        ty = -(e.clientY / innerHeight - 0.5) * AMP_Y * 2;
+        if (!raf) tick();
+      }, { passive: true });
+    }
+
+    // Depth parallax: hero copy scrolls at 65% speed (slower = reads as the deeper layer).
+    // Scroll-scrubbed exit in three strict phases (h1 → kicker → sub), each floating UP and fading,
+    // driven by scroll progress so reverse scrolling plays it backwards.
+    const heroCopy = document.querySelector('.light-hero-copy');
+    if (heroCopy && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const exitGroups = [
+        [...document.querySelectorAll('.light-hero h1 .motion-line')],
+        [...document.querySelectorAll('.light-hero-desc .light-hero-kicker .kinetic-word')],
+        [...document.querySelectorAll('.light-hero-desc > p:not(.light-hero-kicker) .kinetic-word')],
+        [...document.querySelectorAll('.light-hero-actions .light-btn')],
+      ];
+      const EXIT_START = 120, EXIT_END = 760, STAGGER = 0.4;
+      const WINDOWS = [[0, 0.25], [0.28, 0.55], [0.58, 0.82], [0.85, 1]];
+      const clamp01 = (v) => Math.min(1, Math.max(0, v));
+      const smooth = (t) => t * t * (3 - 2 * t);
+      const easeOut = (t, power) => 1 - Math.pow(1 - clamp01(t), power);
+      // Belief: text, then card 1, then card 2 cascade in; all three hold while the ink-fill
+      // plays, then cascade back out as the section releases into Approach. Driven entirely by
+      // bp (local scroll fraction through the pin) so nothing goes idle mid-pin.
+      const beliefSec = document.querySelector('.light-belief');
+      const beliefStage = document.querySelector('.belief-stage');
+      const cardP1 = document.querySelector('.card-wrap-p1');
+      const cardP2 = document.querySelector('.card-wrap-p2');
+      // Approach scroll-telling scene: heading pins; A text + stack build up layer by layer,
+      // unstack, then B text + its stack build; finally B stack and the heading leave together.
+      const scene = document.querySelector('.light-approach');
+      const sceneATxt = document.querySelector('.light-inference-a');
+      const sceneBTxt = document.querySelector('.light-inference-b');
+      const sceneHeading = document.querySelector('.light-approach-heading');
+      const sceneACards = [...document.querySelectorAll('.stack-a .card-wrap')];
+      const sceneBCards = [...document.querySelectorAll('.stack-b .card-wrap')];
+      const seg = (v, s, e) => clamp01((v - s) / (e - s));
+      const IN_A = [[0.05,0.12],[0.12,0.19],[0.19,0.26],[0.26,0.33]];
+      const OUT_A = [[0.38,0.43],[0.42,0.47],[0.46,0.51],[0.50,0.55]];
+      const IN_B = [[0.58,0.65],[0.65,0.72],[0.72,0.79]];
+      const OUT_B = [[0.88,0.92],[0.905,0.945],[0.93,0.97]];
+      const placeScene = (el, vIn, vOut, inOffset) => {
+        el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
+        el.style.transform = `translateY(${((1 - vIn) * inOffset + vOut * -40).toFixed(1)}px)`;
+      };
+      // Belief entrance/exit windows on bp (0→1 across the pin). Card 1 follows card 1's own
+      // start, card 2 follows card 1.
+      const BELIEF_IN = { p1: [0.05, 0.32], p2: [0.11, 0.38] };
+      const BELIEF_OUT = { copy: [0.88, 0.97], p1: [0.82, 0.92], p2: [0.86, 0.95] };
+      const placeBelief = (el, vIn, vOut, inX, inY) => {
+        const rest = 1 - vIn;
+        el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
+        el.style.transform = `translate(${(inX * rest).toFixed(1)}px, ${(inY * rest + vOut * -40).toFixed(1)}px) scale(${(1 + 0.1 * rest).toFixed(3)})`;
+      };
+      const beliefCopy = document.querySelector('.light-belief-copy');
+      const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
+      const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
+      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      const onScroll = ({ scroll }) => {
+        // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
+        // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
+        // Skip entirely while the legacy dark variant is shown: light-main is display:none there,
+        // so rects read 0 and one-shot triggers (beliefRevealed etc.) would fire in a hidden state.
+        if (!desktopMQ.matches || document.documentElement.dataset.variant !== 'light') return;
+        heroCopy.style.transform = `translateY(${Math.min(scroll, 1100) * 0.35}px)`;
+        const p = clamp01((scroll - EXIT_START) / (EXIT_END - EXIT_START));
+        if (p > 0 || exitEngaged) {
+          if (!exitEngaged) { exitGroups.flat().forEach(u => { u.style.transition = 'none'; u.style.animation = 'none'; }); exitEngaged = true; }
+          exitGroups.forEach((units, g) => {
+            const [gs, ge] = WINDOWS[g];
+            const pg = clamp01((p - gs) / (ge - gs));
+            const n = units.length || 1;
+            units.forEach((u, i) => {
+              const e = smooth(clamp01(pg * (1 + STAGGER) - (i / n) * STAGGER));
+              u.style.opacity = String(1 - e);
+              u.style.transform = e ? `translateY(${(-e * 30).toFixed(1)}px)` : 'none';
+            });
+          });
+        }
+        if (beliefSec && beliefStage && cardP1 && cardP2 && desktopMQ.matches) {
+          const chain = (el) => { let t = 0, n = el; while (n) { t += n.offsetTop; n = n.offsetParent; } return t; };
+          if (!beliefSetup) {
+            // Approach-heading-style entrance: each rendered line rises up from below and fades
+            // in as one unit, lines staggered 0.14s apart — same easing, distance, and pacing as
+            // the "MODELS THAT ADAPT / NOT JUST RESPOND" h2 (.motion-line rules). Words on the
+            // same rendered line share identical transforms, so the whole line moves as a block.
+            // Split into per-letter spans on an inner layer FIRST: the word wrapper owns the
+            // timed entrance (rise + fade to 1), while each letter holds the scroll-driven ink
+            // level (30% pale → 100%). Splitting subtly changes word widths (kerning/ligatures
+            // break at span boundaries), which can move a wrap point — so line grouping must be
+            // measured AFTER the split, on the final layout.
+            beliefWords.forEach(w => {
+              w.style.animation = 'none'; w.style.transition = 'none'; w.style.opacity = '0'; w.style.transform = 'translateY(46px)';
+              const chars = [...w.textContent].map(ch => { const s = document.createElement('span'); s.textContent = ch; s.style.opacity = '0.3'; return s; });
+              w.replaceChildren(...chars);
+              beliefChars.push(...chars);
+            });
+            void beliefCopy.offsetHeight;
+            const tops = beliefWords.map(w => w.offsetTop);
+            const lineTops = [...new Set(tops)];
+            beliefWords.forEach((w, i) => {
+              const li = lineTops.indexOf(tops[i]);
+              beliefWordLineOf[i] = li;
+              w.style.transition = `opacity .65s cubic-bezier(.22,1,.36,1) ${(li * 0.14).toFixed(2)}s, transform .85s cubic-bezier(.22,1,.36,1) ${(li * 0.14).toFixed(2)}s`;
+            });
+            beliefLineCount = lineTops.length || 1;
+            beliefCopy.style.transition = 'none'; beliefCopy.style.opacity = '1'; beliefCopy.style.transform = 'none';
+            // Auto ink sweep: letters darken 30% → 100% in reading order, a ~20-letter blend
+            // band sliding across the paragraph over ~4.5s of ACCUMULATED VISIBLE time. It only
+            // runs while the paragraph is at least half on screen (IntersectionObserver) and
+            // pauses/resumes across exits, fast fling-throughs, and hidden tabs (frame-delta
+            // accumulation, not wall-clock) — so the user always witnesses the color arriving.
+            const FADE_WIDTH = 20, INK_DURATION = 4500, nC = beliefChars.length || 1;
+            let inkProgress = 0, inkRaf = 0, inkLast = 0;
+            const inkTick = (now) => {
+              // rAF pauses in hidden tabs but performance.now() doesn't — clamp the delta so
+              // returning to the tab resumes the sweep instead of jumping it to done.
+              inkProgress = Math.min(1, inkProgress + Math.min(now - inkLast, 100) / INK_DURATION);
+              inkLast = now;
+              const sweepPos = inkProgress * (nC - 1 + FADE_WIDTH);
+              beliefChars.forEach((c, i) => {
+                c.style.opacity = (0.3 + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * 0.7).toFixed(3);
+              });
+              inkRaf = inkProgress < 1 ? requestAnimationFrame(inkTick) : 0;
+            };
+            new IntersectionObserver((entries) => entries.forEach((entry) => {
+              if (entry.isIntersecting && inkProgress < 1 && !inkRaf) { inkLast = performance.now(); inkRaf = requestAnimationFrame(inkTick); }
+              else if (!entry.isIntersecting && inkRaf) { cancelAnimationFrame(inkRaf); inkRaf = 0; }
+            }), { threshold: 0.5 }).observe(beliefCopy);
+            beliefSetup = true;
+            // The self-hosted webfonts may land after this first measurement and rewrap the
+            // paragraph; re-derive line grouping (stagger delays + exit order) on final metrics.
+            document.fonts.ready.then(() => {
+              if (!beliefCopy.getBoundingClientRect().height) return;
+              void beliefCopy.offsetHeight;
+              const finalTops = beliefWords.map(w => w.offsetTop);
+              const finalLineTops = [...new Set(finalTops)];
+              beliefWords.forEach((w, i) => {
+                beliefWordLineOf[i] = finalLineTops.indexOf(finalTops[i]);
+                if (!beliefRevealed) w.style.transition = `opacity .65s cubic-bezier(.22,1,.36,1) ${(beliefWordLineOf[i] * 0.14).toFixed(2)}s, transform .85s cubic-bezier(.22,1,.36,1) ${(beliefWordLineOf[i] * 0.14).toFixed(2)}s`;
+              });
+              beliefLineCount = finalLineTops.length || 1;
+            });
+          }
+          const bSpan = beliefSec.offsetHeight - innerHeight;
+          const bp = clamp01((scroll - chain(beliefSec)) / bSpan);
+          // One-shot trigger, like the approach heading: once the paragraph has scrolled into
+          // view, release the lines and let the timed transitions play out.
+          if (!beliefRevealed && beliefCopy.getBoundingClientRect().top < innerHeight * 0.88) {
+            beliefRevealed = true;
+            beliefWords.forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
+          }
+          // Scroll-scrubbed exit: lines float up and fade in order, reversible. Word transitions
+          // are stripped on first engagement so the scrub tracks the wheel with no lag.
+          const beliefExitP = seg(bp, BELIEF_OUT.copy[0], BELIEF_OUT.copy[1]);
+          if (beliefExitP > 0 || beliefExitEngaged) {
+            if (!beliefExitEngaged) { beliefWords.forEach(w => { w.style.transition = 'none'; }); beliefExitEngaged = true; }
+            const ln = beliefLineCount || 1;
+            beliefWords.forEach((w, i) => {
+              const e = smooth(clamp01(beliefExitP * 1.3 - (beliefWordLineOf[i] / ln) * 0.3));
+              w.style.opacity = String(1 - e);
+              w.style.transform = e ? `translateY(${(-40 * e).toFixed(1)}px)` : 'none';
+            });
+          }
+          // Cards still cascade in/out (unchanged).
+          placeBelief(cardP1, easeOut(seg(bp, BELIEF_IN.p1[0], BELIEF_IN.p1[1]), 5), smooth(seg(bp, BELIEF_OUT.p1[0], BELIEF_OUT.p1[1])), -400, -240);
+          placeBelief(cardP2, easeOut(seg(bp, BELIEF_IN.p2[0], BELIEF_IN.p2[1]), 5), smooth(seg(bp, BELIEF_OUT.p2[0], BELIEF_OUT.p2[1])), 400, -280);
+        }
+        if (scene && desktopMQ.matches) {
+          const span = scene.offsetHeight - innerHeight;
+          const sp = clamp01(-scene.getBoundingClientRect().top / span);
+          sceneACards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_A[i][0], IN_A[i][1])), smooth(seg(sp, OUT_A[i][0], OUT_A[i][1])), -70));
+          sceneBCards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_B[i][0], IN_B[i][1])), smooth(seg(sp, OUT_B[i][0], OUT_B[i][1])), -70));
+          placeScene(sceneATxt, smooth(seg(sp, 0, 0.05)), smooth(seg(sp, 0.40, 0.48)), 42);
+          placeScene(sceneBTxt, smooth(seg(sp, 0.55, 0.61)), smooth(seg(sp, 0.90, 0.98)), 42);
+          const hOut = smooth(seg(sp, 0.90, 1));
+          if (hOut > 0 || headingEngaged) {
+            if (!headingEngaged) { headingUnits.forEach(u => { u.style.transition = 'none'; u.style.animation = 'none'; }); headingEngaged = true; }
+            const hn = headingUnits.length || 1;
+            headingUnits.forEach((u, i) => {
+              const e = smooth(clamp01(hOut * 1.4 - (i / hn) * 0.4));
+              u.style.opacity = String(1 - e);
+              u.style.transform = e ? `translateY(${(-30 * e).toFixed(1)}px)` : 'none';
+            });
+          }
+        }
+      };
+      window.lenis.on('scroll', onScroll);
+      onScroll({ scroll: window.scrollY });
+    }
   </script>
 </body>
 </html>
