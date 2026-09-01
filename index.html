@@ -21,9 +21,6 @@
   <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin media="(min-width:768px)">
   <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v34">
@@ -58,15 +55,6 @@
         </div>
       </div>
     </section>
-    <section class="light-belief">
-      <div class="belief-stage">
-      <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
-        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
-      </div>
-      </div>
-    </section>
     <section id="approach" class="light-approach">
       <div class="approach-stage">
         <div class="figma-frame">
@@ -77,14 +65,17 @@
             <div class="card-wrap card-wrap-a3"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-a4"><div class="stack-card"></div></div>
           </div>
-          <div class="stack stack-b" aria-hidden="true">
-            <div class="card-wrap card-wrap-b1"><div class="stack-card"></div></div>
-            <div class="card-wrap card-wrap-b2"><div class="stack-card"></div></div>
-            <div class="card-wrap card-wrap-b3"><div class="stack-card"></div></div>
-          </div>
           <div class="light-inference light-inference-a"><h3>A. Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div>
-          <div class="light-inference light-inference-b"><h3>B. No operation overhead</h3><p>No data-collection pipeline, no dedicated training infrastructure, no team of ML engineers to maintain. Connect the model to a workflow and it learns on the job.</p></div>
         </div>
+      </div>
+    </section>
+    <section class="light-belief">
+      <div class="belief-stage">
+      <div class="figma-frame">
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
+        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
+      </div>
       </div>
     </section>
     <section id="join" class="light-join">
@@ -223,34 +214,40 @@
       const snapScene = () => {
         const scroll = wheeling ? wheelStart : window.scrollY;
         const projected = window.lenis.targetScroll;
-        const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
+        // Page order is Hero → Approach (pinned, several internal stops) → Belief (pinned, one
+        // rest point) → Join. Both pinned scenes' stops/exits are merged into one array so a
+        // single momentum-respecting loop can walk across scene boundaries.
         const approachSpan = approachStart.offsetHeight - innerHeight;
         const approachEntry = approachStart.offsetTop - innerHeight;
-        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress);
-        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72].map(progress => approachStart.offsetTop + approachSpan * progress)];
-        const approachBoundary = approachStops[0];
+        const approachStopFractions = [.13,.21,.29,.37,.60];
+        const approachStops = approachStopFractions.map(progress => approachStart.offsetTop + approachSpan * progress);
+        const approachTriggers = [approachEntry, ...approachStopFractions.slice(0, -1).map(progress => approachStart.offsetTop + approachSpan * progress)];
         const approachExit = approachStart.offsetTop + approachSpan * .97;
+        const beliefSpan = beliefStart.offsetHeight - innerHeight;
+        const beliefBoundary = beliefStart.offsetTop + beliefSpan * .38;
+        const beliefExit = beliefStart.offsetTop + beliefSpan * .97;
+        const allStops = [...approachStops, beliefBoundary];
+        const allTriggers = [...approachTriggers, approachExit];
         const approachSnapEpsilon = 16;
         let target = null;
         // Momentum-respecting snap: land on the FURTHEST stop the projected scroll has already
         // passed, never drag the user back to the first one — a hard fling skips whole scenes
         // and reaches the ends of the page, a gentle tick still aligns to the nearest stop.
         if (scrollDirection > 0) {
-          if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+          if (scroll < joinStart.offsetTop && projected >= beliefExit) target = joinStart.offsetTop;
           else {
-            for (let index = approachStops.length - 1; index >= 0; index--) {
-              if (scroll < approachStops[index] - approachSnapEpsilon && projected > approachTriggers[index]) { target = approachStops[index]; break; }
+            for (let index = allStops.length - 1; index >= 0; index--) {
+              if (scroll < allStops[index] - approachSnapEpsilon && projected > allTriggers[index]) { target = allStops[index]; break; }
             }
-            if (target === null && scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
+            if (target === null && scroll < allStops[0] - 2 && projected > 2) target = allStops[0];
           }
         } else {
-          if (scroll > 2 && projected < beliefBoundary) target = 0;
-          else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
+          if (scroll > 2 && projected < allStops[0]) target = 0;
           else {
-            for (let index = 0; index < approachStops.length - 1; index++) {
-              if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
+            for (let index = 0; index < allStops.length - 1; index++) {
+              if (scroll > allStops[index] + approachSnapEpsilon && projected < allStops[index + 1]) { target = allStops[index]; break; }
             }
-            if (target === null && scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
+            if (target === null && scroll > beliefExit && projected < joinStart.offsetTop) target = allStops.at(-1);
           }
         }
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
@@ -341,15 +338,12 @@
       // unstack, then B text + its stack build; finally B stack and the heading leave together.
       const scene = document.querySelector('.light-approach');
       const sceneATxt = document.querySelector('.light-inference-a');
-      const sceneBTxt = document.querySelector('.light-inference-b');
       const sceneHeading = document.querySelector('.light-approach-heading');
       const sceneACards = [...document.querySelectorAll('.stack-a .card-wrap')];
-      const sceneBCards = [...document.querySelectorAll('.stack-b .card-wrap')];
       const seg = (v, s, e) => clamp01((v - s) / (e - s));
-      const IN_A = [[0.05,0.12],[0.12,0.19],[0.19,0.26],[0.26,0.33]];
-      const OUT_A = [[0.38,0.43],[0.42,0.47],[0.46,0.51],[0.50,0.55]];
-      const IN_B = [[0.58,0.65],[0.65,0.72],[0.72,0.79]];
-      const OUT_B = [[0.88,0.92],[0.905,0.945],[0.93,0.97]];
+      // A-only scene: cards stack in, hold, then unstack out as the pin releases into Belief.
+      const IN_A = [[0.05,0.13],[0.13,0.21],[0.21,0.29],[0.29,0.37]];
+      const OUT_A = [[0.60,0.68],[0.64,0.72],[0.68,0.76],[0.72,0.80]];
       const placeScene = (el, vIn, vOut, inOffset) => {
         el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
         el.style.transform = `translateY(${((1 - vIn) * inOffset + vOut * -40).toFixed(1)}px)`;
@@ -481,10 +475,8 @@
           const span = scene.offsetHeight - innerHeight;
           const sp = clamp01(-scene.getBoundingClientRect().top / span);
           sceneACards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_A[i][0], IN_A[i][1])), smooth(seg(sp, OUT_A[i][0], OUT_A[i][1])), -70));
-          sceneBCards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_B[i][0], IN_B[i][1])), smooth(seg(sp, OUT_B[i][0], OUT_B[i][1])), -70));
-          placeScene(sceneATxt, smooth(seg(sp, 0, 0.05)), smooth(seg(sp, 0.40, 0.48)), 42);
-          placeScene(sceneBTxt, smooth(seg(sp, 0.55, 0.61)), smooth(seg(sp, 0.90, 0.98)), 42);
-          const hOut = smooth(seg(sp, 0.90, 1));
+          placeScene(sceneATxt, smooth(seg(sp, 0, 0.06)), smooth(seg(sp, 0.60, 0.68)), 42);
+          const hOut = smooth(seg(sp, 0.82, 0.95));
           if (hOut > 0 || headingEngaged) {
             if (!headingEngaged) { headingUnits.forEach(u => { u.style.transition = 'none'; u.style.animation = 'none'; }); headingEngaged = true; }
             const hn = headingUnits.length || 1;

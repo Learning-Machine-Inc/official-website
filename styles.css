@@ -200,7 +200,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-p2 { height:min(31.949vw,51.118vh); left:calc(50% - min(4.827vw,7.723vh)); top:calc(50% - min(22.641vw,36.226vh)); width:min(37.907vw,60.651vh); }
 .card-wrap-p2 .polaroid-card { height:min(27.91vw,44.656vh); transform:rotate(7.02deg); width:min(34.756vw,55.61vh); }
 
-.light-approach { background:#f4f0ed; height:calc(100vh + 2800px); margin-top:0; position:relative; }
+.light-approach { background:#f4f0ed; height:calc(100vh + 1600px); margin-top:0; position:relative; }
 .light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:4000px; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
@@ -216,31 +216,20 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
 .card-wrap-a4 { height:58.699vh; left:calc(50% + 96px - 3.677vh); top:233.54px; width:56.374vh; }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
-.card-wrap-b1 { height:61.215vh; left:calc(50% + 105px - 3.849vh); top:1282.54px; width:59.018vh; }
-.card-wrap-b1 .stack-card { background-image:url("assets/figma-user/stack-b-1.jpg"); transform:rotate(-5.22deg); }
-.card-wrap-b2 { height:58.174vh; left:calc(50% + 109px - 3.641vh); top:1294.54px; width:55.822vh; }
-.card-wrap-b2 .stack-card { background-image:url("assets/figma-user/stack-b-2.jpg"); transform:rotate(1.78deg); }
-.card-wrap-b3 { height:61.523vh; left:calc(50% + 82px - 3.87vh); top:1294.54px; width:59.343vh; }
-.card-wrap-b3 .stack-card { background-image:url("assets/figma-user/stack-b-3.jpg"); background-position:right center; transform:rotate(-5.59deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
 .light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
-.light-inference-b p { max-width:568px; }
 
 @media (min-width:768px) {
   .light-approach .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
   .light-approach .figma-frame { display:block; }
   .light-approach-heading { top:calc(17vh + 2px); }
   .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
-  .approach-stage .light-inference-b { bottom:70px; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
   .card-wrap-a1 { top:calc(50vh - 30.847vh); }
   .card-wrap-a2 { top:calc(50vh - 28.538vh); }
   .card-wrap-a3 { top:calc(50vh - 27.938vh); }
   .card-wrap-a4 { top:calc(50vh - 28.016vh); }
-  .card-wrap-b1 { top:calc(50vh - 31.408vh); }
-  .card-wrap-b2 { top:calc(50vh - 29.876vh); }
-  .card-wrap-b3 { top:calc(50vh - 30.094vh); }
 }
 
 .light-join { align-items:center; background:#f4f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
@@ -337,31 +326,22 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .stack { height:290px; margin:0 auto; position:relative; width:calc(100% - 48px); }
   .stack-a { order:1; }
   .light-inference-a { order:2; }
-  /* extra 60px breathing room between the A block and the B block (on top of the 32px gap) */
-  .stack-b { margin-top:60px; order:3; }
-  .light-inference-b { order:4; }
   .stack .card-wrap { height:100% !important; left:0 !important; top:0 !important; width:100% !important; }
   .stack .stack-card { height:100%; width:100%; }
-  /* Mobile A/B loop: one card per group (stacking doubles up the box-shadows), cycling its
-     background through the aligned frames like a flipbook — hard cuts, infinite loop.
-     background-image is non-interpolable, so paired keyframe stops (24%/26%) pin each cut. */
+  /* Mobile A loop: one card (stacking doubles up the box-shadows), cycling its background
+     through the aligned frames like a flipbook — hard cuts, infinite loop. background-image is
+     non-interpolable, so paired keyframe stops (24%/26%) pin each cut. */
   .stack .stack-card { transform:none; }
   .stack .card-wrap { display:none; }
-  .stack .card-wrap-a1,.stack .card-wrap-b1 { display:flex; }
+  .stack .card-wrap-a1 { display:flex; }
   /* The a frames' subject sits small in the canvas center — zoom the shared crop so the early,
      tiny frames read clearly; frames stay aligned since size/position live outside the keyframes. */
   .card-wrap-a1 .stack-card { animation:stack-a-cycle 5.2s infinite; background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); background-size:190%; }
-  .card-wrap-b1 .stack-card { animation:stack-b-cycle 4s infinite; background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); background-position:right center; }
   @keyframes stack-a-cycle {
     0%,24% { background-image:url("assets/figma-user/stack-a-1-mobile.jpg"); }
     26%,49% { background-image:url("assets/figma-user/stack-a-2-mobile.jpg"); }
     51%,74% { background-image:url("assets/figma-user/stack-a-3-mobile.jpg"); }
     76%,100% { background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
-  }
-  @keyframes stack-b-cycle {
-    0%,31% { background-image:url("assets/figma-user/stack-b-1-mobile.jpg"); }
-    34%,64% { background-image:url("assets/figma-user/stack-b-2-mobile.jpg"); }
-    67%,100% { background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); }
   }
   .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
   .light-inference h3,.light-inference p { max-width:none; width:100%; }
@@ -522,15 +502,13 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 }
 
 /* Reduced motion on desktop: the scroll-scrub JS is disabled, so the scene elements that it
-   normally reveals (opacity:0 base state) must be shown statically. Two stacked panels: panel 1 =
-   heading + final A card + A copy, panel 2 = final B card + B copy. */
+   normally reveals (opacity:0 base state) must be shown statically — heading + final A card +
+   A copy, in a single static panel. */
 @media (prefers-reduced-motion:reduce) and (min-width:768px) {
   .light-approach { height:auto; }
-  .light-approach .approach-stage { height:200vh; overflow:visible; position:relative; }
+  .light-approach .approach-stage { height:100vh; overflow:visible; position:relative; }
   .approach-stage .card-wrap, .approach-stage .light-inference { opacity:1; }
-  .stack .card-wrap-a1,.stack .card-wrap-a2,.stack .card-wrap-a3,.stack .card-wrap-b1,.stack .card-wrap-b2 { display:none; }
-  .card-wrap-b3 { top:calc(150vh - 30.094vh); }
-  .approach-stage .light-inference-a { bottom:calc(100vh + 100px); }
+  .stack .card-wrap-a1,.stack .card-wrap-a2,.stack .card-wrap-a3 { display:none; }
   /* Higher-specificity entrance offsets (.card-wrap-p*.motion-card) would beat the generic
      .motion-card reset above; repeat the reset at matching specificity. */
   .motion-ready .light-main .card-wrap-p1.motion-card,
@@ -540,5 +518,4 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 /* Reduced motion on mobile: stop the flipbook loop on the final, complete frame. */
 @media (prefers-reduced-motion:reduce) and (max-width:767px) {
   .card-wrap-a1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
-  .card-wrap-b1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-b-3-mobile.jpg"); }
 }

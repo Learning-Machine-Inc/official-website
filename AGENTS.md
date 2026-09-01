@@ -13,7 +13,7 @@ PORT=3002 node .claude/serve-official-website.js
 
 ## 页面结构
 - `<main class="light-main">`:**正在开发的新版**(浅色手绘工程图风格),四个区块:
-  `light-hero` → `light-belief` → `light-approach` → `light-join`
+  `light-hero` → `light-approach` → `light-belief` → `light-join`
 - `<main class="dark-main">`:旧版,整块保留在 DOM 里,**勿动**。
 - 旧版相关 CSS(hero/vision/approach/join、`html[data-variant]` 等)也**勿动**。
 
@@ -23,7 +23,10 @@ PORT=3002 node .claude/serve-official-website.js
 1. **第一个 script**:IntersectionObserver 驱动的一次性入场体系
    (`motion-reveal` / `motion-line` / `kinetic-words` + `word-reveal` 关键帧),时间驱动。
 2. **第二个 module script**:Lenis 平滑滚动 + 滚动位置逐帧驱动(scrub)的动效:
-   hero 退场视差、belief 的墨水渐变与离场、approach 四卡分镜(IN_A/OUT_A/IN_B/OUT_B 时间窗)。
+   hero 退场视差、approach 单组(A)四卡分镜(IN_A/OUT_A 时间窗,卡片堆入→停留→散开退场,
+   标题随后用 headingUnits 逐行退场)、belief 的墨水渐变与离场。approach 在前、belief 在后
+   (2026-09-01 起,B 分镜已整体移除);两个 pin 场景的 snap 停靠点合并在 `snapScene()`
+   一个数组里(`allStops`/`allTriggers`),按页面顺序拼接,不要拆回两套独立逻辑。
 
 修改动效请在现有体系内调参数/时间窗,**不要引入新动画库、不要另起一套并行系统**。
 
