@@ -106,7 +106,10 @@
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
     const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
     const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
-    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); };
+    // window.resetBeliefCards (defined in the module script below, if that scene exists on this
+    // page) resyncs the belief-card enter/exit state machine — switching to the legacy dark
+    // variant freezes it mid-state, since the module's onScroll bails out while dark is shown.
+    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); window.resetBeliefCards?.(); };
     const toggleVariant = () => setVariant(root.dataset.variant === 'light' ? 'dark' : 'light');
     variantToggle.addEventListener('dblclick', toggleVariant);
     variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleVariant(); } });
@@ -175,7 +178,13 @@
       const motionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
         if (entry.isIntersecting) { revealMotion(entry.target); motionObserver.unobserve(entry.target); }
       }), { rootMargin:'0px 0px -10% 0px', threshold:.12 });
+      const beliefCardsOwnedByScrub = matchMedia('(min-width:768px)').matches;
       document.querySelectorAll('.light-main .motion-reveal,.light-main .motion-image,.light-main .motion-line,.light-main .motion-card').forEach((element) => {
+        // On desktop, card-wrap-p1/p2's enter/exit is owned entirely by the repeatable
+        // beliefCardsActive state machine in the module script below — letting this one-shot
+        // observer also grant them .is-visible races it and causes a double-entrance flicker on
+        // first scroll-in. Mobile has no such system, so it keeps the normal one-shot reveal.
+        if (beliefCardsOwnedByScrub && (element.classList.contains('card-wrap-p1') || element.classList.contains('card-wrap-p2'))) return;
         if (element.closest('.light-hero')) requestAnimationFrame(() => requestAnimationFrame(() => revealMotion(element)));
         else motionObserver.observe(element);
       });
@@ -222,7 +231,9 @@
         const approachStopFractions = [.13,.21,.29,.37,.60];
         const approachStops = approachStopFractions.map(progress => approachStart.offsetTop + approachSpan * progress);
         const approachTriggers = [approachEntry, ...approachStopFractions.slice(0, -1).map(progress => approachStart.offsetTop + approachSpan * progress)];
-        const approachExit = approachStart.offsetTop + approachSpan * .97;
+        // .95 matches hOut's own end (the heading is the last thing to clear, per IN_A/OUT_A/hOut
+        // below) — .97 left a blank stretch of scroll after everything had already exited.
+        const approachExit = approachStart.offsetTop + approachSpan * .95;
         const beliefSpan = beliefStart.offsetHeight - innerHeight;
         const beliefBoundary = beliefStart.offsetTop + beliefSpan * .38;
         const beliefExit = beliefStart.offsetTop + beliefSpan * .97;
@@ -334,7 +345,7 @@
       const cardP1 = document.querySelector('.card-wrap-p1');
       const cardP2 = document.querySelector('.card-wrap-p2');
       // Approach scroll-telling scene: heading pins; A text + stack build up layer by layer,
-      // unstack, then B text + its stack build; finally B stack and the heading leave together.
+      // hold, then unstack together as the pin releases into Belief.
       const scene = document.querySelector('.light-approach');
       const sceneATxt = document.querySelector('.light-inference-a');
       const sceneHeading = document.querySelector('.light-approach-heading');
@@ -362,6 +373,14 @@
       const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
       let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefCardsActive = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      // Exposed so the variant toggle (a separate, non-module script) can resync this state when
+      // switching to/from the legacy dark variant, which freezes onScroll without ever clearing it.
+      window.resetBeliefCards = () => {
+        if (!beliefCardsActive) return;
+        beliefCardsActive = false;
+        cardP1.classList.remove('is-visible', 'is-exiting');
+        cardP2.classList.remove('is-visible', 'is-exiting');
+      };
       const onScroll = ({ scroll }) => {
         // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
         // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
@@ -470,9 +489,14 @@
           }
           // Cards: enter once per visit, exit once per visit — not scroll-scrubbed. `bp` above is
           // clamped to [0,1], which reads as "inside" even from far away; use the raw fraction so
-          // the active/inactive edge only flips near the section's real boundaries.
-          const rawBp = (scroll - chain(beliefSec)) / bSpan;
-          const insideCardRange = rawBp > -0.06 && rawBp < 1.06;
+          // the active/inactive edge only flips near the section's real boundaries. Entering and
+          // leaving use different bands (hysteresis) so a scroll position hovering right at one
+          // threshold can't flip-flop the state every frame; guard bSpan<=0 so a not-yet-laid-out
+          // section can't turn this into a NaN comparison that permanently disables the cards.
+          const rawBp = bSpan > 0 ? (scroll - chain(beliefSec)) / bSpan : null;
+          const insideCardRange = rawBp === null ? beliefCardsActive
+            : beliefCardsActive ? (rawBp > -0.1 && rawBp < 1.1)
+            : (rawBp > -0.05 && rawBp < 1.05);
           if (insideCardRange && !beliefCardsActive) {
             beliefCardsActive = true;
             resetCards([cardP1, cardP2]);

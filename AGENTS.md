@@ -27,6 +27,11 @@ PORT=3002 node .claude/serve-official-website.js
    标题随后用 headingUnits 逐行退场)、belief 的墨水渐变与离场。approach 在前、belief 在后
    (2026-09-01 起,B 分镜已整体移除);两个 pin 场景的 snap 停靠点合并在 `snapScene()`
    一个数组里(`allStops`/`allTriggers`),按页面顺序拼接,不要拆回两套独立逻辑。
+   belief 里的 p1/p2 两张图是例外:不是 scrub,是`beliefCardsActive` 驱动的"每次进入区间
+   重播入场、离开就向上淡出"状态机(桌面独有,带滚动方向不同的迟滞阈值防抖)。这两张图已
+   从第一个 script 的通用一次性 `motionObserver` 里排除(仅桌面排除,移动端仍用那套),
+   避免两套系统抢同一个 `is-visible` class。切换旧版(dark-main)会冻结这套状态机,
+   `window.resetBeliefCards()` 用来在切换时把它拉回一致状态,勿删。
 
 修改动效请在现有体系内调参数/时间窗,**不要引入新动画库、不要另起一套并行系统**。
 
