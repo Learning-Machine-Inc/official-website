@@ -200,7 +200,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-p2 { height:min(31.949vw,51.118vh); left:calc(50% - min(4.827vw,7.723vh)); top:calc(50% - min(22.641vw,36.226vh)); width:min(37.907vw,60.651vh); }
 .card-wrap-p2 .polaroid-card { height:min(27.91vw,44.656vh); transform:rotate(7.02deg); width:min(34.756vw,55.61vh); }
 
-.light-approach { background:#f4f0ed; height:calc(100vh + 1600px); margin-top:0; position:relative; }
+.light-approach { background:#f4f0ed; height:calc(100vh + 1600px); margin-top:400px; position:relative; }
 .light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:4000px; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
