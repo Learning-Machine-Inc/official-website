@@ -387,8 +387,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-hero-desc p:not(.light-hero-kicker) { max-width:min(47.3vw, 681px); }
   .light-hero-desc .light-hero-kicker { color:#302925; opacity:1; }
   .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
-  .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(22.7px, calc(15.94px + .885vw), 31.5px); font-weight:700; gap:16.7px; letter-spacing:0; line-height:.833; margin-bottom:6.1px; }
-  .footer-brand-icon { height:31.07px; width:35.85px; }
+  .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); font-weight:700; gap:10.02px; letter-spacing:0; line-height:.833; margin-bottom:3.66px; }
+  .footer-brand-icon { height:18.64px; width:21.51px; }
   .footer-main { border-bottom:.5px solid rgb(255 255 255 / 50%); padding-top:70px; }
   .footer-main nav { padding-top:2px; }
   .footer-email { min-height:0; padding-top:0; }
