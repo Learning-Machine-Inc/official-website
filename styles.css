@@ -228,7 +228,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-inference-b p { max-width:568px; }
 
 @media (min-width:768px) {
-  .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
+  .light-approach .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
   .light-approach .figma-frame { display:block; }
   .light-approach-heading { top:calc(17vh + 2px); }
   .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
@@ -285,7 +285,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero-desc > .kinetic-words.is-visible:not(.light-hero-kicker) .kinetic-word { animation-duration:.18s; animation-delay:calc(.42s + var(--word-index) * 10ms); }
 @keyframes word-reveal { to { opacity:1; transform:none; } }
 
-@media (max-width:767px) {
+@media (max-width:767.98px) {
   /* P0-3: brand scales to 182px effective width; Careers loses its pill, Contact pill tightens —
      222+228+40 = 490px would overflow a 375px viewport. */
   .light-header { background:#f4f0ed; left:0; padding:0 16px; width:100%; }
@@ -294,7 +294,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-nav a { letter-spacing:.5px; }
   .light-nav a:not(.light-nav-contact) { background:transparent; padding:7.5px 2px; }
   .light-nav-contact { padding:7.5px 12px 7.9px; }
-  .light-hero { height:760px; overflow:hidden; }
+  .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
      the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7). */
   .light-hero-art { background-image:url("assets/figma-107/hero-group-48-mobile.jpg"); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
@@ -457,7 +457,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .footer-bottom { padding-left:28px; padding-right:28px; }
 }
 
-@media (max-width:767px) {
+@media (max-width:767.98px) {
   .site-header { padding:0 16px; }
   .variant-toggle { width:44px; }
   .brand { height:34px; transform:scale(.82); transform-origin:left center; width:222px; }
@@ -519,6 +519,22 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .motion-ready .light-main .motion-line,
   .motion-ready .light-main .motion-card { opacity:1; transform:none; transition:none; }
   .kinetic-words .kinetic-word { animation:none; opacity:1; transform:none; }
+}
+
+/* Reduced motion on desktop: the scroll-scrub JS is disabled, so the scene elements that it
+   normally reveals (opacity:0 base state) must be shown statically. Two stacked panels: panel 1 =
+   heading + final A card + A copy, panel 2 = final B card + B copy. */
+@media (prefers-reduced-motion:reduce) and (min-width:768px) {
+  .light-approach { height:auto; }
+  .light-approach .approach-stage { height:200vh; overflow:visible; position:relative; }
+  .approach-stage .card-wrap, .approach-stage .light-inference { opacity:1; }
+  .stack .card-wrap-a1,.stack .card-wrap-a2,.stack .card-wrap-a3,.stack .card-wrap-b1,.stack .card-wrap-b2 { display:none; }
+  .card-wrap-b3 { top:calc(150vh - 30.094vh); }
+  .approach-stage .light-inference-a { bottom:calc(100vh + 100px); }
+  /* Higher-specificity entrance offsets (.card-wrap-p*.motion-card) would beat the generic
+     .motion-card reset above; repeat the reset at matching specificity. */
+  .motion-ready .light-main .card-wrap-p1.motion-card,
+  .motion-ready .light-main .card-wrap-p2.motion-card { transform:none; }
 }
 
 /* Reduced motion on mobile: stop the flipbook loop on the final, complete frame. */
