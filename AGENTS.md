@@ -38,8 +38,8 @@ PORT=3002 node .claude/serve-official-website.js
 - 滚动进度用 offsetTop 链(代码里的 `chain()` 函数)算文档坐标。sticky 区块
   (`belief-stage` / `approach-stage`)pin 住时 `getBoundingClientRect().top` 恒定不变,
   **不能**拿它当滚动进度,否则动效会"卡死"。
-- 桌面端 scrub/snap 逻辑统一由 `desktopMQ = matchMedia('(min-width:1024px)')` 守卫(与 CSS
-  断点严格一致,勿改回 innerWidth 判断);跨断点会自动 location.reload()。≤1023 走文件末尾
+- 桌面端 scrub/snap 逻辑统一由 `desktopMQ = matchMedia('(min-width:768px)')` 守卫(与 CSS
+  断点严格一致,勿改回 innerWidth 判断);跨断点会自动 location.reload()。≤767 走文件末尾
   媒体查询里的简化布局,改桌面端时确认没有破坏移动端兜底。
 
 ## 设计规范(用户的强规则,不可妥协)

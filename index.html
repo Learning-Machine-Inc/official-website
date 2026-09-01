@@ -11,20 +11,19 @@
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:1024px)">
-  <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:1023px)">
+  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:768px)">
+  <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:767px)">
   <!-- flipbook frames referenced only from @keyframes: browsers fetch those lazily per frame,
        which flashes the blank card color mid-loop unless every frame is preloaded up front -->
-  <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:1023px)">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus&family=Inria+Serif:wght@300;400&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:767px)">
+  <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v34">
 </head>
 <body>
@@ -60,8 +59,8 @@
     <section class="light-belief">
       <div class="belief-stage">
       <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:1023px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:1023px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
         <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
       </div>
       </div>
@@ -97,7 +96,7 @@
     <section id="approach" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
     <section id="join" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip" aria-describedby="role-tooltip" aria-expanded="false">See open roles</button><div id="role-tooltip" class="role-tooltip" role="status">Coming soon｜<a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self‑recommendation</a></div></div><a class="button button-blue" href="mailto:contact@learning-machine.ai">Get in touch</a></div></div></section>
   </main>
-  <footer><div class="footer-main"><div><a href="#home" class="footer-brand">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#">Research</a><a href="#">Team</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
+  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#">Research</a><a href="#">Team</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
   <script>
     const root = document.documentElement;
     const variantToggle = document.querySelector('#variant-toggle');
@@ -108,7 +107,7 @@
     const video = document.querySelector('#approach-video');
     const media = document.querySelector('.device-media');
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    const mobileViewport = matchMedia('(max-width: 1023px)');
+    const mobileViewport = matchMedia('(max-width: 767px)');
     let roleTooltipCloseTimer = 0;
     const cancelRoleTooltipClose = () => { clearTimeout(roleTooltipCloseTimer); roleTooltipCloseTimer = 0; };
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
@@ -198,8 +197,18 @@
     // (innerWidth can disagree with media queries when overflow widens the layout viewport).
     // Crossing the breakpoint reloads: the scrub/pin systems leave inline styles sized for the
     // layout they initialized against, and a clean re-init is the only reliable reset.
-    const desktopMQ = matchMedia('(min-width:1024px)');
+    const desktopMQ = matchMedia('(min-width:768px)');
     desktopMQ.addEventListener('change', () => location.reload());
+    // Fluid type (clamp) resizes section heights with the window; scroll anchors are captured at
+    // init, so a settled width change inside the desktop range also needs a clean re-init.
+    let settledWidth = innerWidth, resizeTimer = 0;
+    addEventListener('resize', () => {
+      if (!desktopMQ.matches) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (Math.abs(innerWidth - settledWidth) > 2) location.reload();
+      }, 300);
+    });
 
     const beliefStart = document.querySelector('.light-belief');
     const approachStart = document.querySelector('.light-approach');
