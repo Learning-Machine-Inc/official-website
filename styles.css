@@ -527,3 +527,16 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 @media (prefers-reduced-motion:reduce) and (max-width:767px) {
   .card-wrap-a1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
 }
+
+/* A/B color test (variant B) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids 1:196/1:218/1:222/1:239.
+   Colors only, extracted from that file — layout/type/spacing untouched. Scoped to
+   [data-ab-variant="b"], toggled by #variant-toggle (see the classic <script> near the top
+   of </body> — that button intentionally does NOT touch html[data-variant] anymore). */
+html[data-ab-variant="b"] .light-hero h1 em { color:#5c8982; }
+html[data-ab-variant="b"] .light-btn-dark { background:#58a69a; border-color:#89cdc1; }
+html[data-ab-variant="b"] .light-nav a { color:#083733; }
+html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
+html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
+html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#88b8b0; }
+html[data-ab-variant="b"] .light-join-card .eyebrow { color:#719791; }
+html[data-ab-variant="b"] .light-join-card .button-blue { background:linear-gradient(#63a79c,#86a29d); }
