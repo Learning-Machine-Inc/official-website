@@ -157,7 +157,7 @@ html[data-variant="light"] .site-header .menu-btn,
 html[data-variant="light"] .site-header .mobile-menu { display:none; }
 html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-events:auto; width:44px; }
 
-.figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1300px; position:relative; z-index:2; }
+.figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1600px; position:relative; z-index:2; }
 
 .light-main { position:relative; }
 .light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
