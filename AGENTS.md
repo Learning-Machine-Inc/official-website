@@ -12,10 +12,18 @@ PORT=3002 node .claude/serve-official-website.js
 浏览器打开 http://localhost:3002 (3001 已被其他进程占用,不要用)。
 
 ## 页面结构
-- `<main class="light-main">`:**正在开发的新版**(浅色手绘工程图风格),四个区块:
-  `light-hero` → `light-approach` → `light-belief` → `light-join`
-- `<main class="dark-main">`:旧版,整块保留在 DOM 里,**勿动**。
-- 旧版相关 CSS(hero/vision/approach/join、`html[data-variant]` 等)也**勿动**。
+- `<main class="light-main">`:**唯一在用的设计**(浅色手绘工程图风格),四个区块:
+  `light-hero` → `light-approach` → `light-belief` → `light-join`。永久 `display:block`,
+  不再受 `data-variant` 控制。
+- `<main class="dark-main">`:旧版,整块代码保留在 DOM 里(历史参考),但永久 `display:none`,
+  已从 CSS 显隐逻辑和 JS 滚动系统里完全解耦——**不要**恢复
+  `html[data-variant="dark"] .light-main { display:none; }` 这类规则,那会重新显示旧版而不是
+  真正的 B 版本。旧版相关 CSS(`html[data-variant="dark"]` 开头的一大段颜色/变量覆盖)也**勿动**,
+  它们现在虽是死代码但不产生任何效果。
+- **A/B 测试入口**(2026-09-02 起):header 左上角那个隐藏的 `#variant-toggle` 按钮
+  (双击触发)现在只切换 `root.dataset.abVariant`('a'/'b'),不挂任何 CSS,是留给以后接
+  真正 B 版本的占位开关。`html[data-variant]` 属性永久固定为 `"light"`,不要让这个入口再去
+  改它。
 
 ## 动效架构(重要,改之前先读完)
 所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):
@@ -30,8 +38,9 @@ PORT=3002 node .claude/serve-official-website.js
    belief 里的 p1/p2 两张图是例外:不是 scrub,是`beliefCardsActive` 驱动的"每次进入区间
    重播入场、离开就向上淡出"状态机(桌面独有,带滚动方向不同的迟滞阈值防抖)。这两张图已
    从第一个 script 的通用一次性 `motionObserver` 里排除(仅桌面排除,移动端仍用那套),
-   避免两套系统抢同一个 `is-visible` class。切换旧版(dark-main)会冻结这套状态机,
-   `window.resetBeliefCards()` 用来在切换时把它拉回一致状态,勿删。
+   避免两套系统抢同一个 `is-visible` class。(`window.resetBeliefCards()` 曾用于旧版切换时
+   重置这套状态机,2026-09-02 随 A/B 入口解耦一起删除——现在 `data-variant` 永久是
+   `"light"`,不会再冻结,不需要这个 resync 了。)
 
 修改动效请在现有体系内调参数/时间窗,**不要引入新动画库、不要另起一套并行系统**。
 
@@ -63,5 +72,6 @@ PORT=3002 node .claude/serve-official-website.js
 ## 验收标准(每个改动都要过)
 1. 在 3002 端口实际滚一遍:入场、滚动 scrub(正向+反向)、离场都正常;
 2. 浏览器控制台无报错;
-3. `dark-main` 与旧版 CSS 未被改动;
+3. 没有恢复 `dark-main` 的显示逻辑,`#variant-toggle` 切换后页面观感/滚动动效不变
+   (除非你正在实现真正的 B 版本);
 4. git 小步提交在 `feat/website-local`,提交信息说清楚改了哪个区块的什么。
