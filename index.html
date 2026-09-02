@@ -108,13 +108,16 @@
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
     const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
     const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
-    // window.resetBeliefCards (defined in the module script below, if that scene exists on this
-    // page) resyncs the belief-card enter/exit state machine — switching to the legacy dark
-    // variant freezes it mid-state, since the module's onScroll bails out while dark is shown.
-    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); window.resetBeliefCards?.(); };
-    const toggleVariant = () => setVariant(root.dataset.variant === 'light' ? 'dark' : 'light');
-    variantToggle.addEventListener('dblclick', toggleVariant);
-    variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleVariant(); } });
+    // A/B entry point, reserved for a future real test. Until a distinct variant B is defined,
+    // this only flips a tracking attribute with no CSS/behavior tied to it — root.dataset.variant
+    // stays fixed at 'light' (set in the <html> tag) so the design and its scroll/pin JS always
+    // run normally. Do NOT wire this back to dataset.variant: the retired legacy dark-main site's
+    // CSS still keys off `[data-variant="dark"]` in several places (colors, shared header, footer
+    // variables), and re-triggering it would show that old design instead of a real variant B.
+    const setAbVariant = (variant) => { const isB = variant === 'b'; root.dataset.abVariant = isB ? 'b' : 'a'; variantToggle.setAttribute('aria-pressed', String(isB)); variantToggle.setAttribute('aria-label', isB ? 'Switch to variant A' : 'Switch to variant B'); };
+    const toggleAbVariant = () => setAbVariant(root.dataset.abVariant === 'b' ? 'a' : 'b');
+    variantToggle.addEventListener('dblclick', toggleAbVariant);
+    variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleAbVariant(); } });
     menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; mobileMenu.hidden = open; menuButton.setAttribute('aria-expanded', String(!open)); menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
     mobileMenu.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
     mobileViewport.addEventListener('change', (event) => { if (!event.matches) closeMenu(); });
@@ -263,7 +266,7 @@
             if (target === null && scroll > beliefExit && projected < joinStart.offsetTop) target = allStops.at(-1);
           }
         }
-        if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
+        if (snapping || target === null) { wheeling = false; return; }
         snapping = true;
         snapStartedAt = performance.now();
         window.lenis.scrollTo(target, { lerp:.09, onComplete:() => { snapping = false; wheeling = false; } });
@@ -375,20 +378,10 @@
       const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
       let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefCardsActive = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
-      // Exposed so the variant toggle (a separate, non-module script) can resync this state when
-      // switching to/from the legacy dark variant, which freezes onScroll without ever clearing it.
-      window.resetBeliefCards = () => {
-        if (!beliefCardsActive) return;
-        beliefCardsActive = false;
-        cardP1.classList.remove('is-visible', 'is-exiting');
-        cardP2.classList.remove('is-visible', 'is-exiting');
-      };
       const onScroll = ({ scroll }) => {
         // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
         // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
-        // Skip entirely while the legacy dark variant is shown: light-main is display:none there,
-        // so rects read 0 and one-shot triggers (beliefRevealed etc.) would fire in a hidden state.
-        if (!desktopMQ.matches || document.documentElement.dataset.variant !== 'light') return;
+        if (!desktopMQ.matches) return;
         heroCopy.style.transform = `translateY(${Math.min(scroll, 1100) * 0.35}px)`;
         const p = clamp01((scroll - EXIT_START) / (EXIT_END - EXIT_START));
         if (p > 0 || exitEngaged) {

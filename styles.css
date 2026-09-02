@@ -144,11 +144,13 @@ footer { background:var(--footer); color:#b3aa9c; height:406px; }
 .footer-bottom a { text-decoration:none; }
 
 /* White version — Figma node 1617:19731 */
-.light-main { display:none; }
-html[data-variant="light"] body { background:#f4f0ed; }
-html[data-variant="light"] .light-main { display:block; }
-html[data-variant="light"] .dark-main { display:none; }
-html[data-variant="dark"] .light-main { display:none; }
+/* 2026-09-02: the #variant-toggle entry point is reserved for a future real A/B test — until a
+   distinct "B" is defined, both states render this design. Do not reintroduce
+   `html[data-variant="dark"] .light-main { display:none; }`; that showed the retired legacy
+   dark-main site instead, which is no longer wired into the scroll/pin JS below. */
+.light-main { display:block; }
+.dark-main { display:none; }
+body { background:#f4f0ed; }
 
 html[data-variant="light"] .site-header { background:transparent; box-shadow:none; height:0; pointer-events:none; }
 html[data-variant="light"] .site-header .brand,
