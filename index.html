@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-variant="light">
+<html lang="en" data-variant="light" data-ab-variant="b">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,12 @@
   <link rel="preload" href="assets/fonts/inria-serif-300-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/inria-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/figma-107/hero-group-48.png" as="image" fetchpriority="high" media="(min-width:768px)">
-  <link rel="preload" href="assets/figma-107/hero-group-48-mobile.jpg" as="image" fetchpriority="high" media="(max-width:767.98px)">
+  <!-- Hero art preloads match the DEFAULT variant (B) and the CSS image-set/media split exactly, so
+       the browser never fetches two hero images. `type` lets non-AVIF browsers skip these and fall
+       back to the CSS-selected WebP/JPEG. -->
+  <link rel="preload" href="assets/figma-b-test/hero-art-1920.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (max-resolution:1.49dppx)">
+  <link rel="preload" href="assets/figma-b-test/hero-art-2752.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (min-resolution:1.5dppx)">
+  <link rel="preload" href="assets/figma-b-test/hero-art-mobile-1440.avif" as="image" type="image/avif" fetchpriority="high" media="(max-width:767.98px)">
   <!-- flipbook frames referenced only from @keyframes: browsers fetch those lazily per frame,
        which flashes the blank card color mid-loop unless every frame is preloaded up front -->
   <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:767.98px)">
@@ -74,8 +78,10 @@
     <section class="light-belief">
       <div class="belief-stage">
       <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="assets/figma-user/belief-p1-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="assets/figma-user/belief-p1-mobile-640.webp"><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><source type="image/avif" srcset="assets/figma-user/belief-p1-1400.avif"><source type="image/webp" srcset="assets/figma-user/belief-p1-1400.webp"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <!-- p2 differs per A/B variant: every source carries data-a/data-b and setAbVariant() swaps srcset/src.
+             Initial values are the B (default) ones so the preload scanner never fetches the A candidate. -->
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="assets/figma-b-test/belief-p2-mobile-640.avif" data-a="assets/figma-user/belief-p2-mobile-640.avif" data-b="assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="assets/figma-b-test/belief-p2-mobile-640.webp" data-a="assets/figma-user/belief-p2-mobile-640.webp" data-b="assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="assets/figma-b-test/belief-p2.jpg" data-a="assets/figma-user/belief-p2-mobile.jpg" data-b="assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="assets/figma-b-test/belief-p2-1400.avif" data-a="assets/figma-user/belief-p2-1400.avif" data-b="assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="assets/figma-b-test/belief-p2-1400.webp" data-a="assets/figma-user/belief-p2-1400.webp" data-b="assets/figma-b-test/belief-p2-1400.webp"><img src="assets/figma-b-test/belief-p2.jpg" data-a="assets/figma-user/belief-p2.png" data-b="assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
         <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
       </div>
       </div>
@@ -114,17 +120,18 @@
     // run normally. Do NOT wire this back to dataset.variant: the retired legacy dark-main site's
     // CSS still keys off `[data-variant="dark"]` in several places (colors, shared header, footer
     // variables), and re-triggering it would show that old design instead of a real variant B.
-    const beliefP2Img = document.querySelector('.card-wrap-p2 img');
-    const BELIEF_P2_SRC = { a: 'assets/figma-user/belief-p2.png', b: 'assets/figma-b-test/belief-p2.jpg' };
+    const beliefP2Sources = document.querySelectorAll('.card-wrap-p2 picture source[data-a], .card-wrap-p2 picture img[data-a]');
     const setAbVariant = (variant) => {
       const isB = variant === 'b';
       root.dataset.abVariant = isB ? 'b' : 'a';
       variantToggle.setAttribute('aria-pressed', String(isB));
       variantToggle.setAttribute('aria-label', isB ? 'Switch to variant A' : 'Switch to variant B');
-      // Swapped via JS `src`, not a CSS `content:url()` override — this element sits inside a
-      // <picture> with a mobile <source>, and content-replacement on an <img> there is unreliable
-      // across browsers once a <source> has already resolved the rendered resource.
-      if (beliefP2Img) beliefP2Img.src = isB ? BELIEF_P2_SRC.b : BELIEF_P2_SRC.a;
+      // The p2 photo lives in a <picture> with AVIF/WebP <source>s; a CSS content:url() override or
+      // changing only img.src would be ignored once a <source> matches, so swap every candidate.
+      beliefP2Sources.forEach((el) => {
+        const next = isB ? el.dataset.b : el.dataset.a;
+        if (el.tagName === 'IMG') el.src = next; else el.srcset = next;
+      });
     };
     const toggleAbVariant = () => setAbVariant(root.dataset.abVariant === 'b' ? 'a' : 'b');
     setAbVariant('b'); // default entry point, per current A/B test — toggle still switches back to A

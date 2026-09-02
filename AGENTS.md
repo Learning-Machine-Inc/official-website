@@ -74,6 +74,19 @@ PORT=3002 node .claude/serve-official-website.js
   要用新字重,先把它加进 `<head>` 里 fonts.googleapis 的请求参数,否则浏览器拿不到。
 - belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
 
+## 图片资源(2026-09-02 起)
+- 页面里的照片类资源一律 **AVIF + WebP**,CSS 背景用 `image-set(url() type(), …)`(前面先写一条
+  普通 `url()` 兜底),`<img>` 用 `<picture><source type>`。桌面头图分 1920w(1x)/ 2752w
+  (≥1.5dppx,`@media (min-resolution:1.5dppx)`)两档,移动端 1440w;`<head>` 里的头图 preload
+  必须和 CSS 的 media/尺寸拆分**一一对应**,且指向默认变体(B),否则会重复下载。
+- 头图底层还叠了一张内联的 48px WebP(LQIP,base64 在 CSS 里),大图到之前先有画面。
+- **换图/加图流程**:把源图放到原位置 → 在 `.claude/encode-images.py` 的 `JOBS` 里登记 →
+  `python3 .claude/encode-images.py` 重出全部格式 → 引用新文件名。不要再直接引用几 MB 的
+  PNG(原 `hero-group-48.png` 6.4MB 就是线上首屏慢的原因;它已换成无损 WebP 母版
+  `hero-group-48.webp`,仅作编码源,页面不引用)。
+- belief-p2 在 A/B 间切换:`<picture>` 里每个 `<source>`/`<img>` 带 `data-a`/`data-b`,
+  `setAbVariant()` 逐个换 `srcset`/`src`;初始值写 B(默认),避免预加载扫描器先抓 A。
+
 ## 验收标准(每个改动都要过)
 1. 在 3002 端口实际滚一遍:入场、滚动 scrub(正向+反向)、离场都正常;
 2. 浏览器控制台无报错;
