@@ -6,8 +6,10 @@
   <meta name="theme-color" content="#F4F0ED">
   <meta name="description" content="Learning Machine builds models that learn and adapt at inference time.">
   <title>Learning Machine | Build AI that truly Learns</title>
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="assets/icons/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/icons/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/inria-serif-300-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
@@ -21,9 +23,6 @@
   <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-1-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-2-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-b-3-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin media="(min-width:768px)">
   <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v34">
@@ -58,15 +57,6 @@
         </div>
       </div>
     </section>
-    <section class="light-belief">
-      <div class="belief-stage">
-      <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
-        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
-      </div>
-      </div>
-    </section>
     <section id="approach" class="light-approach">
       <div class="approach-stage">
         <div class="figma-frame">
@@ -77,14 +67,17 @@
             <div class="card-wrap card-wrap-a3"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-a4"><div class="stack-card"></div></div>
           </div>
-          <div class="stack stack-b" aria-hidden="true">
-            <div class="card-wrap card-wrap-b1"><div class="stack-card"></div></div>
-            <div class="card-wrap card-wrap-b2"><div class="stack-card"></div></div>
-            <div class="card-wrap card-wrap-b3"><div class="stack-card"></div></div>
-          </div>
-          <div class="light-inference light-inference-a"><h3>A. Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div>
-          <div class="light-inference light-inference-b"><h3>B. No operation overhead</h3><p>No data-collection pipeline, no dedicated training infrastructure, no team of ML engineers to maintain. Connect the model to a workflow and it learns on the job.</p></div>
+          <div class="light-inference light-inference-a"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div>
         </div>
+      </div>
+    </section>
+    <section class="light-belief">
+      <div class="belief-stage">
+      <div class="figma-frame">
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p2-mobile.jpg"><img src="assets/figma-user/belief-p2.png" alt=""></picture></div></div>
+        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
+      </div>
       </div>
     </section>
     <section id="join" class="light-join">
@@ -115,7 +108,10 @@
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
     const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
     const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
-    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); };
+    // window.resetBeliefCards (defined in the module script below, if that scene exists on this
+    // page) resyncs the belief-card enter/exit state machine — switching to the legacy dark
+    // variant freezes it mid-state, since the module's onScroll bails out while dark is shown.
+    const setVariant = (variant) => { const isDark = variant === 'dark'; root.dataset.variant = isDark ? 'dark' : 'light'; variantToggle.setAttribute('aria-pressed', String(isDark)); variantToggle.setAttribute('aria-label', isDark ? 'Switch to light version' : 'Switch to dark version'); window.resetBeliefCards?.(); };
     const toggleVariant = () => setVariant(root.dataset.variant === 'light' ? 'dark' : 'light');
     variantToggle.addEventListener('dblclick', toggleVariant);
     variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleVariant(); } });
@@ -184,7 +180,13 @@
       const motionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
         if (entry.isIntersecting) { revealMotion(entry.target); motionObserver.unobserve(entry.target); }
       }), { rootMargin:'0px 0px -10% 0px', threshold:.12 });
+      const beliefCardsOwnedByScrub = matchMedia('(min-width:768px)').matches;
       document.querySelectorAll('.light-main .motion-reveal,.light-main .motion-image,.light-main .motion-line,.light-main .motion-card').forEach((element) => {
+        // On desktop, card-wrap-p1/p2's enter/exit is owned entirely by the repeatable
+        // beliefCardsActive state machine in the module script below — letting this one-shot
+        // observer also grant them .is-visible races it and causes a double-entrance flicker on
+        // first scroll-in. Mobile has no such system, so it keeps the normal one-shot reveal.
+        if (beliefCardsOwnedByScrub && (element.classList.contains('card-wrap-p1') || element.classList.contains('card-wrap-p2'))) return;
         if (element.closest('.light-hero')) requestAnimationFrame(() => requestAnimationFrame(() => revealMotion(element)));
         else motionObserver.observe(element);
       });
@@ -223,34 +225,42 @@
       const snapScene = () => {
         const scroll = wheeling ? wheelStart : window.scrollY;
         const projected = window.lenis.targetScroll;
-        const beliefBoundary = beliefStart.offsetTop + (beliefStart.offsetHeight - innerHeight) * .38;
+        // Page order is Hero → Approach (pinned, several internal stops) → Belief (pinned, one
+        // rest point) → Join. Both pinned scenes' stops/exits are merged into one array so a
+        // single momentum-respecting loop can walk across scene boundaries.
         const approachSpan = approachStart.offsetHeight - innerHeight;
         const approachEntry = approachStart.offsetTop - innerHeight;
-        const approachStops = [.05,.12,.19,.26,.33,.65,.72,.79].map(progress => approachStart.offsetTop + approachSpan * progress);
-        const approachTriggers = [approachEntry,...[.05,.12,.19,.26,.58,.65,.72].map(progress => approachStart.offsetTop + approachSpan * progress)];
-        const approachBoundary = approachStops[0];
-        const approachExit = approachStart.offsetTop + approachSpan * .97;
+        const approachStopFractions = [.13,.21,.29,.37,.60];
+        const approachStops = approachStopFractions.map(progress => approachStart.offsetTop + approachSpan * progress);
+        const approachTriggers = [approachEntry, ...approachStopFractions.slice(0, -1).map(progress => approachStart.offsetTop + approachSpan * progress)];
+        // .95 matches hOut's own end (the heading is the last thing to clear, per IN_A/OUT_A/hOut
+        // below) — .97 left a blank stretch of scroll after everything had already exited.
+        const approachExit = approachStart.offsetTop + approachSpan * .95;
+        const beliefSpan = beliefStart.offsetHeight - innerHeight;
+        const beliefBoundary = beliefStart.offsetTop + beliefSpan * .38;
+        const beliefExit = beliefStart.offsetTop + beliefSpan * .97;
+        const allStops = [...approachStops, beliefBoundary];
+        const allTriggers = [...approachTriggers, approachExit];
         const approachSnapEpsilon = 16;
         let target = null;
         // Momentum-respecting snap: land on the FURTHEST stop the projected scroll has already
         // passed, never drag the user back to the first one — a hard fling skips whole scenes
         // and reaches the ends of the page, a gentle tick still aligns to the nearest stop.
         if (scrollDirection > 0) {
-          if (scroll < joinStart.offsetTop && projected >= approachExit) target = joinStart.offsetTop;
+          if (scroll < joinStart.offsetTop && projected >= beliefExit) target = joinStart.offsetTop;
           else {
-            for (let index = approachStops.length - 1; index >= 0; index--) {
-              if (scroll < approachStops[index] - approachSnapEpsilon && projected > approachTriggers[index]) { target = approachStops[index]; break; }
+            for (let index = allStops.length - 1; index >= 0; index--) {
+              if (scroll < allStops[index] - approachSnapEpsilon && projected > allTriggers[index]) { target = allStops[index]; break; }
             }
-            if (target === null && scroll < beliefBoundary - 2 && projected > 2) target = beliefBoundary;
+            if (target === null && scroll < allStops[0] - 2 && projected > 2) target = allStops[0];
           }
         } else {
-          if (scroll > 2 && projected < beliefBoundary) target = 0;
-          else if (scroll > approachEntry && projected < approachBoundary) target = beliefBoundary;
+          if (scroll > 2 && projected < allStops[0]) target = 0;
           else {
-            for (let index = 0; index < approachStops.length - 1; index++) {
-              if (scroll > approachStops[index] + approachSnapEpsilon && projected < approachStops[index + 1]) { target = approachStops[index]; break; }
+            for (let index = 0; index < allStops.length - 1; index++) {
+              if (scroll > allStops[index] + approachSnapEpsilon && projected < allStops[index + 1]) { target = allStops[index]; break; }
             }
-            if (target === null && scroll > approachExit && projected < joinStart.offsetTop) target = approachStops.at(-1);
+            if (target === null && scroll > beliefExit && projected < joinStart.offsetTop) target = allStops.at(-1);
           }
         }
         if (snapping || document.documentElement.dataset.variant !== 'light' || target === null) { wheeling = false; return; }
@@ -329,44 +339,50 @@
       const WINDOWS = [[0, 0.25], [0.28, 0.55], [0.58, 0.82], [0.85, 1]];
       const clamp01 = (v) => Math.min(1, Math.max(0, v));
       const smooth = (t) => t * t * (3 - 2 * t);
-      const easeOut = (t, power) => 1 - Math.pow(1 - clamp01(t), power);
-      // Belief: text, then card 1, then card 2 cascade in; all three hold while the ink-fill
-      // plays, then cascade back out as the section releases into Approach. Driven entirely by
-      // bp (local scroll fraction through the pin) so nothing goes idle mid-pin.
+      // Belief: text cascades in, holds while the ink-fill plays, then cascades back out as the
+      // section releases. Driven entirely by bp (local scroll fraction through the pin) so
+      // nothing goes idle mid-pin. Cards (p1/p2) are handled separately — see beliefCardsActive.
       const beliefSec = document.querySelector('.light-belief');
       const beliefStage = document.querySelector('.belief-stage');
       const cardP1 = document.querySelector('.card-wrap-p1');
       const cardP2 = document.querySelector('.card-wrap-p2');
       // Approach scroll-telling scene: heading pins; A text + stack build up layer by layer,
-      // unstack, then B text + its stack build; finally B stack and the heading leave together.
+      // hold, then unstack together as the pin releases into Belief.
       const scene = document.querySelector('.light-approach');
       const sceneATxt = document.querySelector('.light-inference-a');
-      const sceneBTxt = document.querySelector('.light-inference-b');
       const sceneHeading = document.querySelector('.light-approach-heading');
       const sceneACards = [...document.querySelectorAll('.stack-a .card-wrap')];
-      const sceneBCards = [...document.querySelectorAll('.stack-b .card-wrap')];
       const seg = (v, s, e) => clamp01((v - s) / (e - s));
-      const IN_A = [[0.05,0.12],[0.12,0.19],[0.19,0.26],[0.26,0.33]];
-      const OUT_A = [[0.38,0.43],[0.42,0.47],[0.46,0.51],[0.50,0.55]];
-      const IN_B = [[0.58,0.65],[0.65,0.72],[0.72,0.79]];
-      const OUT_B = [[0.88,0.92],[0.905,0.945],[0.93,0.97]];
+      // A-only scene: cards stack in, hold, then unstack out as the pin releases into Belief.
+      const IN_A = [[0.05,0.13],[0.13,0.21],[0.21,0.29],[0.29,0.37]];
+      const OUT_A = [[0.60,0.68],[0.64,0.72],[0.68,0.76],[0.72,0.80]];
       const placeScene = (el, vIn, vOut, inOffset) => {
         el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
         el.style.transform = `translateY(${((1 - vIn) * inOffset + vOut * -40).toFixed(1)}px)`;
       };
-      // Belief entrance/exit windows on bp (0→1 across the pin). Card 1 follows card 1's own
-      // start, card 2 follows card 1.
-      const BELIEF_IN = { p1: [0.05, 0.32], p2: [0.11, 0.38] };
-      const BELIEF_OUT = { copy: [0.88, 0.97], p1: [0.82, 0.92], p2: [0.86, 0.95] };
-      const placeBelief = (el, vIn, vOut, inX, inY) => {
-        const rest = 1 - vIn;
-        el.style.opacity = (vIn * (1 - vOut)).toFixed(3);
-        el.style.transform = `translate(${(inX * rest).toFixed(1)}px, ${(inY * rest + vOut * -40).toFixed(1)}px) scale(${(1 + 0.1 * rest).toFixed(3)})`;
+      // Belief copy's own exit window on bp (0→1 across the pin) — unrelated to the cards below.
+      const BELIEF_OUT = { copy: [0.88, 0.97] };
+      // p1/p2 are enter-once-per-visit, not continuously scroll-scrubbed: crossing into the pin
+      // plays the diagonal entrance (shared with .motion-card elsewhere); crossing back out of
+      // it — either direction — plays a plain fade-up exit, never retracing the entrance path.
+      // Re-arms every time the section is re-entered (unlike the belief text's one-shot reveal).
+      const resetCards = (els) => {
+        els.forEach(el => { el.classList.add('motion-snap'); el.classList.remove('is-visible', 'is-exiting'); });
+        void els[0].offsetHeight;
+        els.forEach(el => el.classList.remove('motion-snap'));
       };
       const beliefCopy = document.querySelector('.light-belief-copy');
       const beliefWords = [...document.querySelectorAll('.light-belief-copy .kinetic-word')];
       const headingUnits = sceneHeading ? [...sceneHeading.querySelectorAll('.kinetic-word'), ...sceneHeading.querySelectorAll('.motion-line')] : [];
-      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      let exitEngaged = false, headingEngaged = false, beliefSetup = false, beliefRevealed = false, beliefExitEngaged = false, beliefCardsActive = false, beliefChars = [], beliefWordLineOf = [], beliefLineCount = 1;
+      // Exposed so the variant toggle (a separate, non-module script) can resync this state when
+      // switching to/from the legacy dark variant, which freezes onScroll without ever clearing it.
+      window.resetBeliefCards = () => {
+        if (!beliefCardsActive) return;
+        beliefCardsActive = false;
+        cardP1.classList.remove('is-visible', 'is-exiting');
+        cardP2.classList.remove('is-visible', 'is-exiting');
+      };
       const onScroll = ({ scroll }) => {
         // Hero parallax + scrubbed exit are desktop-tuned (distances assume a 100vh hero);
         // on mobile the copy keeps its one-shot entrance and scrolls away naturally.
@@ -473,18 +489,35 @@
               w.style.transform = e ? `translateY(${(-40 * e).toFixed(1)}px)` : 'none';
             });
           }
-          // Cards still cascade in/out (unchanged).
-          placeBelief(cardP1, easeOut(seg(bp, BELIEF_IN.p1[0], BELIEF_IN.p1[1]), 5), smooth(seg(bp, BELIEF_OUT.p1[0], BELIEF_OUT.p1[1])), -400, -240);
-          placeBelief(cardP2, easeOut(seg(bp, BELIEF_IN.p2[0], BELIEF_IN.p2[1]), 5), smooth(seg(bp, BELIEF_OUT.p2[0], BELIEF_OUT.p2[1])), 400, -280);
+          // Cards: enter once per visit, exit once per visit — not scroll-scrubbed. `bp` above is
+          // clamped to [0,1], which reads as "inside" even from far away; use the raw fraction so
+          // the active/inactive edge only flips near the section's real boundaries. Entering and
+          // leaving use different bands (hysteresis) so a scroll position hovering right at one
+          // threshold can't flip-flop the state every frame; guard bSpan<=0 so a not-yet-laid-out
+          // section can't turn this into a NaN comparison that permanently disables the cards.
+          const rawBp = bSpan > 0 ? (scroll - chain(beliefSec)) / bSpan : null;
+          const insideCardRange = rawBp === null ? beliefCardsActive
+            : beliefCardsActive ? (rawBp > -0.1 && rawBp < 1.1)
+            : (rawBp > -0.05 && rawBp < 1.05);
+          if (insideCardRange && !beliefCardsActive) {
+            beliefCardsActive = true;
+            resetCards([cardP1, cardP2]);
+            cardP1.classList.add('is-visible');
+            cardP2.classList.add('is-visible');
+          } else if (!insideCardRange && beliefCardsActive) {
+            beliefCardsActive = false;
+            cardP1.classList.remove('is-visible');
+            cardP2.classList.remove('is-visible');
+            cardP1.classList.add('is-exiting');
+            cardP2.classList.add('is-exiting');
+          }
         }
         if (scene && desktopMQ.matches) {
           const span = scene.offsetHeight - innerHeight;
           const sp = clamp01(-scene.getBoundingClientRect().top / span);
           sceneACards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_A[i][0], IN_A[i][1])), smooth(seg(sp, OUT_A[i][0], OUT_A[i][1])), -70));
-          sceneBCards.forEach((c, i) => placeScene(c, smooth(seg(sp, IN_B[i][0], IN_B[i][1])), smooth(seg(sp, OUT_B[i][0], OUT_B[i][1])), -70));
-          placeScene(sceneATxt, smooth(seg(sp, 0, 0.05)), smooth(seg(sp, 0.40, 0.48)), 42);
-          placeScene(sceneBTxt, smooth(seg(sp, 0.55, 0.61)), smooth(seg(sp, 0.90, 0.98)), 42);
-          const hOut = smooth(seg(sp, 0.90, 1));
+          placeScene(sceneATxt, smooth(seg(sp, 0, 0.06)), smooth(seg(sp, 0.60, 0.68)), 42);
+          const hOut = smooth(seg(sp, 0.82, 0.95));
           if (hOut > 0 || headingEngaged) {
             if (!headingEngaged) { headingUnits.forEach(u => { u.style.transition = 'none'; u.style.animation = 'none'; }); headingEngaged = true; }
             const hn = headingUnits.length || 1;
