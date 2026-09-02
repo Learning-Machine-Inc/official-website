@@ -127,8 +127,10 @@ h1,h2,h3,.vision-copy { font-family:Georgia,"Times New Roman",serif; font-weight
 .role-tooltip-wrap[data-open="true"] .role-tooltip { opacity:1; pointer-events:auto; transform:translate(-50%,0); visibility:visible; }
 .role-tooltip-email { color:#d3e1ff; text-decoration:underline; text-underline-offset:2px; }
 
-footer { background:var(--footer); color:#b3aa9c; height:406px; }
-.footer-main { display:grid; gap:60px; grid-template-columns:1.4fr 1fr; height:336px; margin:0 auto; max-width:1072px; padding:72px 0 64px; }
+footer { background:var(--footer); color:#b3aa9c; height:386px; }
+/* Footer content sits in the same centered 1456px band as the header (72px inset at 1440, growing
+   past 1600), so the brand / Explore / © all share the page's content left edge. */
+.footer-main { display:grid; gap:60px; grid-template-columns:1.4fr 1fr; height:316px; padding:72px max(72px, calc(50% - 728px)) 44px; }
 .footer-main > div:first-child { display:flex; flex-direction:column; gap:21.6px; }
 .footer-brand { align-items:center; color:#fff; display:flex; font-family:Georgia,serif; font-size:22px; font-weight:700; gap:12px; letter-spacing:-.44px; line-height:35.2px; text-decoration:none; }
 .footer-brand-icon { height:24px; width:auto; }
@@ -136,10 +138,12 @@ footer { background:var(--footer); color:#b3aa9c; height:406px; }
 .footer-email { align-items:center; align-self:flex-start; display:inline-flex; font-size:16px; gap:12px; line-height:25.6px; min-height:44.4px; padding-top:4.4px; text-decoration:none; }
 .footer-email-icon-wrap { align-items:center; border:1px solid #383229; display:flex; height:40px; justify-content:center; width:40px; }
 .footer-email-icon { height:16px; width:16px; }
-.footer-main nav { align-content:start; display:grid; gap:10px; grid-template-columns:repeat(2,minmax(90px,1fr)); }
-.footer-main nav p { color:#fff; font-family:Georgia,serif; font-size:16px; grid-column:1 / -1; line-height:25.6px; margin-bottom:6px; }
+/* Links flow in one row and wrap to a column only when the cell gets too narrow. */
+.footer-main nav { align-content:start; align-items:start; display:flex; flex-wrap:wrap; gap:10px 30px; }
+.footer-main nav p { color:#fff; flex:0 0 100%; font-family:Georgia,serif; font-size:16px; line-height:25.6px; margin-bottom:6px; max-width:none; }
 .footer-main nav a { font-size:14px; line-height:22.4px; text-decoration:none; }
-.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px 184px 24px; }
+/* Same content band as .footer-main / .light-header; the border-top itself stays full-bleed. */
+.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px max(72px, calc(50% - 728px)) 24px; }
 .footer-bottom span:last-child { display:flex; gap:24px; }
 .footer-bottom a { text-decoration:none; }
 
@@ -162,14 +166,23 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1600px; position:relative; z-index:2; }
 
 .light-main { position:relative; }
-.light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
+/* The bar itself stays full-bleed (its cream background must always span the page); only the
+   content is capped — side padding grows once the viewport passes 1600px so brand + nav stay
+   within a centered 1456px (= 1600 − 2×72) band, matching .figma-frame's max-width. */
+.light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; padding:0 max(72px, calc(50% - 728px)); position:fixed; right:0; top:0; z-index:5; }
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .light-nav { align-items:center; display:flex; gap:30px; }
 .light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
-.light-nav a:not(.light-nav-contact) { background:rgb(255 255 255 / 80%); border-radius:5px; padding:7.5px 20px 7.9px; }
+/* Careers pill — Figma tFncbEkPEyRqS4h7Su8ODE node 1:214, shared by variants A and B. Figma's 1px
+   stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
+.light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
 .light-hero { background:#f4f0ed; height:100vh; min-height:761px; position:relative; }
-.light-hero-art { background:url("assets/figma-107/hero-group-48.png") center / cover no-repeat; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
+/* Hero art: two background layers — on top the real photo via image-set(type()) (AVIF → WebP → JPEG,
+   1920w for 1x screens, 2752w for ≥1.5dppx below), underneath an inline 48px WebP LQIP so the hero
+   paints immediately and the photo replaces it when it lands. The plain url() declared first is the
+   fallback for browsers without image-set. Preloads in <head> mirror this split for variant B. */
+.light-hero-art { background-image:url("assets/figma-107/hero-group-48-1920.jpg"),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-image:image-set(url("assets/figma-107/hero-group-48-1920.avif") type("image/avif"),url("assets/figma-107/hero-group-48-1920.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-position:center; background-repeat:no-repeat; background-size:cover; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
 .light-hero-veil { background:linear-gradient(to top,#f4f0ed 0,#f4f0ed 70px,rgb(244 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
 .light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:50px; max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
 .light-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
@@ -210,13 +223,13 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
 .stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:56.524vh; width:54.096vh; }
 .card-wrap-a1 { height:61.215vh; left:calc(50% + 86px - 3.849vh); top:209.54px; width:59.018vh; }
-.card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); transform:rotate(-5.22deg); }
+.card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); background-image:image-set(url("assets/figma-user/stack-a-1.avif") type("image/avif"),url("assets/figma-user/stack-a-1.webp") type("image/webp"),url("assets/figma-user/stack-a-1.jpg") type("image/jpeg")); transform:rotate(-5.22deg); }
 .card-wrap-a2 { height:58.174vh; left:calc(50% + 105px - 3.641vh); top:228.54px; width:55.822vh; }
-.card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); transform:rotate(1.78deg); }
+.card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); background-image:image-set(url("assets/figma-user/stack-a-2.avif") type("image/avif"),url("assets/figma-user/stack-a-2.webp") type("image/webp"),url("assets/figma-user/stack-a-2.jpg") type("image/jpeg")); transform:rotate(1.78deg); }
 .card-wrap-a3 { height:57.495vh; left:calc(50% + 101px - 3.594vh); top:233.54px; width:55.111vh; }
-.card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); transform:rotate(-1.04deg); }
+.card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); background-image:image-set(url("assets/figma-user/stack-a-3.avif") type("image/avif"),url("assets/figma-user/stack-a-3.webp") type("image/webp"),url("assets/figma-user/stack-a-3.jpg") type("image/jpeg")); transform:rotate(-1.04deg); }
 .card-wrap-a4 { height:58.699vh; left:calc(50% + 96px - 3.677vh); top:233.54px; width:56.374vh; }
-.card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); transform:rotate(2.36deg); }
+.card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); background-image:image-set(url("assets/figma-user/stack-a-4.avif") type("image/avif"),url("assets/figma-user/stack-a-4.webp") type("image/webp"),url("assets/figma-user/stack-a-4.jpg") type("image/jpeg")); transform:rotate(2.36deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
 .light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
@@ -234,7 +247,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 }
 
 .light-join { align-items:center; background:#f4f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
-.light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png"); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
+/* Photo layers use image-set(type()) with a plain url() declared first as the fallback for browsers
+   that don't parse image-set; AVIF/WebP encodes live next to their sources. */
+.light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-a.webp"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-105/join-backdrop-a.avif") type("image/avif"),url("assets/figma-105/join-backdrop-a.webp") type("image/webp"),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png") type("image/png")); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
 .light-join-card { align-items:center; background:linear-gradient(#f0efed,rgb(241 240 237 / 70%)); border:.5px solid #666460; color:#1a1a1a; display:flex; flex-direction:column; max-width:720px; padding:65.25px 33px 60.99px; position:relative; text-align:center; width:720px; }
 .light-join-card .eyebrow { color:#628aa8; }
 .light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
@@ -289,12 +304,12 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-brand { margin-right:-40px; transform:scale(.82); transform-origin:left center; }
   .light-nav { gap:10px; }
   .light-nav a { letter-spacing:.5px; }
-  .light-nav a:not(.light-nav-contact) { background:transparent; padding:7.5px 2px; }
+  .light-nav a:not(.light-nav-contact) { background:transparent; border:0; padding:7.5px 2px; }
   .light-nav-contact { padding:7.5px 12px 7.9px; }
   .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
      the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7). */
-  .light-hero-art { background-image:url("assets/figma-107/hero-group-48-mobile.jpg"); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
+  .light-hero-art { background-image:url("assets/figma-107/hero-group-48-mobile.jpg"),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBgCdASowAB4APu1irk+ppSSiKrgMATAdiWkA0u24pVQmh+5tl/VL/3Yd0cH/M/4nsSnCA6CoSAAA/vBJiLgeZWbYVMubvBJJ3dfrLt0vSX9LfUcQWKbEDbGEalVMvWRGyitSMmLgQ4j2N8ew8B4Fu7cSMHJZMU8odGioz8HltpSw8x/AP03aO02UkldzzV1tMadX7Qws1G1PToUxDbU1+K0FvssAAAA="); background-image:image-set(url("assets/figma-107/hero-group-48-mobile-1440.avif") type("image/avif"),url("assets/figma-107/hero-group-48-mobile-1440.webp") type("image/webp"),url("assets/figma-107/hero-group-48-mobile.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBgCdASowAB4APu1irk+ppSSiKrgMATAdiWkA0u24pVQmh+5tl/VL/3Yd0cH/M/4nsSnCA6CoSAAA/vBJiLgeZWbYVMubvBJJ3dfrLt0vSX9LfUcQWKbEDbGEalVMvWRGyitSMmLgQ4j2N8ew8B4Fu7cSMHJZMU8odGioz8HltpSw8x/AP03aO02UkldzzV1tMadX7Qws1G1PToUxDbU1+K0FvssAAAA="); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
   .light-hero-veil { height:84%; left:0; top:22%; width:100%; }
   .figma-frame { height:auto; max-width:none; min-height:100%; }
   /* P0-4: anchor the copy to the hero's bottom edge instead of a fixed top — a fixed top:390px
@@ -364,7 +379,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .motion-ready .light-main .card-wrap-p1.motion-card { transform:translate(-60px,-40px) scale(1.05); }
   .motion-ready .light-main .card-wrap-p2.motion-card { transform:translate(60px,-40px) scale(1.05); }
   .light-join { margin-top:0; padding:70px 20px; }
-  .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-mobile.jpg"); }
+  .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-mobile.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-105/join-backdrop-mobile-1080.avif") type("image/avif"),url("assets/figma-105/join-backdrop-mobile-1080.webp") type("image/webp"),url("assets/figma-105/join-backdrop-mobile.jpg") type("image/jpeg")); }
   .light-join-card { padding:52px 24px; width:100%; }
   .light-join-card .join-actions { flex-direction:column; width:100%; }
   .light-join-card .button { width:100%; }
@@ -390,7 +405,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
   .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); font-weight:700; gap:10.02px; letter-spacing:0; line-height:.833; margin-bottom:3.66px; }
   .footer-brand-icon { height:18.64px; width:21.51px; }
-  .footer-main { border-bottom:.5px solid rgb(255 255 255 / 50%); padding-top:70px; }
+  /* The divider lives on the full-width .footer-bottom (base rule), not on the 1072px-capped
+     .footer-main, so it always runs edge to edge regardless of viewport width. */
+  .footer-main { padding-top:70px; }
   .footer-main nav { padding-top:2px; }
   .footer-email { min-height:0; padding-top:0; }
   .footer-bottom span:last-child { gap:20px; }
@@ -404,7 +421,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .footer-main p { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
   .footer-email { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
   .footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-bottom { border-top:0; font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-bottom { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
 }
 
 html[data-variant="dark"] { --paper:#000; --ink:#fff; --warm:#a89f92; --footer:#1a1a1a; color-scheme:dark; }
@@ -441,8 +458,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 }
 
 @media (min-width:768px) and (max-width:1199px) {
-  .footer-main { padding-left:28px; padding-right:28px; }
-  .footer-bottom { padding-left:28px; padding-right:28px; }
+  /* Footer keeps the header's 72px band at these widths (rule above); nothing to narrow. */
 }
 
 @media (max-width:767.98px) {
@@ -526,4 +542,46 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 /* Reduced motion on mobile: stop the flipbook loop on the final, complete frame. */
 @media (prefers-reduced-motion:reduce) and (max-width:767px) {
   .card-wrap-a1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
+}
+
+/* A/B test (variant B, the default on load) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids
+   1:196/1:218/1:222/1:239. Teal palette + hero/join background art from that file; type/spacing
+   untouched except the belief card placement block further down. Scoped to [data-ab-variant="b"],
+   toggled by #variant-toggle (see the classic <script> near the top of </body> — that button
+   intentionally does NOT touch html[data-variant] anymore). The belief-p2 photo is swapped in
+   that same script via img.src (it sits inside a <picture>, so CSS content:url() is unreliable).
+   join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
+   frame bakes the card into the photo and shows through the translucent real card as a ghost. */
+html[data-ab-variant="b"] .light-hero h1 em { color:#5c8982; }
+html[data-ab-variant="b"] .light-btn-dark { background:#58a69a; border-color:#a3bcb8; }
+html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
+html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
+html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#a3bcb8; }
+html[data-ab-variant="b"] .light-join-card .eyebrow { color:#719791; }
+html[data-ab-variant="b"] .light-join-card .button-blue { background:linear-gradient(#63a79c,#86a29d); }
+/* B hero art. Desktop-only so it cannot beat the mobile rule above (it has higher specificity);
+   mobile B gets its own 1440w encode right below. */
+@media (min-width:768px) {
+  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); background-image:image-set(url("assets/figma-b-test/hero-art-1920.avif") type("image/avif"),url("assets/figma-b-test/hero-art-1920.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+}
+@media (max-width:767.98px) {
+  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+}
+/* ≥1.5dppx desktop screens get the full 2752w encodes (the 1920w set would be upscaled ~1.6× on a
+   2× 1440px display and soften the line work). Mirrors the preload media queries in <head>. */
+@media (min-width:768px) and (min-resolution:1.5dppx) {
+  .light-hero-art { background-image:image-set(url("assets/figma-107/hero-group-48-2752.avif") type("image/avif"),url("assets/figma-107/hero-group-48-2752.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); }
+  html[data-ab-variant="b"] .light-hero-art { background-image:image-set(url("assets/figma-b-test/hero-art-2752.avif") type("image/avif"),url("assets/figma-b-test/hero-art-2752.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+}
+html[data-ab-variant="b"] .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-b-test/join-backdrop.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-b-test/join-backdrop-1440.avif") type("image/avif"),url("assets/figma-b-test/join-backdrop-1440.webp") type("image/webp"),url("assets/figma-b-test/join-backdrop.jpg") type("image/jpeg")); }
+/* B-test Figma frame (tFncbEkPEyRqS4h7Su8ODE, node 1:218): p2 keeps variant A's card size but sits
+   at a different position; p1 is at a shallower tilt and shifted (card photo size unchanged for
+   both). Figma's `rotation` is counter-clockwise-positive and CSS rotate() is clockwise-positive, so
+   the CSS angle is the NEGATED Figma value: p1 -3.27 -> rotate(3.27deg), p2 +7.02 -> rotate(-7.02deg)
+   (verified against node renders: p2's right edge sits higher, p1's lower). Desktop only. */
+@media (min-width:768px) {
+  html[data-ab-variant="b"] .card-wrap-p1 { height:min(24.32vw,38.911vh); left:calc(50% - min(29.243vw,46.788vh)); top:calc(50% - min(15.313vw,24.501vh)); width:min(23.613vw,37.782vh); }
+  html[data-ab-variant="b"] .card-wrap-p1 .polaroid-card { transform:rotate(3.27deg); }
+  html[data-ab-variant="b"] .card-wrap-p2 { left:calc(50% - min(7.431vw,11.889vh)); top:calc(50% - min(20.694vw,33.111vh)); }
+  html[data-ab-variant="b"] .card-wrap-p2 .polaroid-card { transform:rotate(-7.02deg); }
 }

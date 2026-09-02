@@ -21,9 +21,14 @@ PORT=3002 node .claude/serve-official-website.js
   真正的 B 版本。旧版相关 CSS(`html[data-variant="dark"]` 开头的一大段颜色/变量覆盖)也**勿动**,
   它们现在虽是死代码但不产生任何效果。
 - **A/B 测试入口**(2026-09-02 起):header 左上角那个隐藏的 `#variant-toggle` 按钮
-  (双击触发)现在只切换 `root.dataset.abVariant`('a'/'b'),不挂任何 CSS,是留给以后接
-  真正 B 版本的占位开关。`html[data-variant]` 属性永久固定为 `"light"`,不要让这个入口再去
-  改它。
+  (双击触发)切换 `root.dataset.abVariant`('a'/'b')。**页面加载默认是 B**(脚本里
+  `setAbVariant('b')`),双击切回 A。B 版 = 青绿色系测试(Figma `tFncbEkPEyRqS4h7Su8ODE`):
+  `styles.css` 末尾一段 `html[data-ab-variant="b"]` 规则(配色、hero/join 背景图、belief 两张
+  卡片的位置角度),外加 `assets/figma-b-test/` 里的三张图。belief-p2 那张因为在 `<picture>`
+  里,不能用 CSS `content:url()` 换,是 `setAbVariant` 里直接改 `img.src`。
+  `html[data-variant]` 属性永久固定为 `"light"`,不要让这个入口再去改它。
+- 本地开发服务器对所有响应发 `Cache-Control: no-store`(2026-09-02 加),改完直接刷新即可,
+  不需要再手动改 `styles.css?rev=` 版本号。改了 `serve-official-website.js` 本身要重启进程。
 
 ## 动效架构(重要,改之前先读完)
 所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):
@@ -69,9 +74,22 @@ PORT=3002 node .claude/serve-official-website.js
   要用新字重,先把它加进 `<head>` 里 fonts.googleapis 的请求参数,否则浏览器拿不到。
 - belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
 
+## 图片资源(2026-09-02 起)
+- 页面里的照片类资源一律 **AVIF + WebP**,CSS 背景用 `image-set(url() type(), …)`(前面先写一条
+  普通 `url()` 兜底),`<img>` 用 `<picture><source type>`。桌面头图分 1920w(1x)/ 2752w
+  (≥1.5dppx,`@media (min-resolution:1.5dppx)`)两档,移动端 1440w;`<head>` 里的头图 preload
+  必须和 CSS 的 media/尺寸拆分**一一对应**,且指向默认变体(B),否则会重复下载。
+- 头图底层还叠了一张内联的 48px WebP(LQIP,base64 在 CSS 里),大图到之前先有画面。
+- **换图/加图流程**:把源图放到原位置 → 在 `.claude/encode-images.py` 的 `JOBS` 里登记 →
+  `python3 .claude/encode-images.py` 重出全部格式 → 引用新文件名。不要再直接引用几 MB 的
+  PNG(原 `hero-group-48.png` 6.4MB 就是线上首屏慢的原因;它已换成无损 WebP 母版
+  `hero-group-48.webp`,仅作编码源,页面不引用)。
+- belief-p2 在 A/B 间切换:`<picture>` 里每个 `<source>`/`<img>` 带 `data-a`/`data-b`,
+  `setAbVariant()` 逐个换 `srcset`/`src`;初始值写 B(默认),避免预加载扫描器先抓 A。
+
 ## 验收标准(每个改动都要过)
 1. 在 3002 端口实际滚一遍:入场、滚动 scrub(正向+反向)、离场都正常;
 2. 浏览器控制台无报错;
-3. 没有恢复 `dark-main` 的显示逻辑,`#variant-toggle` 切换后页面观感/滚动动效不变
-   (除非你正在实现真正的 B 版本);
+3. 没有恢复 `dark-main` 的显示逻辑;A/B 两态都滚一遍,滚动动效一致,B 态的图片/配色/卡片位置
+   只通过 `html[data-ab-variant="b"]` 规则生效;
 4. git 小步提交在 `feat/website-local`,提交信息说清楚改了哪个区块的什么。
