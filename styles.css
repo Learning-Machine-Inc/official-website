@@ -157,8 +157,7 @@ html[data-variant="light"] .site-header .menu-btn,
 html[data-variant="light"] .site-header .mobile-menu { display:none; }
 html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-events:auto; width:44px; }
 
-.figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1440px; position:relative; z-index:2; }
-.light-hero .figma-frame,.light-approach .figma-frame { max-width:none; }
+.figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1300px; position:relative; z-index:2; }
 
 .light-main { position:relative; }
 .light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
@@ -201,7 +200,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-p2 .polaroid-card { height:min(27.91vw,44.656vh); transform:rotate(7.02deg); width:min(34.756vw,55.61vh); }
 
 .light-approach { background:#f4f0ed; height:calc(100vh + 1600px); margin-top:400px; position:relative; }
-.light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:4000px; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
+.light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:50%; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
 .light-approach h2 .h2-muted { color:#cec4b6; }
@@ -323,7 +322,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-approach .approach-stage { height:auto; inset:auto; position:static; }
   /* In flow (relative), a leftover left:32px shifts the box and widens the document — side
      spacing must come from margin instead. */
-  .light-approach-heading { left:auto; margin:0 32px; padding:0; position:relative; top:auto; width:auto; }
+  .light-approach-heading { left:auto; margin:0 32px; max-width:none; padding:0; position:relative; top:auto; width:auto; }
   .light-approach h2 { font-size:26px; line-height:1.15; }
   .light-approach-heading .eyebrow { font-size:14px; letter-spacing:1.68px; line-height:1.4; }
   .eyebrow { font-size:14px; }
