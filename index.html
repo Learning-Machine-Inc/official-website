@@ -25,11 +25,11 @@
   <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin media="(min-width:768px)">
-  <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v34">
+  <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v35">
 </head>
 <body>
   <header class="site-header" id="header">
-    <button id="variant-toggle" class="variant-toggle" type="button" aria-label="Switch to dark version" aria-pressed="false"></button>
+    <button id="variant-toggle" class="variant-toggle" type="button" aria-label="Switch to variant A" aria-pressed="true"></button>
     <a href="#home" class="brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
     <nav class="desktop-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
@@ -91,7 +91,7 @@
     <section id="approach-dark" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
     <section id="join-dark" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip-dark" aria-describedby="role-tooltip-dark" aria-expanded="false">See open roles</button><div id="role-tooltip-dark" class="role-tooltip" role="status">Coming soon | <a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self-recommendation</a></div></div><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div></div></section>
   </main>
-  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#">Research</a><a href="#">Team</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><span><a href="#home">Privacy</a><a href="#home">Terms</a></span></div></footer>
+  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span></div></footer>
   <script>
     const root = document.documentElement;
     const variantToggle = document.querySelector('#variant-toggle');
@@ -114,8 +114,20 @@
     // run normally. Do NOT wire this back to dataset.variant: the retired legacy dark-main site's
     // CSS still keys off `[data-variant="dark"]` in several places (colors, shared header, footer
     // variables), and re-triggering it would show that old design instead of a real variant B.
-    const setAbVariant = (variant) => { const isB = variant === 'b'; root.dataset.abVariant = isB ? 'b' : 'a'; variantToggle.setAttribute('aria-pressed', String(isB)); variantToggle.setAttribute('aria-label', isB ? 'Switch to variant A' : 'Switch to variant B'); };
+    const beliefP2Img = document.querySelector('.card-wrap-p2 img');
+    const BELIEF_P2_SRC = { a: 'assets/figma-user/belief-p2.png', b: 'assets/figma-b-test/belief-p2.jpg' };
+    const setAbVariant = (variant) => {
+      const isB = variant === 'b';
+      root.dataset.abVariant = isB ? 'b' : 'a';
+      variantToggle.setAttribute('aria-pressed', String(isB));
+      variantToggle.setAttribute('aria-label', isB ? 'Switch to variant A' : 'Switch to variant B');
+      // Swapped via JS `src`, not a CSS `content:url()` override — this element sits inside a
+      // <picture> with a mobile <source>, and content-replacement on an <img> there is unreliable
+      // across browsers once a <source> has already resolved the rendered resource.
+      if (beliefP2Img) beliefP2Img.src = isB ? BELIEF_P2_SRC.b : BELIEF_P2_SRC.a;
+    };
     const toggleAbVariant = () => setAbVariant(root.dataset.abVariant === 'b' ? 'a' : 'b');
+    setAbVariant('b'); // default entry point, per current A/B test — toggle still switches back to A
     variantToggle.addEventListener('dblclick', toggleAbVariant);
     variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleAbVariant(); } });
     menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; mobileMenu.hidden = open; menuButton.setAttribute('aria-expanded', String(!open)); menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
@@ -406,12 +418,17 @@
             // same rendered line share identical transforms, so the whole line moves as a block.
             // Split into per-letter spans on an inner layer FIRST: the word wrapper owns the
             // timed entrance (rise + fade to 1), while each letter holds the scroll-driven ink
-            // level (30% pale → 100%). Splitting subtly changes word widths (kerning/ligatures
+            // level (pale → 100%). Splitting subtly changes word widths (kerning/ligatures
             // break at span boundaries), which can move a wrap point — so line grouping must be
             // measured AFTER the split, on the final layout.
+            // Variant B's belief-copy color (#476b67, per Figma) is lighter/less saturated than
+            // variant A's navy (#242e6f) — the same sweep reads as barely-there against it, so B
+            // starts from a paler base (0.12 vs 0.3) to keep the same felt contrast without
+            // touching the Figma-exact resting color.
+            const inkBase = () => root.dataset.abVariant === 'b' ? 0.12 : 0.3;
             beliefWords.forEach(w => {
               w.style.animation = 'none'; w.style.transition = 'none'; w.style.opacity = '0'; w.style.transform = 'translateY(46px)';
-              const chars = [...w.textContent].map(ch => { const s = document.createElement('span'); s.textContent = ch; s.style.opacity = '0.3'; return s; });
+              const chars = [...w.textContent].map(ch => { const s = document.createElement('span'); s.textContent = ch; s.style.opacity = String(inkBase()); return s; });
               w.replaceChildren(...chars);
               beliefChars.push(...chars);
             });
@@ -425,7 +442,7 @@
             });
             beliefLineCount = lineTops.length || 1;
             beliefCopy.style.transition = 'none'; beliefCopy.style.opacity = '1'; beliefCopy.style.transform = 'none';
-            // Auto ink sweep: letters darken 30% → 100% in reading order, a ~20-letter blend
+            // Auto ink sweep: letters darken base → 100% in reading order, a ~20-letter blend
             // band sliding across the paragraph over ~4.5s of ACCUMULATED VISIBLE time. It only
             // runs while the paragraph is at least half on screen (IntersectionObserver) and
             // pauses/resumes across exits, fast fling-throughs, and hidden tabs (frame-delta
@@ -438,8 +455,9 @@
               inkProgress = Math.min(1, inkProgress + Math.min(now - inkLast, 100) / INK_DURATION);
               inkLast = now;
               const sweepPos = inkProgress * (nC - 1 + FADE_WIDTH);
+              const base = inkBase();
               beliefChars.forEach((c, i) => {
-                c.style.opacity = (0.3 + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * 0.7).toFixed(3);
+                c.style.opacity = (base + smooth(clamp01((sweepPos - i) / FADE_WIDTH)) * (1 - base)).toFixed(3);
               });
               inkRaf = inkProgress < 1 ? requestAnimationFrame(inkTick) : 0;
             };

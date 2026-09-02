@@ -127,8 +127,10 @@ h1,h2,h3,.vision-copy { font-family:Georgia,"Times New Roman",serif; font-weight
 .role-tooltip-wrap[data-open="true"] .role-tooltip { opacity:1; pointer-events:auto; transform:translate(-50%,0); visibility:visible; }
 .role-tooltip-email { color:#d3e1ff; text-decoration:underline; text-underline-offset:2px; }
 
-footer { background:var(--footer); color:#b3aa9c; height:406px; }
-.footer-main { display:grid; gap:60px; grid-template-columns:1.4fr 1fr; height:336px; margin:0 auto; max-width:1072px; padding:72px 0 64px; }
+footer { background:var(--footer); color:#b3aa9c; height:386px; }
+/* Footer content sits in the same centered 1456px band as the header (72px inset at 1440, growing
+   past 1600), so the brand / Explore / © all share the page's content left edge. */
+.footer-main { display:grid; gap:60px; grid-template-columns:1.4fr 1fr; height:316px; padding:72px max(72px, calc(50% - 728px)) 44px; }
 .footer-main > div:first-child { display:flex; flex-direction:column; gap:21.6px; }
 .footer-brand { align-items:center; color:#fff; display:flex; font-family:Georgia,serif; font-size:22px; font-weight:700; gap:12px; letter-spacing:-.44px; line-height:35.2px; text-decoration:none; }
 .footer-brand-icon { height:24px; width:auto; }
@@ -136,10 +138,12 @@ footer { background:var(--footer); color:#b3aa9c; height:406px; }
 .footer-email { align-items:center; align-self:flex-start; display:inline-flex; font-size:16px; gap:12px; line-height:25.6px; min-height:44.4px; padding-top:4.4px; text-decoration:none; }
 .footer-email-icon-wrap { align-items:center; border:1px solid #383229; display:flex; height:40px; justify-content:center; width:40px; }
 .footer-email-icon { height:16px; width:16px; }
-.footer-main nav { align-content:start; display:grid; gap:10px; grid-template-columns:repeat(2,minmax(90px,1fr)); }
-.footer-main nav p { color:#fff; font-family:Georgia,serif; font-size:16px; grid-column:1 / -1; line-height:25.6px; margin-bottom:6px; }
+/* Links flow in one row and wrap to a column only when the cell gets too narrow. */
+.footer-main nav { align-content:start; align-items:start; display:flex; flex-wrap:wrap; gap:10px 30px; }
+.footer-main nav p { color:#fff; flex:0 0 100%; font-family:Georgia,serif; font-size:16px; line-height:25.6px; margin-bottom:6px; max-width:none; }
 .footer-main nav a { font-size:14px; line-height:22.4px; text-decoration:none; }
-.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px 184px 24px; }
+/* Same content band as .footer-main / .light-header; the border-top itself stays full-bleed. */
+.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px max(72px, calc(50% - 728px)) 24px; }
 .footer-bottom span:last-child { display:flex; gap:24px; }
 .footer-bottom a { text-decoration:none; }
 
@@ -162,11 +166,16 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1600px; position:relative; z-index:2; }
 
 .light-main { position:relative; }
-.light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; margin:0 auto; max-width:4000px; padding:0 72px; position:fixed; right:0; top:0; z-index:5; }
+/* The bar itself stays full-bleed (its cream background must always span the page); only the
+   content is capped — side padding grows once the viewport passes 1600px so brand + nav stay
+   within a centered 1456px (= 1600 − 2×72) band, matching .figma-frame's max-width. */
+.light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; padding:0 max(72px, calc(50% - 728px)); position:fixed; right:0; top:0; z-index:5; }
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .light-nav { align-items:center; display:flex; gap:30px; }
 .light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
-.light-nav a:not(.light-nav-contact) { background:rgb(255 255 255 / 80%); border-radius:5px; padding:7.5px 20px 7.9px; }
+/* Careers pill — Figma tFncbEkPEyRqS4h7Su8ODE node 1:214, shared by variants A and B. Figma's 1px
+   stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
+.light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
 .light-hero { background:#f4f0ed; height:100vh; min-height:761px; position:relative; }
 .light-hero-art { background:url("assets/figma-107/hero-group-48.png") center / cover no-repeat; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
@@ -289,7 +298,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-brand { margin-right:-40px; transform:scale(.82); transform-origin:left center; }
   .light-nav { gap:10px; }
   .light-nav a { letter-spacing:.5px; }
-  .light-nav a:not(.light-nav-contact) { background:transparent; padding:7.5px 2px; }
+  .light-nav a:not(.light-nav-contact) { background:transparent; border:0; padding:7.5px 2px; }
   .light-nav-contact { padding:7.5px 12px 7.9px; }
   .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
@@ -390,7 +399,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
   .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); font-weight:700; gap:10.02px; letter-spacing:0; line-height:.833; margin-bottom:3.66px; }
   .footer-brand-icon { height:18.64px; width:21.51px; }
-  .footer-main { border-bottom:.5px solid rgb(255 255 255 / 50%); padding-top:70px; }
+  /* The divider lives on the full-width .footer-bottom (base rule), not on the 1072px-capped
+     .footer-main, so it always runs edge to edge regardless of viewport width. */
+  .footer-main { padding-top:70px; }
   .footer-main nav { padding-top:2px; }
   .footer-email { min-height:0; padding-top:0; }
   .footer-bottom span:last-child { gap:20px; }
@@ -404,7 +415,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .footer-main p { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
   .footer-email { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
   .footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-bottom { border-top:0; font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .footer-bottom { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
 }
 
 html[data-variant="dark"] { --paper:#000; --ink:#fff; --warm:#a89f92; --footer:#1a1a1a; color-scheme:dark; }
@@ -441,8 +452,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 }
 
 @media (min-width:768px) and (max-width:1199px) {
-  .footer-main { padding-left:28px; padding-right:28px; }
-  .footer-bottom { padding-left:28px; padding-right:28px; }
+  /* Footer keeps the header's 72px band at these widths (rule above); nothing to narrow. */
 }
 
 @media (max-width:767.98px) {
@@ -528,15 +538,31 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .card-wrap-a1 .stack-card { animation:none; background-image:url("assets/figma-user/stack-a-4-mobile.jpg"); }
 }
 
-/* A/B color test (variant B) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids 1:196/1:218/1:222/1:239.
-   Colors only, extracted from that file — layout/type/spacing untouched. Scoped to
-   [data-ab-variant="b"], toggled by #variant-toggle (see the classic <script> near the top
-   of </body> — that button intentionally does NOT touch html[data-variant] anymore). */
+/* A/B test (variant B, the default on load) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids
+   1:196/1:218/1:222/1:239. Teal palette + hero/join background art from that file; type/spacing
+   untouched except the belief card placement block further down. Scoped to [data-ab-variant="b"],
+   toggled by #variant-toggle (see the classic <script> near the top of </body> — that button
+   intentionally does NOT touch html[data-variant] anymore). The belief-p2 photo is swapped in
+   that same script via img.src (it sits inside a <picture>, so CSS content:url() is unreliable).
+   join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
+   frame bakes the card into the photo and shows through the translucent real card as a ghost. */
 html[data-ab-variant="b"] .light-hero h1 em { color:#5c8982; }
-html[data-ab-variant="b"] .light-btn-dark { background:#58a69a; border-color:#89cdc1; }
-html[data-ab-variant="b"] .light-nav a { color:#083733; }
+html[data-ab-variant="b"] .light-btn-dark { background:#58a69a; border-color:#a3bcb8; }
 html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
 html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
-html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#88b8b0; }
+html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#a3bcb8; }
 html[data-ab-variant="b"] .light-join-card .eyebrow { color:#719791; }
 html[data-ab-variant="b"] .light-join-card .button-blue { background:linear-gradient(#63a79c,#86a29d); }
+html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"); }
+html[data-ab-variant="b"] .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-b-test/join-backdrop.jpg"); }
+/* B-test Figma frame (tFncbEkPEyRqS4h7Su8ODE, node 1:218): p2 keeps variant A's card size but sits
+   at a different position; p1 is at a shallower tilt and shifted (card photo size unchanged for
+   both). Figma's `rotation` is counter-clockwise-positive and CSS rotate() is clockwise-positive, so
+   the CSS angle is the NEGATED Figma value: p1 -3.27 -> rotate(3.27deg), p2 +7.02 -> rotate(-7.02deg)
+   (verified against node renders: p2's right edge sits higher, p1's lower). Desktop only. */
+@media (min-width:768px) {
+  html[data-ab-variant="b"] .card-wrap-p1 { height:min(24.32vw,38.911vh); left:calc(50% - min(29.243vw,46.788vh)); top:calc(50% - min(15.313vw,24.501vh)); width:min(23.613vw,37.782vh); }
+  html[data-ab-variant="b"] .card-wrap-p1 .polaroid-card { transform:rotate(3.27deg); }
+  html[data-ab-variant="b"] .card-wrap-p2 { left:calc(50% - min(7.431vw,11.889vh)); top:calc(50% - min(20.694vw,33.111vh)); }
+  html[data-ab-variant="b"] .card-wrap-p2 .polaroid-card { transform:rotate(-7.02deg); }
+}

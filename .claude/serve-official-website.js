@@ -23,6 +23,9 @@ http.createServer((request, response) => {
   fs.readFile(file, (error, data) => {
     if (error) return response.writeHead(404).end('not found');
     response.setHeader('Content-Type', TYPES[path.extname(file)] || 'application/octet-stream');
+    // Local dev only: never let the browser cache anything here, so an edit always shows up on
+    // the next reload without needing a manual cache-busting query bump or a hard refresh.
+    response.setHeader('Cache-Control', 'no-store');
     response.end(path.extname(file) === '.html' ? data.toString().replace('</body>', '<script>new EventSource("/__livereload").onmessage=()=>location.reload()</script></body>') : data);
   });
 }).listen(PORT, () => console.log(`official website live reload: http://127.0.0.1:${PORT}`));
