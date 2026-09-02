@@ -180,9 +180,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
 .light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Inter",sans-serif; font-size:15px; font-weight:500; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
-.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f4f0ed; gap:7.99px; width:204px; }
-.light-btn-dark img { height:17px; width:17px; }
-.light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; width:109px; }
+.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f4f0ed; gap:7.99px; min-width:204px; }
+.light-btn-dark img { flex-shrink:0; height:17px; width:17px; }
+.light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; min-width:109px; }
 
 .light-belief { background:#f4f0ed; height:735px; margin-top:0; overflow:hidden; position:relative; }
 @media (min-width:768px) {
