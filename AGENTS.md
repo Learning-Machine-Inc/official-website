@@ -27,8 +27,12 @@ PORT=3002 node .claude/serve-official-website.js
   卡片的位置角度),外加 `assets/figma-b-test/` 里的三张图。belief-p2 那张因为在 `<picture>`
   里,不能用 CSS `content:url()` 换,是 `setAbVariant` 里直接改 `img.src`。
   `html[data-variant]` 属性永久固定为 `"light"`,不要让这个入口再去改它。
-- 本地开发服务器对所有响应发 `Cache-Control: no-store`(2026-09-02 加),改完直接刷新即可,
-  不需要再手动改 `styles.css?rev=` 版本号。改了 `serve-official-website.js` 本身要重启进程。
+- 本地开发服务器对所有响应发 `Cache-Control: no-store`(2026-09-02 加),本地改完直接刷新即可。
+  改了 `serve-official-website.js` 本身要重启进程。
+- **线上(GitHub Pages)有 10 分钟 CDN/浏览器缓存**(`Cache-Control: max-age=600`),而且
+  `styles.css` 的 URL 不变就可能一直命中旧缓存。**每次合并含 styles.css 改动的 PR 前,把
+  `index.html` 里 `styles.css?rev=…-vNN` 的版本号 +1**,否则用户刷新线上看不到新样式
+  (2026-09-03 的按钮配色就是这样"没生效")。
 
 ## 动效架构(重要,改之前先读完)
 所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):
