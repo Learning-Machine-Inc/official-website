@@ -221,14 +221,18 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-approach h2 .h2-muted { color:#cec4b6; }
 .stack { inset:0; position:absolute; }
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
-.stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:56.524vh; width:54.096vh; }
-.card-wrap-a1 { height:61.215vh; left:calc(50% + 86px - 3.849vh); top:209.54px; width:59.018vh; }
+/* Stack geometry comes from the 1440×900 canvas in vh; every length is also capped by its vw
+   equivalent (1vh = 0.625vw, 1px = 1/14.4vw at that canvas) so the whole stack scales down together
+   on narrow-but-tall viewports (iPad, portrait windows) instead of overflowing the right edge.
+   At 1440×900 both terms are equal, so the reference layout is unchanged. */
+.stack-card { background:#fdf9f7 center / cover no-repeat; border-radius:3px; box-shadow:0 0 48px rgb(0 0 0 / 10%); flex-shrink:0; height:min(56.524vh,35.328vw); width:min(54.096vh,33.81vw); }
+.card-wrap-a1 { height:min(61.215vh,38.259vw); left:calc(50% + min(86px,5.972vw) - min(3.849vh,2.406vw)); top:209.54px; width:min(59.018vh,36.886vw); }
 .card-wrap-a1 .stack-card { background-image:url("assets/figma-user/stack-a-1.jpg"); background-image:image-set(url("assets/figma-user/stack-a-1.avif") type("image/avif"),url("assets/figma-user/stack-a-1.webp") type("image/webp"),url("assets/figma-user/stack-a-1.jpg") type("image/jpeg")); transform:rotate(-5.22deg); }
-.card-wrap-a2 { height:58.174vh; left:calc(50% + 105px - 3.641vh); top:228.54px; width:55.822vh; }
+.card-wrap-a2 { height:min(58.174vh,36.359vw); left:calc(50% + min(105px,7.292vw) - min(3.641vh,2.276vw)); top:228.54px; width:min(55.822vh,34.889vw); }
 .card-wrap-a2 .stack-card { background-image:url("assets/figma-user/stack-a-2.jpg"); background-image:image-set(url("assets/figma-user/stack-a-2.avif") type("image/avif"),url("assets/figma-user/stack-a-2.webp") type("image/webp"),url("assets/figma-user/stack-a-2.jpg") type("image/jpeg")); transform:rotate(1.78deg); }
-.card-wrap-a3 { height:57.495vh; left:calc(50% + 101px - 3.594vh); top:233.54px; width:55.111vh; }
+.card-wrap-a3 { height:min(57.495vh,35.934vw); left:calc(50% + min(101px,7.014vw) - min(3.594vh,2.246vw)); top:233.54px; width:min(55.111vh,34.444vw); }
 .card-wrap-a3 .stack-card { background-image:url("assets/figma-user/stack-a-3.jpg"); background-image:image-set(url("assets/figma-user/stack-a-3.avif") type("image/avif"),url("assets/figma-user/stack-a-3.webp") type("image/webp"),url("assets/figma-user/stack-a-3.jpg") type("image/jpeg")); transform:rotate(-1.04deg); }
-.card-wrap-a4 { height:58.699vh; left:calc(50% + 96px - 3.677vh); top:233.54px; width:56.374vh; }
+.card-wrap-a4 { height:min(58.699vh,36.687vw); left:calc(50% + min(96px,6.667vw) - min(3.677vh,2.298vw)); top:233.54px; width:min(56.374vh,35.234vw); }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); background-image:image-set(url("assets/figma-user/stack-a-4.avif") type("image/avif"),url("assets/figma-user/stack-a-4.webp") type("image/webp"),url("assets/figma-user/stack-a-4.jpg") type("image/jpeg")); transform:rotate(2.36deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
