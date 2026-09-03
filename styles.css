@@ -423,7 +423,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .footer-main nav { padding-top:2px; }
   .footer-email { min-height:0; padding-top:0; }
   .footer-bottom span:last-child { gap:20px; }
-  .light-approach-heading .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:14px; letter-spacing:2.4px; line-height:22px; }
+  /* Eyebrow tracks the inference h3 (same clamp/5vh expression) at 0.53×, capped at the 14px Figma
+     value: its uppercase, letter-spaced line is then never wider than "Learning at inference"
+     (measured: 0.55 lands within 1px of equal). Spacing/leading are em-based so they scale with it
+     (2.4px / 22px at 14px). */
+  .light-approach-heading .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:min(14px, calc(.53 * min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh))); letter-spacing:.1714em; line-height:1.5714; }
   .light-join-card .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); line-height:1.222; }
   .light-join-card > p:not(.eyebrow) { color:#2e2b27; font-family:"Roboto","Inter",sans-serif; font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); font-weight:300; line-height:1.5; }
   .light-join-card { width:min(50vw, 720px); }
