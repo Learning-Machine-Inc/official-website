@@ -203,7 +203,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-belief { height:calc(100vh + 2400px); overflow:visible; }
   .belief-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
   .belief-stage .figma-frame { display:block; height:100%; }
-  .light-belief-copy { left:0; margin:0 auto; position:absolute; right:0; top:calc(50% + 202px); }
+  /* 202px below centre on the 900px canvas (= 22.44vh); on short viewports it scales with the cards
+     instead of sliding below the fold. */
+  .light-belief-copy { left:0; margin:0 auto; position:absolute; right:0; top:calc(50% + min(202px, 22.44vh)); }
 }
 .light-belief-copy { color:#242e6f; font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
 .card-wrap { align-items:center; display:flex; justify-content:center; position:absolute; }
@@ -238,15 +240,15 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); background-image:image-set(url("assets/figma-user/stack-a-4.avif") type("image/avif"),url("assets/figma-user/stack-a-4.webp") type("image/webp"),url("assets/figma-user/stack-a-4.jpg") type("image/jpeg")); transform:rotate(2.36deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
-/* Copy must end before the card stack's left edge (53.57vw when vw-scaled) minus a 24px gap;
-   584px wins at the 1440 canvas and wider. */
-.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:min(584px, calc(53.5vw - 96px)); }
+.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
 
 @media (min-width:768px) {
   .light-approach .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
   .light-approach .figma-frame { display:block; }
   .light-approach-heading { top:calc(17vh + 2px); }
-  .approach-stage .light-inference { bottom:min(100px, 11.1vh); height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
+  /* Shrink-to-fit block capped just left of the card stack (53.57vw − 24px gap, incl. the 72px side
+     padding); the h3 never wraps, so the copy below is always at least as wide as the heading. */
+  .approach-stage .light-inference { bottom:min(100px, 11.1vh); height:auto; justify-content:flex-start; left:0; max-width:min(728px, calc(53.5vw - 24px)); opacity:0; position:absolute; top:auto; width:auto; will-change:transform,opacity; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
   .card-wrap-a1 { top:calc(50vh - 30.847vh); }
   .card-wrap-a2 { top:calc(50vh - 28.538vh); }
@@ -404,15 +406,15 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   /* vh caps only bite on short viewports (<~770px tall for the h2, <700px for the h3) so the pinned
      heading and the bottom-anchored inference copy never collide; 1440×900 is unaffected. */
   .light-approach h2 { font-size:min(clamp(43.1px, calc(28.31px + 1.923vw), 61.5px), 7.5vh); letter-spacing:-1.0451px; line-height:.964; text-transform:none; }
-  .light-inference h3 { font-size:min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh); letter-spacing:0; line-height:1.5; }
+  .light-inference h3 { font-size:min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh); letter-spacing:0; line-height:1.5; white-space:nowrap; }
   .light-join-card h2 { font-size:clamp(30.3px, calc(19.23px + 1.442vw), 44px); line-height:1.2; }
-  .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:clamp(19.2px, calc(13.62px + .721vw), 26px); line-height:1.5; width:min(69.03vw, 994px); }
+  .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:min(clamp(19.2px, calc(13.62px + .721vw), 26px), 3.7vh); line-height:1.5; width:min(69.03vw, 994px); }
   .light-hero-desc { gap:10px; width:min(62.78vw, 904px); }
   .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
   .light-hero-desc .light-hero-kicker { max-width:min(48vw, 691px); }
   .light-hero-desc p:not(.light-hero-kicker) { max-width:min(47.3vw, 681px); }
   .light-hero-desc .light-hero-kicker { color:#302925; opacity:1; }
-  .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
+  .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); font-weight:300; line-height:1.5; }
   .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); font-weight:700; gap:10.02px; letter-spacing:0; line-height:.833; margin-bottom:3.66px; }
   .footer-brand-icon { height:18.64px; width:21.51px; }
   /* The divider lives on the full-width .footer-bottom (base rule), not on the 1072px-capped
