@@ -179,14 +179,16 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
 .light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
-.light-hero { background:#f4f0ed; height:100vh; min-height:761px; position:relative; }
+/* The hero is exactly one viewport tall so its copy (bottom-anchored) is always above the fold;
+   the old 761px floor pushed the description and CTAs off-screen on short windows. */
+.light-hero { background:#f4f0ed; height:100vh; min-height:400px; position:relative; }
 /* Hero art: two background layers — on top the real photo via image-set(type()) (AVIF → WebP → JPEG,
    1920w for 1x screens, 2752w for ≥1.5dppx below), underneath an inline 48px WebP LQIP so the hero
    paints immediately and the photo replaces it when it lands. The plain url() declared first is the
    fallback for browsers without image-set. Preloads in <head> mirror this split for variant B. */
 .light-hero-art { background-image:url("assets/figma-107/hero-group-48-1920.jpg"),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-image:image-set(url("assets/figma-107/hero-group-48-1920.avif") type("image/avif"),url("assets/figma-107/hero-group-48-1920.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-position:center; background-repeat:no-repeat; background-size:cover; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
 .light-hero-veil { background:linear-gradient(to top,#f4f0ed 0,#f4f0ed 70px,rgb(244 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
-.light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:50px; max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
+.light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:min(50px, 5.56vh); max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
 .light-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
 .light-hero h1 .motion-line:first-child { margin-bottom:0; }
 .light-hero h1 em { color:#4b72c1; font-style:normal; }
@@ -409,7 +411,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    · 24/32 body · 14/22 caption. SIZES ONLY: typefaces, colours and weights are set once in the base
    rules above and shared with the mobile scale in the max-width block. */
 @media (min-width:768px) {
-  .light-hero h1 { font-size:clamp(70.2px, calc(40.62px + 3.846vw), 107px); line-height:.896; }
+  /* 13vh / 3.1vh caps only bite below ~740px tall so the whole copy block fits a short window. */
+  .light-hero h1 { font-size:min(clamp(70.2px, calc(40.62px + 3.846vw), 107px), 13vh); line-height:.896; }
   /* vh caps only bite on short viewports (<~770px tall for the h2, <700px for the h3) so the pinned
      heading and the bottom-anchored inference copy never collide; 1440×900 is unaffected. */
   .light-approach h2 { font-size:min(clamp(43.1px, calc(28.31px + 1.923vw), 61.5px), 7.5vh); letter-spacing:-1.0451px; line-height:.964; }
@@ -417,7 +420,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-join-card h2 { font-size:clamp(30.3px, calc(19.23px + 1.442vw), 44px); line-height:1.2; }
   .light-belief-copy { font-size:min(clamp(19.2px, calc(13.62px + .721vw), 26px), 3.7vh); line-height:1.5; width:min(69.03vw, 994px); }
   .light-hero-desc { gap:10px; width:min(62.78vw, 904px); }
-  .light-hero-desc p { font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); line-height:1.5; }
+  .light-hero-desc p { font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); line-height:1.5; }
   .light-hero-desc .light-hero-kicker { max-width:min(48vw, 691px); }
   .light-hero-desc p:not(.light-hero-kicker) { max-width:min(47.3vw, 681px); }
   .light-inference p { font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); line-height:1.5; }
@@ -574,8 +577,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
    that same script via img.src (it sits inside a <picture>, so CSS content:url() is unreliable).
    join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
    frame bakes the card into the photo and shows through the translucent real card as a ghost. */
-html[data-ab-variant="b"] .light-hero h1 em { color:#5c8982; }
-html[data-ab-variant="b"] .light-btn-dark { background:#58a69a; border-color:#a3bcb8; }
+html[data-ab-variant="b"] .light-hero h1 em { color:#008f7f; }
+html[data-ab-variant="b"] .light-btn-dark { background:#3bb4a2; border-color:#aaddd4; }
 html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
 html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
 html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#a3bcb8; }
@@ -584,16 +587,16 @@ html[data-ab-variant="b"] .light-join-card .button-blue { background:linear-grad
 /* B hero art. Desktop-only so it cannot beat the mobile rule above (it has higher specificity);
    mobile B gets its own 1440w encode right below. */
 @media (min-width:768px) {
-  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); background-image:image-set(url("assets/figma-b-test/hero-art-1920.avif") type("image/avif"),url("assets/figma-b-test/hero-art-1920.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBgCdASowAB4APu1krU+ppSQiKrgMATAdiWcAzU2zpVQmoFai8H4lM14FTXVUtlyeo+6zAg5HQrEwAAD+8jtXuYXeYGUapxFOCvF2baBmdgc10bgDO194aGlrr63NxZmz7fJnOmgC3vLHTiq1vk3ChjSNC1g387xMrvrA6m6A71P/0ObaK4N2oG14c0ghOSWpNkpBd1aTxqJs5kQAc2O8vjH6A9U4AAA="); background-image:image-set(url("assets/figma-b-test/hero-art-1920.avif") type("image/avif"),url("assets/figma-b-test/hero-art-1920.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBgCdASowAB4APu1krU+ppSQiKrgMATAdiWcAzU2zpVQmoFai8H4lM14FTXVUtlyeo+6zAg5HQrEwAAD+8jtXuYXeYGUapxFOCvF2baBmdgc10bgDO194aGlrr63NxZmz7fJnOmgC3vLHTiq1vk3ChjSNC1g387xMrvrA6m6A71P/0ObaK4N2oG14c0ghOSWpNkpBd1aTxqJs5kQAc2O8vjH6A9U4AAA="); }
 }
 @media (max-width:767.98px) {
-  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBgCdASowAB4APu1krU+ppSQiKrgMATAdiWcAzU2zpVQmoFai8H4lM14FTXVUtlyeo+6zAg5HQrEwAAD+8jtXuYXeYGUapxFOCvF2baBmdgc10bgDO194aGlrr63NxZmz7fJnOmgC3vLHTiq1vk3ChjSNC1g387xMrvrA6m6A71P/0ObaK4N2oG14c0ghOSWpNkpBd1aTxqJs5kQAc2O8vjH6A9U4AAA="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBgCdASowAB4APu1krU+ppSQiKrgMATAdiWcAzU2zpVQmoFai8H4lM14FTXVUtlyeo+6zAg5HQrEwAAD+8jtXuYXeYGUapxFOCvF2baBmdgc10bgDO194aGlrr63NxZmz7fJnOmgC3vLHTiq1vk3ChjSNC1g387xMrvrA6m6A71P/0ObaK4N2oG14c0ghOSWpNkpBd1aTxqJs5kQAc2O8vjH6A9U4AAA="); }
 }
 /* ≥1.5dppx desktop screens get the full 2752w encodes (the 1920w set would be upscaled ~1.6× on a
    2× 1440px display and soften the line work). Mirrors the preload media queries in <head>. */
 @media (min-width:768px) and (min-resolution:1.5dppx) {
   .light-hero-art { background-image:image-set(url("assets/figma-107/hero-group-48-2752.avif") type("image/avif"),url("assets/figma-107/hero-group-48-2752.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); }
-  html[data-ab-variant="b"] .light-hero-art { background-image:image-set(url("assets/figma-b-test/hero-art-2752.avif") type("image/avif"),url("assets/figma-b-test/hero-art-2752.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABwBQCdASowAB4APu1irk8ppSSiKrgMATAdiWkcAA66BVv7//fkJfSEQVH83EFmYEZeB1AAAP7wqU4w/2gFOGDXUIBNCukRoyvW3zm8jST1ooI5GSVg3Q+/V3HjCug0IYRNr6sLHkGDM6CcHa1FG1mWMQNU42NPl39C19KKxGUi2nX6+9sja+ycFYHnrMcqo9GQvRZUHw2b8j/WwIDSE+NRNnMhkHOdZYEcLhdfAAAAAA=="); }
+  html[data-ab-variant="b"] .light-hero-art { background-image:image-set(url("assets/figma-b-test/hero-art-2752.avif") type("image/avif"),url("assets/figma-b-test/hero-art-2752.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABQBgCdASowAB4APu1krU+ppSQiKrgMATAdiWcAzU2zpVQmoFai8H4lM14FTXVUtlyeo+6zAg5HQrEwAAD+8jtXuYXeYGUapxFOCvF2baBmdgc10bgDO194aGlrr63NxZmz7fJnOmgC3vLHTiq1vk3ChjSNC1g387xMrvrA6m6A71P/0ObaK4N2oG14c0ghOSWpNkpBd1aTxqJs5kQAc2O8vjH6A9U4AAA="); }
 }
 html[data-ab-variant="b"] .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-b-test/join-backdrop.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-b-test/join-backdrop-1440.avif") type("image/avif"),url("assets/figma-b-test/join-backdrop-1440.webp") type("image/webp"),url("assets/figma-b-test/join-backdrop.jpg") type("image/jpeg")); }
 /* B-test Figma frame (tFncbEkPEyRqS4h7Su8ODE, node 1:218): p2 keeps variant A's card size but sits
