@@ -215,7 +215,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-p2 .polaroid-card { height:min(27.91vw,44.656vh); transform:rotate(7.02deg); width:min(34.756vw,55.61vh); }
 
 .light-approach { background:#f4f0ed; height:calc(100vh + 1600px); margin-top:400px; position:relative; }
-.light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:50%; padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
+/* Heading box may extend to just left of the card stack (its left edge sits at 53.57% once the stack
+   is vw-scaled) so "not just respond" keeps to one line down to ~850px viewports. */
+.light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:calc(53.5% + 48px); padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
 .light-approach h2 .h2-muted { color:#cec4b6; }
@@ -236,13 +238,15 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); background-image:image-set(url("assets/figma-user/stack-a-4.avif") type("image/avif"),url("assets/figma-user/stack-a-4.webp") type("image/webp"),url("assets/figma-user/stack-a-4.jpg") type("image/jpeg")); transform:rotate(2.36deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
 .light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
-.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
+/* Copy must end before the card stack's left edge (53.57vw when vw-scaled) minus a 24px gap;
+   584px wins at the 1440 canvas and wider. */
+.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:min(584px, calc(53.5vw - 96px)); }
 
 @media (min-width:768px) {
   .light-approach .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
   .light-approach .figma-frame { display:block; }
   .light-approach-heading { top:calc(17vh + 2px); }
-  .approach-stage .light-inference { bottom:100px; height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
+  .approach-stage .light-inference { bottom:min(100px, 11.1vh); height:auto; justify-content:flex-start; left:0; opacity:0; position:absolute; top:auto; will-change:transform,opacity; }
   .approach-stage .card-wrap { opacity:0; will-change:transform,opacity; }
   .card-wrap-a1 { top:calc(50vh - 30.847vh); }
   .card-wrap-a2 { top:calc(50vh - 28.538vh); }
@@ -397,8 +401,10 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    96/86 display · 40/48 heading · 32/48 statement · 24/32 body · 14/22 caption */
 @media (min-width:768px) {
   .light-hero h1 { font-size:clamp(70.2px, calc(40.62px + 3.846vw), 107px); line-height:.896; }
-  .light-approach h2 { font-size:clamp(43.1px, calc(28.31px + 1.923vw), 61.5px); letter-spacing:-1.0451px; line-height:.964; text-transform:none; }
-  .light-inference h3 { font-size:clamp(25.5px, calc(18.15px + .962vw), 35px); letter-spacing:0; line-height:1.5; }
+  /* vh caps only bite on short viewports (<~770px tall for the h2, <700px for the h3) so the pinned
+     heading and the bottom-anchored inference copy never collide; 1440×900 is unaffected. */
+  .light-approach h2 { font-size:min(clamp(43.1px, calc(28.31px + 1.923vw), 61.5px), 7.5vh); letter-spacing:-1.0451px; line-height:.964; text-transform:none; }
+  .light-inference h3 { font-size:min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh); letter-spacing:0; line-height:1.5; }
   .light-join-card h2 { font-size:clamp(30.3px, calc(19.23px + 1.442vw), 44px); line-height:1.2; }
   .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:clamp(19.2px, calc(13.62px + .721vw), 26px); line-height:1.5; width:min(69.03vw, 994px); }
   .light-hero-desc { gap:10px; width:min(62.78vw, 904px); }
