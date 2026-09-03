@@ -97,7 +97,7 @@ h1,h2,h3,.vision-copy { font-family:Georgia,"Times New Roman",serif; font-weight
 .approach { background:#f7f5f4; color:#1a1a1a; height:857px; position:relative; }
 .approach-card { background:#f3f1ef; height:857px; left:2.222vw; overflow:hidden; position:absolute; top:0; width:95.556vw; }
 .approach-heading { left:6.667vw; max-width:640px; position:absolute; top:65.25px; z-index:2; }
-.eyebrow { color:#b8542e; font-family:"Inter",sans-serif; font-size:12px; font-weight:600; letter-spacing:1.68px; line-height:19.2px; text-transform:uppercase; }
+.eyebrow { color:#b8542e; font-family:"Roboto","Inter",sans-serif; font-size:12px; font-weight:600; letter-spacing:1.68px; line-height:19.2px; text-transform:uppercase; }
 .approach h2 { font-size:48px; letter-spacing:-.46px; line-height:51.52px; margin-top:14.6px; white-space:nowrap; }
 .approach h2 span { color:var(--warm); }
 .approach-stage { height:100%; inset:0; position:absolute; z-index:1; }
@@ -132,18 +132,20 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
    past 1600), so the brand / Explore / © all share the page's content left edge. */
 .footer-main { display:grid; gap:60px; grid-template-columns:1.4fr 1fr; height:316px; padding:72px max(72px, calc(50% - 728px)) 44px; }
 .footer-main > div:first-child { display:flex; flex-direction:column; gap:21.6px; }
-.footer-brand { align-items:center; color:#fff; display:flex; font-family:Georgia,serif; font-size:22px; font-weight:700; gap:12px; letter-spacing:-.44px; line-height:35.2px; text-decoration:none; }
+/* Typeface / colour / weight decisions live here in the base rules so desktop and mobile share one
+   design system; the breakpoint blocks below only change sizes, spacing and layout. */
+.footer-brand { align-items:center; color:#fff; display:flex; font-family:"Outfit",sans-serif; font-size:22px; font-weight:700; gap:12px; letter-spacing:0; line-height:35.2px; text-decoration:none; }
 .footer-brand-icon { height:24px; width:auto; }
-.footer-main p { font-size:16px; line-height:25.6px; max-width:380px; }
-.footer-email { align-items:center; align-self:flex-start; display:inline-flex; font-size:16px; gap:12px; line-height:25.6px; min-height:44.4px; padding-top:4.4px; text-decoration:none; }
+.footer-main p { font-family:"Roboto","Inter",sans-serif; font-size:16px; line-height:25.6px; max-width:380px; }
+.footer-email { align-items:center; align-self:flex-start; display:inline-flex; font-family:"Roboto","Inter",sans-serif; font-size:16px; gap:12px; line-height:25.6px; min-height:44.4px; padding-top:4.4px; text-decoration:none; }
 .footer-email-icon-wrap { align-items:center; border:1px solid #383229; display:flex; height:40px; justify-content:center; width:40px; }
 .footer-email-icon { height:16px; width:16px; }
 /* Links flow in one row and wrap to a column only when the cell gets too narrow. */
 .footer-main nav { align-content:start; align-items:start; display:flex; flex-wrap:wrap; gap:10px 30px; }
 .footer-main nav p { color:#fff; flex:0 0 100%; font-family:Georgia,serif; font-size:16px; line-height:25.6px; margin-bottom:6px; max-width:none; }
-.footer-main nav a { font-size:14px; line-height:22.4px; text-decoration:none; }
+.footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22.4px; text-decoration:none; }
 /* Same content band as .footer-main / .light-header; the border-top itself stays full-bleed. */
-.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px max(72px, calc(50% - 728px)) 24px; }
+.footer-bottom { border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-family:"Roboto","Inter",sans-serif; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:24.5px max(72px, calc(50% - 728px)) 24px; }
 .footer-bottom span:last-child { display:flex; gap:24px; }
 .footer-bottom a { text-decoration:none; }
 
@@ -172,7 +174,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; padding:0 max(72px, calc(50% - 728px)); position:fixed; right:0; top:0; z-index:5; }
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .light-nav { align-items:center; display:flex; gap:30px; }
-.light-nav a { color:#030303; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
+.light-nav a { color:#030303; font-family:"Roboto","Inter",sans-serif; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
 /* Careers pill — Figma tFncbEkPEyRqS4h7Su8ODE node 1:214, shared by variants A and B. Figma's 1px
    stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
 .light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
@@ -189,11 +191,11 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-hero h1 .motion-line:first-child { margin-bottom:0; }
 .light-hero h1 em { color:#4b72c1; font-style:normal; }
 .light-hero-desc { display:flex; flex-direction:column; padding:0 6px; width:904px; }
-.light-hero-desc p { font-family:"Inria Serif",Georgia,serif; font-size:24px; font-weight:400; line-height:32px; margin:0; }
-.light-hero-desc .light-hero-kicker { color:#242e6f; max-width:691px; opacity:.79; }
+.light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:24px; font-weight:300; line-height:32px; margin:0; }
+.light-hero-desc .light-hero-kicker { color:#302925; max-width:691px; }
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
-.light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Inter",sans-serif; font-size:15px; font-weight:500; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
+.light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Roboto","Inter",sans-serif; font-size:15px; font-weight:400; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
 .light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f4f0ed; gap:7.99px; min-width:204px; }
 .light-btn-dark img { flex-shrink:0; height:17px; width:17px; }
 .light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; min-width:109px; }
@@ -207,7 +209,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
      instead of sliding below the fold. */
   .light-belief-copy { left:0; margin:0 auto; position:absolute; right:0; top:calc(50% + min(202px, 22.44vh)); }
 }
-.light-belief-copy { color:#242e6f; font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
+.light-belief-copy { color:#242e6f; font-family:"Roboto","Inter",sans-serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
 .card-wrap { align-items:center; display:flex; justify-content:center; position:absolute; }
 .polaroid-card { border:.5px solid #bbb; border-radius:5px; box-shadow:0 4px 44px rgb(0 0 0 / 8%); flex-shrink:0; overflow:hidden; position:relative; }
 .polaroid-card img { height:100%; object-fit:cover; object-position:bottom; position:absolute; width:100%; }
@@ -221,7 +223,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    is vw-scaled) so "not just respond" keeps to one line down to ~850px viewports. */
 .light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:calc(53.5% + 48px); padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
 .light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
-.light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.6634px; line-height:60px; margin:0; text-transform:uppercase; }
+.light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.0175em; line-height:60px; margin:0; text-transform:none; }
 .light-approach h2 .h2-muted { color:#cec4b6; }
 .stack { inset:0; position:absolute; }
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
@@ -239,8 +241,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .card-wrap-a4 { height:min(58.699vh,36.687vw); left:calc(50% + min(96px,6.667vw) - min(3.677vh,2.298vw)); top:233.54px; width:min(56.374vh,35.234vw); }
 .card-wrap-a4 .stack-card { background-image:url("assets/figma-user/stack-a-4.jpg"); background-image:image-set(url("assets/figma-user/stack-a-4.avif") type("image/avif"),url("assets/figma-user/stack-a-4.webp") type("image/webp"),url("assets/figma-user/stack-a-4.jpg") type("image/jpeg")); transform:rotate(2.36deg); }
 .light-inference { align-items:flex-start; box-sizing:border-box; display:flex; flex-direction:column; gap:4px; height:817px; justify-content:flex-end; max-width:4000px; padding:0 72px; width:100%; }
-.light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:-.2778px; line-height:44.444px; }
-.light-inference p { color:#555; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
+.light-inference h3 { color:#000; font-family:Georgia,"Times New Roman",serif; font-size:48px; font-weight:400; letter-spacing:0; line-height:44.444px; }
+.light-inference p { color:#555; font-family:"Roboto","Inter",sans-serif; font-size:20px; font-weight:300; line-height:30px; max-width:584px; }
 
 @media (min-width:768px) {
   .light-approach .approach-stage { height:100vh; overflow:hidden; position:sticky; top:0; }
@@ -263,7 +265,8 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
 .light-join-card { align-items:center; background:linear-gradient(#f0efed,rgb(241 240 237 / 70%)); border:.5px solid #666460; color:#1a1a1a; display:flex; flex-direction:column; max-width:720px; padding:65.25px 33px 60.99px; position:relative; text-align:center; width:720px; }
 .light-join-card .eyebrow { color:#628aa8; }
 .light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
-.light-join-card > p:not(.eyebrow) { color:#776f63; font-size:17px; line-height:27.2px; max-width:480px; }
+.light-join-card > p:not(.eyebrow) { color:#2e2b27; font-family:"Roboto","Inter",sans-serif; font-size:17px; font-weight:300; line-height:27.2px; max-width:480px; }
+.light-join-card .button { font-family:"Roboto","Inter",sans-serif; font-weight:400; }
 .light-join-card .join-actions { gap:14px; margin-top:14.7px; }
 .light-join-card .button-dark { color:#fff; min-width:136px; padding:0 30px; }
 
@@ -379,9 +382,9 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-inference { height:auto; margin-left:0; padding:0 32px; width:100%; }
   .light-inference h3,.light-inference p { max-width:none; width:100%; }
   .light-inference h3 { font-size:26px; line-height:1.2; }
-  .light-inference p { font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:16px; line-height:1.5; }
+  .light-inference p { font-size:16px; line-height:1.5; }
   .light-join-card h2 { font-size:26px; line-height:1.2; }
-  .light-join-card > p:not(.eyebrow) { font-family:"Inria Serif",Georgia,"Times New Roman",serif; font-size:16px; font-weight:300; line-height:1.5; }
+  .light-join-card > p:not(.eyebrow) { font-size:16px; line-height:1.5; }
   .footer-brand { font-size:20px; }
   .footer-bottom { font-size:14px; }
   /* The desktop entrance offsets (±400px) are wider than the phone screen itself and widen the
@@ -399,23 +402,23 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   .light-header { background:#f4f0ed; }
 }
 
-/* Desktop type scale (spec 2026-08-28) — five tiers, desktop only, mobile keeps its own scale:
-   96/86 display · 40/48 heading · 32/48 statement · 24/32 body · 14/22 caption */
+/* Desktop type scale (spec 2026-08-28) — five tiers: 96/86 display · 40/48 heading · 32/48 statement
+   · 24/32 body · 14/22 caption. SIZES ONLY: typefaces, colours and weights are set once in the base
+   rules above and shared with the mobile scale in the max-width block. */
 @media (min-width:768px) {
   .light-hero h1 { font-size:clamp(70.2px, calc(40.62px + 3.846vw), 107px); line-height:.896; }
   /* vh caps only bite on short viewports (<~770px tall for the h2, <700px for the h3) so the pinned
      heading and the bottom-anchored inference copy never collide; 1440×900 is unaffected. */
-  .light-approach h2 { font-size:min(clamp(43.1px, calc(28.31px + 1.923vw), 61.5px), 7.5vh); letter-spacing:-1.0451px; line-height:.964; text-transform:none; }
-  .light-inference h3 { font-size:min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh); letter-spacing:0; line-height:1.5; white-space:nowrap; }
+  .light-approach h2 { font-size:min(clamp(43.1px, calc(28.31px + 1.923vw), 61.5px), 7.5vh); letter-spacing:-1.0451px; line-height:.964; }
+  .light-inference h3 { font-size:min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh); line-height:1.5; white-space:nowrap; }
   .light-join-card h2 { font-size:clamp(30.3px, calc(19.23px + 1.442vw), 44px); line-height:1.2; }
-  .light-belief-copy { font-family:"Roboto","Inter",sans-serif; font-size:min(clamp(19.2px, calc(13.62px + .721vw), 26px), 3.7vh); line-height:1.5; width:min(69.03vw, 994px); }
+  .light-belief-copy { font-size:min(clamp(19.2px, calc(13.62px + .721vw), 26px), 3.7vh); line-height:1.5; width:min(69.03vw, 994px); }
   .light-hero-desc { gap:10px; width:min(62.78vw, 904px); }
-  .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); font-weight:300; line-height:1.5; }
+  .light-hero-desc p { font-size:clamp(16.8px, calc(13.08px + .481vw), 21.5px); line-height:1.5; }
   .light-hero-desc .light-hero-kicker { max-width:min(48vw, 691px); }
   .light-hero-desc p:not(.light-hero-kicker) { max-width:min(47.3vw, 681px); }
-  .light-hero-desc .light-hero-kicker { color:#302925; opacity:1; }
-  .light-inference p { font-family:"Roboto","Inter",sans-serif; font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); font-weight:300; line-height:1.5; }
-  .footer-brand { font-family:"Outfit",sans-serif; font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); font-weight:700; gap:10.02px; letter-spacing:0; line-height:.833; margin-bottom:3.66px; }
+  .light-inference p { font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); line-height:1.5; }
+  .footer-brand { font-size:clamp(13.62px, calc(9.564px + .531vw), 18.9px); gap:10.02px; line-height:.833; margin-bottom:3.66px; }
   .footer-brand-icon { height:18.64px; width:21.51px; }
   /* The divider lives on the full-width .footer-bottom (base rule), not on the 1072px-capped
      .footer-main, so it always runs edge to edge regardless of viewport width. */
@@ -427,17 +430,17 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
      value: its uppercase, letter-spaced line is then never wider than "Learning at inference"
      (measured: 0.55 lands within 1px of equal). Spacing/leading are em-based so they scale with it
      (2.4px / 22px at 14px). */
-  .light-approach-heading .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:min(14px, calc(.53 * min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh))); letter-spacing:.1714em; line-height:1.5714; }
-  .light-join-card .eyebrow { font-family:"Roboto","Inter",sans-serif; font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); line-height:1.222; }
-  .light-join-card > p:not(.eyebrow) { color:#2e2b27; font-family:"Roboto","Inter",sans-serif; font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); font-weight:300; line-height:1.5; }
+  .light-approach-heading .eyebrow { font-size:min(14px, calc(.53 * min(clamp(25.5px, calc(18.15px + .962vw), 35px), 5vh))); letter-spacing:.1714em; line-height:1.5714; }
+  .light-join-card .eyebrow { font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); line-height:1.222; }
+  .light-join-card > p:not(.eyebrow) { font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); line-height:1.5; }
   .light-join-card { width:min(50vw, 720px); }
-  .light-btn { font-family:"Roboto","Inter",sans-serif; font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); font-weight:400; line-height:1.333; }
-  .light-join-card .button { font-family:"Roboto","Inter",sans-serif; font-size:16px; font-weight:400; }
-  .light-nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-main p { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-email { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
-  .footer-bottom { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22px; }
+  .light-btn { font-size:clamp(14.8px, calc(11.08px + .481vw), 19.5px); line-height:1.333; }
+  .light-join-card .button { font-size:16px; }
+  .light-nav a { font-size:14px; line-height:22px; }
+  .footer-main p { font-size:14px; line-height:22px; }
+  .footer-email { font-size:14px; line-height:22px; }
+  .footer-main nav a { font-size:14px; line-height:22px; }
+  .footer-bottom { font-size:14px; line-height:22px; }
 }
 
 html[data-variant="dark"] { --paper:#000; --ink:#fff; --warm:#a89f92; --footer:#1a1a1a; color-scheme:dark; }
