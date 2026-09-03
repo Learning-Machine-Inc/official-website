@@ -173,7 +173,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    within a centered 1456px (= 1600 − 2×72) band, matching .figma-frame's max-width. */
 .light-header { align-items:center; background:transparent; box-sizing:border-box; display:flex; height:64px; justify-content:space-between; left:0; padding:0 max(72px, calc(50% - 728px)); position:fixed; right:0; top:0; z-index:5; }
 .light-brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
-.light-nav { align-items:center; display:flex; gap:30px; }
+.light-nav { align-items:center; display:flex; gap:13.99px; } /* same gap as .light-hero-actions */
 .light-nav a { color:#030303; font-family:"Roboto","Inter",sans-serif; font-size:14px; letter-spacing:1px; line-height:22.4px; text-decoration:none; }
 /* Careers pill — Figma tFncbEkPEyRqS4h7Su8ODE node 1:214, shared by variants A and B. Figma's 1px
    stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
@@ -578,12 +578,12 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
    join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
    frame bakes the card into the photo and shows through the translucent real card as a ghost. */
 html[data-ab-variant="b"] .light-hero h1 em { color:#008f7f; }
-html[data-ab-variant="b"] .light-btn-dark { background:#3bb4a2; border-color:#aaddd4; }
+html[data-ab-variant="b"] .light-btn-dark { background:#3bb4a2; border-color:#aaddd4; color:#fff; }
 html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
 html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
 html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#a3bcb8; }
 html[data-ab-variant="b"] .light-join-card .eyebrow { color:#719791; }
-html[data-ab-variant="b"] .light-join-card .button-blue { background:linear-gradient(#63a79c,#86a29d); }
+html[data-ab-variant="b"] .light-join-card .button-blue { background:#33a190; }
 /* B hero art. Desktop-only so it cannot beat the mobile rule above (it has higher specificity);
    mobile B gets its own 1440w encode right below. */
 @media (min-width:768px) {
