@@ -339,11 +339,14 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
   /* P0-2: this rule sets top/left but was missing position:absolute, so the copy sat at the top
      of the section underneath the cards. */
   .light-belief-copy { font-size:20px; left:32px; line-height:1.45; position:absolute; top:395px; width:calc(100% - 64px); }
-  .card-wrap-p1 { height:214.196745px; left:calc(12% - 25.177301px); top:160.803255px; width:210.354602px; }
+  /* Cards spread with the viewport only up to 580px; past that both anchor to the centre so the pair
+     keeps the 580px composition (p1 at 50%−245.58px, p2's right edge at 50%+278px) instead of
+     drifting to opposite edges on wide phones / small tablets. */
+  .card-wrap-p1 { height:214.196745px; left:max(calc(12% - 25.177301px), calc(50% - 245.58px)); top:160.803255px; width:210.354602px; }
   .card-wrap-p1 .polaroid-card { height:174px; width:168.348028px; }
   /* P0-2: right:calc(11% - 95.98px) is negative below ~873px viewport width — card bled 55px
      past the right edge at 375px. */
-  .card-wrap-p2 { height:274.727235px; right:12px; left:auto; top:100.272765px; width:325.959268px; }
+  .card-wrap-p2 { height:274.727235px; right:max(12px, calc(50% - 278px)); left:auto; top:100.272765px; width:325.959268px; }
   .card-wrap-p2 .polaroid-card { height:240px; width:298.867925px; }
   .light-approach { height:auto; margin-top:0; padding-top:20px; }
   /* P0-1: the legacy dark-main rule `.approach-stage { position:absolute; inset:0 }` also hits
