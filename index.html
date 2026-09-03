@@ -12,8 +12,6 @@
   <link rel="icon" href="assets/icons/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
-  <link rel="preload" href="assets/fonts/inria-serif-300-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
-  <link rel="preload" href="assets/fonts/inria-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Hero art preloads match the DEFAULT variant (B) and the CSS image-set/media split exactly, so
        the browser never fetches two hero images. `type` lets non-AVIF browsers skip these and fall
@@ -28,7 +26,8 @@
   <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
   <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin media="(min-width:768px)">
+  <!-- Roboto is the shared body face on every breakpoint now (Inria Serif is no longer used). -->
+  <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v35">
 </head>
 <body>

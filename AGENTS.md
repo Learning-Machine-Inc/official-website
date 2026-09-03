@@ -70,8 +70,13 @@ PORT=3002 node .claude/serve-official-website.js
   禁止"取整求美观"、禁止用近似百分比布局替代。
 - Figma 1440px 画布绝对坐标 → 响应式的既有惯例(沿用,别发明新写法):
   `left:max(<Xpx>, calc(50% - <内容半宽>)); width:min(<Wpx>, calc(100% - 边距*2))`
-- 字体经 Google Fonts 引入:Gentium Plus / Inria Serif(300,400)/ Just Me Again Down Here。
-  要用新字重,先把它加进 `<head>` 里 fonts.googleapis 的请求参数,否则浏览器拿不到。
+- 字体全部自托管在 `assets/fonts/`(`@font-face` 在 styles.css 顶部):Gentium Plus(标题衬线)、
+  Roboto 可变字重 300–600(正文/按钮/眉题/页脚)、Outfit 700(页脚品牌)、Inter(body 兜底)。
+  要用新字体/字重,下载 woff2 放进去并加 `@font-face`,不要接 Google Fonts(用户网络极慢)。
+- **桌面端和移动端是同一套设计系统**(2026-09-03 起):字体族、颜色、字重、大小写这些"令牌"只写在
+  基础规则里,`@media (min-width:768px)` / `@media (max-width:767.98px)` 两个块**只放字号、行高、
+  宽度、布局**。改字体/颜色一律改基础规则,不要在媒体查询里覆盖 `font-family`/`color`,否则另一端
+  会掉队(之前 Roboto、青绿色等桌面更新没同步到移动端就是这个原因)。
 - belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
 
 ## 图片资源(2026-09-02 起)
