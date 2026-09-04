@@ -42,10 +42,13 @@ PORT=3002 node .claude/serve-official-website.js
   脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
   加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
-- **中英双版**(2026-09-04 起):中文在 `careers/`,英文在 `careers/en/`,同名文件一一对应,
-  `<head>` 里互挂 `hreflang` alternate。语言切换只在页脚右下角的 `.lang-menu`(header 右上曾有过一个
-  「中文 | EN」文字对,用户 2026-09-04 撤掉了,不要再加回)。脚本里 `UI` 表放界面文案。品牌标 / 页脚
-  回首页链到**同语言**首页(zh → `../zh/`,en → `../../`)。
+- **四种语言**(2026-09-04 起):中文 `careers/`、英文 `careers/en/`、法文 `careers/fr/`、德文 `careers/de/`,
+  同名文件一一对应,`<head>` 里互挂四个 `hreflang` alternate(+ x-default 指英文)。每条岗位有 zh / en / fr / de
+  四份文案(中文是用户原稿逐字,其余是忠实翻译,法/德为机翻初稿)。语言切换只在页脚右下角的 `.lang-menu`
+  (header 右上曾有过「中文 | EN」文字对,用户撤掉了,不要再加回)。`UI` 表放界面文案:header 两个按钮
+  (招聘/联系我们 · Careers/Contact · Carrières/Contact · Karriere/Kontakt)、页脚简介与链接、投递卡等都按
+  语言出;列表页眉题 "Careers · We are hiring" 和 "Open roles" 按用户 Figma 里的中文页设计保留英文。
+  品牌标 / 页脚回首页链到**同语言**首页(zh → `../zh/`,en → `../../`,fr → `../../fr/`,de → `../../de/`)。
 
 ## 多语言首页(zh/ fr/ de/,2026-09-04 起)
 - `zh/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
@@ -54,14 +57,14 @@ PORT=3002 node .claude/serve-official-website.js
   按提示更新 `T`,不要手改生成文件。
 - 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 中文 /
   Français / Deutsch,参考用户给的深色下拉样式)。index.html 里写的是英文态,生成时把当前项和链接换掉。
-  招聘页(gen-careers.py 的 `footer_lang_menu`)也有这个菜单,但招聘只有中英两版,Français / Deutsch
-  指向英文版岗位页(回退)。
+  招聘页(gen-careers.py 的 `footer_lang_menu`)也有这个菜单,四种语言各指向自己那套岗位页(同名文件)。
 - 中文排版(2026-09-04 可读性审核):汉字占满 em 框,首页英文那套紧行距(hero 0.9、approach 标题 0.96)
   会让中文行贴在一起,所以 `html[lang="zh-CN"]` 下标题行距 ≥1.1、正文/belief 1.6,规则在 styles.css 的
   hero h1 附近,靠选择器权重压过各断点。approach 标题每行在 1024 宽(可用约 438px)必须仍是一行:法/德第三行
   曾因太长换行,已缩短为 "plutôt que répondre" / "nicht nur antworten";改标题文案后要在 1024 宽复查。
-- 英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`,法/德首页指向
-  `careers/en/`(各走各的语言,没有的回英文)。
+- 首页 header 的两个按钮(Careers/Contact · 招聘/联系我们 · Carrières/Contact · Karriere/Kontakt)、Join 按钮
+  和页脚 Careers 都随语言:英文 → `careers/en/`,中文 → `careers/`,法文 → `careers/fr/`,德文 → `careers/de/`
+  (用户 2026-09-04:选了语言后所有子页面都跟随)。
 - **语言记忆**(2026-09-04):页脚菜单点某种语言时写 `localStorage["lm-lang"]`;每页 `<head>` 里紧跟
   hreflang alternate 的一段内联脚本在样式表之前执行,发现页面语言 ≠ 记住的语言就按 alternate 跳到对应
   版本(没有该语言版本时跳英文版,例如法语用户进招聘页会落到 `careers/en/`)。没有记录 = 首次访问 = 按 URL

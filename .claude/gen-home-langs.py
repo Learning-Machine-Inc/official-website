@@ -29,6 +29,11 @@ T = [
      '<title>Learning Machine | 打造真正会学习的 AI</title>',
      '<title>Learning Machine | Une IA qui apprend vraiment</title>',
      '<title>Learning Machine | KI, die wirklich lernt</title>'),
+    # header buttons follow the language too (user 2026-09-04)
+    ('<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">招聘</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">联系我们</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Carrières</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Karriere</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Kontakt</a></nav>'),
     # hero
     ('<h1><span class="motion-line">Build AI</span><span class="motion-line">that truly <em>Learns</em></span></h1>',
      '<h1><span class="motion-line">打造真正</span><span class="motion-line">会<em>学习</em>的 AI</span></h1>',
@@ -69,8 +74,8 @@ T = [
     # language; French and German fall back to the English careers pages.
     ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/en/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
      '<h2>加入我们</h2><p>我们正在构建 AI 的未来，研究、工程与产品方向都在招人。来和我们一起创造。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
-     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/en/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
-     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/en/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
+     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/fr/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
+     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/de/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
     # footer
     ('Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p>',
      'Learning Machine</a><p>打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。</p>',
@@ -78,8 +83,8 @@ T = [
      'Learning Machine</a><p>Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.</p>'),
     ('<p>Explore</p><a href="#approach">Approach</a><a href="careers/en/">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
      '<p>探索</p><a href="#approach">我们的方法</a><a href="careers/">招聘</a><a href="mailto:contact@learning-machine.ai">联系我们</a>',
-     '<p>Explorer</p><a href="#approach">Approche</a><a href="careers/en/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
-     '<p>Entdecken</p><a href="#approach">Ansatz</a><a href="careers/en/">Karriere</a><a href="mailto:contact@learning-machine.ai">Kontakt</a>'),
+     '<p>Explorer</p><a href="#approach">Approche</a><a href="careers/fr/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
+     '<p>Entdecken</p><a href="#approach">Ansatz</a><a href="careers/de/">Karriere</a><a href="mailto:contact@learning-machine.ai">Kontakt</a>'),
     ('<span>© 2026 Learning Machine Co. All rights reserved.</span>',
      '<span>© 2026 Learning Machine Co. 保留所有权利。</span>',
      '<span>© 2026 Learning Machine Co. Tous droits réservés.</span>',
