@@ -618,7 +618,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .btn-primary { background:#3bb4a2; border:1px solid #aaddd4; }
 /* Careers text appears once as it enters view; no JS or reduced-motion fallback ever hides content. */
 @media (prefers-reduced-motion:no-preference) {
-  .careers-motion-ready .careers-title > *,.careers-motion-ready .role-row,.careers-motion-ready .facts > li,.careers-motion-ready .careers-section,.careers-motion-ready .apply-card { opacity:0; transform:translateY(10px); transition:opacity .36s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms),transform .42s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms); }
+  .careers-motion-ready .careers-title > *,.careers-motion-ready .role-row,.careers-motion-ready .facts > li,.careers-motion-ready .careers-section,.careers-motion-ready .apply-card { opacity:0; transform:translateY(7px); transition:opacity .75s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms),transform .9s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms); }
   .careers-motion-ready .careers-motion-visible { opacity:1; transform:none; }
 }
 @media (min-width:768px) and (max-width:1199px) {
