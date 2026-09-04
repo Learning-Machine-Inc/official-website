@@ -42,10 +42,22 @@ PORT=3002 node .claude/serve-official-website.js
   脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
   加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
-- **中英双版**(2026-09-04 起):中文在 `careers/`(默认),英文在 `careers/en/`,同名文件一一对应,
-  `<head>` 里互挂 `hreflang` alternate。header 右上的 `.lang-switch`(中文 | EN 一个药丸,当前语言实色)
-  就是链到另一语言的同一页;脚本里 `UI` 表放界面文案。首页目前只有英文,没有接这个开关。
-  ≤767px 时招聘页 header 隐藏 Careers 药丸(本来就在 Careers 里,页脚仍有链接),否则和语言开关放不下。
+- **中英双版**(2026-09-04 起):中文在 `careers/`,英文在 `careers/en/`,同名文件一一对应,
+  `<head>` 里互挂 `hreflang` alternate。header 右上的 `.lang-switch`(纯文字「中文 | EN」,不带框,
+  当前语言实色)链到另一语言的同一页;脚本里 `UI` 表放界面文案。品牌标 / 页脚回首页链到**同语言**首页
+  (zh → `../zh/`,en → `../../`)。
+- ≤767px 时只要 header 里有语言开关就隐藏 Careers 药丸(`.light-nav:has(.lang-switch)`),手机宽度放不下
+  品牌标 + 中文|EN + Careers + Contact 四样;页脚仍有 Careers 链接。
+
+## 中文首页(zh/,2026-09-04 起)
+- `zh/index.html` 由 `.claude/gen-home-zh.py` 从 `index.html` 生成:同一份标记/脚本/图片,只替换文案
+  (脚本里的 `T` 表,英文片段 → 中文)并给相对路径加 `../`。**改了 index.html 就要重跑一次**;`T` 里任何
+  英文片段在 index.html 里找不到时脚本会直接报错退出,按提示更新 `T`,不要手改 `zh/index.html`。
+- 首页 header 也有 `.lang-switch`:index.html 里 EN 实色、中文 → `zh/`;生成时换成中文实色、EN → `../`。
+  英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`(各走各的语言)。
+- 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个
+  词,词间不补空格;scramble 字符表也按语言切换。belief 的逐字墨水效果对中文天然逐字,无需改动。
+- 中文首页当前文案是机翻初稿(用户 2026-09-04:可以先机翻),改文案改 `T` 的中文侧即可。
 - 样式在 styles.css 的「Careers pages」块,复用首页 header/footer 与令牌;字号层级按用户在 Figma
   调定的值(64/104 主标 · 32/48 标题 · 28/48 信息条 · 16/24 正文 · 14/22 眉题)。中文不额外下载
   字体,靠 `--careers-serif` / `--careers-sans` 栈按字形回退到系统 Songti / PingFang。
