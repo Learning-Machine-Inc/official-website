@@ -582,8 +582,11 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
    values · 16/24 body · 14/22 eyebrows. */
 .careers-page { --careers-serif:"Gentium Plus","Songti SC","Noto Serif CJK SC","Source Han Serif SC","Noto Serif SC",Georgia,serif; --careers-sans:"Roboto","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC","Inter",sans-serif; background:#f4f0ed; color:#302925; font-family:var(--careers-sans); padding-top:64px; }
 .careers-page .light-header { background:#f4f0ed; }
+.careers-main { position:relative; }
 .careers-band { padding:0 max(132px, calc(50% - 588px)); } /* 132px inset on Figma's 1440px careers frames; content stays capped at 1176px. */
 .careers-title { padding-bottom:72px; padding-top:96px; } /* longhands: the horizontal inset comes from .careers-band */
+.careers-back { align-items:center; background:#faf8f7; border:1px solid #d5d5d5; border-radius:5px; box-sizing:border-box; color:#373737; cursor:pointer; display:flex; font-family:"Roboto","Inter",sans-serif; font-size:20px; height:44px; justify-content:center; left:max(72px, calc(50% - 728px)); line-height:1; position:absolute; text-decoration:none; top:32px; width:44px; }
+.careers-back:focus-visible { outline:2px solid #008f7f; outline-offset:3px; }
 .careers-eyebrow { color:#5c8982; font-family:"Roboto","Inter",sans-serif; font-size:14px; font-weight:600; letter-spacing:2.4px; line-height:22px; margin:0; text-transform:uppercase; }
 .careers-title h1 { color:#382d22; font-family:var(--careers-serif); font-size:clamp(40px, 4.444vw, 64px); font-weight:400; letter-spacing:-1.0451px; line-height:1.625; margin:0; } /* 64/104 at 1440, scales down with the window */
 .careers-intro { color:#2e2b27; font-size:18px; font-weight:300; line-height:27px; margin:0; max-width:720px; }
@@ -637,6 +640,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .light-nav .lang-switch a[lang] { padding:0 4px; white-space:nowrap; }
   .careers-band { padding:0 36px; } /* mobile header inset (16px) + 20px */
   .careers-title { padding-bottom:32px; padding-top:48px; }
+  .careers-back { left:16px; top:0; }
   .careers-title h1 { font-size:40px; line-height:52px; }
   .role-row,.careers-section { gap:16px; grid-template-columns:minmax(0,1fr); }
   .facts { gap:24px; grid-template-columns:minmax(0,1fr); }

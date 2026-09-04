@@ -8,7 +8,7 @@ import html, os
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v41"
+REV = "figma-1617-19731-v42"
 EMAIL = "careers@learning-machine.ai"
 
 # Per-language UI strings. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
@@ -16,14 +16,14 @@ EMAIL = "careers@learning-machine.ai"
 UI = {
     "zh": dict(html_lang="zh-CN", prefix="../", outdir="careers",
                intro="目前开放 {n} 个岗位 · 北京研发中心。点击岗位查看职位要求、待遇与投递方式。",
-               view="查看详情",
+               view="查看详情", back="返回职位列表",
                open_apply=("Open application · 自荐", "没有合适的岗位？直接把简历发给我们", "邮件发送至 {email}，注明你感兴趣的方向。", "自荐投递", "自荐投递"),
                apply=("Apply · 简历投递", "简历投递", "邮件发送至 {email}，主题请注明「{subject}」。", "立即投递"),
                index_desc="Learning Machine 北京研发中心开放岗位：Agent 全栈研发、客户端、视觉设计。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}），北京 · 中关村。"),
     "en": dict(html_lang="en", prefix="../../", outdir="careers/en",
                intro="{n} open roles at our Beijing R&D center. Open a role for requirements, package and how to apply.",
-               view="View details",
+               view="View details", back="Back to open roles",
                open_apply=("Open application", "No matching role? Send us your CV anyway", "Email {email} and tell us which direction interests you.", "Send open application", "Open application"),
                apply=("Apply", "Send your CV", "Email {email} with the subject line “{subject}”.", "Apply now"),
                index_desc="Open roles at Learning Machine's Beijing R&D center: Agent full-stack engineering, client engineering, visual design.",
@@ -244,7 +244,8 @@ def build_role(r, L):
       </section>""" for eb, h, lst in d["sections"])
     subject = f"{d['name']} · {d['tag']}"
     _, h2, note, btn = ui["apply"]
-    body = f"""    <section class="careers-band careers-title">
+    body = f"""    <a class="careers-back" href="./" aria-label="{attr(ui['back'])}" title="{attr(ui['back'])}"><span aria-hidden="true">←</span></a>
+    <section class="careers-band careers-title">
       <p class="careers-eyebrow">{esc(d["eyebrow"])}</p>
       <h1>{esc(d["name"])}</h1>
     </section>
