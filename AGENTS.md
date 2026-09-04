@@ -34,6 +34,19 @@ PORT=3002 node .claude/serve-official-website.js
   `index.html` 里 `styles.css?rev=…-vNN` 的版本号 +1**,否则用户刷新线上看不到新样式
   (2026-09-03 的按钮配色就是这样"没生效")。
 
+## 招聘页(careers/,2026-09-03 起)
+- `careers/index.html` = 二级页 Open roles(所有开放岗位列表),`careers/<slug>.html` = 三级岗位详情;
+  首页 Join 区 "See open roles" 与页脚 Careers 都指向 `careers/`。Figma 对应「公司-产品官网」文件
+  页「官网 1440 · 代码回同步 0831」里的 07(L2)/ 08–10(L3)画板。
+- **这些页面由 `.claude/gen-careers.py` 生成**:岗位数据(名称/类型/亮点/地点待遇/各区块条目)都在
+  脚本里的 `ROLES` 表。改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改
+  生成出来的 HTML。新增岗位 = 加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
+- 样式在 styles.css 的「Careers pages」块,复用首页 header/footer 与令牌;字号层级按用户在 Figma
+  调定的值(64/104 主标 · 32/48 标题 · 28/48 信息条 · 16/24 正文 · 14/22 眉题)。中文不额外下载
+  字体,靠 `--careers-serif` / `--careers-sans` 栈按字形回退到系统 Songti / PingFang。
+- 布局类名 `.careers-band` 负责左右内距(与 header 同一条 1456px 内容带),其他区块**只写上下
+  padding 的 longhand**,别用 `padding` 简写把左右覆盖成 0(踩过)。
+
 ## 动效架构(重要,改之前先读完)
 所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):
 
