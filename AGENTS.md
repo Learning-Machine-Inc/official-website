@@ -44,8 +44,8 @@ PORT=3002 node .claude/serve-official-website.js
 - 样式在 styles.css 的「Careers pages」块,复用首页 header/footer 与令牌;字号层级按用户在 Figma
   调定的值(64/104 主标 · 32/48 标题 · 28/48 信息条 · 16/24 正文 · 14/22 眉题)。中文不额外下载
   字体,靠 `--careers-serif` / `--careers-sans` 栈按字形回退到系统 Songti / PingFang。
-- 布局类名 `.careers-band` 负责左右内距 = header 内容带再向内 20px(桌面 `max(92px, 50%-708px)`,
-  移动 36px),任何窗口宽度下都保持这 20px 关系;其他区块**只写上下 padding 的 longhand**,别用
+- 布局类名 `.careers-band` 负责左右内距 = header 内容带再向内(桌面 +40px:`max(112px, 50%-688px)`;
+  移动 +20px:36px,手机上再缩文字列就太窄了),任何窗口宽度下都保持这个关系;其他区块**只写上下 padding 的 longhand**,别用
   `padding` 简写把左右覆盖成 0(踩过)。列宽/字号按 1440 画布用 `min(400px, 27.778vw)`、
   `clamp(…, 4.444vw, 64px)` 这类公式写,768–1199 之间岗位行改成"名称 | 按钮"两列、亮点落到名称下方。
 
