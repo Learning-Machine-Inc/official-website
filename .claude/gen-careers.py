@@ -8,7 +8,7 @@ import html, os
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v37"
+REV = "figma-1617-19731-v38"
 EMAIL = "careers@learning-machine.ai"
 
 # Per-language UI strings. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
@@ -166,12 +166,12 @@ def page(L, pagefile, title, desc, body):
 def apply_card(eyebrow, h2, note, btn_label, subject, top=False):
     band = "apply-band apply-band-top" if top else "apply-band"
     mail = f"mailto:{EMAIL}?subject={attr(subject)}"
+    eyebrow_html = f'        <p class="careers-eyebrow">{esc(eyebrow)}</p>\n' if eyebrow else ""
     return f"""    <section class="careers-band {band}">
       <div class="apply-card">
-        <p class="careers-eyebrow">{esc(eyebrow)}</p>
-        <h2>{esc(h2)}</h2>
+{eyebrow_html}        <h2>{esc(h2)}</h2>
         <p>{esc(note)}</p>
-        <div class="apply-actions"><a class="btn-primary" href="{mail}">{esc(btn_label)}&nbsp;&nbsp;→</a><a class="btn-black" href="mailto:{EMAIL}">{EMAIL}</a></div>
+        <div class="apply-actions"><a class="btn-primary" href="{mail}">{esc(btn_label)}&nbsp;&nbsp;→</a></div>
       </div>
     </section>
 """
@@ -218,7 +218,7 @@ def build_role(r, L):
         </ul>
       </section>""" for eb, h, lst in d["sections"])
     subject = f"{d['name']} · {d['tag']}"
-    eyebrow, h2, note, btn = ui["apply"]
+    _, h2, note, btn = ui["apply"]
     body = f"""    <section class="careers-band careers-title">
       <p class="careers-eyebrow">{esc(d["eyebrow"])}</p>
       <h1>{esc(d["name"])}</h1>
@@ -231,7 +231,7 @@ def build_role(r, L):
     <div class="careers-band careers-sections">
 {secs}
     </div>
-""" + apply_card(eyebrow, h2, note.format(email=EMAIL, subject=subject), btn, subject)
+""" + apply_card(None, h2, note.format(email=EMAIL, subject=subject), btn, subject)
     return page(L, f"{r['slug']}.html", ui["role_title"].format(name=d["name"], tag=d["tag"]),
                 ui["role_desc"].format(name=d["name"], tag=d["tag"]), body)
 
