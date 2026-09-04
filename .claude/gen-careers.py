@@ -16,14 +16,14 @@ EMAIL = "careers@learning-machine.ai"
 UI = {
     "zh": dict(html_lang="zh-CN", prefix="../", outdir="careers",
                intro="目前开放 {n} 个岗位 · 北京研发中心。点击岗位查看职位要求、待遇与投递方式。",
-               view="查看详情", back="返回职位列表",
+               view="查看详情", back="返回职位列表", back_home="返回首页",
                open_apply=("Open application · 自荐", "没有合适的岗位？直接把简历发给我们", "邮件发送至 {email}，注明你感兴趣的方向。", "自荐投递", "自荐投递"),
                apply=("Apply · 简历投递", "简历投递", "邮件发送至 {email}，主题请注明「{subject}」。", "立即投递"),
                index_desc="Learning Machine 北京研发中心开放岗位：Agent 全栈研发、客户端、视觉设计。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}），北京 · 中关村。"),
     "en": dict(html_lang="en", prefix="../../", outdir="careers/en",
                intro="{n} open roles at our Beijing R&D center. Open a role for requirements, package and how to apply.",
-               view="View details", back="Back to open roles",
+               view="View details", back="Back to open roles", back_home="Back to home",
                open_apply=("Open application", "No matching role? Send us your CV anyway", "Email {email} and tell us which direction interests you.", "Send open application", "Open application"),
                apply=("Apply", "Send your CV", "Email {email} with the subject line “{subject}”.", "Apply now"),
                index_desc="Open roles at Learning Machine's Beijing R&D center: Agent full-stack engineering, client engineering, visual design.",
@@ -220,7 +220,8 @@ def build_index(L):
     ui = UI[L]
     rows = "".join(role_row(r, L) for r in ROLES)
     eyebrow, h2, note, btn, subject = ui["open_apply"]
-    body = f"""    <section class="careers-band careers-title">
+    body = f"""    <a class="careers-back" href="{ui['prefix']}" aria-label="{attr(ui['back_home'])}" title="{attr(ui['back_home'])}"><span aria-hidden="true">←</span></a>
+    <section class="careers-band careers-title">
       <p class="careers-eyebrow">Careers · We are hiring</p>
       <h1>Open roles</h1>
       <p class="careers-intro">{esc(ui["intro"].format(n=len(ROLES)))}</p>
