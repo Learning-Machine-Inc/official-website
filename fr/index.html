@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" data-variant="light" data-ab-variant="b">
+<html lang="fr" data-variant="light" data-ab-variant="b">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F4F0ED">
-  <meta name="description" content="Learning Machine builds models that learn and adapt at inference time.">
-  <title>Learning Machine | Build AI that truly Learns</title>
+  <meta name="description" content="Learning Machine conçoit des modèles qui apprennent et s'adaptent au moment de l'inférence.">
+  <title>Learning Machine | Une IA qui apprend vraiment</title>
   <link rel="alternate" hreflang="en" href="https://learning-machine.ai/">
   <link rel="alternate" hreflang="zh-CN" href="https://learning-machine.ai/zh/">
   <link rel="alternate" hreflang="fr" href="https://learning-machine.ai/fr/">
@@ -30,55 +30,55 @@
   </script>
   <!-- Chrome ignores `media` on icon links, so the SVG carries both marks and switches with its own
        prefers-color-scheme rule (Chrome/Firefox). The PNG pair stays for browsers without SVG favicons. -->
-  <link rel="icon" href="assets/icons/favicon-adaptive.svg?v=1" type="image/svg+xml">
-  <link rel="icon" href="assets/icons/favicon-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="assets/icons/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
-  <link rel="preload" href="assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="../assets/icons/favicon-adaptive.svg?v=1" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="../assets/icons/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Hero art preloads match the DEFAULT variant (B) and the CSS image-set/media split exactly, so
        the browser never fetches two hero images. `type` lets non-AVIF browsers skip these and fall
        back to the CSS-selected WebP/JPEG. -->
-  <link rel="preload" href="assets/figma-b-test/hero-art-1920.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (max-resolution:1.49dppx)">
-  <link rel="preload" href="assets/figma-b-test/hero-art-2752.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (min-resolution:1.5dppx)">
-  <link rel="preload" href="assets/figma-b-test/hero-art-mobile-1440.avif" as="image" type="image/avif" fetchpriority="high" media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/figma-b-test/hero-art-1920.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (max-resolution:1.49dppx)">
+  <link rel="preload" href="../assets/figma-b-test/hero-art-2752.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (min-resolution:1.5dppx)">
+  <link rel="preload" href="../assets/figma-b-test/hero-art-mobile-1440.avif" as="image" type="image/avif" fetchpriority="high" media="(max-width:767.98px)">
   <!-- flipbook frames referenced only from @keyframes: browsers fetch those lazily per frame,
        which flashes the blank card color mid-loop unless every frame is preloaded up front -->
-  <link rel="preload" href="assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
-  <link rel="preload" href="assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/figma-user/stack-a-1-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/figma-user/stack-a-2-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/figma-user/stack-a-3-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/figma-user/stack-a-4-mobile.jpg" as="image" media="(max-width:767.98px)">
+  <link rel="preload" href="../assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Roboto is the shared body face on every breakpoint now (Inria Serif is no longer used). -->
-  <link rel="preload" href="assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?rev=figma-1617-19731-v44">
+  <link rel="preload" href="../assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css?rev=figma-1617-19731-v44">
 </head>
 <body>
   <header class="site-header" id="header">
     <button id="variant-toggle" class="variant-toggle" type="button" aria-label="Switch to variant A" aria-pressed="true"></button>
-    <a href="#home" class="brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
+    <a href="#home" class="brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="../assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="../assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="../assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
     <nav class="desktop-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#approach">Approach</a><a href="#vision">Vision</a><a href="#join">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav>
   </header>
   <main class="light-main">
     <header class="light-header">
-      <a href="#home" class="light-brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
-      <nav class="light-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
+      <a href="#home" class="light-brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="../assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="../assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="../assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
+      <nav class="light-nav" aria-label="Primary navigation"><a href="#join">Carrières</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
     </header>
     <section id="home" class="light-hero">
       <div class="light-hero-art motion-image" aria-hidden="true"></div>
       <div class="light-hero-veil" aria-hidden="true"></div>
       <div class="figma-frame">
         <div class="light-hero-copy">
-          <h1><span class="motion-line">Build AI</span><span class="motion-line">that truly <em>Learns</em></span></h1>
+          <h1><span class="motion-line">Construire une IA</span><span class="motion-line">qui <em>apprend</em> vraiment</span></h1>
           <div class="light-hero-desc">
-            <p class="light-hero-kicker motion-reveal kinetic-words" data-words>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work.</p>
-            <p class="motion-reveal kinetic-words" data-words>We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p>
+            <p class="light-hero-kicker motion-reveal kinetic-words" data-words>La capacité d'apprendre est le seul moyen de généraliser l'intelligence artificielle à tous les domaines du travail intellectuel humain.</p>
+            <p class="motion-reveal kinetic-words" data-words>Nous construisons la première génération de modèles de fondation capables d'apprendre, de s'adapter et de s'améliorer en continu.</p>
           </div>
           <div class="light-hero-actions motion-reveal">
-            <a class="light-btn light-btn-dark" href="#approach">See our approach <img src="assets/figma-107/55e5bbb7e913989d3bc60ba2a0e65f7cb2ddb240.svg" alt=""></a>
-            <a class="light-btn light-btn-blue" href="mailto:contact@learning-machine.ai">Join us</a>
+            <a class="light-btn light-btn-dark" href="#approach">Découvrir notre approche <img src="../assets/figma-107/55e5bbb7e913989d3bc60ba2a0e65f7cb2ddb240.svg" alt=""></a>
+            <a class="light-btn light-btn-blue" href="mailto:contact@learning-machine.ai">Nous rejoindre</a>
           </div>
         </div>
       </div>
@@ -86,40 +86,40 @@
     <section id="approach" class="light-approach">
       <div class="approach-stage">
         <div class="figma-frame">
-          <div class="light-approach-heading motion-reveal"><p class="eyebrow kinetic-words" data-words>What makes us different</p><h2><span class="motion-line" data-scramble>Models</span><span class="motion-line">that adapt,</span><span class="motion-line h2-muted">not just respond</span></h2></div>
+          <div class="light-approach-heading motion-reveal"><p class="eyebrow kinetic-words" data-words>Ce qui nous distingue</p><h2><span class="motion-line" data-scramble>Des modèles</span><span class="motion-line">qui s'adaptent,</span><span class="motion-line h2-muted">plutôt que répondre</span></h2></div>
           <div class="stack stack-a" aria-hidden="true">
             <div class="card-wrap card-wrap-a1"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-a2"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-a3"><div class="stack-card"></div></div>
             <div class="card-wrap card-wrap-a4"><div class="stack-card"></div></div>
           </div>
-          <div class="light-inference light-inference-a"><p>Our models learn as they work—absorbing new knowledge and mastering new tasks through trial and error. No data pipelines, dedicated training infrastructure, or ML team required. Connect a model to a workflow, and it learns on the job.</p></div>
+          <div class="light-inference light-inference-a"><p>Nos modèles apprennent en travaillant : ils absorbent de nouvelles connaissances et maîtrisent de nouvelles tâches par essais et erreurs. Aucun pipeline de données, aucune infrastructure d'entraînement dédiée, aucune équipe ML. Connectez un modèle à un flux de travail, et il apprend sur le tas.</p></div>
         </div>
       </div>
     </section>
     <section class="light-belief">
       <div class="belief-stage">
       <div class="figma-frame">
-        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="assets/figma-user/belief-p1-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="assets/figma-user/belief-p1-mobile-640.webp"><source media="(max-width:767.98px)" srcset="assets/figma-user/belief-p1-mobile.jpg"><source type="image/avif" srcset="assets/figma-user/belief-p1-1400.avif"><source type="image/webp" srcset="assets/figma-user/belief-p1-1400.webp"><img src="assets/figma-user/belief-p1.png" alt=""></picture></div></div>
+        <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-user/belief-p1-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-user/belief-p1-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-user/belief-p1-mobile.jpg"><source type="image/avif" srcset="../assets/figma-user/belief-p1-1400.avif"><source type="image/webp" srcset="../assets/figma-user/belief-p1-1400.webp"><img src="../assets/figma-user/belief-p1.png" alt=""></picture></div></div>
         <!-- p2 differs per A/B variant: every source carries data-a/data-b and setAbVariant() swaps srcset/src.
              Initial values are the B (default) ones so the preload scanner never fetches the A candidate. -->
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="assets/figma-b-test/belief-p2-mobile-640.avif" data-a="assets/figma-user/belief-p2-mobile-640.avif" data-b="assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="assets/figma-b-test/belief-p2-mobile-640.webp" data-a="assets/figma-user/belief-p2-mobile-640.webp" data-b="assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="assets/figma-b-test/belief-p2.jpg" data-a="assets/figma-user/belief-p2-mobile.jpg" data-b="assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="assets/figma-b-test/belief-p2-1400.avif" data-a="assets/figma-user/belief-p2-1400.avif" data-b="assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="assets/figma-b-test/belief-p2-1400.webp" data-a="assets/figma-user/belief-p2-1400.webp" data-b="assets/figma-b-test/belief-p2-1400.webp"><img src="assets/figma-b-test/belief-p2.jpg" data-a="assets/figma-user/belief-p2.png" data-b="assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
-        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span></p>
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-b-test/belief-p2-mobile-640.avif" data-a="../assets/figma-user/belief-p2-mobile-640.avif" data-b="../assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-b-test/belief-p2-mobile-640.webp" data-a="../assets/figma-user/belief-p2-mobile-640.webp" data-b="../assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2-mobile.jpg" data-b="../assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="../assets/figma-b-test/belief-p2-1400.avif" data-a="../assets/figma-user/belief-p2-1400.avif" data-b="../assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="../assets/figma-b-test/belief-p2-1400.webp" data-a="../assets/figma-user/belief-p2-1400.webp" data-b="../assets/figma-b-test/belief-p2-1400.webp"><img src="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2.png" data-b="../assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
+        <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>Nous croyons que l'avenir de l'IA doit être divers et inclusif.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Chaque entreprise devrait pouvoir utiliser son savoir propriétaire pour construire sa propre IA. Chaque personne devrait bénéficier d'une expérience d'IA taillée pour elle. Et, par défaut, ses données devraient rester entre ses mains.</span></p>
       </div>
       </div>
     </section>
     <section id="join" class="light-join">
       <div class="light-join-backdrop" aria-hidden="true"></div>
-      <div class="light-join-card motion-reveal"><p class="eyebrow">Careers</p><h2>Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/en/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div></div>
+      <div class="light-join-card motion-reveal"><p class="eyebrow">Careers</p><h2>Rejoignez-nous</h2><p>Nous construisons l'avenir de l'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="../careers/fr/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div></div>
     </section>
   </main>
   <main class="dark-main">
-    <section id="home-dark" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" loading="lazy" src="assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" loading="lazy" src="assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
-    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img loading="lazy" src="assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
-    <section id="approach-dark" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
+    <section id="home-dark" class="hero" aria-labelledby="home-title"><div class="hero-art" aria-hidden="true"></div><div class="hero-content"><h1 id="home-title">Build AI<br>that truly <span>Learns</span></h1><p>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work. We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p><div class="hero-actions"><a class="button button-dark" href="#approach">See our approach <img class="button-arrow button-arrow-light" loading="lazy" src="../assets/figma-106/264ccda5f251740c385b65d1f270a574ca7d4ad7.svg" alt=""><img class="button-arrow button-arrow-dark" loading="lazy" src="../assets/figma-105/1b79b69ccec25c0fecf6d5f36806c3ef3e21624c.svg" alt=""></a><a class="button button-blue" href="#join">Join us</a></div></div></section>
+    <section id="vision" class="vision" aria-labelledby="vision-title"><figure class="vision-art" aria-hidden="true"><img loading="lazy" src="../assets/figma-106/8e6cf8409d490253ff5ce04387bc73a5a5513d6e.png" alt=""></figure><div class="vision-copy"><p id="vision-title">We believe the future of AI should be diverse and inclusive. Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</p></div></section>
+    <section id="approach-dark" class="approach" aria-labelledby="approach-title"><div class="approach-card" aria-hidden="true"></div><div class="approach-heading"><p class="eyebrow">What makes us different</p><h2 id="approach-title">Models that adapt,<br><span>not just respond</span></h2></div><div class="approach-stage"><div class="inference-copy"><h3>Learning at inference</h3><p>Our models take in new knowledge as they work, pick up new tasks through trial and error.</p></div><div class="device-media"><img class="device-poster" loading="lazy" src="../assets/figma-106/1ade5447022583dc259db8ff5a8a2d0152b8f68a.png" alt="Technical drawing of the Learning Machine device"><video id="approach-video" muted loop playsinline preload="none" aria-label="Animated technical drawing of the Learning Machine device"><source src="../assets/media/device-motion.mp4" type="video/mp4"></video></div></div></section>
     <section id="join-dark" class="join" aria-labelledby="join-title"><div class="join-backdrop" aria-hidden="true"></div><div class="join-card"><p class="eyebrow">Careers</p><h2 id="join-title">Join us</h2><p>We're building the future of AI, and we're hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><div class="role-tooltip-wrap"><button class="button button-dark role-tooltip-trigger" type="button" aria-controls="role-tooltip-dark" aria-describedby="role-tooltip-dark" aria-expanded="false">See open roles</button><div id="role-tooltip-dark" class="role-tooltip" role="status">Coming soon | <a class="role-tooltip-email" href="mailto:careers@learning-machine.ai">Self-recommendation</a></div></div><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div></div></section>
   </main>
-  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="#approach">Approach</a><a href="careers/en/">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><div class="lang-menu" data-lang-menu><ul class="lang-menu-list" id="lang-menu-list" role="menu" hidden><li><a role="menuitem" lang="en" hreflang="en" href="./" aria-current="page">English</a></li><li><a role="menuitem" lang="zh-CN" hreflang="zh-CN" href="zh/">中文</a></li><li><a role="menuitem" lang="fr" hreflang="fr" href="fr/">Français</a></li><li><a role="menuitem" lang="de" hreflang="de" href="de/">Deutsch</a></li></ul><button class="lang-menu-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu-list"><svg class="lang-menu-globe" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="lang-menu-label">English</span><svg class="lang-menu-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button></div></div></footer>
+  <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="../assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="../assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explorer</p><a href="#approach">Approche</a><a href="../careers/fr/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. Tous droits réservés.</span><div class="lang-menu" data-lang-menu><ul class="lang-menu-list" id="lang-menu-list" role="menu" hidden><li><a role="menuitem" lang="en" hreflang="en" href="../">English</a></li><li><a role="menuitem" lang="zh-CN" hreflang="zh-CN" href="../zh/">中文</a></li><li><a role="menuitem" lang="fr" hreflang="fr" href="./" aria-current="page">Français</a></li><li><a role="menuitem" lang="de" hreflang="de" href="../de/">Deutsch</a></li></ul><button class="lang-menu-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu-list"><svg class="lang-menu-globe" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="lang-menu-label">Français</span><svg class="lang-menu-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button></div></div></footer>
   <script>
     const root = document.documentElement;
     const variantToggle = document.querySelector('#variant-toggle');
@@ -260,7 +260,7 @@
     });
   </script>
   <script type="module">
-    import Lenis from './assets/vendor/lenis-1.3.26.mjs';
+    import Lenis from '../assets/vendor/lenis-1.3.26.mjs';
 
     window.lenis = new Lenis({ autoRaf:true, lerp:.14, respectReducedMotion:true, smoothWheel:true, wheelMultiplier:1.5 });
 

@@ -17,7 +17,8 @@ http.createServer((request, response) => {
     clients.add(response);
     return request.on('close', () => clients.delete(response));
   }
-  const relative = decodeURIComponent(request.url.split('?')[0] || '/').replace(/^\/$/, '/index.html');
+  // Directory requests (/, /careers/) resolve to their index.html, like GitHub Pages does.
+  const relative = decodeURIComponent(request.url.split('?')[0] || '/').replace(/\/$/, '/index.html');
   const file = path.resolve(ROOT, `.${relative}`);
   if (!file.startsWith(ROOT)) return response.writeHead(403).end();
   fs.readFile(file, (error, data) => {
