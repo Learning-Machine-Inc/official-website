@@ -15,7 +15,7 @@
   <link rel="preload" href="../../assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../assets/fonts/gentium-plus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../assets/fonts/roboto-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../../styles.css?rev=figma-1617-19731-v38">
+  <link rel="stylesheet" href="../../styles.css?rev=figma-1617-19731-v39">
 </head>
 <body class="careers-page">
   <header class="light-header">
@@ -73,5 +73,21 @@
     </section>
   </main>
   <footer><div class="footer-main"><div><a href="../../" class="footer-brand"><img class="footer-brand-icon" src="../../assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="../../assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="../../#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span></div></footer>
+  <script>
+    (() => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+      const targets = document.querySelectorAll('.careers-title > *, .role-row, .facts > li, .careers-section, .apply-card');
+      document.documentElement.classList.add('careers-motion-ready');
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('careers-motion-visible');
+        observer.unobserve(entry.target);
+      }), { threshold:.08, rootMargin:'0px 0px -8% 0px' });
+      targets.forEach((target, index) => {
+        target.style.setProperty('--careers-reveal-delay', `${Math.min(index, 3) * 50}ms`);
+        observer.observe(target);
+      });
+    })();
+  </script>
 </body>
 </html>

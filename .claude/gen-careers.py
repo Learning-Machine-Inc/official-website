@@ -8,7 +8,7 @@ import html, os
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v38"
+REV = "figma-1617-19731-v39"
 EMAIL = "careers@learning-machine.ai"
 
 # Per-language UI strings. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
@@ -57,9 +57,27 @@ HEAD = """<!doctype html>
 
 FOOTER = """  </main>
   <footer><div class="footer-main"><div><a href="{p}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="{p}#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span></div></footer>
+{motion}
 </body>
 </html>
 """
+
+MOTION = """  <script>
+    (() => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+      const targets = document.querySelectorAll('.careers-title > *, .role-row, .facts > li, .careers-section, .apply-card');
+      document.documentElement.classList.add('careers-motion-ready');
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('careers-motion-visible');
+        observer.unobserve(entry.target);
+      }), { threshold:.08, rootMargin:'0px 0px -8% 0px' });
+      targets.forEach((target, index) => {
+        target.style.setProperty('--careers-reveal-delay', `${Math.min(index, 3) * 50}ms`);
+        observer.observe(target);
+      });
+    })();
+  </script>"""
 
 # One entry per role; slug=None means "no posting yet" (list row only, shows the `soon` text).
 # Copy is the user's postings verbatim (zh) and a faithful translation (en) — do not paraphrase.
@@ -160,7 +178,7 @@ def page(L, pagefile, title, desc, body):
                   f'  <link rel="alternate" hreflang="en" href="{SITE}/careers/en/{pagefile}">\n')
     head = HEAD.format(lang=ui["html_lang"], p=ui["prefix"], title=esc(title), desc=attr(desc), rev=REV,
                        alternates=alternates, switch=lang_switch(L, pagefile))
-    return head + body + FOOTER.format(p=ui["prefix"])
+    return head + body + FOOTER.format(p=ui["prefix"], motion=MOTION)
 
 
 def apply_card(eyebrow, h2, note, btn_label, subject, top=False):
