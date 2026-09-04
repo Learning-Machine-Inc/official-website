@@ -43,21 +43,23 @@ PORT=3002 node .claude/serve-official-website.js
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
   加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
 - **中英双版**(2026-09-04 起):中文在 `careers/`,英文在 `careers/en/`,同名文件一一对应,
-  `<head>` 里互挂 `hreflang` alternate。header 右上的 `.lang-switch`(纯文字「中文 | EN」,不带框,
-  当前语言实色)链到另一语言的同一页;脚本里 `UI` 表放界面文案。品牌标 / 页脚回首页链到**同语言**首页
-  (zh → `../zh/`,en → `../../`)。
-- ≤767px 时只要 header 里有语言开关就隐藏 Careers 药丸(`.light-nav:has(.lang-switch)`),手机宽度放不下
-  品牌标 + 中文|EN + Careers + Contact 四样;页脚仍有 Careers 链接。
+  `<head>` 里互挂 `hreflang` alternate。语言切换只在页脚右下角的 `.lang-menu`(header 右上曾有过一个
+  「中文 | EN」文字对,用户 2026-09-04 撤掉了,不要再加回)。脚本里 `UI` 表放界面文案。品牌标 / 页脚
+  回首页链到**同语言**首页(zh → `../zh/`,en → `../../`)。
 
 ## 多语言首页(zh/ fr/ de/,2026-09-04 起)
 - `zh/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
   同一份标记/脚本/图片,只替换文案(脚本里的 `T` 表,每行 = 英文片段 + 中/法/德三列)并给相对路径加
   `../`。**改了 index.html 就要重跑一次**;`T` 里任何英文片段在 index.html 里找不到时脚本会直接报错退出,
   按提示更新 `T`,不要手改生成文件。
-- 语言入口有两个:header 的 `.lang-switch`(中文 | EN 文字对,只管这两种)和**页脚右下角的 `.lang-menu`**
-  (地球图标 + 当前语言 + 上拉菜单:English / 中文 / Français / Deutsch,参考用户给的深色下拉样式)。
-  index.html 里写的是英文态,生成时把当前项和链接换掉。招聘页(gen-careers.py 的 `footer_lang_menu`)
-  也有这个菜单,但招聘只有中英两版,Français / Deutsch 指向英文版岗位页(回退)。
+- 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 中文 /
+  Français / Deutsch,参考用户给的深色下拉样式)。index.html 里写的是英文态,生成时把当前项和链接换掉。
+  招聘页(gen-careers.py 的 `footer_lang_menu`)也有这个菜单,但招聘只有中英两版,Français / Deutsch
+  指向英文版岗位页(回退)。
+- 中文排版(2026-09-04 可读性审核):汉字占满 em 框,首页英文那套紧行距(hero 0.9、approach 标题 0.96)
+  会让中文行贴在一起,所以 `html[lang="zh-CN"]` 下标题行距 ≥1.1、正文/belief 1.6,规则在 styles.css 的
+  hero h1 附近,靠选择器权重压过各断点。approach 标题每行在 1024 宽(可用约 438px)必须仍是一行:法/德第三行
+  曾因太长换行,已缩短为 "plutôt que répondre" / "nicht nur antworten";改标题文案后要在 1024 宽复查。
 - 英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`,法/德首页指向
   `careers/en/`(各走各的语言,没有的回英文)。
 - 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个

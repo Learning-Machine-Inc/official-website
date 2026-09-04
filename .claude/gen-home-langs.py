@@ -2,8 +2,8 @@
 """Build the translated home pages zh/, fr/ and de/ from index.html (English, the default).
 
 Same markup, scripts, images and animations; only the copy changes, relative paths get a ../ prefix,
-and the two language controls (header 中文 | EN pair, footer language menu) are re-pointed. Run it
-after EVERY index.html change:
+and the footer language menu is re-pointed (the header pair was removed 2026-09-04). Run it after EVERY
+index.html change:
 
     python3 .claude/gen-home-langs.py
 
@@ -50,11 +50,12 @@ T = [
      'light-btn-blue" href="mailto:contact@learning-machine.ai">加入我们</a>',
      'light-btn-blue" href="mailto:contact@learning-machine.ai">Nous rejoindre</a>',
      'light-btn-blue" href="mailto:contact@learning-machine.ai">Komm ins Team</a>'),
-    # approach
+    # approach — each h2 line must stay ONE line down to 1024px wide (≈438px at 48px Georgia, measured);
+    # "pas seulement répondre" / "statt nur zu antworten" wrapped there, hence the shorter third lines.
     ('<p class="eyebrow kinetic-words" data-words>What makes us different</p><h2><span class="motion-line" data-scramble>Models</span><span class="motion-line">that adapt,</span><span class="motion-line h2-muted">not just respond</span></h2>',
      '<p class="eyebrow kinetic-words" data-words>我们的不同之处</p><h2><span class="motion-line" data-scramble>模型</span><span class="motion-line">会适应，</span><span class="motion-line h2-muted">而非只会回应</span></h2>',
-     '<p class="eyebrow kinetic-words" data-words>Ce qui nous distingue</p><h2><span class="motion-line" data-scramble>Des modèles</span><span class="motion-line">qui s\'adaptent,</span><span class="motion-line h2-muted">au lieu de seulement répondre</span></h2>',
-     '<p class="eyebrow kinetic-words" data-words>Was uns unterscheidet</p><h2><span class="motion-line" data-scramble>Modelle,</span><span class="motion-line">die sich anpassen,</span><span class="motion-line h2-muted">statt nur zu antworten</span></h2>'),
+     '<p class="eyebrow kinetic-words" data-words>Ce qui nous distingue</p><h2><span class="motion-line" data-scramble>Des modèles</span><span class="motion-line">qui s\'adaptent,</span><span class="motion-line h2-muted">plutôt que répondre</span></h2>',
+     '<p class="eyebrow kinetic-words" data-words>Was uns unterscheidet</p><h2><span class="motion-line" data-scramble>Modelle,</span><span class="motion-line">die sich anpassen,</span><span class="motion-line h2-muted">nicht nur antworten</span></h2>'),
     ('<div class="light-inference light-inference-a"><p>Our models learn as they work—absorbing new knowledge and mastering new tasks through trial and error. No data pipelines, dedicated training infrastructure, or ML team required. Connect a model to a workflow, and it learns on the job.</p></div>',
      '<div class="light-inference light-inference-a"><p>我们的模型在工作中学习——一边吸收新知识，一边通过试错掌握新任务。无需数据管线、专用训练基础设施或机器学习团队。把模型接入工作流，它就能在岗位上边做边学。</p></div>',
      '<div class="light-inference light-inference-a"><p>Nos modèles apprennent en travaillant : ils absorbent de nouvelles connaissances et maîtrisent de nouvelles tâches par essais et erreurs. Aucun pipeline de données, aucune infrastructure d\'entraînement dédiée, aucune équipe ML. Connectez un modèle à un flux de travail, et il apprend sur le tas.</p></div>',
@@ -87,14 +88,6 @@ T = [
 COLUMN = {"zh-CN": 1, "fr": 2, "de": 3}
 
 
-def header_pair(lang):
-    """The header 中文 | EN pair as seen from a translated page (one level below the root)."""
-    zh_cur = ' aria-current="page"' if lang == "zh-CN" else ""
-    zh_href = "./" if lang == "zh-CN" else "../zh/"
-    return (f'<a lang="zh-CN" hreflang="zh-CN" href="{zh_href}"{zh_cur}>中文</a>'
-            f'<a lang="en" hreflang="en" href="../">EN</a>')
-
-
 def footer_menu_list(lang):
     """Footer language menu items as seen from a translated page (one level below the root)."""
     items = []
@@ -107,8 +100,6 @@ def footer_menu_list(lang):
 
 src = open(f"{ROOT}/index.html", encoding="utf-8").read()
 missing = [row[0] for row in T if row[0] not in src]
-en_pair = '<a lang="zh-CN" hreflang="zh-CN" href="zh/">中文</a><a lang="en" hreflang="en" href="./" aria-current="page">EN</a>'
-if en_pair not in src: missing.append(en_pair)
 if not re.search(r'<ul class="lang-menu-list".*?</ul>', src, re.S): missing.append("<ul class=\"lang-menu-list\"…")
 if '<span class="lang-menu-label">English</span>' not in src: missing.append('<span class="lang-menu-label">English</span>')
 if missing:
@@ -118,7 +109,6 @@ for lang, label, folder in LANGS[1:]:
     out = src
     for row in T:
         out = out.replace(row[0], row[COLUMN[lang]], 1)
-    out = out.replace(en_pair, header_pair(lang), 1)
     out = re.sub(r'<ul class="lang-menu-list".*?</ul>', footer_menu_list(lang), out, count=1, flags=re.S)
     out = out.replace('<span class="lang-menu-label">English</span>', f'<span class="lang-menu-label">{label}</span>', 1)
     # One level below the root: prefix every relative URL (assets/, styles.css, careers/) with ../ but leave

@@ -150,13 +150,13 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
    UPWARD and shares one rounded outline with the trigger row, which is a shade lighter. The current language
    is marked; French and German pages exist for the home page only, careers fall back to English. */
 .lang-menu { position:relative; }
-.lang-menu-button { align-items:center; background:rgb(255 255 255 / 8%); border:1px solid rgb(255 255 255 / 16%); border-radius:12px; color:#fff; cursor:pointer; display:flex; font:inherit; font-size:14px; gap:10px; height:36px; line-height:20px; padding:0 14px 0 12px; }
+.lang-menu-button { align-items:center; background:rgb(255 255 255 / 8%); border:1px solid rgb(255 255 255 / 16%); border-radius:5px; color:#fff; cursor:pointer; display:flex; font:inherit; font-size:14px; gap:10px; height:36px; line-height:20px; padding:0 14px 0 12px; }
 .lang-menu-button:hover,.lang-menu-button:focus-visible { background:rgb(255 255 255 / 12%); }
 .lang-menu-button:focus-visible { outline:2px solid #3bb4a2; outline-offset:2px; }
 .lang-menu-chevron { transition:transform .2s ease; }
-.lang-menu[data-open="true"] .lang-menu-button { background:rgb(255 255 255 / 12%); border-radius:0 0 12px 12px; border-top-color:transparent; }
+.lang-menu[data-open="true"] .lang-menu-button { background:rgb(255 255 255 / 12%); border-radius:0 0 5px 5px; border-top-color:transparent; } /* 5px = the site's button radius (user 2026-09-04) */
 .lang-menu[data-open="true"] .lang-menu-chevron { transform:rotate(180deg); }
-.lang-menu-list { background:var(--footer); border:1px solid rgb(255 255 255 / 16%); border-bottom:0; border-radius:12px 12px 0 0; bottom:100%; left:0; list-style:none; margin:0; min-width:100%; padding:10px 0 6px; position:absolute; right:0; z-index:3; }
+.lang-menu-list { background:var(--footer); border:1px solid rgb(255 255 255 / 16%); border-bottom:0; border-radius:5px 5px 0 0; bottom:100%; left:0; list-style:none; margin:0; min-width:100%; padding:10px 0 6px; position:absolute; right:0; z-index:3; }
 .lang-menu-list a { color:#fff; display:block; font-size:14px; line-height:20px; padding:10px 20px; text-decoration:none; white-space:nowrap; }
 .lang-menu-list a:hover,.lang-menu-list a:focus-visible { background:rgb(255 255 255 / 8%); outline:none; }
 .lang-menu-list a[aria-current] { color:#aaddd4; }
@@ -193,13 +193,6 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
 .light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
-/* Language switch (home + careers): the plain text pair "中文 | EN", no pill around it (user 2026-09-04,
-   the mobile look is the only look). Current language solid, the other one links to the same page in that
-   language. Inner links undo the generic pill rule above. */
-.lang-switch { align-items:center; display:flex; flex:none; }
-.light-nav .lang-switch a[lang] { background:none; border:0; border-radius:0; color:#083733; opacity:.5; padding:0 6px; white-space:nowrap; }
-.light-nav .lang-switch a[lang][aria-current] { font-weight:500; opacity:1; }
-.light-nav .lang-switch a[lang] + a[lang] { border-left:1px solid rgb(0 0 0 / 20%); }
 /* The hero is exactly one viewport tall so its copy (bottom-anchored) is always above the fold;
    the old 761px floor pushed the description and CTAs off-screen on short windows. */
 .light-hero { background:#f4f0ed; height:100vh; min-height:400px; position:relative; }
@@ -216,6 +209,13 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    Latin stays Gentium / Georgia. Sans text already falls to PingFang / YaHei through the generic family. */
 html[lang="zh-CN"] .light-hero h1 { font-family:"Gentium Plus","Songti SC","Noto Serif CJK SC","Source Han Serif SC","Noto Serif SC",Georgia,"Times New Roman",serif; }
 html[lang="zh-CN"] :is(.light-approach h2, .light-join-card h2) { font-family:Georgia,"Songti SC","Noto Serif CJK SC","Source Han Serif SC","Noto Serif SC","Times New Roman",serif; }
+/* Chinese leading (readability audit 2026-09-04). CJK glyphs fill the whole em box, so the tight Latin display
+   leading (hero 0.9, approach heading 0.96) made Chinese lines touch, and 1.4–1.5 body leading reads dense in
+   Chinese. These beat the breakpoint rules on specificity, so they hold on every viewport. */
+html[lang="zh-CN"] .light-hero h1 { line-height:1.1; }
+html[lang="zh-CN"] .light-approach h2 { line-height:1.15; }
+html[lang="zh-CN"] :is(.light-hero-desc p, .light-inference p, .light-join-card > p:not(.eyebrow)) { line-height:1.6; }
+html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 .light-hero h1 .motion-line:first-child { margin-bottom:0; }
 .light-hero h1 em { color:#4b72c1; font-style:normal; }
 .light-hero-desc { display:flex; flex-direction:column; padding:0 6px; width:904px; }
@@ -347,10 +347,6 @@ html[lang="zh-CN"] :is(.light-approach h2, .light-join-card h2) { font-family:Ge
   .light-nav a { letter-spacing:.5px; }
   .light-nav a:not(.light-nav-contact) { background:transparent; border:0; padding:7.5px 2px; }
   .light-nav-contact { padding:7.5px 12px 7.9px; }
-  /* With the language pair in the header there is no room for the Careers link next to Contact on a
-     360px phone (brand + 中文|EN + Contact already fill it), so it is dropped there; the footer keeps it. */
-  .light-nav:has(.lang-switch) > a:not(.light-nav-contact) { display:none; }
-  .light-nav .lang-switch a[lang] { padding:0 4px; }
   .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
      the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7). */

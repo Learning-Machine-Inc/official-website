@@ -50,7 +50,7 @@ HEAD = """<!doctype html>
 <body class="careers-page">
   <header class="light-header">
     <a href="{home}" class="light-brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="{p}assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="{p}assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="{p}assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
-    <nav class="light-nav" aria-label="Primary navigation">{switch}<a href="./">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
+    <nav class="light-nav" aria-label="Primary navigation"><a href="./">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
   </header>
   <main class="careers-main">
 """
@@ -166,19 +166,6 @@ def items(lst):
     return "\n".join(f'          <li class="careers-item">{esc(t)}</li>' for t in lst)
 
 
-def lang_switch(L, pagefile):
-    """The header pill. pagefile is "" for the index or "<slug>.html"; each link targets the same page
-    in the other language (zh lives in careers/, en in careers/en/)."""
-    if L == "zh":
-        zh, en = (pagefile or "./"), ("en/" + pagefile)
-    else:
-        zh, en = ("../" + pagefile), (pagefile or "./")
-    cur = ' aria-current="page"'
-    return (f'<div class="lang-switch" aria-label="Language / 语言">'
-            f'<a lang="zh-CN" hreflang="zh-CN" href="{zh}"{cur if L == "zh" else ""}>中文</a>'
-            f'<a lang="en" hreflang="en" href="{en}"{cur if L == "en" else ""}>EN</a></div>')
-
-
 LANG_MENU_SCRIPT = """  <script>
     // Footer language menu (bottom right): opens upward over the button, closes on outside click / Escape.
     document.querySelectorAll('[data-lang-menu]').forEach((menu) => {
@@ -216,7 +203,7 @@ def page(L, pagefile, title, desc, body):
                   f'  <link rel="alternate" hreflang="en" href="{SITE}/careers/en/{pagefile}">\n')
     # home = the homepage in the SAME language (zh careers → zh/, en careers → the English root).
     head = HEAD.format(lang=ui["html_lang"], p=ui["prefix"], home=ui["home"], title=esc(title), desc=attr(desc), rev=REV,
-                       alternates=alternates, switch=lang_switch(L, pagefile))
+                       alternates=alternates)
     return head + body + FOOTER.format(p=ui["prefix"], home=ui["home"], motion=MOTION,
                                        scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]),
                                        langmenu=footer_lang_menu(L, pagefile), langscript=LANG_MENU_SCRIPT)
