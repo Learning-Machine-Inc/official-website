@@ -38,7 +38,8 @@ HEAD = """<!doctype html>
   <meta name="theme-color" content="#F4F0ED">
   <meta name="description" content="{desc}">
   <title>{title} | Learning Machine</title>
-{alternates}  <link rel="icon" href="{p}assets/icons/favicon-adaptive.svg?v=1" type="image/svg+xml">
+{alternates}{langmem}
+  <link rel="icon" href="{p}assets/icons/favicon-adaptive.svg?v=1" type="image/svg+xml">
   <link rel="icon" href="{p}assets/icons/favicon-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
   <link rel="icon" href="{p}assets/icons/favicon-dark-32.png" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
   <link rel="apple-touch-icon" href="{p}assets/icons/apple-touch-icon.png">
@@ -166,6 +167,23 @@ def items(lst):
     return "\n".join(f'          <li class="careers-item">{esc(t)}</li>' for t in lst)
 
 
+# Same two snippets as index.html (keep them in sync): the <head> language-memory redirect and the footer menu.
+LANG_MEMORY_SCRIPT = """  <script>
+    // Language memory. The footer menu stores the chosen language (localStorage "lm-lang"); from then on any
+    // page served in another language jumps to its version in that language, resolved through the hreflang
+    // alternates above (English when no version exists). No stored choice = first visit = the page as served.
+    (() => { try {
+      const pref = localStorage.getItem('lm-lang');
+      if (!pref || pref === document.documentElement.lang) return;
+      const alt = (code) => document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
+      const target = alt(pref) || alt('en');
+      if (!target) return;
+      const path = new URL(target.href).pathname;
+      const strip = (p) => p.replace(/index\\.html$/, '');
+      if (strip(path) !== strip(location.pathname)) location.replace(path + location.search + location.hash);
+    } catch (error) {} })();
+  </script>"""
+
 LANG_MENU_SCRIPT = """  <script>
     // Footer language menu (bottom right): opens upward over the button, closes on outside click / Escape.
     document.querySelectorAll('[data-lang-menu]').forEach((menu) => {
@@ -173,6 +191,8 @@ LANG_MENU_SCRIPT = """  <script>
       const list = menu.querySelector('.lang-menu-list');
       const setOpen = (open) => { menu.dataset.open = String(open); button.setAttribute('aria-expanded', String(open)); list.hidden = !open; };
       button.addEventListener('click', () => setOpen(list.hidden));
+      // Remember the choice before the link navigates; the <head> script in every page enforces it later.
+      list.addEventListener('click', (event) => { const link = event.target.closest('a[lang]'); if (link) { try { localStorage.setItem('lm-lang', link.lang); } catch (error) {} } });
       addEventListener('click', (event) => { if (!menu.contains(event.target)) setOpen(false); });
       addEventListener('keydown', (event) => { if (event.key === 'Escape' && !list.hidden) { setOpen(false); button.focus(); } });
     });
@@ -203,7 +223,7 @@ def page(L, pagefile, title, desc, body):
                   f'  <link rel="alternate" hreflang="en" href="{SITE}/careers/en/{pagefile}">\n')
     # home = the homepage in the SAME language (zh careers → zh/, en careers → the English root).
     head = HEAD.format(lang=ui["html_lang"], p=ui["prefix"], home=ui["home"], title=esc(title), desc=attr(desc), rev=REV,
-                       alternates=alternates)
+                       alternates=alternates, langmem=LANG_MEMORY_SCRIPT)
     return head + body + FOOTER.format(p=ui["prefix"], home=ui["home"], motion=MOTION,
                                        scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]),
                                        langmenu=footer_lang_menu(L, pagefile), langscript=LANG_MENU_SCRIPT)

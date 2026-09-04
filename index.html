@@ -11,6 +11,23 @@
   <link rel="alternate" hreflang="fr" href="https://learning-machine.ai/fr/">
   <link rel="alternate" hreflang="de" href="https://learning-machine.ai/de/">
   <link rel="alternate" hreflang="x-default" href="https://learning-machine.ai/">
+  <script>
+    // Language memory. The footer menu stores the chosen language (localStorage "lm-lang"); from then on any
+    // page served in another language jumps to its version in that language, resolved through the hreflang
+    // alternates above (English when no version exists). No stored choice = first visit = the page as served,
+    // English by default — browser language is deliberately NOT consulted. Runs before the stylesheet so the
+    // wrong-language page never paints.
+    (() => { try {
+      const pref = localStorage.getItem('lm-lang');
+      if (!pref || pref === document.documentElement.lang) return;
+      const alt = (code) => document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
+      const target = alt(pref) || alt('en');
+      if (!target) return;
+      const path = new URL(target.href).pathname;
+      const strip = (p) => p.replace(/index\.html$/, '');
+      if (strip(path) !== strip(location.pathname)) location.replace(path + location.search + location.hash);
+    } catch (error) {} })();
+  </script>
   <!-- Chrome ignores `media` on icon links, so the SVG carries both marks and switches with its own
        prefers-color-scheme rule (Chrome/Firefox). The PNG pair stays for browsers without SVG favicons. -->
   <link rel="icon" href="assets/icons/favicon-adaptive.svg?v=1" type="image/svg+xml">
@@ -236,6 +253,8 @@
       const list = menu.querySelector('.lang-menu-list');
       const setOpen = (open) => { menu.dataset.open = String(open); button.setAttribute('aria-expanded', String(open)); list.hidden = !open; };
       button.addEventListener('click', () => setOpen(list.hidden));
+      // Remember the choice before the link navigates; the <head> script in every page enforces it later.
+      list.addEventListener('click', (event) => { const link = event.target.closest('a[lang]'); if (link) { try { localStorage.setItem('lm-lang', link.lang); } catch (error) {} } });
       addEventListener('click', (event) => { if (!menu.contains(event.target)) setOpen(false); });
       addEventListener('keydown', (event) => { if (event.key === 'Escape' && !list.hidden) { setOpen(false); button.focus(); } });
     });

@@ -62,6 +62,11 @@ PORT=3002 node .claude/serve-official-website.js
   曾因太长换行,已缩短为 "plutôt que répondre" / "nicht nur antworten";改标题文案后要在 1024 宽复查。
 - 英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`,法/德首页指向
   `careers/en/`(各走各的语言,没有的回英文)。
+- **语言记忆**(2026-09-04):页脚菜单点某种语言时写 `localStorage["lm-lang"]`;每页 `<head>` 里紧跟
+  hreflang alternate 的一段内联脚本在样式表之前执行,发现页面语言 ≠ 记住的语言就按 alternate 跳到对应
+  版本(没有该语言版本时跳英文版,例如法语用户进招聘页会落到 `careers/en/`)。没有记录 = 首次访问 = 按 URL
+  原样显示(默认英文),**不读浏览器语言**。这段脚本在 index.html 和 gen-careers.py 的 `LANG_MEMORY_SCRIPT`
+  各有一份,改一处要同步另一处。alternate 的 href 是线上绝对地址,脚本只取 pathname,本地也能用。
 - 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个
   词,词间不补空格;scramble 字符表也按语言切换。belief 的逐字墨水效果对中文天然逐字,无需改动。
 - 中文首页当前文案是机翻初稿(用户 2026-09-04:可以先机翻),改文案改 `T` 的中文侧即可。
