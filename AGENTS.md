@@ -39,8 +39,13 @@ PORT=3002 node .claude/serve-official-website.js
   首页 Join 区 "See open roles" 与页脚 Careers 都指向 `careers/`。Figma 对应「公司-产品官网」文件
   页「官网 1440 · 代码回同步 0831」里的 07(L2)/ 08–10(L3)画板。
 - **这些页面由 `.claude/gen-careers.py` 生成**:岗位数据(名称/类型/亮点/地点待遇/各区块条目)都在
-  脚本里的 `ROLES` 表。改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改
-  生成出来的 HTML。新增岗位 = 加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
+  脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
+  改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
+  加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
+- **中英双版**(2026-09-04 起):中文在 `careers/`(默认),英文在 `careers/en/`,同名文件一一对应,
+  `<head>` 里互挂 `hreflang` alternate。header 右上的 `.lang-switch`(中文 | EN 一个药丸,当前语言实色)
+  就是链到另一语言的同一页;脚本里 `UI` 表放界面文案。首页目前只有英文,没有接这个开关。
+  ≤767px 时招聘页 header 隐藏 Careers 药丸(本来就在 Careers 里,页脚仍有链接),否则和语言开关放不下。
 - 样式在 styles.css 的「Careers pages」块,复用首页 header/footer 与令牌;字号层级按用户在 Figma
   调定的值(64/104 主标 · 32/48 标题 · 28/48 信息条 · 16/24 正文 · 14/22 眉题)。中文不额外下载
   字体,靠 `--careers-serif` / `--careers-sans` 栈按字形回退到系统 Songti / PingFang。

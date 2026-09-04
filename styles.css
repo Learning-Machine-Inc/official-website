@@ -179,6 +179,12 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    stroke sits inside the 37.4px box, so padding is 1px tighter than the 7.5/20/7.9 spec. */
 .light-nav a:not(.light-nav-contact) { background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; color:#083733; padding:6.5px 19px 6.9px; }
 .light-nav-contact { background:#1a1a1a; border-radius:5px; color:#fff !important; padding:7.5px 20px 7.9px; }
+/* Language switch (careers pages): one Careers-style pill holding both languages, the current one solid,
+   the other one a link to the same page in that language. Inner links undo the generic pill rule above. */
+.lang-switch { align-items:center; background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; box-sizing:border-box; display:flex; padding:6.5px 6px 6.9px; }
+.light-nav .lang-switch a[lang] { background:none; border:0; border-radius:0; color:#083733; opacity:.5; padding:0 12px; }
+.light-nav .lang-switch a[lang][aria-current] { font-weight:500; opacity:1; }
+.light-nav .lang-switch a[lang] + a[lang] { border-left:1px solid rgb(0 0 0 / 20%); }
 /* The hero is exactly one viewport tall so its copy (bottom-anchored) is always above the fold;
    the old 761px floor pushed the description and CTAs off-screen on short windows. */
 .light-hero { background:#f4f0ed; height:100vh; min-height:400px; position:relative; }
@@ -620,6 +626,11 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .role-action { grid-area:action; }
 }
 @media (max-width:767.98px) {
+  /* Header: the 中文 | EN pill goes borderless like the mobile Careers pill, and the Careers link itself is
+     dropped on careers pages (we are already there; the footer keeps the link) so brand + pill + Contact fit in 375px. */
+  .careers-page .light-nav > a:not(.light-nav-contact) { display:none; }
+  .lang-switch { background:transparent; border:0; flex:none; padding:0; }
+  .light-nav .lang-switch a[lang] { padding:0 4px; white-space:nowrap; }
   .careers-band { padding:0 36px; } /* mobile header inset (16px) + 20px */
   .careers-title { padding-bottom:32px; padding-top:48px; }
   .careers-title h1 { font-size:40px; line-height:52px; }
