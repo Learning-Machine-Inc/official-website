@@ -56,9 +56,10 @@ HEAD = """<!doctype html>
 """
 
 FOOTER = """  </main>
-  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="{home}#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span></div></footer>
+  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="{home}#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span>{langmenu}</div></footer>
 {motion}
 {scroll}
+{langscript}
 </body>
 </html>
 """
@@ -178,6 +179,37 @@ def lang_switch(L, pagefile):
             f'<a lang="en" hreflang="en" href="{en}"{cur if L == "en" else ""}>EN</a></div>')
 
 
+LANG_MENU_SCRIPT = """  <script>
+    // Footer language menu (bottom right): opens upward over the button, closes on outside click / Escape.
+    document.querySelectorAll('[data-lang-menu]').forEach((menu) => {
+      const button = menu.querySelector('.lang-menu-button');
+      const list = menu.querySelector('.lang-menu-list');
+      const setOpen = (open) => { menu.dataset.open = String(open); button.setAttribute('aria-expanded', String(open)); list.hidden = !open; };
+      button.addEventListener('click', () => setOpen(list.hidden));
+      addEventListener('click', (event) => { if (!menu.contains(event.target)) setOpen(false); });
+      addEventListener('keydown', (event) => { if (event.key === 'Escape' && !list.hidden) { setOpen(false); button.focus(); } });
+    });
+  </script>"""
+
+
+def footer_lang_menu(L, pagefile):
+    """Footer language menu. Careers exist in 中文 and English only, so Français / Deutsch point at the
+    English page of the same role (same fallback the home pages' Join buttons use)."""
+    zh_href = (pagefile or "./") if L == "zh" else "../" + pagefile
+    en_href = "en/" + pagefile if L == "zh" else (pagefile or "./")
+    langs = [("en", "English", en_href, L == "en"), ("zh-CN", "中文", zh_href, L == "zh"),
+             ("fr", "Français", en_href, False), ("de", "Deutsch", en_href, False)]
+    current = ' aria-current="page"'
+    items = "".join(f'<li><a role="menuitem" lang="{code}" hreflang="{code}" href="{href}"{current if cur else ""}>{label}</a></li>'
+                    for code, label, href, cur in langs)
+    label = "中文" if L == "zh" else "English"
+    return ('<div class="lang-menu" data-lang-menu><ul class="lang-menu-list" id="lang-menu-list" role="menu" hidden>' + items + '</ul>'
+            '<button class="lang-menu-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu-list">'
+            '<svg class="lang-menu-globe" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>'
+            f'<span class="lang-menu-label">{label}</span>'
+            '<svg class="lang-menu-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button></div>')
+
+
 def page(L, pagefile, title, desc, body):
     ui = UI[L]
     alternates = (f'  <link rel="alternate" hreflang="zh-CN" href="{SITE}/careers/{pagefile}">\n'
@@ -186,7 +218,8 @@ def page(L, pagefile, title, desc, body):
     head = HEAD.format(lang=ui["html_lang"], p=ui["prefix"], home=ui["home"], title=esc(title), desc=attr(desc), rev=REV,
                        alternates=alternates, switch=lang_switch(L, pagefile))
     return head + body + FOOTER.format(p=ui["prefix"], home=ui["home"], motion=MOTION,
-                                       scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]))
+                                       scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]),
+                                       langmenu=footer_lang_menu(L, pagefile), langscript=LANG_MENU_SCRIPT)
 
 
 def apply_card(eyebrow, h2, note, btn_label, subject, top=False):

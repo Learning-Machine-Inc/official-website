@@ -49,12 +49,17 @@ PORT=3002 node .claude/serve-official-website.js
 - ≤767px 时只要 header 里有语言开关就隐藏 Careers 药丸(`.light-nav:has(.lang-switch)`),手机宽度放不下
   品牌标 + 中文|EN + Careers + Contact 四样;页脚仍有 Careers 链接。
 
-## 中文首页(zh/,2026-09-04 起)
-- `zh/index.html` 由 `.claude/gen-home-zh.py` 从 `index.html` 生成:同一份标记/脚本/图片,只替换文案
-  (脚本里的 `T` 表,英文片段 → 中文)并给相对路径加 `../`。**改了 index.html 就要重跑一次**;`T` 里任何
-  英文片段在 index.html 里找不到时脚本会直接报错退出,按提示更新 `T`,不要手改 `zh/index.html`。
-- 首页 header 也有 `.lang-switch`:index.html 里 EN 实色、中文 → `zh/`;生成时换成中文实色、EN → `../`。
-  英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`(各走各的语言)。
+## 多语言首页(zh/ fr/ de/,2026-09-04 起)
+- `zh/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
+  同一份标记/脚本/图片,只替换文案(脚本里的 `T` 表,每行 = 英文片段 + 中/法/德三列)并给相对路径加
+  `../`。**改了 index.html 就要重跑一次**;`T` 里任何英文片段在 index.html 里找不到时脚本会直接报错退出,
+  按提示更新 `T`,不要手改生成文件。
+- 语言入口有两个:header 的 `.lang-switch`(中文 | EN 文字对,只管这两种)和**页脚右下角的 `.lang-menu`**
+  (地球图标 + 当前语言 + 上拉菜单:English / 中文 / Français / Deutsch,参考用户给的深色下拉样式)。
+  index.html 里写的是英文态,生成时把当前项和链接换掉。招聘页(gen-careers.py 的 `footer_lang_menu`)
+  也有这个菜单,但招聘只有中英两版,Français / Deutsch 指向英文版岗位页(回退)。
+- 英文首页的 Join 按钮 / 页脚 Careers 指向 `careers/en/`,中文首页指向 `careers/`,法/德首页指向
+  `careers/en/`(各走各的语言,没有的回英文)。
 - 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个
   词,词间不补空格;scramble 字符表也按语言切换。belief 的逐字墨水效果对中文天然逐字,无需改动。
 - 中文首页当前文案是机翻初稿(用户 2026-09-04:可以先机翻),改文案改 `T` 的中文侧即可。

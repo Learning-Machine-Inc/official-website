@@ -69,7 +69,7 @@
       </div>
     </section>
   </main>
-  <footer><div class="footer-main"><div><a href="../../" class="footer-brand"><img class="footer-brand-icon" src="../../assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="../../assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="../../#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span></div></footer>
+  <footer><div class="footer-main"><div><a href="../../" class="footer-brand"><img class="footer-brand-icon" src="../../assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="../../assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>Explore</p><a href="../../#approach">Approach</a><a href="./">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. All rights reserved.</span><div class="lang-menu" data-lang-menu><ul class="lang-menu-list" id="lang-menu-list" role="menu" hidden><li><a role="menuitem" lang="en" hreflang="en" href="agent-client.html" aria-current="page">English</a></li><li><a role="menuitem" lang="zh-CN" hreflang="zh-CN" href="../agent-client.html">中文</a></li><li><a role="menuitem" lang="fr" hreflang="fr" href="agent-client.html">Français</a></li><li><a role="menuitem" lang="de" hreflang="de" href="agent-client.html">Deutsch</a></li></ul><button class="lang-menu-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu-list"><svg class="lang-menu-globe" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="lang-menu-label">English</span><svg class="lang-menu-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button></div></div></footer>
   <script>
     (() => {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
@@ -89,6 +89,17 @@
   <script type="module">
     import Lenis from '../../assets/vendor/lenis-1.3.26.mjs';
     window.lenis = new Lenis({ autoRaf:true, lerp:.14, respectReducedMotion:true, smoothWheel:true, wheelMultiplier:1.5 });
+  </script>
+  <script>
+    // Footer language menu (bottom right): opens upward over the button, closes on outside click / Escape.
+    document.querySelectorAll('[data-lang-menu]').forEach((menu) => {
+      const button = menu.querySelector('.lang-menu-button');
+      const list = menu.querySelector('.lang-menu-list');
+      const setOpen = (open) => { menu.dataset.open = String(open); button.setAttribute('aria-expanded', String(open)); list.hidden = !open; };
+      button.addEventListener('click', () => setOpen(list.hidden));
+      addEventListener('click', (event) => { if (!menu.contains(event.target)) setOpen(false); });
+      addEventListener('keydown', (event) => { if (event.key === 'Escape' && !list.hidden) { setOpen(false); button.focus(); } });
+    });
   </script>
 </body>
 </html>
