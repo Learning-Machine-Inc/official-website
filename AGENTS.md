@@ -54,6 +54,10 @@ PORT=3002 node .claude/serve-official-website.js
 修改动效请在现有体系内调参数/时间窗,**不要引入新动画库、不要另起一套并行系统**。
 
 ## 已知坑(都真实踩过)
+- **favicon 深浅模式**:Chrome 忽略 `<link rel="icon">` 上的 `media="(prefers-color-scheme)"`,
+  两个 SVG 分开挂无效。现在用 `assets/icons/favicon-adaptive.svg` 一个文件装两套图形,靠 SVG
+  内部的 `@media (prefers-color-scheme: dark)` 切换;PNG 版仍按 media 挂着给不支持 SVG favicon 的
+  浏览器。改图标要同时更新这个自适应文件。
 - `.kinetic-word` 的基础 CSS 是 `opacity:0`,靠 `word-reveal` 动画补到 1。JS 里一旦
   `style.animation='none'`,**必须同时** `style.opacity='1'`,否则整段文字直接消失。
 - `light-belief` 的文字是两层结构,职责不同,不要合并:
