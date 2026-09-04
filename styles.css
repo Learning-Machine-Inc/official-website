@@ -601,7 +601,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .role-points { display:grid; gap:12px; list-style:none; margin:0; padding:12px 0 0; }
 .role-soon { color:#776f63; font-size:16px; font-weight:300; line-height:24px; margin:12px 0 0; }
 .role-action { padding-top:4px; }
-.btn-outline { align-items:center; background:#faf8f7; border:1px solid #d5d5d5; border-radius:5px; box-sizing:border-box; color:#373737; display:inline-flex; font-size:16px; font-weight:400; gap:8px; height:40px; line-height:24px; padding:0 24px; text-decoration:none; white-space:nowrap; }
+.btn-outline { align-items:center; background:#fffaf5; border:1px solid rgb(0 0 0 / 29%); border-radius:5px; box-sizing:border-box; color:#373737; display:inline-flex; font-size:16px; font-weight:400; gap:8px; height:40px; line-height:24px; padding:0 24px; text-decoration:none; white-space:nowrap; }
 /* L3 — facts + sections */
 .facts { border-bottom:.5px solid #666460; border-top:.5px solid #666460; display:grid; gap:min(48px, 3.333vw); grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); list-style:none; margin:0; padding:40px 0; } /* 3 across at 1440, 2 then 1 as the band narrows */
 .fact-value { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(24px, 1.944vw, 28px); font-weight:400; line-height:1.7143; margin:0; }

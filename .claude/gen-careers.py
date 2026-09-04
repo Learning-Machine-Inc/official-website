@@ -8,7 +8,7 @@ import html, os
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v42"
+REV = "figma-1617-19731-v43"
 EMAIL = "careers@learning-machine.ai"
 
 # Per-language UI strings. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
