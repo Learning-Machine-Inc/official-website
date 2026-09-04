@@ -596,7 +596,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .roles-list { border-top:.5px solid #666460; list-style:none; margin:0; padding:0; }
 .role-row { align-items:start; border-bottom:.5px solid #666460; display:grid; gap:min(48px, 3.333vw); grid-template-columns:min(400px, 27.778vw) minmax(0,1fr) auto; padding:40px 0; } /* 400 / 48 at 1440 */
 .role-name { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(28px, 2.222vw, 32px); font-weight:400; line-height:1.5; margin:0; }
-.role-meta,.fact-label { color:#776f63; font-family:"Roboto","Inter",sans-serif; font-size:14px; font-weight:600; letter-spacing:1.68px; line-height:22px; margin:0; text-transform:uppercase; }
+.role-meta,.fact-label { color:#776f63; font-family:"Roboto","Inter",sans-serif; font-size:14px; font-weight:400; letter-spacing:1.68px; line-height:22px; margin:0; text-transform:uppercase; } /* regular, not bold (user 2026-09-04) */
 .role-meta { margin-top:6px; }
 .role-points { display:grid; gap:12px; list-style:none; margin:0; padding:12px 0 0; }
 .role-soon { color:#776f63; font-size:16px; font-weight:300; line-height:24px; margin:12px 0 0; }
