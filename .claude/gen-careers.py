@@ -10,7 +10,7 @@ import html, os, posixpath
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v44"
+REV = "figma-1617-19731-v45"
 EMAIL = "careers@learning-machine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).
