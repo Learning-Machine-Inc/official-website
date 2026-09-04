@@ -618,7 +618,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .apply-card h2 { color:#1a1a1a; font-family:"Noto Serif SC",var(--careers-serif); font-size:28px; font-weight:400; line-height:48px; margin:0; }
 .apply-card p { color:#2e2b27; font-family:"Noto Sans SC",var(--careers-sans); font-size:18px; font-weight:300; line-height:27px; margin:0; max-width:600px; }
 .apply-actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding-top:15px; }
-.btn-primary { align-items:center; border-radius:5px; box-sizing:border-box; color:#fff; display:inline-flex; font-family:"Noto Sans SC",var(--careers-sans); font-size:18px; font-weight:400; gap:8px; height:45px; line-height:24px; padding:0 30px; text-decoration:none; white-space:nowrap; }
+.btn-primary { align-items:center; border-radius:5px; box-sizing:border-box; color:#fff; display:inline-flex; font-family:"Noto Sans SC",var(--careers-sans); font-size:clamp(14px, 1.111vw, 16px); font-weight:400; gap:8px; height:clamp(40px, 3.125vw, 45px); line-height:24px; padding:0 clamp(24px, 2.083vw, 30px); text-decoration:none; white-space:nowrap; } /* 16px text / 45px box at 1440, scales with the window (user 2026-09-04) */
 .btn-primary { background:#33a190; border:1px solid #aaddd4; }
 /* Careers text appears once as it enters view; no JS or reduced-motion fallback ever hides content. */
 @media (prefers-reduced-motion:no-preference) {
@@ -640,21 +640,39 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .lang-switch { background:transparent; border:0; flex:none; padding:0; }
   .light-nav .lang-switch a[lang] { padding:0 4px; white-space:nowrap; }
   .careers-band { padding:0 36px; } /* mobile header inset (16px) + 20px */
-  .careers-title { padding-bottom:32px; padding-top:48px; }
-  .careers-back { left:16px; top:0; }
-  .careers-title h1 { font-size:40px; line-height:52px; }
-  .role-row,.careers-section { gap:16px; grid-template-columns:minmax(0,1fr); }
-  .facts { gap:24px; grid-template-columns:minmax(0,1fr); }
-  .fact-value { font-size:24px; line-height:36px; }
-  .careers-section h2 { font-size:28px; line-height:40px; }
+  .careers-back { font-size:16px; height:36px; left:16px; top:0; width:36px; }
+  /* Mobile type scale (user 2026-09-04): body 13/20; title 32/40 · headings 22/30 · fact values 20/28 ·
+     intro 14/21 · eyebrows and meta 11/16. Spacing tightened in step with the sizes. The title band
+     starts 16px below the 36px back button. */
+  .careers-title { padding-bottom:24px; padding-top:52px; }
+  .careers-title h1 { font-size:32px; letter-spacing:-.5px; line-height:40px; margin-top:8px; }
+  .careers-intro { font-size:14px; line-height:21px; margin-top:12px; }
+  .careers-eyebrow { font-size:11px; letter-spacing:1.8px; line-height:16px; }
+  .role-meta,.fact-label { font-size:11px; letter-spacing:1.2px; line-height:16px; }
+  .role-meta { margin-top:4px; }
+  .careers-item,.role-soon { font-size:13px; gap:8px; line-height:20px; }
+  .role-soon { margin-top:8px; }
+  .role-row,.careers-section { gap:12px; grid-template-columns:minmax(0,1fr); }
+  .role-row { padding:28px 0; }
+  .role-name { font-size:22px; line-height:30px; }
+  .role-points { gap:8px; }
+  .facts { gap:16px; grid-template-columns:minmax(0,1fr); padding:24px 0; }
+  .fact-value { font-size:20px; line-height:28px; }
+  .careers-sections { gap:32px; padding-bottom:24px; padding-top:24px; }
+  .careers-section h2 { font-size:22px; line-height:30px; }
   .careers-section ul,.role-points { padding-top:0; }
-  .careers-sections { gap:40px; }
+  .careers-section ul { gap:8px; }
   .role-action { padding-top:0; width:100%; }
   .btn-outline,.btn-primary { justify-content:center; width:100%; }
-  .apply-band { padding-bottom:64px; }
-  .apply-band.apply-band-top { padding-top:40px; }
-  .apply-card { padding:40px 24px; }
-  .apply-actions { flex-direction:column; width:100%; }
+  .btn-outline { font-size:14px; height:36px; line-height:20px; }
+  .btn-primary { font-size:14px; height:40px; line-height:20px; padding:0 24px; }
+  .apply-band { padding-bottom:48px; }
+  .apply-band.apply-band-top { padding-top:32px; }
+  .apply-card { gap:10px; padding:32px 20px; }
+  .apply-card .careers-eyebrow { font-size:11px; letter-spacing:1.2px; line-height:16px; }
+  .apply-card h2 { font-size:22px; line-height:30px; }
+  .apply-card p { font-size:14px; line-height:21px; }
+  .apply-actions { flex-direction:column; gap:10px; padding-top:10px; width:100%; }
 }
 
 /* A/B test (variant B, the default on load) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids
