@@ -569,6 +569,17 @@
       window.lenis.on('scroll', onScroll);
       onScroll({ scroll: window.scrollY });
     }
+
+    // Deep links such as /#join (the careers pages' back button): the browser's own fragment jump
+    // races Lenis's first frame, which writes its remembered position (0) back to the window, so
+    // the landing is made explicit — once now, once more after load in case images shift layout.
+    const landOnHash = () => {
+      if (location.hash.length < 2) return;
+      const target = document.getElementById(location.hash.slice(1));
+      if (target && target.offsetHeight) window.lenis.scrollTo(target, { immediate:true, force:true });
+    };
+    landOnHash();
+    addEventListener('load', landOnHash, { once:true });
   </script>
 </body>
 </html>
