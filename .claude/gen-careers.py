@@ -345,7 +345,8 @@ def build_index(L):
     rows = "".join(role_row(r, L) for r in ROLES)
     eyebrow, h2, note, btn, subject = ui["open_apply"]
     # The eyebrow and "Open roles" stay English in every language, as designed for the 中文 page in Figma.
-    body = f"""    <a class="careers-back" href="{ui['home']}" aria-label="{attr(ui['back_home'])}" title="{attr(ui['back_home'])}"><span aria-hidden="true">←</span></a>
+    # Back from the list lands on the home page's Join section (where "See open roles" lives), not the top.
+    body = f"""    <a class="careers-back" href="{ui['home']}#join" aria-label="{attr(ui['back_home'])}" title="{attr(ui['back_home'])}"><span aria-hidden="true">←</span></a>
     <section class="careers-band careers-title">
       <p class="careers-eyebrow">Careers · We are hiring</p>
       <h1>Open roles</h1>
