@@ -34,7 +34,8 @@ PORT=3002 node .claude/serve-official-website.js
 ## 招聘页(careers/,2026-09-03 起)
 - **2026-09-07 用户定的内容规则**:招聘页任何地方**不出现地点(北京/中关村)和薪资待遇信息**——三级页原来的
   "地点与待遇"信息条整行删除,岗位元信息只剩"类型 · 团队";招聘页正文(条目、引言、投递卡说明)字号 = 首页
-  正文规范(`.light-hero-desc p` 那条 clamp 表达式),手机端仍是 13px 那套;全站 header 只保留 Contact 按钮,
+  正文规范(`.light-hero-desc p`:桌面那条 clamp 表达式 / 1.5,手机端 16px / 1.4;手机端原来的 13/20 · 14/21
+  那套 2026-09-07 按用户要求统一成正文规范);全站 header 只保留 Contact 按钮,
   Careers 药丸已去掉(招聘入口是 Join 卡按钮和页脚)。
 - `careers/index.html` = 二级页 Open roles(所有开放岗位列表),`careers/<slug>.html` = 三级岗位详情;
   首页 Join 区 "See open roles" 与页脚 Careers 都指向 `careers/`。Figma 对应「公司-产品官网」文件
@@ -140,7 +141,9 @@ PORT=3002 node .claude/serve-official-website.js
   基础规则里,`@media (min-width:768px)` / `@media (max-width:767.98px)` 两个块**只放字号、行高、
   宽度、布局**。改字体/颜色一律改基础规则,不要在媒体查询里覆盖 `font-family`/`color`,否则另一端
   会掉队(之前 Roboto、青绿色等桌面更新没同步到移动端就是这个原因)。
-- belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
+- belief 段落文案(`.light-belief-copy`):`#476b67`,Roboto 300;桌面字号是自己的 clamp 表达式 / 1.5,
+  **手机端 = 正文规范 16px / 1.4,与首页段落 "The ability to learn…" 完全一致**(用户 2026-09-07,原来是 20/1.45);
+  墨水浅态 = 12% opacity(`inkBase`)。中文行高 1.6 由 `html[lang="zh-CN"]` 规则统一压过。
 
 ## 图片资源(2026-09-02 起)
 - 页面里的照片类资源一律 **AVIF + WebP**,CSS 背景用 `image-set(url() type(), …)`(前面先写一条
