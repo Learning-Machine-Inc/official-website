@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-variant="light" data-ab-variant="b">
+<html lang="fr" data-variant="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,7 @@
   <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
   <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin media="(max-width:767.98px)">
   <link rel="preload" href="../assets/fonts/outfit-bold-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <!-- Hero art preloads match the DEFAULT variant (B) and the CSS image-set/media split exactly, so
+  <!-- Hero art preloads match the CSS image-set/media split exactly, so
        the browser never fetches two hero images. `type` lets non-AVIF browsers skip these and fall
        back to the CSS-selected WebP/JPEG. -->
   <link rel="preload" href="../assets/figma-b-test/hero-art-1920.avif" as="image" type="image/avif" fetchpriority="high" media="(min-width:768px) and (max-resolution:1.49dppx)">
@@ -100,9 +100,8 @@
       <div class="belief-stage">
       <div class="figma-frame">
         <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-user/belief-p1-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-user/belief-p1-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-user/belief-p1-mobile.jpg"><source type="image/avif" srcset="../assets/figma-user/belief-p1-1400.avif"><source type="image/webp" srcset="../assets/figma-user/belief-p1-1400.webp"><img src="../assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <!-- p2 photo of the (only) teal design. The data-a/data-b attributes are leftovers of the removed A/B
-             toggle; the live values are the data-b ones. -->
-        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-b-test/belief-p2-mobile-640.avif" data-a="../assets/figma-user/belief-p2-mobile-640.avif" data-b="../assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-b-test/belief-p2-mobile-640.webp" data-a="../assets/figma-user/belief-p2-mobile-640.webp" data-b="../assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2-mobile.jpg" data-b="../assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="../assets/figma-b-test/belief-p2-1400.avif" data-a="../assets/figma-user/belief-p2-1400.avif" data-b="../assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="../assets/figma-b-test/belief-p2-1400.webp" data-a="../assets/figma-user/belief-p2-1400.webp" data-b="../assets/figma-b-test/belief-p2-1400.webp"><img src="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2.png" data-b="../assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
+        <!-- p2 photo (Figma tFncbEkPEyRqS4h7Su8ODE, belief frame 1:218). -->
+        <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="../assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="../assets/figma-b-test/belief-p2-1400.webp"><img src="../assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
         <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>Nous croyons que l'avenir de l'IA doit être divers et inclusif.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Chaque entreprise devrait pouvoir utiliser son savoir propriétaire pour construire sa propre IA. Chaque personne devrait bénéficier d'une expérience d'IA taillée pour elle. Et, par défaut, ses données devraient rester entre ses mains.</span></p>
       </div>
       </div>
@@ -134,10 +133,8 @@
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
     const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
     const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
-    // The teal design ("variant B") is the only design: html[data-ab-variant="b"] is fixed in the <html>
-    // tag and the old double-click toggle back to the blue scheme was removed on 2026-09-07. The
-    // data-a attributes still on the belief-p2 <picture> are inert leftovers. Do NOT touch
-    // root.dataset.variant either — the retired dark-main CSS still keys off [data-variant="dark"].
+    // One design only (2026-09-07): the former A/B split and its double-click toggle are gone. Do NOT touch
+    // root.dataset.variant — the retired dark-main CSS still keys off [data-variant="dark"].
     menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; mobileMenu.hidden = open; menuButton.setAttribute('aria-expanded', String(!open)); menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
     mobileMenu.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
     mobileViewport.addEventListener('change', (event) => { if (!event.matches) closeMenu(); });
@@ -452,11 +449,9 @@
             // level (pale → 100%). Splitting subtly changes word widths (kerning/ligatures
             // break at span boundaries), which can move a wrap point — so line grouping must be
             // measured AFTER the split, on the final layout.
-            // Variant B's belief-copy color (#476b67, per Figma) is lighter/less saturated than
-            // variant A's navy (#242e6f) — the same sweep reads as barely-there against it, so B
-            // starts from a paler base (0.12 vs 0.3) to keep the same felt contrast without
-            // touching the Figma-exact resting color.
-            const inkBase = () => root.dataset.abVariant === 'b' ? 0.12 : 0.3;
+            // The belief copy colour (#476b67, per Figma) is light and desaturated, so the ink sweep
+            // starts from a pale 0.12 base to stay visible against the resting colour.
+            const inkBase = () => 0.12;
             beliefWords.forEach(w => {
               w.style.animation = 'none'; w.style.transition = 'none'; w.style.opacity = '0'; w.style.transform = 'translateY(46px)';
               const chars = [...w.textContent].map(ch => { const s = document.createElement('span'); s.textContent = ch; s.style.opacity = String(inkBase()); return s; });

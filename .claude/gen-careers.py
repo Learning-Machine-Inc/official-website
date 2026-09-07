@@ -61,7 +61,7 @@ for ui in UI.values():
     ui["prefix"] = "../" * (ui["dir"].count("/") + 1)
 
 HEAD = """<!doctype html>
-<html lang="{lang}" data-variant="light" data-ab-variant="b">
+<html lang="{lang}" data-variant="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">

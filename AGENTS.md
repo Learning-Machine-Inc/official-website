@@ -20,12 +20,10 @@ PORT=3002 node .claude/serve-official-website.js
   `html[data-variant="dark"] .light-main { display:none; }` 这类规则,那会重新显示旧版而不是
   真正的 B 版本。旧版相关 CSS(`html[data-variant="dark"]` 开头的一大段颜色/变量覆盖)也**勿动**,
   它们现在虽是死代码但不产生任何效果。
-- **青绿色系(原"B 版")是唯一设计**(2026-09-07 用户要求删掉双击 logo 进入的蓝色方案):
-  `<html data-ab-variant="b">` 写死,`#variant-toggle` 按钮、`setAbVariant()`、belief-p2 换图逻辑都已删除。
-  B 的样式仍以 `styles.css` 末尾 `html[data-ab-variant="b"]` 规则覆盖蓝色基础值的形式存在,基础值里的蓝色
-  (`#4b72c1`、`#242e6f` 等)和 `assets/figma-107/hero-group-48-*`、`figma-user/belief-p2*` 这些 A 版素材
-  现在是死代码/死资源,可以另起一次清理把 B 值合并进基础规则;`<picture>` 里的 `data-a/data-b` 属性无用但无害。
-  `html[data-variant]` 属性永久固定为 `"light"`。
+- **只有一套设计**(2026-09-07 用户要求彻底删除蓝色方案):A/B 机制已不存在——没有 `data-ab-variant` 属性、
+  没有切换按钮和脚本,青绿配色(`#008f7f` / `#3bb4a2` / `#476b67` 等)、B 版首屏图与 Join 背景、belief 卡片
+  桌面位置都直接写在基础规则里;蓝色方案的样式值和专用素材(`figma-107/hero-group-48-*`、`figma-user/belief-p2*`、
+  `figma-105/join-backdrop-*`)已删除。`html[data-variant]` 属性永久固定为 `"light"`(旧 dark-main 仍靠它隐藏)。
 - 本地开发服务器对所有响应发 `Cache-Control: no-store`(2026-09-02 加),本地改完直接刷新即可。
   改了 `serve-official-website.js` 本身要重启进程。
 - **线上(GitHub Pages)有 10 分钟 CDN/浏览器缓存**(`Cache-Control: max-age=600`),而且
@@ -141,14 +139,13 @@ PORT=3002 node .claude/serve-official-website.js
 - 页面里的照片类资源一律 **AVIF + WebP**,CSS 背景用 `image-set(url() type(), …)`(前面先写一条
   普通 `url()` 兜底),`<img>` 用 `<picture><source type>`。桌面头图分 1920w(1x)/ 2752w
   (≥1.5dppx,`@media (min-resolution:1.5dppx)`)两档,移动端 1440w;`<head>` 里的头图 preload
-  必须和 CSS 的 media/尺寸拆分**一一对应**,且指向默认变体(B),否则会重复下载。
+  必须和 CSS 的 media/尺寸拆分**一一对应**,否则会重复下载。
 - 头图底层还叠了一张内联的 48px WebP(LQIP,base64 在 CSS 里),大图到之前先有画面。
 - **换图/加图流程**:把源图放到原位置 → 在 `.claude/encode-images.py` 的 `JOBS` 里登记 →
   `python3 .claude/encode-images.py` 重出全部格式 → 引用新文件名。不要再直接引用几 MB 的
-  PNG(原 `hero-group-48.png` 6.4MB 就是线上首屏慢的原因;它已换成无损 WebP 母版
-  `hero-group-48.webp`,仅作编码源,页面不引用)。
-- belief-p2 在 A/B 间切换:`<picture>` 里每个 `<source>`/`<img>` 带 `data-a`/`data-b`,
-  `setAbVariant()` 逐个换 `srcset`/`src`;初始值写 B(默认),避免预加载扫描器先抓 A。
+  PNG(2026-09-02 之前线上首屏慢就是因为直接引了 6.4MB 的 PNG)。首屏源图是
+  `assets/figma-b-test/hero-art.jpg`(2752×1729),belief 两张卡片源图在 `figma-user/belief-p1.png` 和
+  `figma-b-test/belief-p2.jpg`,Join 背景 `figma-b-test/join-backdrop.jpg`。
 
 ## 验收标准(每个改动都要过)
 1. 在 3002 端口实际滚一遍:入场、滚动 scrub(正向+反向)、离场都正常;
