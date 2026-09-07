@@ -626,7 +626,10 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 /* L3 — facts + sections */
 .facts { border-bottom:.5px solid #666460; border-top:.5px solid #666460; display:grid; gap:min(48px, 3.333vw); grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); list-style:none; margin:0; padding:40px 0; } /* 3 across at 1440, 2 then 1 as the band narrows */
 .fact-value { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(24px, 1.944vw, 28px); font-weight:400; line-height:1.7143; margin:0; }
-.careers-sections { border-top:.5px solid #666460; display:grid; gap:9px; padding-bottom:36px; padding-top:40px; } /* the rule used to belong to the facts row (removed 2026-09-07); sections now open the body directly under the title */
+.careers-sections { display:grid; gap:9px; padding-bottom:36px; padding-top:0; }
+/* The rule under the title used to belong to the facts row (removed 2026-09-07). It sits on the first section so it
+   spans the content band, not the padded full width. */
+.careers-section:first-child { border-top:.5px solid #666460; padding-top:40px; }
 .careers-section { display:grid; gap:min(48px, 3.333vw); grid-template-columns:min(400px, 27.778vw) minmax(0,1fr); }
 .careers-section h2 { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(28px, 2.222vw, 32px); font-weight:400; line-height:1.5; margin:-2px 0 0; }
 .careers-section ul { display:grid; gap:12px; list-style:none; margin:0; padding:32px 0 0; }
@@ -678,7 +681,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .role-points { gap:8px; }
   .facts { gap:16px; grid-template-columns:minmax(0,1fr); padding:24px 0; }
   .fact-value { font-size:20px; line-height:28px; }
-  .careers-sections { gap:32px; padding-bottom:24px; padding-top:24px; }
+  .careers-sections { gap:32px; padding-bottom:24px; padding-top:0; }
+  .careers-section:first-child { padding-top:24px; }
   .careers-section h2 { font-size:22px; line-height:30px; }
   .careers-section ul,.role-points { padding-top:0; }
   .careers-section ul { gap:8px; }
