@@ -35,6 +35,10 @@ PORT=3002 node .claude/serve-official-website.js
   (2026-09-03 的按钮配色就是这样"没生效")。
 
 ## 招聘页(careers/,2026-09-03 起)
+- **2026-09-07 用户定的内容规则**:招聘页任何地方**不出现地点(北京/中关村)和薪资待遇信息**——三级页原来的
+  "地点与待遇"信息条整行删除,岗位元信息只剩"类型 · 团队";招聘页正文(条目、引言、投递卡说明)字号 = 首页
+  正文规范(`.light-hero-desc p` 那条 clamp 表达式),手机端仍是 13px 那套;全站 header 只保留 Contact 按钮,
+  Careers 药丸已去掉(招聘入口是 Join 卡按钮和页脚)。
 - `careers/index.html` = 二级页 Open roles(所有开放岗位列表),`careers/<slug>.html` = 三级岗位详情;
   首页 Join 区 "See open roles" 与页脚 Careers 都指向 `careers/`。Figma 对应「公司-产品官网」文件
   页「官网 1440 · 代码回同步 0831」里的 07(L2)/ 08–10(L3)画板。
