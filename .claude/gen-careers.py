@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the careers pages in the site's four languages from one data table:
-  careers/index.html,    careers/<slug>.html     中文
-  careers/en/index.html, careers/en/<slug>.html  English (site default)
-  careers/fr/…, careers/de/…                     Français / Deutsch (first-pass machine translation)
+"""Generate the careers pages in the site's four languages from one data table (language first, like the
+home pages: the default language English has no prefix, every other language is one folder):
+  careers/index.html,       careers/<slug>.html        English (site default)
+  zh-cn/careers/index.html, zh-cn/careers/<slug>.html  简体中文 (zh-cn, not plain zh: Simplified only)
+  fr/careers/…, de/careers/…                           Français / Deutsch (first-pass machine translation)
+The old URLs (careers/ = 中文, careers/en|fr|de/, zh/) are kept as redirect stubs by gen-home-langs.py.
 Header/footer markup mirrors index.html (asset paths rewritten with ../ or ../../). Every page links to
 its siblings through the footer language menu and hreflang alternates; the <head> language-memory
 script keeps a visitor inside the language they chose."""
@@ -10,50 +12,50 @@ import html, os, posixpath
 
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v46"
+REV = "figma-1617-19731-v47"
 EMAIL = "careers@learning-machine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).
-LANGS = [("en", "English", "en"), ("zh-CN", "中文", "zh"), ("fr", "Français", "fr"), ("de", "Deutsch", "de")]
+LANGS = [("en", "English", "en"), ("zh-CN", "简体中文", "zh"), ("fr", "Français", "fr"), ("de", "Deutsch", "de")]
 
 # Per-language UI strings. `dir` is the site-relative folder of that language's careers pages; `home` is the
 # same-language home page relative to `dir`. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
 # apply = (eyebrow, h2, note, button); footer = (blurb, explore, approach, careers, contact, copyright).
 UI = {
-    "zh": dict(html_lang="zh-CN", dir="careers", home="../zh/",
+    "zh": dict(html_lang="zh-CN", dir="zh-cn/careers", home="../",
                nav_careers="招聘", nav_contact="联系我们",
                intro="目前开放 {n} 个岗位。点击岗位查看职位要求与投递方式。",
                view="查看详情", back="返回职位列表", back_home="返回首页",
                open_apply=("Open application · 自荐", "没有合适的岗位？直接把简历发给我们", "邮件发送至 {email}，注明你感兴趣的方向。", "自荐投递", "自荐投递"),
                apply=("Apply · 简历投递", "简历投递", "邮件发送至 {email}，主题请注明「{subject}」。", "立即投递"),
-               index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端、视觉设计。",
+               index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端研发。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}）。",
                footer=("打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。", "探索", "我们的方法", "招聘", "联系我们", "© 2026 Learning Machine Co. 保留所有权利。")),
-    "en": dict(html_lang="en", dir="careers/en", home="../../",
+    "en": dict(html_lang="en", dir="careers", home="../",
                nav_careers="Careers", nav_contact="Contact",
                intro="{n} open roles. Open a role for requirements and how to apply.",
                view="View details", back="Back to open roles", back_home="Back to home",
                open_apply=("Open application", "No matching role? Send us your CV anyway", "Email {email} and tell us which direction interests you.", "Send open application", "Open application"),
                apply=("Apply", "Send your CV", "Email {email} with the subject line “{subject}”.", "Apply now"),
-               index_desc="Open roles at Learning Machine: Agent full-stack engineering, client engineering, visual design.",
+               index_desc="Open roles at Learning Machine: Agent full-stack engineering and client engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine is hiring: {name} ({tag}).",
                footer=("Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.", "Explore", "Approach", "Careers", "Contact", "© 2026 Learning Machine Co. All rights reserved.")),
-    "fr": dict(html_lang="fr", dir="careers/fr", home="../../fr/",
+    "fr": dict(html_lang="fr", dir="fr/careers", home="../",
                nav_careers="Carrières", nav_contact="Contact",
                intro="{n} postes ouverts. Ouvrez un poste pour voir les exigences et comment postuler.",
                view="Voir le poste", back="Retour aux postes", back_home="Retour à l'accueil",
                open_apply=("Candidature spontanée", "Aucun poste ne vous correspond ? Envoyez-nous quand même votre CV", "Écrivez à {email} en précisant le domaine qui vous intéresse.", "Envoyer une candidature spontanée", "Candidature spontanée"),
                apply=("Postuler", "Envoyez votre CV", "Écrivez à {email} avec pour objet « {subject} ».", "Postuler"),
-               index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent, ingénierie client, design visuel.",
+               index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent et ingénierie client.",
                role_title="{name} ({tag})", role_desc="Learning Machine recrute : {name} ({tag}).",
                footer=("Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.", "Explorer", "Approche", "Carrières", "Contact", "© 2026 Learning Machine Co. Tous droits réservés.")),
-    "de": dict(html_lang="de", dir="careers/de", home="../../de/",
+    "de": dict(html_lang="de", dir="de/careers", home="../",
                nav_careers="Karriere", nav_contact="Kontakt",
                intro="{n} offene Stellen. Öffne eine Stelle für Anforderungen und Bewerbung.",
                view="Details ansehen", back="Zurück zu den Stellen", back_home="Zur Startseite",
                open_apply=("Initiativbewerbung", "Keine passende Stelle? Schick uns trotzdem deinen Lebenslauf", "Schreib an {email} und nenne die Richtung, die dich interessiert.", "Initiativbewerbung senden", "Initiativbewerbung"),
                apply=("Bewerben", "Schick uns deinen Lebenslauf", "Schreib an {email} mit dem Betreff „{subject}“.", "Jetzt bewerben"),
-               index_desc="Offene Stellen bei Learning Machine: Agent-Full-Stack-Engineering, Client-Engineering, Visual Design.",
+               index_desc="Offene Stellen bei Learning Machine: Agent-Full-Stack-Engineering und Client-Engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine sucht: {name} ({tag}).",
                footer=("Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.", "Entdecken", "Ansatz", "Karriere", "Kontakt", "© 2026 Learning Machine Co. Alle Rechte vorbehalten.")),
 }
@@ -120,6 +122,16 @@ SMOOTH_SCROLL = """  <script type="module">
 # One entry per role; slug=None means "no posting yet" (list row only, shows the `soon` text).
 # No location / salary / benefits anywhere (user 2026-09-07): the former facts row is gone and metas carry only type · team.
 # Copy is the user's postings verbatim (zh) and faithful translations (en / fr / de) — do not paraphrase.
+# PARKED_ROLES are not rendered anywhere: the design internship was taken down on 2026-09-07 (user: 先把设计的招聘信息下掉,
+# 之后我再补上). When the posting is ready, move the entry back into ROLES, give it a slug + sections, and put
+# "visual design" back into the four `index_desc` strings above.
+PARKED_ROLES = [
+    dict(slug=None,
+         zh=dict(name="Agent 视觉设计实习生", tag="实习", meta="实习 · 设计", soon="招聘详情即将发布"),
+         en=dict(name="Agent Visual Design Intern", tag="Intern", meta="Intern · Design", soon="Details coming soon"),
+         fr=dict(name="Stagiaire Design Visuel Agent", tag="Stage", meta="Stage · Design", soon="Détails à venir"),
+         de=dict(name="Praktikum Visual Design Agent", tag="Praktikum", meta="Praktikum · Design", soon="Details folgen")),
+]
 ROLES = [
     dict(slug="agent-fullstack-campus",
          zh=dict(name="Agent 全栈研发工程师", tag="校招 / 实习", meta="校招 / 实习 · 研发",
@@ -155,7 +167,7 @@ ROLES = [
                      ("NICE TO HAVE", "Pluspunkte", ["Sicheres Arbeiten auf Englisch", "Erfahrung im Bau von Agent-Produkten", "Erfahrung in plattformübergreifender Entwicklung (Mobile + Desktop)", "Open-Source-Beiträge"]),
                  ])),
     dict(slug="agent-fullstack",
-         zh=dict(name="Agent 全栈研发工程师", tag="社招", meta="社招 · 研发",
+         zh=dict(name="Agent 全栈研发高级工程师", tag="社招", meta="社招 · 研发",
                  points=["负责 AI Agent 个人助理客户端全栈研发，端到端落地核心功能", "主导核心交互逻辑、任务调度与上下文管理，结合大模型能力"],
                  eyebrow="WE ARE HIRING · 社招",
                  sections=[
@@ -164,7 +176,7 @@ ROLES = [
                      ("SKILLS", "技能要求", ["前端 / 客户端：熟练掌握 Flutter / React Native，或 iOS（Swift / OC），熟悉组件化、工程化开发，了解 UI/UX 设计规范。", "后端：熟练掌握 Go / Python / Java 中的一种或多种，熟悉 MySQL、MongoDB 等数据库，了解 Redis 缓存、消息队列等中间件，具备接口设计、性能优化能力。", "AI 相关：熟悉大模型 API 调用、Prompt 设计，了解 Agent 框架（如 LangChain、LlamaIndex），有智能对话、任务拆解、多工具集成经验者加分。", "其他：熟悉 Git 版本控制，具备良好的代码规范和文档编写习惯；具备较强的学习能力、沟通能力和团队协作能力，能快速适应 AI 技术迭代节奏。"]),
                      ("NICE TO HAVE", "加分项", ["有个人助理类、AI Agent 类产品全栈研发经验，或主导过相关产品从 0 到 1 落地。", "熟悉大模型微调、Agent 智能调度策略、上下文记忆优化等相关技术。", "有跨端（移动端 + PC 端）研发经验，能独立完成全平台客户端适配。", "开源项目贡献者，或有个人技术博客、相关技术成果展示。"]),
                  ]),
-         en=dict(name="Agent Full-Stack Engineer", tag="Experienced hire", meta="Experienced hire · Engineering",
+         en=dict(name="Senior Agent Full-Stack Engineer", tag="Experienced hire", meta="Experienced hire · Engineering",
                  points=["Own full-stack development of the AI Agent personal-assistant client and ship its core features end to end", "Lead core interaction logic, task scheduling and context management on top of large-model capabilities"],
                  eyebrow="WE ARE HIRING · Experienced hire",
                  sections=[
@@ -173,7 +185,7 @@ ROLES = [
                      ("SKILLS", "Skills", ["Front-end / client: proficient in Flutter / React Native or iOS (Swift / Objective-C); familiar with component-based, engineered development and UI/UX design guidelines.", "Back-end: proficient in one or more of Go / Python / Java; familiar with MySQL, MongoDB and other databases, plus middleware such as Redis caching and message queues; able to design APIs and optimise performance.", "AI: familiar with LLM API calls and prompt design; know Agent frameworks such as LangChain and LlamaIndex. Experience with intelligent conversation, task decomposition or multi-tool integration is a plus.", "Other: fluent with Git; good coding standards and documentation habits; strong learning, communication and teamwork skills, able to keep pace with fast AI iteration."]),
                      ("NICE TO HAVE", "Bonus points", ["Full-stack experience on personal-assistant or AI Agent products, or having led such a product from zero to launch.", "Familiar with large-model fine-tuning, Agent scheduling strategies or context-memory optimisation.", "Cross-platform (mobile + desktop) experience, able to adapt a client to every platform independently.", "Open-source contributor, or a personal tech blog / portfolio of technical work."]),
                  ]),
-         fr=dict(name="Ingénieur Full-Stack Agent", tag="Expérimenté", meta="Expérimenté · Ingénierie",
+         fr=dict(name="Ingénieur Full-Stack Agent Senior", tag="Expérimenté", meta="Expérimenté · Ingénierie",
                  points=["Piloter le développement full-stack du client assistant personnel AI Agent et livrer ses fonctionnalités clés de bout en bout", "Diriger la logique d'interaction, l'ordonnancement des tâches et la gestion du contexte, sur la base des grands modèles"],
                  eyebrow="WE ARE HIRING · Expérimenté",
                  sections=[
@@ -182,7 +194,7 @@ ROLES = [
                      ("SKILLS", "Compétences", ["Front-end / client : maîtrise de Flutter / React Native ou d'iOS (Swift / Objective-C) ; familiarité avec le développement par composants et industrialisé, ainsi qu'avec les règles de design UI/UX.", "Back-end : maîtrise d'un ou plusieurs langages parmi Go / Python / Java ; connaissance de MySQL, MongoDB et autres bases de données, ainsi que de middlewares comme le cache Redis et les files de messages ; capacité à concevoir des API et à optimiser les performances.", "IA : familiarité avec les appels d'API LLM et la conception de prompts ; connaissance de frameworks d'Agent comme LangChain et LlamaIndex. Une expérience en conversation intelligente, décomposition de tâches ou intégration multi-outils est un plus.", "Autres : maîtrise de Git ; bonnes pratiques de code et de documentation ; fortes capacités d'apprentissage, de communication et de travail en équipe, pour suivre le rythme rapide de l'IA."]),
                      ("NICE TO HAVE", "Atouts", ["Expérience full-stack sur des produits assistant personnel ou AI Agent, ou avoir mené un tel produit de zéro au lancement.", "Connaissance du fine-tuning des grands modèles, des stratégies d'ordonnancement d'Agent ou de l'optimisation de la mémoire de contexte.", "Expérience multiplateforme (mobile + desktop), capacité à adapter seul un client à toutes les plateformes.", "Contributeur open source, ou blog technique personnel / portfolio de réalisations techniques."]),
                  ]),
-         de=dict(name="Agent Full-Stack Engineer", tag="Berufserfahren", meta="Berufserfahren · Engineering",
+         de=dict(name="Senior Agent Full-Stack Engineer", tag="Berufserfahren", meta="Berufserfahren · Engineering",
                  points=["Die Full-Stack-Entwicklung des KI-Agent-Assistenten-Clients verantworten und seine Kernfunktionen Ende-zu-Ende ausliefern", "Interaktionslogik, Aufgabenplanung und Kontextverwaltung auf Basis großer Modelle leiten"],
                  eyebrow="WE ARE HIRING · Berufserfahren",
                  sections=[
@@ -191,11 +203,6 @@ ROLES = [
                      ("SKILLS", "Kenntnisse", ["Frontend / Client: sicher in Flutter / React Native oder iOS (Swift / Objective-C); vertraut mit komponentenbasierter, industrialisierter Entwicklung und UI/UX-Richtlinien.", "Backend: sicher in einer oder mehreren Sprachen aus Go / Python / Java; vertraut mit MySQL, MongoDB und anderen Datenbanken sowie Middleware wie Redis-Cache und Message Queues; API-Design und Performance-Optimierung.", "KI: vertraut mit LLM-API-Aufrufen und Prompt-Design; Kenntnis von Agent-Frameworks wie LangChain und LlamaIndex. Erfahrung mit intelligenten Dialogen, Aufgabenzerlegung oder Multi-Tool-Integration ist ein Plus.", "Sonstiges: sicher mit Git; gute Code- und Dokumentationsstandards; starke Lern-, Kommunikations- und Teamfähigkeit, um mit dem schnellen KI-Tempo Schritt zu halten."]),
                      ("NICE TO HAVE", "Pluspunkte", ["Full-Stack-Erfahrung mit Assistenten- oder KI-Agent-Produkten oder ein solches Produkt von null bis zum Launch geführt.", "Vertraut mit LLM-Fine-Tuning, Agent-Planungsstrategien oder Optimierung des Kontextgedächtnisses.", "Plattformübergreifende Erfahrung (Mobile + Desktop), einen Client selbstständig auf alle Plattformen bringen.", "Open-Source-Beiträge oder ein eigener Tech-Blog / ein Portfolio technischer Arbeiten."]),
                  ])),
-    dict(slug=None,
-         zh=dict(name="Agent 视觉设计实习生", tag="实习", meta="实习 · 设计", soon="招聘详情即将发布"),
-         en=dict(name="Agent Visual Design Intern", tag="Intern", meta="Intern · Design", soon="Details coming soon"),
-         fr=dict(name="Stagiaire Design Visuel Agent", tag="Stage", meta="Stage · Design", soon="Détails à venir"),
-         de=dict(name="Praktikum Visual Design Agent", tag="Praktikum", meta="Praktikum · Design", soon="Details folgen")),
     dict(slug="agent-client",
          zh=dict(name="Agent 客户端工程师", tag="社招", meta="社招 · 客户端研发",
                  points=["开发自有模型的 Agent 客户端：Web、iOS、macOS", "从 Figma MCP 到 Coding Agent 的全栈客户端功能开发"],
@@ -245,7 +252,8 @@ def items(lst):
 
 
 def rel(from_dir, to_dir):
-    """Relative URL prefix from one careers folder to another: "" for the same folder, else "en/", "../fr/", "../"."""
+    """Relative URL prefix from one careers folder to another: "" for the same folder, else e.g. "../zh-cn/careers/"
+    (from careers/) or "../../careers/" (from zh-cn/careers/)."""
     r = posixpath.relpath(to_dir, from_dir)
     return "" if r == "." else r + "/"
 

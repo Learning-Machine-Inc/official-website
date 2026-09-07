@@ -350,15 +350,19 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
   .light-nav-contact { padding:7.5px 12px 7.9px; }
   .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
-     the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7). */
-  .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
+     the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7).
+     Size: the base rule's `cover` filled the 760px box with a 322%-wide crop that read as oversized
+     (user 2026-09-07: 缩小一些，仍要顶对齐). The art is now 220% of the viewport width, still anchored
+     to the top edge (`70% top`); the 760px box and the bottom-anchored copy are unchanged, and the veil
+     fades the art's lower edge behind the paragraph exactly as before. */
+  .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-position:70% top; background-size:220% auto; height:760px; left:0; min-width:0; top:0; width:100%; }
   .light-hero-veil { height:84%; left:0; top:22%; width:100%; }
   .figma-frame { height:auto; max-width:none; min-height:100%; }
   /* P0-4: anchor the copy to the hero's bottom edge instead of a fixed top — a fixed top:390px
      plus natural content height pushed the buttons 21px past the 760px section. */
   .light-hero-copy { bottom:24px; gap:12px; left:32px; margin-left:0; padding:0; position:absolute; top:auto; width:calc(100% - 64px); }
-  /* Mobile type scale — exactly five sizes, hierarchy first:
-     34 display / 26 heading / 20 statement / 16 body / 14 caption+controls */
+  /* Mobile type scale — hierarchy first:
+     34 display / 26 heading / 16 body (hero paragraph AND the belief copy) / 14 caption+controls */
   .light-hero h1 { font-size:34px; letter-spacing:-.5px; line-height:1.1; }
   .light-hero-desc { width:100%; }
   .light-hero-desc .light-hero-kicker { font-size:16px; line-height:1.4; max-width:none; }
@@ -367,7 +371,9 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
   .light-belief { height:820px; margin-top:0; }
   /* P0-2: this rule sets top/left but was missing position:absolute, so the copy sat at the top
      of the section underneath the cards. */
-  .light-belief-copy { font-size:20px; left:32px; line-height:1.45; position:absolute; top:395px; width:calc(100% - 64px); }
+  /* Belief copy = body text on mobile: the same 16px / 1.4 as the hero paragraph ("The ability to learn…",
+     .light-hero-desc p) — user 2026-09-07. Position and width unchanged. */
+  .light-belief-copy { font-size:16px; left:32px; line-height:1.4; position:absolute; top:395px; width:calc(100% - 64px); }
   /* Cards spread with the viewport only up to 580px; past that both anchor to the centre so the pair
      keeps the 580px composition (p1 at 50%−245.58px, p2's right edge at 50%+278px) instead of
      drifting to opposite edges on wide phones / small tablets. */
@@ -649,7 +655,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 }
 @media (min-width:768px) {
   /* Careers body copy = the site's body size, i.e. the same responsive expression as the hero paragraph
-     ("The ability to learn…", .light-hero-desc p) — user 2026-09-07. Mobile keeps its own 13px scale below. */
+     ("The ability to learn…", .light-hero-desc p) — user 2026-09-07. Mobile follows the same paragraph's
+     16px / 1.4 in the mobile block below. */
   .careers-item,.role-soon,.careers-intro,.apply-card p { font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); line-height:1.5; }
 }
 @media (min-width:768px) and (max-width:1199px) {
@@ -663,16 +670,16 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 @media (max-width:767.98px) {
   .careers-band { padding:0 36px; } /* mobile header inset (16px) + 20px */
   .careers-back { font-size:16px; height:36px; left:16px; top:0; width:36px; }
-  /* Mobile type scale (user 2026-09-04): body 13/20; title 32/40 · headings 22/30 · fact values 20/28 ·
-     intro 14/21 · eyebrows and meta 11/16. Spacing tightened in step with the sizes. The title band
-     starts 16px below the 36px back button. */
+  /* Mobile type scale: body copy (items, intro, apply note) = the hero paragraph's mobile 16px / 1.4
+     (user 2026-09-07, replacing the 13/20 · 14/21 scale of 2026-09-04); title 32/40 · headings 22/30 ·
+     eyebrows and meta 11/16. The title band starts 16px below the 36px back button. */
   .careers-title { padding-bottom:24px; padding-top:52px; }
   .careers-title h1 { font-size:32px; letter-spacing:-.5px; line-height:40px; margin-top:8px; }
-  .careers-intro { font-size:14px; line-height:21px; margin-top:12px; }
+  .careers-intro { font-size:16px; line-height:1.4; margin-top:12px; }
   .careers-eyebrow { font-size:11px; letter-spacing:1.8px; line-height:16px; }
   .role-meta,.fact-label { font-size:11px; letter-spacing:1.2px; line-height:16px; }
   .role-meta { margin-top:4px; }
-  .careers-item,.role-soon { font-size:13px; gap:8px; line-height:20px; }
+  .careers-item,.role-soon { font-size:16px; gap:8px; line-height:1.4; }
   .role-soon { margin-top:8px; }
   .role-row,.careers-section { gap:12px; grid-template-columns:minmax(0,1fr); }
   .role-row { padding:28px 0; }
@@ -694,7 +701,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .apply-card { gap:10px; padding:32px 20px; }
   .apply-card .careers-eyebrow { font-size:11px; letter-spacing:1.2px; line-height:16px; }
   .apply-card h2 { font-size:22px; line-height:30px; }
-  .apply-card p { font-size:14px; line-height:21px; }
+  .apply-card p { font-size:16px; line-height:1.4; }
   .apply-actions { flex-direction:column; gap:10px; padding-top:10px; width:100%; }
 }
 

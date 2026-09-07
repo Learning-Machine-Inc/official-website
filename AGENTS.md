@@ -34,7 +34,8 @@ PORT=3002 node .claude/serve-official-website.js
 ## 招聘页(careers/,2026-09-03 起)
 - **2026-09-07 用户定的内容规则**:招聘页任何地方**不出现地点(北京/中关村)和薪资待遇信息**——三级页原来的
   "地点与待遇"信息条整行删除,岗位元信息只剩"类型 · 团队";招聘页正文(条目、引言、投递卡说明)字号 = 首页
-  正文规范(`.light-hero-desc p` 那条 clamp 表达式),手机端仍是 13px 那套;全站 header 只保留 Contact 按钮,
+  正文规范(`.light-hero-desc p`:桌面那条 clamp 表达式 / 1.5,手机端 16px / 1.4;手机端原来的 13/20 · 14/21
+  那套 2026-09-07 按用户要求统一成正文规范);全站 header 只保留 Contact 按钮,
   Careers 药丸已去掉(招聘入口是 Join 卡按钮和页脚)。
 - `careers/index.html` = 二级页 Open roles(所有开放岗位列表),`careers/<slug>.html` = 三级岗位详情;
   首页 Join 区 "See open roles" 与页脚 Careers 都指向 `careers/`。Figma 对应「公司-产品官网」文件
@@ -42,33 +43,40 @@ PORT=3002 node .claude/serve-official-website.js
 - **这些页面由 `.claude/gen-careers.py` 生成**:岗位数据(名称/类型/亮点/地点待遇/各区块条目)都在
   脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
-  加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
-- **四种语言**(2026-09-04 起):中文 `careers/`、英文 `careers/en/`、法文 `careers/fr/`、德文 `careers/de/`,
-  同名文件一一对应,`<head>` 里互挂四个 `hreflang` alternate(+ x-default 指英文)。每条岗位有 zh / en / fr / de
+  加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。视觉设计实习生 2026-09-07 按用户要求
+  先下掉(之后再补),四语条目停在脚本的 `PARKED_ROLES` 里不渲染;补稿时移回 `ROLES`,并把四个 `index_desc` 的
+  "视觉设计"加回来。
+- **四种语言**(2026-09-04 起;2026-09-07 改为语言前缀在最前):英文 `careers/`(默认,无前缀)、简体中文
+  `zh-cn/careers/`、法文 `fr/careers/`、德文 `de/careers/`,同名文件一一对应,`<head>` 里互挂四个 `hreflang`
+  alternate(+ x-default 指英文)。旧地址(`careers/` 曾是中文、`careers/en|fr|de/`、`zh/`)由 gen-home-langs.py
+  写成 noindex 跳转桩页,别删。每条岗位有 zh / en / fr / de
   四份文案(中文是用户原稿逐字,其余是忠实翻译,法/德为机翻初稿)。语言切换只在页脚右下角的 `.lang-menu`
   (header 右上曾有过「中文 | EN」文字对,用户撤掉了,不要再加回)。`UI` 表放界面文案:header 两个按钮
   (招聘/联系我们 · Careers/Contact · Carrières/Contact · Karriere/Kontakt)、页脚简介与链接、投递卡等都按
   语言出;列表页眉题 "Careers · We are hiring" 和 "Open roles" 按用户 Figma 里的中文页设计保留英文。
-  品牌标 / 页脚回首页链到**同语言**首页(zh → `../zh/`,en → `../../`,fr → `../../fr/`,de → `../../de/`)。
+  品牌标 / 页脚回首页链到**同语言**首页(四种语言都是 `../`,因为招聘目录就在各语言首页目录里)。
 
-## 多语言首页(zh/ fr/ de/,2026-09-04 起)
-- `zh/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
+## 多语言首页(zh-cn/ fr/ de/,2026-09-04 起)
+- URL 规则:语言目录在最前,默认语言英文不加前缀(`/`、`/careers/`),其余 `/zh-cn/…`、`/fr/…`、`/de/…`。
+  中文用**简体专属**代码 `zh-cn`(html lang `zh-CN`,菜单标签「简体中文」;用户 2026-09-07:要区分简体和繁体),
+  不要用笼统的 `zh/`。以后加繁体就是 `zh-tw/`(或 `zh-hant/`)。
+- `zh-cn/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
   同一份标记/脚本/图片,只替换文案(脚本里的 `T` 表,每行 = 英文片段 + 中/法/德三列)并给相对路径加
   `../`。**改了 index.html 就要重跑一次**;`T` 里任何英文片段在 index.html 里找不到时脚本会直接报错退出,
   按提示更新 `T`,不要手改生成文件。
-- 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 中文 /
+- 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 简体中文 /
   Français / Deutsch,参考用户给的深色下拉样式)。index.html 里写的是英文态,生成时把当前项和链接换掉。
   招聘页(gen-careers.py 的 `footer_lang_menu`)也有这个菜单,四种语言各指向自己那套岗位页(同名文件)。
 - 中文排版(2026-09-04 可读性审核):汉字占满 em 框,首页英文那套紧行距(hero 0.9、approach 标题 0.96)
   会让中文行贴在一起,所以 `html[lang="zh-CN"]` 下标题行距 ≥1.1、正文/belief 1.6,规则在 styles.css 的
   hero h1 附近,靠选择器权重压过各断点。approach 标题每行在 1024 宽(可用约 438px)必须仍是一行:法/德第三行
   曾因太长换行,已缩短为 "plutôt que répondre" / "nicht nur antworten";改标题文案后要在 1024 宽复查。
-- 首页 header 的两个按钮(Careers/Contact · 招聘/联系我们 · Carrières/Contact · Karriere/Kontakt)、Join 按钮
-  和页脚 Careers 都随语言:英文 → `careers/en/`,中文 → `careers/`,法文 → `careers/fr/`,德文 → `careers/de/`
-  (用户 2026-09-04:选了语言后所有子页面都跟随)。
+- 首页 header 的 Contact 按钮(Contact · 联系我们 · Contact · Kontakt)、Join 按钮和页脚 Careers 都随语言;
+  招聘链接四种语言都写 `careers/`,因为各语言首页目录下就是自己那套招聘页(`/careers/`、`/zh-cn/careers/`、
+  `/fr/careers/`、`/de/careers/`)(用户 2026-09-04:选了语言后所有子页面都跟随)。
 - **语言记忆**(2026-09-04):页脚菜单点某种语言时写 `localStorage["lm-lang"]`;每页 `<head>` 里紧跟
   hreflang alternate 的一段内联脚本在样式表之前执行,发现页面语言 ≠ 记住的语言就按 alternate 跳到对应
-  版本(没有该语言版本时跳英文版,例如法语用户进招聘页会落到 `careers/en/`)。没有记录 = 首次访问 = 按 URL
+  版本(没有该语言版本时跳英文版;例如记住简体中文的访客打开 `/careers/` 会落到 `/zh-cn/careers/`)。没有记录 = 首次访问 = 按 URL
   原样显示(默认英文),**不读浏览器语言**。这段脚本在 index.html 和 gen-careers.py 的 `LANG_MEMORY_SCRIPT`
   各有一份,改一处要同步另一处。alternate 的 href 是线上绝对地址,脚本只取 pathname,本地也能用。
 - 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个
@@ -133,7 +141,12 @@ PORT=3002 node .claude/serve-official-website.js
   基础规则里,`@media (min-width:768px)` / `@media (max-width:767.98px)` 两个块**只放字号、行高、
   宽度、布局**。改字体/颜色一律改基础规则,不要在媒体查询里覆盖 `font-family`/`color`,否则另一端
   会掉队(之前 Roboto、青绿色等桌面更新没同步到移动端就是这个原因)。
-- belief 段落文案:`#242E6F`,Inria Serif 300,32px/43px,浅态 = 30% opacity。
+- 手机端首屏插图(`.light-hero-art` 移动块):`background-size:220% auto` + `background-position:70% top`,
+  即插图宽度 = 视口的 2.2 倍、顶边贴住区块顶部(用户 2026-09-07:原来的 `cover` 裁切显得太大,要缩小但仍顶对齐)。
+  盒子仍是 760px 高、文案锚在底部,插图下缘由 `.light-hero-veil` 渐隐在段落后面;调大小只改这个百分比。
+- belief 段落文案(`.light-belief-copy`):`#476b67`,Roboto 300;桌面字号是自己的 clamp 表达式 / 1.5,
+  **手机端 = 正文规范 16px / 1.4,与首页段落 "The ability to learn…" 完全一致**(用户 2026-09-07,原来是 20/1.45);
+  墨水浅态 = 12% opacity(`inkBase`)。中文行高 1.6 由 `html[lang="zh-CN"]` 规则统一压过。
 
 ## 图片资源(2026-09-02 起)
 - 页面里的照片类资源一律 **AVIF + WebP**,CSS 背景用 `image-set(url() type(), …)`(前面先写一条
