@@ -167,7 +167,7 @@ ROLES = [
                      ("NICE TO HAVE", "Pluspunkte", ["Sicheres Arbeiten auf Englisch", "Erfahrung im Bau von Agent-Produkten", "Erfahrung in plattformübergreifender Entwicklung (Mobile + Desktop)", "Open-Source-Beiträge"]),
                  ])),
     dict(slug="agent-fullstack",
-         zh=dict(name="Agent 全栈研发工程师", tag="社招", meta="社招 · 研发",
+         zh=dict(name="Agent 全栈研发高级工程师", tag="社招", meta="社招 · 研发",
                  points=["负责 AI Agent 个人助理客户端全栈研发，端到端落地核心功能", "主导核心交互逻辑、任务调度与上下文管理，结合大模型能力"],
                  eyebrow="WE ARE HIRING · 社招",
                  sections=[
@@ -176,7 +176,7 @@ ROLES = [
                      ("SKILLS", "技能要求", ["前端 / 客户端：熟练掌握 Flutter / React Native，或 iOS（Swift / OC），熟悉组件化、工程化开发，了解 UI/UX 设计规范。", "后端：熟练掌握 Go / Python / Java 中的一种或多种，熟悉 MySQL、MongoDB 等数据库，了解 Redis 缓存、消息队列等中间件，具备接口设计、性能优化能力。", "AI 相关：熟悉大模型 API 调用、Prompt 设计，了解 Agent 框架（如 LangChain、LlamaIndex），有智能对话、任务拆解、多工具集成经验者加分。", "其他：熟悉 Git 版本控制，具备良好的代码规范和文档编写习惯；具备较强的学习能力、沟通能力和团队协作能力，能快速适应 AI 技术迭代节奏。"]),
                      ("NICE TO HAVE", "加分项", ["有个人助理类、AI Agent 类产品全栈研发经验，或主导过相关产品从 0 到 1 落地。", "熟悉大模型微调、Agent 智能调度策略、上下文记忆优化等相关技术。", "有跨端（移动端 + PC 端）研发经验，能独立完成全平台客户端适配。", "开源项目贡献者，或有个人技术博客、相关技术成果展示。"]),
                  ]),
-         en=dict(name="Agent Full-Stack Engineer", tag="Experienced hire", meta="Experienced hire · Engineering",
+         en=dict(name="Senior Agent Full-Stack Engineer", tag="Experienced hire", meta="Experienced hire · Engineering",
                  points=["Own full-stack development of the AI Agent personal-assistant client and ship its core features end to end", "Lead core interaction logic, task scheduling and context management on top of large-model capabilities"],
                  eyebrow="WE ARE HIRING · Experienced hire",
                  sections=[
@@ -185,7 +185,7 @@ ROLES = [
                      ("SKILLS", "Skills", ["Front-end / client: proficient in Flutter / React Native or iOS (Swift / Objective-C); familiar with component-based, engineered development and UI/UX design guidelines.", "Back-end: proficient in one or more of Go / Python / Java; familiar with MySQL, MongoDB and other databases, plus middleware such as Redis caching and message queues; able to design APIs and optimise performance.", "AI: familiar with LLM API calls and prompt design; know Agent frameworks such as LangChain and LlamaIndex. Experience with intelligent conversation, task decomposition or multi-tool integration is a plus.", "Other: fluent with Git; good coding standards and documentation habits; strong learning, communication and teamwork skills, able to keep pace with fast AI iteration."]),
                      ("NICE TO HAVE", "Bonus points", ["Full-stack experience on personal-assistant or AI Agent products, or having led such a product from zero to launch.", "Familiar with large-model fine-tuning, Agent scheduling strategies or context-memory optimisation.", "Cross-platform (mobile + desktop) experience, able to adapt a client to every platform independently.", "Open-source contributor, or a personal tech blog / portfolio of technical work."]),
                  ]),
-         fr=dict(name="Ingénieur Full-Stack Agent", tag="Expérimenté", meta="Expérimenté · Ingénierie",
+         fr=dict(name="Ingénieur Full-Stack Agent Senior", tag="Expérimenté", meta="Expérimenté · Ingénierie",
                  points=["Piloter le développement full-stack du client assistant personnel AI Agent et livrer ses fonctionnalités clés de bout en bout", "Diriger la logique d'interaction, l'ordonnancement des tâches et la gestion du contexte, sur la base des grands modèles"],
                  eyebrow="WE ARE HIRING · Expérimenté",
                  sections=[
@@ -194,7 +194,7 @@ ROLES = [
                      ("SKILLS", "Compétences", ["Front-end / client : maîtrise de Flutter / React Native ou d'iOS (Swift / Objective-C) ; familiarité avec le développement par composants et industrialisé, ainsi qu'avec les règles de design UI/UX.", "Back-end : maîtrise d'un ou plusieurs langages parmi Go / Python / Java ; connaissance de MySQL, MongoDB et autres bases de données, ainsi que de middlewares comme le cache Redis et les files de messages ; capacité à concevoir des API et à optimiser les performances.", "IA : familiarité avec les appels d'API LLM et la conception de prompts ; connaissance de frameworks d'Agent comme LangChain et LlamaIndex. Une expérience en conversation intelligente, décomposition de tâches ou intégration multi-outils est un plus.", "Autres : maîtrise de Git ; bonnes pratiques de code et de documentation ; fortes capacités d'apprentissage, de communication et de travail en équipe, pour suivre le rythme rapide de l'IA."]),
                      ("NICE TO HAVE", "Atouts", ["Expérience full-stack sur des produits assistant personnel ou AI Agent, ou avoir mené un tel produit de zéro au lancement.", "Connaissance du fine-tuning des grands modèles, des stratégies d'ordonnancement d'Agent ou de l'optimisation de la mémoire de contexte.", "Expérience multiplateforme (mobile + desktop), capacité à adapter seul un client à toutes les plateformes.", "Contributeur open source, ou blog technique personnel / portfolio de réalisations techniques."]),
                  ]),
-         de=dict(name="Agent Full-Stack Engineer", tag="Berufserfahren", meta="Berufserfahren · Engineering",
+         de=dict(name="Senior Agent Full-Stack Engineer", tag="Berufserfahren", meta="Berufserfahren · Engineering",
                  points=["Die Full-Stack-Entwicklung des KI-Agent-Assistenten-Clients verantworten und seine Kernfunktionen Ende-zu-Ende ausliefern", "Interaktionslogik, Aufgabenplanung und Kontextverwaltung auf Basis großer Modelle leiten"],
                  eyebrow="WE ARE HIRING · Berufserfahren",
                  sections=[
