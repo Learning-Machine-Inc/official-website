@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the careers pages in the site's four languages from one data table:
-  careers/index.html,    careers/<slug>.html     中文
-  careers/en/index.html, careers/en/<slug>.html  English (site default)
-  careers/fr/…, careers/de/…                     Français / Deutsch (first-pass machine translation)
+"""Generate the careers pages in the site's four languages from one data table (language first, like the
+home pages: the default language English has no prefix, every other language is one folder):
+  careers/index.html,       careers/<slug>.html        English (site default)
+  zh-cn/careers/index.html, zh-cn/careers/<slug>.html  简体中文 (zh-cn, not plain zh: Simplified only)
+  fr/careers/…, de/careers/…                           Français / Deutsch (first-pass machine translation)
+The old URLs (careers/ = 中文, careers/en|fr|de/, zh/) are kept as redirect stubs by gen-home-langs.py.
 Header/footer markup mirrors index.html (asset paths rewritten with ../ or ../../). Every page links to
 its siblings through the footer language menu and hreflang alternates; the <head> language-memory
 script keeps a visitor inside the language they chose."""
@@ -14,13 +16,13 @@ REV = "figma-1617-19731-v46"
 EMAIL = "careers@learning-machine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).
-LANGS = [("en", "English", "en"), ("zh-CN", "中文", "zh"), ("fr", "Français", "fr"), ("de", "Deutsch", "de")]
+LANGS = [("en", "English", "en"), ("zh-CN", "简体中文", "zh"), ("fr", "Français", "fr"), ("de", "Deutsch", "de")]
 
 # Per-language UI strings. `dir` is the site-relative folder of that language's careers pages; `home` is the
 # same-language home page relative to `dir`. Tuples: open_apply = (eyebrow, h2, note, button, mail subject);
 # apply = (eyebrow, h2, note, button); footer = (blurb, explore, approach, careers, contact, copyright).
 UI = {
-    "zh": dict(html_lang="zh-CN", dir="careers", home="../zh/",
+    "zh": dict(html_lang="zh-CN", dir="zh-cn/careers", home="../",
                nav_careers="招聘", nav_contact="联系我们",
                intro="目前开放 {n} 个岗位。点击岗位查看职位要求与投递方式。",
                view="查看详情", back="返回职位列表", back_home="返回首页",
@@ -29,7 +31,7 @@ UI = {
                index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端、视觉设计。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}）。",
                footer=("打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。", "探索", "我们的方法", "招聘", "联系我们", "© 2026 Learning Machine Co. 保留所有权利。")),
-    "en": dict(html_lang="en", dir="careers/en", home="../../",
+    "en": dict(html_lang="en", dir="careers", home="../",
                nav_careers="Careers", nav_contact="Contact",
                intro="{n} open roles. Open a role for requirements and how to apply.",
                view="View details", back="Back to open roles", back_home="Back to home",
@@ -38,7 +40,7 @@ UI = {
                index_desc="Open roles at Learning Machine: Agent full-stack engineering, client engineering, visual design.",
                role_title="{name} ({tag})", role_desc="Learning Machine is hiring: {name} ({tag}).",
                footer=("Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.", "Explore", "Approach", "Careers", "Contact", "© 2026 Learning Machine Co. All rights reserved.")),
-    "fr": dict(html_lang="fr", dir="careers/fr", home="../../fr/",
+    "fr": dict(html_lang="fr", dir="fr/careers", home="../",
                nav_careers="Carrières", nav_contact="Contact",
                intro="{n} postes ouverts. Ouvrez un poste pour voir les exigences et comment postuler.",
                view="Voir le poste", back="Retour aux postes", back_home="Retour à l'accueil",
@@ -47,7 +49,7 @@ UI = {
                index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent, ingénierie client, design visuel.",
                role_title="{name} ({tag})", role_desc="Learning Machine recrute : {name} ({tag}).",
                footer=("Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.", "Explorer", "Approche", "Carrières", "Contact", "© 2026 Learning Machine Co. Tous droits réservés.")),
-    "de": dict(html_lang="de", dir="careers/de", home="../../de/",
+    "de": dict(html_lang="de", dir="de/careers", home="../",
                nav_careers="Karriere", nav_contact="Kontakt",
                intro="{n} offene Stellen. Öffne eine Stelle für Anforderungen und Bewerbung.",
                view="Details ansehen", back="Zurück zu den Stellen", back_home="Zur Startseite",
@@ -245,7 +247,8 @@ def items(lst):
 
 
 def rel(from_dir, to_dir):
-    """Relative URL prefix from one careers folder to another: "" for the same folder, else "en/", "../fr/", "../"."""
+    """Relative URL prefix from one careers folder to another: "" for the same folder, else e.g. "../zh-cn/careers/"
+    (from careers/) or "../../careers/" (from zh-cn/careers/)."""
     r = posixpath.relpath(to_dir, from_dir)
     return "" if r == "." else r + "/"
 

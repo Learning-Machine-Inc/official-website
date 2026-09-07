@@ -43,32 +43,37 @@ PORT=3002 node .claude/serve-official-website.js
   脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
   加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
-- **四种语言**(2026-09-04 起):中文 `careers/`、英文 `careers/en/`、法文 `careers/fr/`、德文 `careers/de/`,
-  同名文件一一对应,`<head>` 里互挂四个 `hreflang` alternate(+ x-default 指英文)。每条岗位有 zh / en / fr / de
+- **四种语言**(2026-09-04 起;2026-09-07 改为语言前缀在最前):英文 `careers/`(默认,无前缀)、简体中文
+  `zh-cn/careers/`、法文 `fr/careers/`、德文 `de/careers/`,同名文件一一对应,`<head>` 里互挂四个 `hreflang`
+  alternate(+ x-default 指英文)。旧地址(`careers/` 曾是中文、`careers/en|fr|de/`、`zh/`)由 gen-home-langs.py
+  写成 noindex 跳转桩页,别删。每条岗位有 zh / en / fr / de
   四份文案(中文是用户原稿逐字,其余是忠实翻译,法/德为机翻初稿)。语言切换只在页脚右下角的 `.lang-menu`
   (header 右上曾有过「中文 | EN」文字对,用户撤掉了,不要再加回)。`UI` 表放界面文案:header 两个按钮
   (招聘/联系我们 · Careers/Contact · Carrières/Contact · Karriere/Kontakt)、页脚简介与链接、投递卡等都按
   语言出;列表页眉题 "Careers · We are hiring" 和 "Open roles" 按用户 Figma 里的中文页设计保留英文。
-  品牌标 / 页脚回首页链到**同语言**首页(zh → `../zh/`,en → `../../`,fr → `../../fr/`,de → `../../de/`)。
+  品牌标 / 页脚回首页链到**同语言**首页(四种语言都是 `../`,因为招聘目录就在各语言首页目录里)。
 
-## 多语言首页(zh/ fr/ de/,2026-09-04 起)
-- `zh/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
+## 多语言首页(zh-cn/ fr/ de/,2026-09-04 起)
+- URL 规则:语言目录在最前,默认语言英文不加前缀(`/`、`/careers/`),其余 `/zh-cn/…`、`/fr/…`、`/de/…`。
+  中文用**简体专属**代码 `zh-cn`(html lang `zh-CN`,菜单标签「简体中文」;用户 2026-09-07:要区分简体和繁体),
+  不要用笼统的 `zh/`。以后加繁体就是 `zh-tw/`(或 `zh-hant/`)。
+- `zh-cn/`、`fr/`、`de/` 三个 `index.html` 由 `.claude/gen-home-langs.py` 从 `index.html`(英文,默认)生成:
   同一份标记/脚本/图片,只替换文案(脚本里的 `T` 表,每行 = 英文片段 + 中/法/德三列)并给相对路径加
   `../`。**改了 index.html 就要重跑一次**;`T` 里任何英文片段在 index.html 里找不到时脚本会直接报错退出,
   按提示更新 `T`,不要手改生成文件。
-- 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 中文 /
+- 语言入口只有一个:**页脚右下角的 `.lang-menu`**(地球图标 + 当前语言 + 上拉菜单:English / 简体中文 /
   Français / Deutsch,参考用户给的深色下拉样式)。index.html 里写的是英文态,生成时把当前项和链接换掉。
   招聘页(gen-careers.py 的 `footer_lang_menu`)也有这个菜单,四种语言各指向自己那套岗位页(同名文件)。
 - 中文排版(2026-09-04 可读性审核):汉字占满 em 框,首页英文那套紧行距(hero 0.9、approach 标题 0.96)
   会让中文行贴在一起,所以 `html[lang="zh-CN"]` 下标题行距 ≥1.1、正文/belief 1.6,规则在 styles.css 的
   hero h1 附近,靠选择器权重压过各断点。approach 标题每行在 1024 宽(可用约 438px)必须仍是一行:法/德第三行
   曾因太长换行,已缩短为 "plutôt que répondre" / "nicht nur antworten";改标题文案后要在 1024 宽复查。
-- 首页 header 的两个按钮(Careers/Contact · 招聘/联系我们 · Carrières/Contact · Karriere/Kontakt)、Join 按钮
-  和页脚 Careers 都随语言:英文 → `careers/en/`,中文 → `careers/`,法文 → `careers/fr/`,德文 → `careers/de/`
-  (用户 2026-09-04:选了语言后所有子页面都跟随)。
+- 首页 header 的 Contact 按钮(Contact · 联系我们 · Contact · Kontakt)、Join 按钮和页脚 Careers 都随语言;
+  招聘链接四种语言都写 `careers/`,因为各语言首页目录下就是自己那套招聘页(`/careers/`、`/zh-cn/careers/`、
+  `/fr/careers/`、`/de/careers/`)(用户 2026-09-04:选了语言后所有子页面都跟随)。
 - **语言记忆**(2026-09-04):页脚菜单点某种语言时写 `localStorage["lm-lang"]`;每页 `<head>` 里紧跟
   hreflang alternate 的一段内联脚本在样式表之前执行,发现页面语言 ≠ 记住的语言就按 alternate 跳到对应
-  版本(没有该语言版本时跳英文版,例如法语用户进招聘页会落到 `careers/en/`)。没有记录 = 首次访问 = 按 URL
+  版本(没有该语言版本时跳英文版;例如记住简体中文的访客打开 `/careers/` 会落到 `/zh-cn/careers/`)。没有记录 = 首次访问 = 按 URL
   原样显示(默认英文),**不读浏览器语言**。这段脚本在 index.html 和 gen-careers.py 的 `LANG_MEMORY_SCRIPT`
   各有一份,改一处要同步另一处。alternate 的 href 是线上绝对地址,脚本只取 pathname,本地也能用。
 - 首页第一个 `<script>` 的 kinetic-words 拆词对 `lang=zh` 走 `Intl.Segmenter`(不支持则逐字),标点并入前一个

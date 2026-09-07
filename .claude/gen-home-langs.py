@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build the translated home pages zh/, fr/ and de/ from index.html (English, the default).
+"""Build the translated home pages zh-cn/, fr/ and de/ from index.html (English, the default).
 
 Same markup, scripts, images and animations; only the copy changes, relative paths get a ../ prefix,
-and the footer language menu is re-pointed (the header pair was removed 2026-09-04). Run it after EVERY
-index.html change:
+and the footer language menu is re-pointed (the header pair was removed 2026-09-04). Chinese is the
+Simplified-only code zh-cn (label 简体中文), never a plain zh/. The script also writes the redirect stubs for
+the pre-2026-09-07 URLs (STUBS at the bottom). Run it after EVERY index.html change:
 
     python3 .claude/gen-home-langs.py
 
@@ -15,7 +16,7 @@ import os, re, sys
 ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
 
 # Footer language menu, in display order: (html lang, label, directory under the site root; "" = English root).
-LANGS = [("en", "English", ""), ("zh-CN", "中文", "zh/"), ("fr", "Français", "fr/"), ("de", "Deutsch", "de/")]
+LANGS = [("en", "English", ""), ("zh-CN", "简体中文", "zh-cn/"), ("fr", "Français", "fr/"), ("de", "Deutsch", "de/")]
 
 # (English snippet in index.html, 中文, Français, Deutsch). Keys carry enough surrounding markup to be unique
 # to the live light-main page — the retired dark-main copy repeats several of these sentences.
@@ -72,19 +73,19 @@ T = [
      '<span class="kinetic-words" data-words>Wir glauben, dass die Zukunft der KI vielfältig und inklusiv sein sollte.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Jedes Unternehmen sollte sein eigenes Wissen nutzen können, um seine eigene KI zu bauen. Jeder Mensch sollte eine auf ihn zugeschnittene KI-Erfahrung haben. Und standardmäßig sollten die Daten in den eigenen Händen bleiben.</span>'),
     # join card (light-main only: the legacy dark-main h2 carries an id). Open roles → careers in the same
     # language; French and German fall back to the English careers pages.
-    ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/en/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
+    ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
      '<h2>加入我们</h2><p>我们正在构建 AI 的未来，研究、工程与产品方向都在招人。来和我们一起创造。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
-     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/fr/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
-     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/de/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
+     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
+     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
     # footer
     ('Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p>',
      'Learning Machine</a><p>打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。</p>',
      'Learning Machine</a><p>Nous construisons la prochaine génération de modèles d\'IA qui apprennent et s\'adaptent vraiment au moment de l\'inférence — une intelligence adaptative pour chaque entreprise.</p>',
      'Learning Machine</a><p>Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.</p>'),
-    ('<p>Explore</p><a href="#approach">Approach</a><a href="careers/en/">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
+    ('<p>Explore</p><a href="#approach">Approach</a><a href="careers/">Careers</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
      '<p>探索</p><a href="#approach">我们的方法</a><a href="careers/">招聘</a><a href="mailto:contact@learning-machine.ai">联系我们</a>',
-     '<p>Explorer</p><a href="#approach">Approche</a><a href="careers/fr/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
-     '<p>Entdecken</p><a href="#approach">Ansatz</a><a href="careers/de/">Karriere</a><a href="mailto:contact@learning-machine.ai">Kontakt</a>'),
+     '<p>Explorer</p><a href="#approach">Approche</a><a href="careers/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
+     '<p>Entdecken</p><a href="#approach">Ansatz</a><a href="careers/">Karriere</a><a href="mailto:contact@learning-machine.ai">Kontakt</a>'),
     ('<span>© 2026 Learning Machine Co. All rights reserved.</span>',
      '<span>© 2026 Learning Machine Co. 保留所有权利。</span>',
      '<span>© 2026 Learning Machine Co. Tous droits réservés.</span>',
@@ -125,3 +126,18 @@ for lang, label, folder in LANGS[1:]:
     with open(f"{ROOT}/{folder}index.html", "w", encoding="utf-8") as f:
         f.write(out)
     print(f"written: {folder}index.html ({len(T)} snippets translated)")
+
+# URLs used before 2026-09-07 (language folder inside careers/, 中文 at /zh/). GitHub Pages has no server-side
+# redirects, so every old path keeps a tiny noindex page that forwards to the new language-first path.
+STUBS = {"zh/index.html": "../zh-cn/", "careers/en/index.html": "../", "careers/fr/index.html": "../../fr/careers/", "careers/de/index.html": "../../de/careers/"}
+for slug in ["agent-fullstack-campus", "agent-fullstack", "agent-client"]:
+    STUBS[f"careers/en/{slug}.html"] = f"../{slug}.html"
+    STUBS[f"careers/fr/{slug}.html"] = f"../../fr/careers/{slug}.html"
+    STUBS[f"careers/de/{slug}.html"] = f"../../de/careers/{slug}.html"
+for path, target in STUBS.items():
+    os.makedirs(os.path.dirname(f"{ROOT}/{path}"), exist_ok=True)
+    with open(f"{ROOT}/{path}", "w", encoding="utf-8") as f:
+        f.write(f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Learning Machine</title><meta name="robots" content="noindex">'
+                f'<meta http-equiv="refresh" content="0; url={target}"><script>location.replace("{target}" + location.hash);</script></head>'
+                f'<body><p>This page has moved: <a href="{target}">continue</a>.</p></body></html>\n')
+print(f"written: {len(STUBS)} redirect stubs for the old URLs")
