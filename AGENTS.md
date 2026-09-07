@@ -20,13 +20,12 @@ PORT=3002 node .claude/serve-official-website.js
   `html[data-variant="dark"] .light-main { display:none; }` 这类规则,那会重新显示旧版而不是
   真正的 B 版本。旧版相关 CSS(`html[data-variant="dark"]` 开头的一大段颜色/变量覆盖)也**勿动**,
   它们现在虽是死代码但不产生任何效果。
-- **A/B 测试入口**(2026-09-02 起):header 左上角那个隐藏的 `#variant-toggle` 按钮
-  (双击触发)切换 `root.dataset.abVariant`('a'/'b')。**页面加载默认是 B**(脚本里
-  `setAbVariant('b')`),双击切回 A。B 版 = 青绿色系测试(Figma `tFncbEkPEyRqS4h7Su8ODE`):
-  `styles.css` 末尾一段 `html[data-ab-variant="b"]` 规则(配色、hero/join 背景图、belief 两张
-  卡片的位置角度),外加 `assets/figma-b-test/` 里的三张图。belief-p2 那张因为在 `<picture>`
-  里,不能用 CSS `content:url()` 换,是 `setAbVariant` 里直接改 `img.src`。
-  `html[data-variant]` 属性永久固定为 `"light"`,不要让这个入口再去改它。
+- **青绿色系(原"B 版")是唯一设计**(2026-09-07 用户要求删掉双击 logo 进入的蓝色方案):
+  `<html data-ab-variant="b">` 写死,`#variant-toggle` 按钮、`setAbVariant()`、belief-p2 换图逻辑都已删除。
+  B 的样式仍以 `styles.css` 末尾 `html[data-ab-variant="b"]` 规则覆盖蓝色基础值的形式存在,基础值里的蓝色
+  (`#4b72c1`、`#242e6f` 等)和 `assets/figma-107/hero-group-48-*`、`figma-user/belief-p2*` 这些 A 版素材
+  现在是死代码/死资源,可以另起一次清理把 B 值合并进基础规则;`<picture>` 里的 `data-a/data-b` 属性无用但无害。
+  `html[data-variant]` 属性永久固定为 `"light"`。
 - 本地开发服务器对所有响应发 `Cache-Control: no-store`(2026-09-02 加),本地改完直接刷新即可。
   改了 `serve-official-website.js` 本身要重启进程。
 - **线上(GitHub Pages)有 10 分钟 CDN/浏览器缓存**(`Cache-Control: max-age=600`),而且

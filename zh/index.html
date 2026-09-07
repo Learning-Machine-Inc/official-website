@@ -55,7 +55,6 @@
 </head>
 <body>
   <header class="site-header" id="header">
-    <button id="variant-toggle" class="variant-toggle" type="button" aria-label="Switch to variant A" aria-pressed="true"></button>
     <a href="#home" class="brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="../assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="../assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="../assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
     <nav class="desktop-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>
     <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
@@ -101,8 +100,8 @@
       <div class="belief-stage">
       <div class="figma-frame">
         <div class="card-wrap card-wrap-p1 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-user/belief-p1-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-user/belief-p1-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-user/belief-p1-mobile.jpg"><source type="image/avif" srcset="../assets/figma-user/belief-p1-1400.avif"><source type="image/webp" srcset="../assets/figma-user/belief-p1-1400.webp"><img src="../assets/figma-user/belief-p1.png" alt=""></picture></div></div>
-        <!-- p2 differs per A/B variant: every source carries data-a/data-b and setAbVariant() swaps srcset/src.
-             Initial values are the B (default) ones so the preload scanner never fetches the A candidate. -->
+        <!-- p2 photo of the (only) teal design. The data-a/data-b attributes are leftovers of the removed A/B
+             toggle; the live values are the data-b ones. -->
         <div class="card-wrap card-wrap-p2 motion-card"><div class="polaroid-card"><picture><source media="(max-width:767.98px)" type="image/avif" srcset="../assets/figma-b-test/belief-p2-mobile-640.avif" data-a="../assets/figma-user/belief-p2-mobile-640.avif" data-b="../assets/figma-b-test/belief-p2-mobile-640.avif"><source media="(max-width:767.98px)" type="image/webp" srcset="../assets/figma-b-test/belief-p2-mobile-640.webp" data-a="../assets/figma-user/belief-p2-mobile-640.webp" data-b="../assets/figma-b-test/belief-p2-mobile-640.webp"><source media="(max-width:767.98px)" srcset="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2-mobile.jpg" data-b="../assets/figma-b-test/belief-p2.jpg"><source type="image/avif" srcset="../assets/figma-b-test/belief-p2-1400.avif" data-a="../assets/figma-user/belief-p2-1400.avif" data-b="../assets/figma-b-test/belief-p2-1400.avif"><source type="image/webp" srcset="../assets/figma-b-test/belief-p2-1400.webp" data-a="../assets/figma-user/belief-p2-1400.webp" data-b="../assets/figma-b-test/belief-p2-1400.webp"><img src="../assets/figma-b-test/belief-p2.jpg" data-a="../assets/figma-user/belief-p2.png" data-b="../assets/figma-b-test/belief-p2.jpg" alt=""></picture></div></div>
         <p class="light-belief-copy motion-reveal"><span class="kinetic-words" data-words>我们相信，AI 的未来应当是多元且包容的。</span> <span class="belief-muted kinetic-words" data-words data-word-offset="10">每家企业都应能用自己的专有知识构建属于自己的 AI；每个人都应拥有为其量身定制的 AI 体验；而且在默认情况下，数据应始终掌握在他们自己手中。</span></p>
       </div>
@@ -122,7 +121,6 @@
   <footer><div class="footer-main"><div><a href="#home" class="footer-brand"><img class="footer-brand-icon" src="../assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="../assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>探索</p><a href="#approach">我们的方法</a><a href="../careers/">招聘</a><a href="mailto:contact@learning-machine.ai">联系我们</a></nav></div><div class="footer-bottom"><span>© 2026 Learning Machine Co. 保留所有权利。</span><div class="lang-menu" data-lang-menu><ul class="lang-menu-list" id="lang-menu-list" role="menu" hidden><li><a role="menuitem" lang="en" hreflang="en" href="../">English</a></li><li><a role="menuitem" lang="zh-CN" hreflang="zh-CN" href="./" aria-current="page">中文</a></li><li><a role="menuitem" lang="fr" hreflang="fr" href="../fr/">Français</a></li><li><a role="menuitem" lang="de" hreflang="de" href="../de/">Deutsch</a></li></ul><button class="lang-menu-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-menu-list"><svg class="lang-menu-globe" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="lang-menu-label">中文</span><svg class="lang-menu-chevron" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button></div></div></footer>
   <script>
     const root = document.documentElement;
-    const variantToggle = document.querySelector('#variant-toggle');
     const menuButton = document.querySelector('.menu-btn');
     const mobileMenu = document.querySelector('#mobile-menu');
     const roleTooltipWrap = document.querySelector('.role-tooltip-wrap');
@@ -136,29 +134,10 @@
     const setRoleTooltipOpen = (open) => { roleTooltipWrap.dataset.open = String(open); roleTooltipTrigger.setAttribute('aria-expanded', String(open)); };
     const scheduleRoleTooltipClose = () => { cancelRoleTooltipClose(); roleTooltipCloseTimer = setTimeout(() => setRoleTooltipOpen(false), 300); };
     const closeMenu = () => { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open menu'); };
-    // A/B entry point, reserved for a future real test. Until a distinct variant B is defined,
-    // this only flips a tracking attribute with no CSS/behavior tied to it — root.dataset.variant
-    // stays fixed at 'light' (set in the <html> tag) so the design and its scroll/pin JS always
-    // run normally. Do NOT wire this back to dataset.variant: the retired legacy dark-main site's
-    // CSS still keys off `[data-variant="dark"]` in several places (colors, shared header, footer
-    // variables), and re-triggering it would show that old design instead of a real variant B.
-    const beliefP2Sources = document.querySelectorAll('.card-wrap-p2 picture source[data-a], .card-wrap-p2 picture img[data-a]');
-    const setAbVariant = (variant) => {
-      const isB = variant === 'b';
-      root.dataset.abVariant = isB ? 'b' : 'a';
-      variantToggle.setAttribute('aria-pressed', String(isB));
-      variantToggle.setAttribute('aria-label', isB ? 'Switch to variant A' : 'Switch to variant B');
-      // The p2 photo lives in a <picture> with AVIF/WebP <source>s; a CSS content:url() override or
-      // changing only img.src would be ignored once a <source> matches, so swap every candidate.
-      beliefP2Sources.forEach((el) => {
-        const next = isB ? el.dataset.b : el.dataset.a;
-        if (el.tagName === 'IMG') el.src = next; else el.srcset = next;
-      });
-    };
-    const toggleAbVariant = () => setAbVariant(root.dataset.abVariant === 'b' ? 'a' : 'b');
-    setAbVariant('b'); // default entry point, per current A/B test — toggle still switches back to A
-    variantToggle.addEventListener('dblclick', toggleAbVariant);
-    variantToggle.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleAbVariant(); } });
+    // The teal design ("variant B") is the only design: html[data-ab-variant="b"] is fixed in the <html>
+    // tag and the old double-click toggle back to the blue scheme was removed on 2026-09-07. The
+    // data-a attributes still on the belief-p2 <picture> are inert leftovers. Do NOT touch
+    // root.dataset.variant either — the retired dark-main CSS still keys off [data-variant="dark"].
     menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; mobileMenu.hidden = open; menuButton.setAttribute('aria-expanded', String(!open)); menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu'); });
     mobileMenu.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
     mobileViewport.addEventListener('change', (event) => { if (!event.matches) closeMenu(); });

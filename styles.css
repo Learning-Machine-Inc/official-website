@@ -59,7 +59,6 @@ h1,h2,h3,p,figure { margin:0; }
 h1,h2,h3,.vision-copy { font-family:Georgia,"Times New Roman",serif; font-weight:400; }
 
 .site-header { align-items:center; background:#fffefc; box-shadow:0 0 77px rgb(42 53 153 / 15%); display:flex; height:64px; justify-content:space-between; left:0; padding:0 5vw; position:absolute; right:0; top:0; z-index:10; }
-.variant-toggle { background:transparent; border:0; cursor:default; height:64px; left:0; min-height:44px; min-width:44px; padding:0; position:absolute; top:0; width:64px; }
 .brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .brand-lockup { display:block; height:100%; position:relative; width:100%; }
 .brand-mark { height:21.864px; left:9.67px; position:absolute; top:8px; width:25.227px; }
@@ -164,8 +163,9 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
 .footer-bottom a { text-decoration:none; }
 
 /* White version — Figma node 1617:19731 */
-/* 2026-09-02: the #variant-toggle entry point is reserved for a future real A/B test — until a
-   distinct "B" is defined, both states render this design. Do not reintroduce
+/* 2026-09-07: the #variant-toggle entry point (double-click on the logo → blue "variant A") is gone;
+   html[data-ab-variant="b"] is fixed, so the teal rules at the end of this file always apply and the
+   blue base values they override are dead. Do not reintroduce
    `html[data-variant="dark"] .light-main { display:none; }`; that showed the retired legacy
    dark-main site instead, which is no longer wired into the scroll/pin JS below. */
 .light-main { display:block; }
@@ -177,7 +177,6 @@ html[data-variant="light"] .site-header .brand,
 html[data-variant="light"] .site-header .desktop-nav,
 html[data-variant="light"] .site-header .menu-btn,
 html[data-variant="light"] .site-header .mobile-menu { display:none; }
-html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-events:auto; width:44px; }
 
 .figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1600px; position:relative; z-index:2; }
 
@@ -514,7 +513,6 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 
 @media (max-width:767.98px) {
   .site-header { padding:0 16px; }
-  .variant-toggle { width:44px; }
   .brand { height:34px; transform:scale(.82); transform-origin:left center; width:222px; }
   .desktop-nav { display:none; }
   .menu-btn { display:block; margin-left:auto; }
@@ -702,9 +700,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 /* A/B test (variant B, the default on load) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids
    1:196/1:218/1:222/1:239. Teal palette + hero/join background art from that file; type/spacing
    untouched except the belief card placement block further down. Scoped to [data-ab-variant="b"],
-   toggled by #variant-toggle (see the classic <script> near the top of </body> — that button
-   intentionally does NOT touch html[data-variant] anymore). The belief-p2 photo is swapped in
-   that same script via img.src (it sits inside a <picture>, so CSS content:url() is unreliable).
+   which is fixed in the <html> tag since 2026-09-07 (the double-click toggle back to the blue
+   scheme was removed), so these rules always apply.
    join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
    frame bakes the card into the photo and shows through the translucent real card as a ghost. */
 html[data-ab-variant="b"] .light-hero h1 em { color:#008f7f; }
