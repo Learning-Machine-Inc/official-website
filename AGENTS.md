@@ -42,7 +42,9 @@ PORT=3002 node .claude/serve-official-website.js
 - **这些页面由 `.claude/gen-careers.py` 生成**:岗位数据(名称/类型/亮点/地点待遇/各区块条目)都在
   脚本里的 `ROLES` 表,每条岗位有 `zh` / `en` 两份文案(中文是用户原稿逐字,英文是忠实翻译,不要改写)。
   改岗位内容 → 改表 → `python3 .claude/gen-careers.py` 重出;不要手改生成出来的 HTML。新增岗位 =
-  加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。
+  加一条 `ROLES`(没有稿子的岗位 `slug=None`,列表页只显示"即将发布")。视觉设计实习生 2026-09-07 按用户要求
+  先下掉(之后再补),四语条目停在脚本的 `PARKED_ROLES` 里不渲染;补稿时移回 `ROLES`,并把四个 `index_desc` 的
+  "视觉设计"加回来。
 - **四种语言**(2026-09-04 起;2026-09-07 改为语言前缀在最前):英文 `careers/`(默认,无前缀)、简体中文
   `zh-cn/careers/`、法文 `fr/careers/`、德文 `de/careers/`,同名文件一一对应,`<head>` 里互挂四个 `hreflang`
   alternate(+ x-default 指英文)。旧地址(`careers/` 曾是中文、`careers/en|fr|de/`、`zh/`)由 gen-home-langs.py

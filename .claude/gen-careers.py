@@ -28,7 +28,7 @@ UI = {
                view="查看详情", back="返回职位列表", back_home="返回首页",
                open_apply=("Open application · 自荐", "没有合适的岗位？直接把简历发给我们", "邮件发送至 {email}，注明你感兴趣的方向。", "自荐投递", "自荐投递"),
                apply=("Apply · 简历投递", "简历投递", "邮件发送至 {email}，主题请注明「{subject}」。", "立即投递"),
-               index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端、视觉设计。",
+               index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端研发。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}）。",
                footer=("打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。", "探索", "我们的方法", "招聘", "联系我们", "© 2026 Learning Machine Co. 保留所有权利。")),
     "en": dict(html_lang="en", dir="careers", home="../",
@@ -37,7 +37,7 @@ UI = {
                view="View details", back="Back to open roles", back_home="Back to home",
                open_apply=("Open application", "No matching role? Send us your CV anyway", "Email {email} and tell us which direction interests you.", "Send open application", "Open application"),
                apply=("Apply", "Send your CV", "Email {email} with the subject line “{subject}”.", "Apply now"),
-               index_desc="Open roles at Learning Machine: Agent full-stack engineering, client engineering, visual design.",
+               index_desc="Open roles at Learning Machine: Agent full-stack engineering and client engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine is hiring: {name} ({tag}).",
                footer=("Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.", "Explore", "Approach", "Careers", "Contact", "© 2026 Learning Machine Co. All rights reserved.")),
     "fr": dict(html_lang="fr", dir="fr/careers", home="../",
@@ -46,7 +46,7 @@ UI = {
                view="Voir le poste", back="Retour aux postes", back_home="Retour à l'accueil",
                open_apply=("Candidature spontanée", "Aucun poste ne vous correspond ? Envoyez-nous quand même votre CV", "Écrivez à {email} en précisant le domaine qui vous intéresse.", "Envoyer une candidature spontanée", "Candidature spontanée"),
                apply=("Postuler", "Envoyez votre CV", "Écrivez à {email} avec pour objet « {subject} ».", "Postuler"),
-               index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent, ingénierie client, design visuel.",
+               index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent et ingénierie client.",
                role_title="{name} ({tag})", role_desc="Learning Machine recrute : {name} ({tag}).",
                footer=("Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.", "Explorer", "Approche", "Carrières", "Contact", "© 2026 Learning Machine Co. Tous droits réservés.")),
     "de": dict(html_lang="de", dir="de/careers", home="../",
@@ -55,7 +55,7 @@ UI = {
                view="Details ansehen", back="Zurück zu den Stellen", back_home="Zur Startseite",
                open_apply=("Initiativbewerbung", "Keine passende Stelle? Schick uns trotzdem deinen Lebenslauf", "Schreib an {email} und nenne die Richtung, die dich interessiert.", "Initiativbewerbung senden", "Initiativbewerbung"),
                apply=("Bewerben", "Schick uns deinen Lebenslauf", "Schreib an {email} mit dem Betreff „{subject}“.", "Jetzt bewerben"),
-               index_desc="Offene Stellen bei Learning Machine: Agent-Full-Stack-Engineering, Client-Engineering, Visual Design.",
+               index_desc="Offene Stellen bei Learning Machine: Agent-Full-Stack-Engineering und Client-Engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine sucht: {name} ({tag}).",
                footer=("Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.", "Entdecken", "Ansatz", "Karriere", "Kontakt", "© 2026 Learning Machine Co. Alle Rechte vorbehalten.")),
 }
@@ -122,6 +122,16 @@ SMOOTH_SCROLL = """  <script type="module">
 # One entry per role; slug=None means "no posting yet" (list row only, shows the `soon` text).
 # No location / salary / benefits anywhere (user 2026-09-07): the former facts row is gone and metas carry only type · team.
 # Copy is the user's postings verbatim (zh) and faithful translations (en / fr / de) — do not paraphrase.
+# PARKED_ROLES are not rendered anywhere: the design internship was taken down on 2026-09-07 (user: 先把设计的招聘信息下掉,
+# 之后我再补上). When the posting is ready, move the entry back into ROLES, give it a slug + sections, and put
+# "visual design" back into the four `index_desc` strings above.
+PARKED_ROLES = [
+    dict(slug=None,
+         zh=dict(name="Agent 视觉设计实习生", tag="实习", meta="实习 · 设计", soon="招聘详情即将发布"),
+         en=dict(name="Agent Visual Design Intern", tag="Intern", meta="Intern · Design", soon="Details coming soon"),
+         fr=dict(name="Stagiaire Design Visuel Agent", tag="Stage", meta="Stage · Design", soon="Détails à venir"),
+         de=dict(name="Praktikum Visual Design Agent", tag="Praktikum", meta="Praktikum · Design", soon="Details folgen")),
+]
 ROLES = [
     dict(slug="agent-fullstack-campus",
          zh=dict(name="Agent 全栈研发工程师", tag="校招 / 实习", meta="校招 / 实习 · 研发",
@@ -193,11 +203,6 @@ ROLES = [
                      ("SKILLS", "Kenntnisse", ["Frontend / Client: sicher in Flutter / React Native oder iOS (Swift / Objective-C); vertraut mit komponentenbasierter, industrialisierter Entwicklung und UI/UX-Richtlinien.", "Backend: sicher in einer oder mehreren Sprachen aus Go / Python / Java; vertraut mit MySQL, MongoDB und anderen Datenbanken sowie Middleware wie Redis-Cache und Message Queues; API-Design und Performance-Optimierung.", "KI: vertraut mit LLM-API-Aufrufen und Prompt-Design; Kenntnis von Agent-Frameworks wie LangChain und LlamaIndex. Erfahrung mit intelligenten Dialogen, Aufgabenzerlegung oder Multi-Tool-Integration ist ein Plus.", "Sonstiges: sicher mit Git; gute Code- und Dokumentationsstandards; starke Lern-, Kommunikations- und Teamfähigkeit, um mit dem schnellen KI-Tempo Schritt zu halten."]),
                      ("NICE TO HAVE", "Pluspunkte", ["Full-Stack-Erfahrung mit Assistenten- oder KI-Agent-Produkten oder ein solches Produkt von null bis zum Launch geführt.", "Vertraut mit LLM-Fine-Tuning, Agent-Planungsstrategien oder Optimierung des Kontextgedächtnisses.", "Plattformübergreifende Erfahrung (Mobile + Desktop), einen Client selbstständig auf alle Plattformen bringen.", "Open-Source-Beiträge oder ein eigener Tech-Blog / ein Portfolio technischer Arbeiten."]),
                  ])),
-    dict(slug=None,
-         zh=dict(name="Agent 视觉设计实习生", tag="实习", meta="实习 · 设计", soon="招聘详情即将发布"),
-         en=dict(name="Agent Visual Design Intern", tag="Intern", meta="Intern · Design", soon="Details coming soon"),
-         fr=dict(name="Stagiaire Design Visuel Agent", tag="Stage", meta="Stage · Design", soon="Détails à venir"),
-         de=dict(name="Praktikum Visual Design Agent", tag="Praktikum", meta="Praktikum · Design", soon="Details folgen")),
     dict(slug="agent-client",
          zh=dict(name="Agent 客户端工程师", tag="社招", meta="社招 · 客户端研发",
                  points=["开发自有模型的 Agent 客户端：Web、iOS、macOS", "从 Figma MCP 到 Coding Agent 的全栈客户端功能开发"],
