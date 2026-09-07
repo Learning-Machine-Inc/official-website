@@ -141,6 +141,9 @@ PORT=3002 node .claude/serve-official-website.js
   基础规则里,`@media (min-width:768px)` / `@media (max-width:767.98px)` 两个块**只放字号、行高、
   宽度、布局**。改字体/颜色一律改基础规则,不要在媒体查询里覆盖 `font-family`/`color`,否则另一端
   会掉队(之前 Roboto、青绿色等桌面更新没同步到移动端就是这个原因)。
+- 手机端首屏插图(`.light-hero-art` 移动块):`background-size:220% auto` + `background-position:70% top`,
+  即插图宽度 = 视口的 2.2 倍、顶边贴住区块顶部(用户 2026-09-07:原来的 `cover` 裁切显得太大,要缩小但仍顶对齐)。
+  盒子仍是 760px 高、文案锚在底部,插图下缘由 `.light-hero-veil` 渐隐在段落后面;调大小只改这个百分比。
 - belief 段落文案(`.light-belief-copy`):`#476b67`,Roboto 300;桌面字号是自己的 clamp 表达式 / 1.5,
   **手机端 = 正文规范 16px / 1.4,与首页段落 "The ability to learn…" 完全一致**(用户 2026-09-07,原来是 20/1.45);
   墨水浅态 = 12% opacity(`inkBase`)。中文行高 1.6 由 `html[lang="zh-CN"]` 规则统一压过。
