@@ -30,10 +30,10 @@ T = [
      '<title>Learning Machine | Une IA qui apprend vraiment</title>',
      '<title>Learning Machine | KI, die wirklich lernt</title>'),
     # header buttons follow the language too (user 2026-09-04)
-    ('<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Careers</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
-     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">招聘</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">联系我们</a></nav>',
-     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Carrières</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
-     '<nav class="light-nav" aria-label="Primary navigation"><a href="#join">Karriere</a><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Kontakt</a></nav>'),
+    ('<nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">联系我们</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Contact</a></nav>',
+     '<nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">Kontakt</a></nav>'),
     # hero
     ('<h1><span class="motion-line">Build AI</span><span class="motion-line">that truly <em>Learns</em></span></h1>',
      '<h1><span class="motion-line">打造真正</span><span class="motion-line">会<em>学习</em>的 AI</span></h1>',

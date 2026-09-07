@@ -59,7 +59,6 @@ h1,h2,h3,p,figure { margin:0; }
 h1,h2,h3,.vision-copy { font-family:Georgia,"Times New Roman",serif; font-weight:400; }
 
 .site-header { align-items:center; background:#fffefc; box-shadow:0 0 77px rgb(42 53 153 / 15%); display:flex; height:64px; justify-content:space-between; left:0; padding:0 5vw; position:absolute; right:0; top:0; z-index:10; }
-.variant-toggle { background:transparent; border:0; cursor:default; height:64px; left:0; min-height:44px; min-width:44px; padding:0; position:absolute; top:0; width:64px; }
 .brand { display:block; height:36.591px; overflow:hidden; text-decoration:none; width:222px; }
 .brand-lockup { display:block; height:100%; position:relative; width:100%; }
 .brand-mark { height:21.864px; left:9.67px; position:absolute; top:8px; width:25.227px; }
@@ -164,10 +163,10 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
 .footer-bottom a { text-decoration:none; }
 
 /* White version — Figma node 1617:19731 */
-/* 2026-09-02: the #variant-toggle entry point is reserved for a future real A/B test — until a
-   distinct "B" is defined, both states render this design. Do not reintroduce
-   `html[data-variant="dark"] .light-main { display:none; }`; that showed the retired legacy
-   dark-main site instead, which is no longer wired into the scroll/pin JS below. */
+/* One design only (2026-09-07): the former A/B split is gone — the teal palette, hero/join art and belief card
+   placement live directly in these rules and the blue values/assets were deleted. Do not reintroduce
+   `html[data-variant="dark"] .light-main { display:none; }`; that showed the retired legacy dark-main site
+   instead, which is no longer wired into the scroll/pin JS below. */
 .light-main { display:block; }
 .dark-main { display:none; }
 body { background:#f4f0ed; }
@@ -177,7 +176,6 @@ html[data-variant="light"] .site-header .brand,
 html[data-variant="light"] .site-header .desktop-nav,
 html[data-variant="light"] .site-header .menu-btn,
 html[data-variant="light"] .site-header .mobile-menu { display:none; }
-html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-events:auto; width:44px; }
 
 .figma-frame { display:flex; flex-direction:column; gap:166px; height:100%; justify-content:flex-end; margin:0 auto; max-width:1600px; position:relative; z-index:2; }
 
@@ -200,7 +198,7 @@ html[data-variant="light"] .site-header .variant-toggle { height:44px; pointer-e
    1920w for 1x screens, 2752w for ≥1.5dppx below), underneath an inline 48px WebP LQIP so the hero
    paints immediately and the photo replaces it when it lands. The plain url() declared first is the
    fallback for browsers without image-set. Preloads in <head> mirror this split for variant B. */
-.light-hero-art { background-image:url("assets/figma-107/hero-group-48-1920.jpg"),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-image:image-set(url("assets/figma-107/hero-group-48-1920.avif") type("image/avif"),url("assets/figma-107/hero-group-48-1920.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); background-position:center; background-repeat:no-repeat; background-size:cover; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
+.light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-1920.avif") type("image/avif"),url("assets/figma-b-test/hero-art-1920.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-position:center; background-repeat:no-repeat; background-size:cover; height:994px; left:-5.35%; min-width:1583px; mix-blend-mode:multiply; position:absolute; top:-72px; width:109.93%; z-index:0; }
 .light-hero-veil { background:linear-gradient(to top,#f4f0ed 0,#f4f0ed 70px,rgb(244 240 237 / 0%)); height:840px; left:0; pointer-events:none; position:absolute; top:142px; width:100%; z-index:1; }
 .light-hero-copy { color:#302925; display:flex; flex-direction:column; gap:27px; margin-bottom:min(50px, 5.56vh); max-width:4000px; padding:0 72px; width:100%; will-change:transform; }
 .light-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,"Times New Roman",serif; font-size:96px; letter-spacing:-1.0451px; line-height:86px; }
@@ -217,14 +215,14 @@ html[lang="zh-CN"] .light-approach h2 { line-height:1.15; }
 html[lang="zh-CN"] :is(.light-hero-desc p, .light-inference p, .light-join-card > p:not(.eyebrow)) { line-height:1.6; }
 html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 .light-hero h1 .motion-line:first-child { margin-bottom:0; }
-.light-hero h1 em { color:#4b72c1; font-style:normal; }
+.light-hero h1 em { color:#008f7f; font-style:normal; }
 .light-hero-desc { display:flex; flex-direction:column; padding:0 6px; width:904px; }
 .light-hero-desc p { font-family:"Roboto","Inter",sans-serif; font-size:24px; font-weight:300; line-height:32px; margin:0; }
 .light-hero-desc .light-hero-kicker { color:#302925; max-width:691px; }
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
 .light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Roboto","Inter",sans-serif; font-size:15px; font-weight:400; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
-.light-btn-dark { background:#4b72c1; border:1px solid #adc2ec; color:#f4f0ed; gap:7.99px; min-width:204px; }
+.light-btn-dark { background:#3bb4a2; border:1px solid #aaddd4; color:#fff; gap:7.99px; min-width:204px; }
 .light-btn-dark img { flex-shrink:0; height:17px; width:17px; }
 .light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; min-width:109px; }
 
@@ -237,7 +235,7 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
      instead of sliding below the fold. */
   .light-belief-copy { left:0; margin:0 auto; position:absolute; right:0; top:calc(50% + min(202px, 22.44vh)); }
 }
-.light-belief-copy { color:#242e6f; font-family:"Roboto","Inter",sans-serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
+.light-belief-copy { color:#476b67; font-family:"Roboto","Inter",sans-serif; font-size:32px; font-weight:300; line-height:43px; margin:0 auto; text-align:center; width:1200px; }
 .card-wrap { align-items:center; display:flex; justify-content:center; position:absolute; }
 .polaroid-card { border:.5px solid #bbb; border-radius:5px; box-shadow:0 4px 44px rgb(0 0 0 / 8%); flex-shrink:0; overflow:hidden; position:relative; }
 .polaroid-card img { height:100%; object-fit:cover; object-position:bottom; position:absolute; width:100%; }
@@ -250,9 +248,9 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 /* Heading box may extend to just left of the card stack (its left edge sits at 53.57% once the stack
    is vw-scaled) so "not just respond" keeps to one line down to ~850px viewports. */
 .light-approach-heading { display:flex; flex-direction:column; gap:22px; left:0; max-width:calc(53.5% + 48px); padding:0 72px 0 78px; position:absolute; top:386px; width:100%; z-index:2; }
-.light-approach-heading .eyebrow { color:#b8542e; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
+.light-approach-heading .eyebrow { color:#5c8982; font-size:17.305px; letter-spacing:2.4227px; line-height:27.688px; }
 .light-approach h2 { color:#191919; font-size:64px; letter-spacing:-.0175em; line-height:60px; margin:0; text-transform:none; }
-.light-approach h2 .h2-muted { color:#cec4b6; }
+.light-approach h2 .h2-muted { color:#a3bcb8; }
 .stack { inset:0; position:absolute; }
 .stack .card-wrap { align-items:center; display:flex; justify-content:center; }
 /* Stack geometry comes from the 1440×900 canvas in vh; every length is also capped by its vw
@@ -289,9 +287,12 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 .light-join { align-items:center; background:#f4f0ed; display:flex; height:611px; justify-content:center; margin-top:0; overflow:hidden; padding:100px 160px; position:relative; }
 /* Photo layers use image-set(type()) with a plain url() declared first as the fallback for browsers
    that don't parse image-set; AVIF/WebP encodes live next to their sources. */
-.light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-a.webp"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-105/join-backdrop-a.avif") type("image/avif"),url("assets/figma-105/join-backdrop-a.webp") type("image/webp"),url("assets/figma-105/e86e3c68173afa66a54ad0875bd7020cae6edbf4.png") type("image/png")); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
+/* join-backdrop.jpg must be the Figma image LAYER (tFncbEkPEyRqS4h7Su8ODE node 1:240) — a screenshot of the whole join
+   frame bakes the card into the photo and shows through the translucent real card as a ghost. */
+.light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-b-test/join-backdrop.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-b-test/join-backdrop-1440.avif") type("image/avif"),url("assets/figma-b-test/join-backdrop-1440.webp") type("image/webp"),url("assets/figma-b-test/join-backdrop.jpg") type("image/jpeg")); background-position:center bottom; background-size:cover; inset:0; position:absolute; }
 .light-join-card { align-items:center; background:linear-gradient(#f0efed,rgb(241 240 237 / 70%)); border:.5px solid #666460; color:#1a1a1a; display:flex; flex-direction:column; max-width:720px; padding:65.25px 33px 60.99px; position:relative; text-align:center; width:720px; }
-.light-join-card .eyebrow { color:#628aa8; }
+.light-join-card .eyebrow { color:#719791; }
+.light-join-card .button-blue { background:#33a190; }
 .light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
 .light-join-card > p:not(.eyebrow) { color:#2e2b27; font-family:"Roboto","Inter",sans-serif; font-size:17px; font-weight:300; line-height:27.2px; max-width:480px; }
 .light-join-card .button { font-family:"Roboto","Inter",sans-serif; font-weight:400; }
@@ -350,7 +351,7 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
   .light-hero { height:760px; min-height:760px; overflow:hidden; }
   /* P1-5: min-width:1583px from the base rule must be cleared or the art stays 1583px wide and
      the 70% focal point never shows. Mobile also swaps in a lightweight jpg (P1-7). */
-  .light-hero-art { background-image:url("assets/figma-107/hero-group-48-mobile.jpg"),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBgCdASowAB4APu1irk+ppSSiKrgMATAdiWkA0u24pVQmh+5tl/VL/3Yd0cH/M/4nsSnCA6CoSAAA/vBJiLgeZWbYVMubvBJJ3dfrLt0vSX9LfUcQWKbEDbGEalVMvWRGyitSMmLgQ4j2N8ew8B4Fu7cSMHJZMU8odGioz8HltpSw8x/AP03aO02UkldzzV1tMadX7Qws1G1PToUxDbU1+K0FvssAAAA="); background-image:image-set(url("assets/figma-107/hero-group-48-mobile-1440.avif") type("image/avif"),url("assets/figma-107/hero-group-48-mobile-1440.webp") type("image/webp"),url("assets/figma-107/hero-group-48-mobile.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBgCdASowAB4APu1irk+ppSSiKrgMATAdiWkA0u24pVQmh+5tl/VL/3Yd0cH/M/4nsSnCA6CoSAAA/vBJiLgeZWbYVMubvBJJ3dfrLt0vSX9LfUcQWKbEDbGEalVMvWRGyitSMmLgQ4j2N8ew8B4Fu7cSMHJZMU8odGioz8HltpSw8x/AP03aO02UkldzzV1tMadX7Qws1G1PToUxDbU1+K0FvssAAAA="); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
+  .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-position:70% top; height:760px; left:0; min-width:0; top:0; width:100%; }
   .light-hero-veil { height:84%; left:0; top:22%; width:100%; }
   .figma-frame { height:auto; max-width:none; min-height:100%; }
   /* P0-4: anchor the copy to the hero's bottom edge instead of a fixed top — a fixed top:390px
@@ -423,7 +424,6 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
   .motion-ready .light-main .card-wrap-p1.motion-card { transform:translate(-60px,-40px) scale(1.05); }
   .motion-ready .light-main .card-wrap-p2.motion-card { transform:translate(60px,-40px) scale(1.05); }
   .light-join { margin-top:0; padding:70px 20px; }
-  .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-105/join-backdrop-mobile.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-105/join-backdrop-mobile-1080.avif") type("image/avif"),url("assets/figma-105/join-backdrop-mobile-1080.webp") type("image/webp"),url("assets/figma-105/join-backdrop-mobile.jpg") type("image/jpeg")); }
   .light-join-card { padding:52px 24px; width:100%; }
   .light-join-card .join-actions { flex-direction:column; width:100%; }
   .light-join-card .button { width:100%; }
@@ -514,7 +514,6 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 
 @media (max-width:767.98px) {
   .site-header { padding:0 16px; }
-  .variant-toggle { width:44px; }
   .brand { height:34px; transform:scale(.82); transform-origin:left center; width:222px; }
   .desktop-nav { display:none; }
   .menu-btn { display:block; margin-left:auto; }
@@ -626,7 +625,10 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 /* L3 — facts + sections */
 .facts { border-bottom:.5px solid #666460; border-top:.5px solid #666460; display:grid; gap:min(48px, 3.333vw); grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); list-style:none; margin:0; padding:40px 0; } /* 3 across at 1440, 2 then 1 as the band narrows */
 .fact-value { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(24px, 1.944vw, 28px); font-weight:400; line-height:1.7143; margin:0; }
-.careers-sections { display:grid; gap:9px; padding-bottom:36px; padding-top:36px; }
+.careers-sections { display:grid; gap:9px; padding-bottom:36px; padding-top:0; }
+/* The rule under the title used to belong to the facts row (removed 2026-09-07). It sits on the first section so it
+   spans the content band, not the padded full width. */
+.careers-section:first-child { border-top:.5px solid #666460; padding-top:40px; }
 .careers-section { display:grid; gap:min(48px, 3.333vw); grid-template-columns:min(400px, 27.778vw) minmax(0,1fr); }
 .careers-section h2 { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(28px, 2.222vw, 32px); font-weight:400; line-height:1.5; margin:-2px 0 0; }
 .careers-section ul { display:grid; gap:12px; list-style:none; margin:0; padding:32px 0 0; }
@@ -635,7 +637,7 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .apply-band.apply-band-top { padding-top:72px; }
 .apply-card { align-items:center; background:linear-gradient(to bottom,rgb(228 219 218 / 30%),rgb(240 236 233 / 10%)); border:.5px solid rgb(102 100 96 / 51%); display:flex; flex-direction:column; gap:15px; padding:56px 48px; text-align:center; }
 .apply-card .careers-eyebrow { color:#719791; font-family:"Roboto","Inter",sans-serif; font-size:14px; font-weight:600; letter-spacing:1.68px; line-height:22px; }
-.apply-card h2 { color:#1a1a1a; font-family:"Noto Serif SC",var(--careers-serif); font-size:28px; font-weight:400; line-height:48px; margin:0; }
+.apply-card h2 { color:#1a1a1a; font-family:var(--careers-serif); font-size:clamp(28px, 2.222vw, 32px); font-weight:400; line-height:1.5; margin:0; } /* same size rule as .role-name (user 2026-09-07) */
 .apply-card p { color:#2e2b27; font-family:"Noto Sans SC",var(--careers-sans); font-size:18px; font-weight:300; line-height:27px; margin:0; max-width:600px; }
 .apply-actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding-top:15px; }
 .btn-primary { align-items:center; border-radius:5px; box-sizing:border-box; color:#fff; display:inline-flex; font-family:"Noto Sans SC",var(--careers-sans); font-size:clamp(14px, 1.111vw, 16px); font-weight:400; gap:8px; height:clamp(40px, 3.125vw, 45px); line-height:24px; padding:0 clamp(24px, 2.083vw, 30px); text-decoration:none; white-space:nowrap; } /* 16px text / 45px box at 1440, scales with the window (user 2026-09-04) */
@@ -644,6 +646,11 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 @media (prefers-reduced-motion:no-preference) {
   .careers-motion-ready .careers-title > *,.careers-motion-ready .role-row,.careers-motion-ready .facts > li,.careers-motion-ready .careers-section,.careers-motion-ready .apply-card { opacity:0; transform:translateY(7px); transition:opacity .75s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms),transform .9s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms); }
   .careers-motion-ready .careers-motion-visible,.careers-motion-ready .facts > li.careers-motion-visible { opacity:1; transform:none; }
+}
+@media (min-width:768px) {
+  /* Careers body copy = the site's body size, i.e. the same responsive expression as the hero paragraph
+     ("The ability to learn…", .light-hero-desc p) — user 2026-09-07. Mobile keeps its own 13px scale below. */
+  .careers-item,.role-soon,.careers-intro,.apply-card p { font-size:min(clamp(16.8px, calc(13.08px + .481vw), 21.5px), 3.1vh); line-height:1.5; }
 }
 @media (min-width:768px) and (max-width:1199px) {
   /* Too narrow for name | highlights | button side by side: highlights drop under the name, button keeps the right edge. */
@@ -673,7 +680,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .role-points { gap:8px; }
   .facts { gap:16px; grid-template-columns:minmax(0,1fr); padding:24px 0; }
   .fact-value { font-size:20px; line-height:28px; }
-  .careers-sections { gap:32px; padding-bottom:24px; padding-top:24px; }
+  .careers-sections { gap:32px; padding-bottom:24px; padding-top:0; }
+  .careers-section:first-child { padding-top:24px; }
   .careers-section h2 { font-size:22px; line-height:30px; }
   .careers-section ul,.role-points { padding-top:0; }
   .careers-section ul { gap:8px; }
@@ -690,44 +698,17 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .apply-actions { flex-direction:column; gap:10px; padding-top:10px; width:100%; }
 }
 
-/* A/B test (variant B, the default on load) — Figma tFncbEkPEyRqS4h7Su8ODE, node-ids
-   1:196/1:218/1:222/1:239. Teal palette + hero/join background art from that file; type/spacing
-   untouched except the belief card placement block further down. Scoped to [data-ab-variant="b"],
-   toggled by #variant-toggle (see the classic <script> near the top of </body> — that button
-   intentionally does NOT touch html[data-variant] anymore). The belief-p2 photo is swapped in
-   that same script via img.src (it sits inside a <picture>, so CSS content:url() is unreliable).
-   join-backdrop.jpg must be the Figma image LAYER (node 1:240) — a screenshot of the whole join
-   frame bakes the card into the photo and shows through the translucent real card as a ghost. */
-html[data-ab-variant="b"] .light-hero h1 em { color:#008f7f; }
-html[data-ab-variant="b"] .light-btn-dark { background:#3bb4a2; border-color:#aaddd4; color:#fff; }
-html[data-ab-variant="b"] .light-belief-copy { color:#476b67; }
-html[data-ab-variant="b"] .light-approach-heading .eyebrow { color:#5c8982; }
-html[data-ab-variant="b"] .light-approach h2 .h2-muted { color:#a3bcb8; }
-html[data-ab-variant="b"] .light-join-card .eyebrow { color:#719791; }
-html[data-ab-variant="b"] .light-join-card .button-blue { background:#33a190; }
-/* B hero art. Desktop-only so it cannot beat the mobile rule above (it has higher specificity);
-   mobile B gets its own 1440w encode right below. */
-@media (min-width:768px) {
-  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-1920.avif") type("image/avif"),url("assets/figma-b-test/hero-art-1920.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); }
-}
-@media (max-width:767.98px) {
-  html[data-ab-variant="b"] .light-hero-art { background-image:url("assets/figma-b-test/hero-art-mobile-1440.jpg"),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); background-image:image-set(url("assets/figma-b-test/hero-art-mobile-1440.avif") type("image/avif"),url("assets/figma-b-test/hero-art-mobile-1440.webp") type("image/webp"),url("assets/figma-b-test/hero-art-mobile-1440.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); }
-}
 /* ≥1.5dppx desktop screens get the full 2752w encodes (the 1920w set would be upscaled ~1.6× on a
    2× 1440px display and soften the line work). Mirrors the preload media queries in <head>. */
 @media (min-width:768px) and (min-resolution:1.5dppx) {
-  .light-hero-art { background-image:image-set(url("assets/figma-107/hero-group-48-2752.avif") type("image/avif"),url("assets/figma-107/hero-group-48-2752.webp") type("image/webp"),url("assets/figma-107/hero-group-48-1920.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBQCdASowAB4APu1krU+ppSQiKrgMATAdiWkcAA611Vv/30TyE3gZfvRAqZIgEo8EdfsYAAD+8NC2ee10/Thg11CATQrpEaMr1t85vFx2vjsLpjztB/tYxURxUGap1l6MSAi38KXBmdEDAm3fxz8mtLTlQkbqWGQakFWZS4km8ysy21eLuVjrvjOX4bJPZTHWgsTADjiXKqbLH70zkQTlccioafEDGsKAAA=="); }
-  html[data-ab-variant="b"] .light-hero-art { background-image:image-set(url("assets/figma-b-test/hero-art-2752.avif") type("image/avif"),url("assets/figma-b-test/hero-art-2752.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); }
+  .light-hero-art { background-image:image-set(url("assets/figma-b-test/hero-art-2752.avif") type("image/avif"),url("assets/figma-b-test/hero-art-2752.webp") type("image/webp"),url("assets/figma-b-test/hero-art.jpg") type("image/jpeg")),url("data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBgCdASowAB4APrVMoUsnJCMhqrgMAOAWiWkACBvOp/e1Nm/n93kcWKdChHK1eNTztbqArG1H+hUpTAAA/vmZuGQQ9z1X4UxxDsB5RktwxarMDF0hUwESJslp8dG5foWHAxH1g6HA8S5BitrBsDSnGP0TwsDCjKvJxj8QPh4yhTCp50Ehb3kMxZoPmeN3BGG0qwPvkjzPuY7i1GzKJYdfXcAet6usT4qMrp9leZ7Y57oXWqWssuUjfpRqOyQE16emBrlfIVP5KcrDJ9aNTkm2BvoPLJuKNtltmhRi0QmpubwFblquoaAMUflgOns6BAA="); }
 }
-html[data-ab-variant="b"] .light-join-backdrop { background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),url("assets/figma-b-test/join-backdrop.jpg"); background-image:linear-gradient(180deg,#f4f0ed,rgb(255 255 255 / 0%)),image-set(url("assets/figma-b-test/join-backdrop-1440.avif") type("image/avif"),url("assets/figma-b-test/join-backdrop-1440.webp") type("image/webp"),url("assets/figma-b-test/join-backdrop.jpg") type("image/jpeg")); }
-/* B-test Figma frame (tFncbEkPEyRqS4h7Su8ODE, node 1:218): p2 keeps variant A's card size but sits
-   at a different position; p1 is at a shallower tilt and shifted (card photo size unchanged for
-   both). Figma's `rotation` is counter-clockwise-positive and CSS rotate() is clockwise-positive, so
-   the CSS angle is the NEGATED Figma value: p1 -3.27 -> rotate(3.27deg), p2 +7.02 -> rotate(-7.02deg)
-   (verified against node renders: p2's right edge sits higher, p1's lower). Desktop only. */
+/* Desktop belief card placement — Figma tFncbEkPEyRqS4h7Su8ODE node 1:218. Figma's `rotation` is counter-clockwise-
+   positive and CSS rotate() is clockwise-positive, so the CSS angle is the NEGATED Figma value: p1 -3.27 ->
+   rotate(3.27deg), p2 +7.02 -> rotate(-7.02deg). The base rules above hold the mobile geometry/angles. */
 @media (min-width:768px) {
-  html[data-ab-variant="b"] .card-wrap-p1 { height:min(24.32vw,38.911vh); left:calc(50% - min(29.243vw,46.788vh)); top:calc(50% - min(15.313vw,24.501vh)); width:min(23.613vw,37.782vh); }
-  html[data-ab-variant="b"] .card-wrap-p1 .polaroid-card { transform:rotate(3.27deg); }
-  html[data-ab-variant="b"] .card-wrap-p2 { left:calc(50% - min(7.431vw,11.889vh)); top:calc(50% - min(20.694vw,33.111vh)); }
-  html[data-ab-variant="b"] .card-wrap-p2 .polaroid-card { transform:rotate(-7.02deg); }
+  .card-wrap-p1 { height:min(24.32vw,38.911vh); left:calc(50% - min(29.243vw,46.788vh)); top:calc(50% - min(15.313vw,24.501vh)); width:min(23.613vw,37.782vh); }
+  .card-wrap-p1 .polaroid-card { transform:rotate(3.27deg); }
+  .card-wrap-p2 { left:calc(50% - min(7.431vw,11.889vh)); top:calc(50% - min(20.694vw,33.111vh)); }
+  .card-wrap-p2 .polaroid-card { transform:rotate(-7.02deg); }
 }
