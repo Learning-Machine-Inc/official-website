@@ -222,7 +222,7 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 .light-hero-desc p:not(.light-hero-kicker) { max-width:681px; }
 .light-hero-actions { align-items:center; display:flex; gap:13.99px; justify-content:flex-start; padding-top:11.99px; width:100%; }
 .light-btn { align-items:center; border-radius:5px; box-sizing:border-box; display:flex; font-family:"Roboto","Inter",sans-serif; font-size:15px; font-weight:400; height:45px; line-height:24px; padding:0 27px; text-decoration:none; white-space:nowrap; }
-.light-btn-dark { background:#3bb4a2; border:1px solid #aaddd4; color:#fff; gap:7.99px; min-width:204px; }
+.light-btn-dark { background:#3bb4a2; border:1px solid #aaddd4; color:#fff; gap:7.99px; justify-content:center; min-width:204px; }
 .light-btn-dark img { flex-shrink:0; height:17px; width:17px; }
 .light-btn-blue { background:#000; border:1px solid rgb(255 255 255 / 65%); color:#fff; justify-content:center; min-width:109px; }
 
@@ -295,6 +295,8 @@ html[lang="zh-CN"] .light-belief-copy { line-height:1.6; }
 .light-join-card .button-blue { background:#33a190; }
 .light-join-card h2 { font-size:40px; letter-spacing:-.4px; line-height:64px; margin:15.3px 0 0; }
 .light-join-card > p:not(.eyebrow) { color:#2e2b27; font-family:"Roboto","Inter",sans-serif; font-size:17px; font-weight:300; line-height:27.2px; max-width:480px; }
+/* Optical centering for the Chinese sentence ending in full-width punctuation. */
+html[lang="zh-CN"] .light-join-card > p:not(.eyebrow) { position:relative; left:.35em; }
 .light-join-card .button { font-family:"Roboto","Inter",sans-serif; font-weight:400; }
 .light-join-card .join-actions { gap:14px; margin-top:14.7px; }
 .light-join-card .button-dark { color:#fff; min-width:136px; padding:0 30px; }

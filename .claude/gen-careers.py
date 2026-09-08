@@ -10,9 +10,9 @@ its siblings through the footer language menu and hreflang alternates; the <head
 script keeps a visitor inside the language they chose."""
 import html, os, posixpath
 
-ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v47"
+REV = "figma-1617-19731-v48"
 EMAIL = "careers@learning-machine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).
@@ -121,7 +121,7 @@ SMOOTH_SCROLL = """  <script type="module">
 
 # One entry per role; slug=None means "no posting yet" (list row only, shows the `soon` text).
 # No location / salary / benefits anywhere (user 2026-09-07): the former facts row is gone and metas carry only type · team.
-# Copy is the user's postings verbatim (zh) and faithful translations (en / fr / de) — do not paraphrase.
+# Copy approved 2026-09-08: three sections per role, aligned across zh / en / fr / de.
 # PARKED_ROLES are not rendered anywhere: the design internship was taken down on 2026-09-07 (user: 先把设计的招聘信息下掉,
 # 之后我再补上). When the posting is ready, move the entry back into ROLES, give it a slug + sections, and put
 # "visual design" back into the four `index_desc` strings above.
@@ -138,103 +138,271 @@ ROLES = [
                  points=["开发自有模型的 Agent，有资深 Mentor 和团队协作", "全栈客户端功能开发，根据 Figma MCP 到 Coding Agent 进行前端页面开发"],
                  eyebrow="WE ARE HIRING · 校招 / 实习",
                  sections=[
-                     ("WHAT YOU'LL DO", "职位要求", ["开发自有模型的 Agent，有资深 Mentor 和团队协作", "全栈客户端功能开发，根据 Figma MCP 到 Coding Agent 进行前端页面开发", "服务端逻辑对接，承接 Agentic 架构，也可参与到 Agentic 架构设计和开发中"]),
-                     ("WHO YOU ARE", "希望你是", ["计算机、电子信息、软件工程、人工智能等相关专业，熟练使用 Coding Agent，在校期间有相关课程设计、项目实践经验者优先。", "具备扎实的计算机基础知识，掌握数据结构、算法、计算机网络、操作系统等核心知识点。", "对 Agentic 架构、大模型有浓厚兴趣，了解其基本工作原理，有大模型 API 集成、Prompt 设计相关实践经验者优先。", "具备一定的客户端研发能力，熟悉至少一种客户端开发技术（iOS / Android / Flutter / React Native / PC 端桌面应用），能独立完成简单界面、交互逻辑开发。", "具备基础的后端研发能力，熟悉至少一种后端语言（Java / Go / Python / Node.js），了解 RESTful API、数据库基础，能完成简单后端接口开发与调试。", "具备良好的学习能力、问题排查能力和逻辑思维，积极主动，乐于接受新挑战，有较强的沟通能力和团队协作意识。"]),
-                     ("NICE TO HAVE", "加分项", ["英文办公", "有 Agent 类产品研发经验", "有跨端（移动端 + PC 端）研发经验", "开源项目贡献者"]),
+                     ("WHAT YOU'LL DO", "岗位职责", [
+                         "与资深导师及团队协作，基于自研模型开发 Agent 产品。",
+                         "使用 Figma MCP 和 Coding Agents，将设计稿转化为客户端界面与交互功能。",
+                         "对接后端服务，参与 Agent 架构设计与功能开发。",
+                     ]),
+                     ("WHO YOU ARE", "任职要求", [
+                         "计算机、电子信息、软件工程、人工智能等相关专业，具备数据结构、算法、网络和操作系统基础。",
+                         "熟练使用 Coding Agents，对 Agent 和大模型有浓厚兴趣，了解其基本工作原理。",
+                         "熟悉至少一种客户端技术，如 iOS、Android、Flutter、React Native 或桌面应用开发，能独立实现基础界面与交互。",
+                         "掌握至少一种后端语言，如 Java、Go、Python 或 Node.js，了解 RESTful API 和数据库，能开发与调试基础接口。",
+                         "学习主动，善于分析和解决问题，具备良好的沟通与团队协作能力。",
+                     ]),
+                     ("NICE TO HAVE", "加分项", [
+                         "有相关课程项目、Agent 产品、大模型 API 集成或 Prompt 设计实践。",
+                         "有移动端与桌面端跨平台开发经验。",
+                         "有开源项目贡献。",
+                         "能使用英语开展日常工作。",
+                     ]),
                  ]),
          en=dict(name="Agent Full-Stack Engineer", tag="Campus / Intern", meta="Campus / Intern · Engineering",
                  points=["Build Agents on our own models, with senior mentors and a collaborative team", "Full-stack client development: front-end pages built from Figma MCP through Coding Agent"],
                  eyebrow="WE ARE HIRING · Campus / Intern",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsibilities", ["Build Agents on our own models, working with senior mentors and the team", "Full-stack client feature development: front-end pages built from Figma MCP through Coding Agent", "Integrate server-side logic and carry the Agentic architecture; you can also take part in designing and building it"]),
-                     ("WHO YOU ARE", "Requirements", ["Majoring in computer science, electronic information, software engineering, AI or a related field; fluent with Coding Agents. Relevant coursework or project experience is a plus.", "Solid computer-science fundamentals: data structures, algorithms, networking and operating systems.", "Strong interest in Agentic architectures and large models, with an understanding of how they work. Hands-on experience with LLM API integration or prompt design is a plus.", "Some client-side development ability: at least one client stack (iOS / Android / Flutter / React Native / desktop) and able to build simple UI and interaction logic on your own.", "Basic back-end ability: at least one back-end language (Java / Go / Python / Node.js), familiar with RESTful APIs and database basics, able to build and debug simple endpoints.", "A fast learner and a capable debugger with clear logical thinking; proactive, open to new challenges, a strong communicator and team player."]),
-                     ("NICE TO HAVE", "Bonus points", ["Comfortable working in English", "Experience building Agent products", "Cross-platform (mobile + desktop) development experience", "Open-source contributor"]),
+                     ("WHAT YOU'LL DO", "Responsibilities", [
+                         "Build Agent products powered by our own models, working with senior mentors and the team.",
+                         "Turn designs into client interfaces and interactions using Figma MCP and Coding Agents.",
+                         "Integrate back-end services and contribute to Agent architecture and feature development.",
+                     ]),
+                     ("WHO YOU ARE", "Requirements", [
+                         "Studying computer science, electronic engineering, software engineering, AI or a related field, with solid foundations in data structures, algorithms, networking and operating systems.",
+                         "Proficient with Coding Agents, with a strong interest in Agents and large language models and an understanding of how they work.",
+                         "Familiar with at least one client stack, such as iOS, Android, Flutter, React Native or desktop development, and able to build basic interfaces and interactions independently.",
+                         "Comfortable with at least one back-end language, such as Java, Go, Python or Node.js, and able to build and debug basic endpoints using RESTful APIs and databases.",
+                         "A proactive learner and thoughtful problem solver who communicates clearly and works well with others.",
+                     ]),
+                     ("NICE TO HAVE", "Bonus points", [
+                         "Relevant coursework or hands-on experience with Agent products, LLM API integration or prompt design.",
+                         "Cross-platform development experience across mobile and desktop.",
+                         "Contributions to open-source projects.",
+                         "Comfortable working in English.",
+                     ]),
                  ]),
          fr=dict(name="Ingénieur Full-Stack Agent", tag="Campus / Stage", meta="Campus / Stage · Ingénierie",
                  points=["Construire des Agents sur nos propres modèles, avec des mentors seniors et une équipe collaborative", "Développement client full-stack : des pages front-end construites de Figma MCP jusqu'au Coding Agent"],
                  eyebrow="WE ARE HIRING · Campus / Stage",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsabilités", ["Construire des Agents sur nos propres modèles, aux côtés de mentors seniors et de l'équipe", "Développement full-stack de fonctionnalités client : pages front-end construites de Figma MCP jusqu'au Coding Agent", "Intégrer la logique serveur et porter l'architecture agentique ; vous pouvez aussi participer à sa conception et à son développement"]),
-                     ("WHO YOU ARE", "Profil recherché", ["Études en informatique, électronique et information, génie logiciel, IA ou domaine proche ; à l'aise avec les Coding Agents. Projets ou cours pertinents appréciés.", "Bases solides en informatique : structures de données, algorithmes, réseaux et systèmes d'exploitation.", "Fort intérêt pour les architectures agentiques et les grands modèles, avec une compréhension de leur fonctionnement. Une expérience d'intégration d'API LLM ou de conception de prompts est un plus.", "Une certaine capacité de développement client : au moins une stack (iOS / Android / Flutter / React Native / desktop) et savoir réaliser seul des interfaces et des interactions simples.", "Bases back-end : au moins un langage (Java / Go / Python / Node.js), connaissance des API RESTful et des bases de données, capacité à développer et déboguer des endpoints simples.", "Apprentissage rapide, bon sens du débogage et esprit logique ; proactif, ouvert aux nouveaux défis, bon communicant et esprit d'équipe."]),
-                     ("NICE TO HAVE", "Atouts", ["À l'aise pour travailler en anglais", "Expérience de développement de produits Agent", "Expérience de développement multiplateforme (mobile + desktop)", "Contributeur open source"]),
+                     ("WHAT YOU'LL DO", "Responsabilités", [
+                         "Développer des produits Agent fondés sur nos propres modèles, aux côtés de mentors expérimentés et de l’équipe.",
+                         "Transformer les maquettes en interfaces et interactions côté client à l’aide de Figma MCP et de Coding Agents.",
+                         "Intégrer les services back-end et contribuer à l’architecture des Agents et au développement de leurs fonctionnalités.",
+                     ]),
+                     ("WHO YOU ARE", "Profil recherché", [
+                         "Études en informatique, électronique, génie logiciel, IA ou dans un domaine connexe, avec de solides bases en structures de données, algorithmes, réseaux et systèmes d’exploitation.",
+                         "Maîtrise des Coding Agents, avec un fort intérêt pour les Agents et les grands modèles de langage et une compréhension de leur fonctionnement.",
+                         "Connaissance d’au moins une technologie client, comme iOS, Android, Flutter, React Native ou le développement d’applications de bureau, et capacité à réaliser de façon autonome des interfaces et interactions simples.",
+                         "Maîtrise d’au moins un langage back-end, comme Java, Go, Python ou Node.js, et capacité à développer et déboguer des points d’accès simples à l’aide d’API RESTful et de bases de données.",
+                         "Envie d’apprendre, capacité à analyser et résoudre les problèmes, communication claire et goût du travail en équipe.",
+                     ]),
+                     ("NICE TO HAVE", "Atouts", [
+                         "Projets réalisés dans le cadre des études ou expérience pratique de produits Agent, d’intégration d’API LLM ou de conception de prompts.",
+                         "Expérience du développement multiplateforme sur mobile et ordinateur.",
+                         "Contributions à des projets open source.",
+                         "Aisance pour travailler en anglais.",
+                     ]),
                  ]),
          de=dict(name="Agent Full-Stack Engineer", tag="Campus / Praktikum", meta="Campus / Praktikum · Engineering",
                  points=["Agents auf unseren eigenen Modellen bauen, mit erfahrenen Mentoren und einem kollaborativen Team", "Full-Stack-Client-Entwicklung: Frontend-Seiten von Figma MCP über den Coding Agent bis zur Auslieferung"],
                  eyebrow="WE ARE HIRING · Campus / Praktikum",
                  sections=[
-                     ("WHAT YOU'LL DO", "Aufgaben", ["Agents auf unseren eigenen Modellen bauen, gemeinsam mit erfahrenen Mentoren und dem Team", "Full-Stack-Entwicklung von Client-Funktionen: Frontend-Seiten von Figma MCP über den Coding Agent", "Serverseitige Logik anbinden und die agentische Architektur tragen; du kannst auch an ihrem Entwurf und Aufbau mitwirken"]),
-                     ("WHO YOU ARE", "Profil", ["Studium der Informatik, Elektronik und Informationstechnik, Softwaretechnik, KI oder eines verwandten Fachs; sicher im Umgang mit Coding Agents. Passende Kurse oder Projekte sind ein Plus.", "Solide Informatik-Grundlagen: Datenstrukturen, Algorithmen, Netzwerke und Betriebssysteme.", "Starkes Interesse an agentischen Architekturen und großen Modellen und ein Verständnis ihrer Funktionsweise. Praxis mit LLM-API-Integration oder Prompt-Design ist ein Plus.", "Etwas Client-Entwicklungserfahrung: mindestens ein Client-Stack (iOS / Android / Flutter / React Native / Desktop), einfache Oberflächen und Interaktionen selbstständig umsetzbar.", "Backend-Grundlagen: mindestens eine Backend-Sprache (Java / Go / Python / Node.js), vertraut mit RESTful APIs und Datenbank-Grundlagen, einfache Endpunkte bauen und debuggen.", "Schnell lernend, gut im Debuggen und logisch denkend; proaktiv, offen für neue Herausforderungen, kommunikationsstark und teamorientiert."]),
-                     ("NICE TO HAVE", "Pluspunkte", ["Sicheres Arbeiten auf Englisch", "Erfahrung im Bau von Agent-Produkten", "Erfahrung in plattformübergreifender Entwicklung (Mobile + Desktop)", "Open-Source-Beiträge"]),
+                     ("WHAT YOU'LL DO", "Aufgaben", [
+                         "Agent-Produkte auf Basis unserer eigenen Modelle entwickeln, gemeinsam mit erfahrenen Mentoren und dem Team.",
+                         "Mit Figma MCP und Coding Agents Designs in Client-Oberflächen und Interaktionen umsetzen.",
+                         "Backend-Dienste integrieren und an der Agent-Architektur sowie der Entwicklung von Funktionen mitwirken.",
+                     ]),
+                     ("WHO YOU ARE", "Anforderungen", [
+                         "Studium der Informatik, Elektrotechnik, Softwaretechnik, KI oder eines verwandten Fachs mit soliden Grundlagen in Datenstrukturen, Algorithmen, Netzwerken und Betriebssystemen.",
+                         "Sicherer Umgang mit Coding Agents, großes Interesse an Agents und großen Sprachmodellen sowie Verständnis ihrer Funktionsweise.",
+                         "Vertrautheit mit mindestens einer Client-Technologie wie iOS, Android, Flutter, React Native oder Desktop-Entwicklung und die Fähigkeit, einfache Oberflächen und Interaktionen selbstständig umzusetzen.",
+                         "Beherrschung mindestens einer Backend-Sprache wie Java, Go, Python oder Node.js sowie die Fähigkeit, einfache Endpunkte mit RESTful APIs und Datenbanken zu entwickeln und zu debuggen.",
+                         "Eigeninitiative beim Lernen, analytisches Denken und Problemlösungskompetenz sowie klare Kommunikation und Teamfähigkeit.",
+                     ]),
+                     ("NICE TO HAVE", "Pluspunkte", [
+                         "Studienprojekte oder praktische Erfahrung mit Agent-Produkten, der Integration von LLM-APIs oder Prompt-Design.",
+                         "Erfahrung mit plattformübergreifender Entwicklung für Mobile und Desktop.",
+                         "Beiträge zu Open-Source-Projekten.",
+                         "Sicheres Arbeiten auf Englisch.",
+                     ]),
                  ])),
     dict(slug="agent-fullstack",
          zh=dict(name="Agent 全栈研发高级工程师", tag="社招", meta="社招 · 研发",
                  points=["负责 AI Agent 个人助理客户端全栈研发，端到端落地核心功能", "主导核心交互逻辑、任务调度与上下文管理，结合大模型能力"],
                  eyebrow="WE ARE HIRING · 社招",
                  sections=[
-                     ("WHAT YOU'LL DO", "岗位职责", ["负责 AI Agent 个人助理客户端全栈研发，涵盖前端 / 移动端、后端接口、AI 能力集成，端到端实现个人助理的核心功能落地，确保产品流畅性、稳定性和用户体验。", "主导 Agent 个人助理的核心交互逻辑、任务调度、上下文管理研发，结合大模型能力，实现智能对话、任务拆解、多工具调用（日程、邮件、文件管理等）、个性化推荐等核心场景。", "负责客户端与大模型 API、第三方工具（办公软件、生活服务接口等）的对接与调试，优化接口性能、数据传输效率，解决跨端兼容、网络异常等问题。", "参与产品需求评审、技术方案设计，结合 AI Agent 特性提出客户端技术优化建议，推动产品迭代升级；负责技术文档编写、代码评审，保障研发质量。", "关注 AI Agent、大模型应用、客户端研发前沿技术，将新技术、新方案融入产品研发，提升产品竞争力和研发效率。", "配合测试、产品团队，完成功能测试、Bug 修复、用户反馈优化，确保产品上线质量；协助搭建客户端研发规范和流程。"]),
-                     ("CORE REQUIREMENTS", "核心要求", ["本科及以上学历，计算机、电子信息、软件工程等相关专业，3 年及以上全栈研发经验，熟练使用 Coding Agent，有 AI Agent、个人助理类产品研发经验者优先。", "具备扎实的客户端研发能力，熟练掌握至少一种客户端开发技术，能独立完成客户端界面、交互逻辑开发。", "具备后端研发能力，熟练掌握至少一种后端语言，熟悉 RESTful API、微服务架构，能独立开发、调试后端接口，处理数据存储与交互。", "了解大模型的工作原理，有大模型 API 集成、Prompt 工程、Agent 任务调度、上下文管理相关经验者优先。", "具备良好的问题排查能力，能快速定位并解决客户端、后端、AI 集成过程中的技术问题，有跨端开发、性能优化经验者优先。"]),
-                     ("SKILLS", "技能要求", ["前端 / 客户端：熟练掌握 Flutter / React Native，或 iOS（Swift / OC），熟悉组件化、工程化开发，了解 UI/UX 设计规范。", "后端：熟练掌握 Go / Python / Java 中的一种或多种，熟悉 MySQL、MongoDB 等数据库，了解 Redis 缓存、消息队列等中间件，具备接口设计、性能优化能力。", "AI 相关：熟悉大模型 API 调用、Prompt 设计，了解 Agent 框架（如 LangChain、LlamaIndex），有智能对话、任务拆解、多工具集成经验者加分。", "其他：熟悉 Git 版本控制，具备良好的代码规范和文档编写习惯；具备较强的学习能力、沟通能力和团队协作能力，能快速适应 AI 技术迭代节奏。"]),
-                     ("NICE TO HAVE", "加分项", ["有个人助理类、AI Agent 类产品全栈研发经验，或主导过相关产品从 0 到 1 落地。", "熟悉大模型微调、Agent 智能调度策略、上下文记忆优化等相关技术。", "有跨端（移动端 + PC 端）研发经验，能独立完成全平台客户端适配。", "开源项目贡献者，或有个人技术博客、相关技术成果展示。"]),
+                     ("WHAT YOU'LL DO", "岗位职责", [
+                         "负责 AI Agent 个人助理的全栈研发，覆盖客户端、后端服务与 AI 能力集成，端到端交付核心功能。",
+                         "主导 Agent 交互、任务调度与上下文管理，实现智能对话、任务拆解、工具调用和个性化体验。",
+                         "与产品和测试团队协作，推动技术方案、代码评审与产品迭代，优化跨端体验、性能和稳定性。",
+                     ]),
+                     ("WHO YOU ARE", "任职要求", [
+                         "本科及以上学历，计算机、电子信息、软件工程等相关专业，具备 3 年及以上全栈研发经验，熟练使用 Coding Agents。",
+                         "熟练掌握 Flutter、React Native 或原生 iOS 开发，能独立完成客户端界面与交互，熟悉组件化开发和 UI/UX 规范。",
+                         "熟练掌握 Go、Python 或 Java 中至少一种语言，熟悉 RESTful API、微服务和数据库，了解缓存与消息队列。",
+                         "理解大模型基本原理，熟悉大模型 API 集成、Prompt 设计及常见 Agent 框架。",
+                         "能定位并解决客户端、后端与 AI 集成中的问题，具备良好的 Git、代码、文档和团队协作习惯。",
+                     ]),
+                     ("NICE TO HAVE", "加分项", [
+                         "有 AI Agent 或个人助理产品研发经验，或主导过相关产品从零到上线。",
+                         "有模型微调、Agent 调度策略或上下文记忆优化经验。",
+                         "有移动端与桌面端跨平台开发、适配或性能优化经验。",
+                         "有开源贡献、技术博客或可展示的技术作品。",
+                     ]),
                  ]),
          en=dict(name="Senior Agent Full-Stack Engineer", tag="Experienced hire", meta="Experienced hire · Engineering",
                  points=["Own full-stack development of the AI Agent personal-assistant client and ship its core features end to end", "Lead core interaction logic, task scheduling and context management on top of large-model capabilities"],
                  eyebrow="WE ARE HIRING · Experienced hire",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsibilities", ["Own full-stack development of the AI Agent personal-assistant client — front-end / mobile, back-end APIs and AI capability integration — delivering the assistant's core features end to end with a smooth, stable experience.", "Lead development of the assistant's core interaction logic, task scheduling and context management; use large-model capabilities to deliver intelligent conversation, task decomposition, multi-tool calling (calendar, email, file management and more) and personalised recommendations.", "Integrate and debug the client against large-model APIs and third-party tools (office software, lifestyle-service APIs and others); optimise API performance and data transfer, and resolve cross-platform compatibility and network-failure issues.", "Take part in requirement reviews and technical design; propose client-side improvements grounded in how AI Agents work and drive product iteration. Write technical documentation and review code to keep engineering quality high.", "Follow the frontier of AI Agents, large-model applications and client engineering, and bring new techniques and approaches into the product to raise competitiveness and engineering efficiency.", "Work with QA and product on feature testing, bug fixing and user-feedback improvements to ensure release quality; help establish client engineering standards and processes."]),
-                     ("CORE REQUIREMENTS", "Requirements", ["Bachelor's degree or above in computer science, electronic information, software engineering or a related field; 3+ years of full-stack experience; fluent with Coding Agents. Experience building AI Agent or personal-assistant products is a plus.", "Solid client-side skills: expert in at least one client stack and able to build client UI and interaction logic independently.", "Back-end skills: expert in at least one back-end language, familiar with RESTful APIs and microservice architecture, able to build and debug endpoints and handle data storage and exchange independently.", "Understand how large models work; experience with LLM API integration, prompt engineering, Agent task scheduling or context management is a plus.", "Strong debugging skills: quick to locate and fix issues across client, back-end and AI integration. Cross-platform development or performance-optimisation experience is a plus."]),
-                     ("SKILLS", "Skills", ["Front-end / client: proficient in Flutter / React Native or iOS (Swift / Objective-C); familiar with component-based, engineered development and UI/UX design guidelines.", "Back-end: proficient in one or more of Go / Python / Java; familiar with MySQL, MongoDB and other databases, plus middleware such as Redis caching and message queues; able to design APIs and optimise performance.", "AI: familiar with LLM API calls and prompt design; know Agent frameworks such as LangChain and LlamaIndex. Experience with intelligent conversation, task decomposition or multi-tool integration is a plus.", "Other: fluent with Git; good coding standards and documentation habits; strong learning, communication and teamwork skills, able to keep pace with fast AI iteration."]),
-                     ("NICE TO HAVE", "Bonus points", ["Full-stack experience on personal-assistant or AI Agent products, or having led such a product from zero to launch.", "Familiar with large-model fine-tuning, Agent scheduling strategies or context-memory optimisation.", "Cross-platform (mobile + desktop) experience, able to adapt a client to every platform independently.", "Open-source contributor, or a personal tech blog / portfolio of technical work."]),
+                     ("WHAT YOU'LL DO", "Responsibilities", [
+                         "Own full-stack development of an AI Agent personal assistant, delivering core features across clients, back-end services and AI integrations.",
+                         "Lead Agent interactions, task scheduling and context management to support conversation, task decomposition, tool use and personalized experiences.",
+                         "Work with product and QA on technical design, code reviews and product iteration, improving cross-platform experience, performance and reliability.",
+                     ]),
+                     ("WHO YOU ARE", "Requirements", [
+                         "A bachelor’s degree or above in computer science, electronic engineering, software engineering or a related field, with 3+ years of full-stack experience and proficiency with Coding Agents.",
+                         "Proficient in Flutter, React Native or native iOS development, with the ability to build client interfaces and interactions independently using component-based design and UI/UX guidelines.",
+                         "Proficient in at least one of Go, Python or Java; familiar with RESTful APIs, microservices and databases, with an understanding of caching and message queues.",
+                         "Understand how large language models work and be familiar with LLM API integration, prompt design and common Agent frameworks.",
+                         "Able to diagnose issues across clients, back-end services and AI integrations, with sound Git, coding, documentation and collaboration practices.",
+                     ]),
+                     ("NICE TO HAVE", "Bonus points", [
+                         "Experience building AI Agent or personal-assistant products, or leading one from concept to launch.",
+                         "Experience with model fine-tuning, Agent scheduling strategies or context-memory optimization.",
+                         "Experience with mobile and desktop development, cross-platform adaptation or performance optimization.",
+                         "Open-source contributions, a technical blog or a portfolio of technical work.",
+                     ]),
                  ]),
          fr=dict(name="Ingénieur Full-Stack Agent Senior", tag="Expérimenté", meta="Expérimenté · Ingénierie",
                  points=["Piloter le développement full-stack du client assistant personnel AI Agent et livrer ses fonctionnalités clés de bout en bout", "Diriger la logique d'interaction, l'ordonnancement des tâches et la gestion du contexte, sur la base des grands modèles"],
                  eyebrow="WE ARE HIRING · Expérimenté",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsabilités", ["Piloter le développement full-stack du client assistant personnel AI Agent — front-end / mobile, API back-end et intégration des capacités IA — en livrant ses fonctionnalités clés de bout en bout avec une expérience fluide et stable.", "Diriger le développement de la logique d'interaction, de l'ordonnancement des tâches et de la gestion du contexte ; s'appuyer sur les grands modèles pour offrir conversation intelligente, décomposition des tâches, appels multi-outils (agenda, e-mail, gestion de fichiers, etc.) et recommandations personnalisées.", "Intégrer et déboguer le client avec les API des grands modèles et les outils tiers (logiciels bureautiques, services du quotidien, etc.) ; optimiser les performances des API et les transferts de données, résoudre les problèmes de compatibilité multiplateforme et de réseau.", "Participer aux revues de besoins et à la conception technique ; proposer des améliorations côté client fondées sur le fonctionnement des AI Agents et faire avancer le produit. Rédiger la documentation technique et relire le code pour garantir la qualité.", "Suivre l'état de l'art des AI Agents, des applications de grands modèles et du développement client, et intégrer les nouvelles techniques au produit pour renforcer sa compétitivité et l'efficacité de l'équipe.", "Collaborer avec les équipes QA et produit sur les tests fonctionnels, la correction de bugs et les retours utilisateurs pour garantir la qualité des mises en production ; contribuer aux standards et processus de développement client."]),
-                     ("CORE REQUIREMENTS", "Exigences", ["Licence ou plus en informatique, électronique et information, génie logiciel ou domaine proche ; 3 ans et plus d'expérience full-stack ; à l'aise avec les Coding Agents. Une expérience sur des produits AI Agent ou assistant personnel est un plus.", "Solides compétences client : maîtrise d'au moins une stack client et capacité à réaliser seul interfaces et logique d'interaction.", "Compétences back-end : maîtrise d'au moins un langage back-end, connaissance des API RESTful et des architectures microservices, capacité à développer et déboguer des endpoints et à gérer le stockage et les échanges de données.", "Compréhension du fonctionnement des grands modèles ; une expérience d'intégration d'API LLM, de prompt engineering, d'ordonnancement de tâches d'Agent ou de gestion du contexte est un plus.", "Bonnes capacités de débogage : localiser et corriger rapidement les problèmes côté client, back-end et intégration IA. Une expérience multiplateforme ou d'optimisation des performances est un plus."]),
-                     ("SKILLS", "Compétences", ["Front-end / client : maîtrise de Flutter / React Native ou d'iOS (Swift / Objective-C) ; familiarité avec le développement par composants et industrialisé, ainsi qu'avec les règles de design UI/UX.", "Back-end : maîtrise d'un ou plusieurs langages parmi Go / Python / Java ; connaissance de MySQL, MongoDB et autres bases de données, ainsi que de middlewares comme le cache Redis et les files de messages ; capacité à concevoir des API et à optimiser les performances.", "IA : familiarité avec les appels d'API LLM et la conception de prompts ; connaissance de frameworks d'Agent comme LangChain et LlamaIndex. Une expérience en conversation intelligente, décomposition de tâches ou intégration multi-outils est un plus.", "Autres : maîtrise de Git ; bonnes pratiques de code et de documentation ; fortes capacités d'apprentissage, de communication et de travail en équipe, pour suivre le rythme rapide de l'IA."]),
-                     ("NICE TO HAVE", "Atouts", ["Expérience full-stack sur des produits assistant personnel ou AI Agent, ou avoir mené un tel produit de zéro au lancement.", "Connaissance du fine-tuning des grands modèles, des stratégies d'ordonnancement d'Agent ou de l'optimisation de la mémoire de contexte.", "Expérience multiplateforme (mobile + desktop), capacité à adapter seul un client à toutes les plateformes.", "Contributeur open source, ou blog technique personnel / portfolio de réalisations techniques."]),
+                     ("WHAT YOU'LL DO", "Responsabilités", [
+                         "Piloter le développement full-stack d’un assistant personnel AI Agent et livrer ses fonctionnalités clés de bout en bout, des clients aux services back-end et aux intégrations IA.",
+                         "Diriger le développement des interactions de l’Agent, de l’ordonnancement des tâches et de la gestion du contexte pour permettre la conversation, la décomposition des tâches, l’utilisation d’outils et des expériences personnalisées.",
+                         "Collaborer avec les équipes produit et QA sur la conception technique, les revues de code et les évolutions du produit afin d’améliorer l’expérience multiplateforme, les performances et la fiabilité.",
+                     ]),
+                     ("WHO YOU ARE", "Profil recherché", [
+                         "Licence ou diplôme supérieur en informatique, électronique, génie logiciel ou dans un domaine connexe, avec au moins 3 ans d’expérience full-stack et une maîtrise des Coding Agents.",
+                         "Maîtrise de Flutter, React Native ou du développement iOS natif, avec la capacité à réaliser de façon autonome des interfaces et interactions client selon les principes de conception par composants et les recommandations UI/UX.",
+                         "Maîtrise d’au moins un langage parmi Go, Python ou Java ; connaissance des API RESTful, des microservices et des bases de données, ainsi que des mécanismes de cache et des files de messages.",
+                         "Compréhension du fonctionnement des grands modèles de langage et connaissance de l’intégration d’API LLM, de la conception de prompts et des principaux frameworks d’Agents.",
+                         "Capacité à diagnostiquer les problèmes côté client, back-end et intégration IA, avec de bonnes pratiques de Git, de code, de documentation et de collaboration.",
+                     ]),
+                     ("NICE TO HAVE", "Atouts", [
+                         "Expérience du développement de produits AI Agent ou d’assistants personnels, ou de leur pilotage de la conception au lancement.",
+                         "Expérience du fine-tuning de modèles, des stratégies d’ordonnancement des Agents ou de l’optimisation de la mémoire contextuelle.",
+                         "Expérience du développement sur mobile et ordinateur, de l’adaptation multiplateforme ou de l’optimisation des performances.",
+                         "Contributions open source, blog technique ou portfolio de réalisations techniques.",
+                     ]),
                  ]),
          de=dict(name="Senior Agent Full-Stack Engineer", tag="Berufserfahren", meta="Berufserfahren · Engineering",
                  points=["Die Full-Stack-Entwicklung des KI-Agent-Assistenten-Clients verantworten und seine Kernfunktionen Ende-zu-Ende ausliefern", "Interaktionslogik, Aufgabenplanung und Kontextverwaltung auf Basis großer Modelle leiten"],
                  eyebrow="WE ARE HIRING · Berufserfahren",
                  sections=[
-                     ("WHAT YOU'LL DO", "Aufgaben", ["Die Full-Stack-Entwicklung des KI-Agent-Assistenten-Clients verantworten — Frontend / Mobile, Backend-APIs und Integration der KI-Fähigkeiten — und die Kernfunktionen des Assistenten Ende-zu-Ende mit flüssiger, stabiler Nutzererfahrung ausliefern.", "Die Entwicklung von Interaktionslogik, Aufgabenplanung und Kontextverwaltung leiten; mit großen Modellen intelligente Dialoge, Aufgabenzerlegung, Multi-Tool-Aufrufe (Kalender, E-Mail, Dateiverwaltung u. a.) und personalisierte Empfehlungen umsetzen.", "Den Client an LLM-APIs und Drittanbieter-Tools (Office-Software, Alltagsdienste u. a.) anbinden und debuggen; API-Performance und Datenübertragung optimieren, Kompatibilitäts- und Netzwerkprobleme lösen.", "An Anforderungs-Reviews und technischem Design mitwirken; clientseitige Verbesserungen aus der Funktionsweise von KI-Agents ableiten und die Produktentwicklung vorantreiben. Technische Dokumentation schreiben und Code reviewen, um die Qualität zu sichern.", "Die Entwicklung bei KI-Agents, LLM-Anwendungen und Client-Engineering verfolgen und neue Techniken ins Produkt bringen, um Wettbewerbsfähigkeit und Effizienz zu steigern.", "Mit QA und Produkt an Funktionstests, Bugfixes und Nutzerfeedback arbeiten, um die Release-Qualität zu sichern; beim Aufbau von Standards und Prozessen für die Client-Entwicklung mithelfen."]),
-                     ("CORE REQUIREMENTS", "Anforderungen", ["Bachelor oder höher in Informatik, Elektronik und Informationstechnik, Softwaretechnik oder einem verwandten Fach; 3+ Jahre Full-Stack-Erfahrung; sicher im Umgang mit Coding Agents. Erfahrung mit KI-Agent- oder Assistenten-Produkten ist ein Plus.", "Solide Client-Kompetenz: mindestens einen Client-Stack beherrschen und Oberflächen sowie Interaktionslogik selbstständig umsetzen.", "Backend-Kompetenz: mindestens eine Backend-Sprache beherrschen, vertraut mit RESTful APIs und Microservice-Architekturen, Endpunkte selbstständig bauen und debuggen, Datenspeicherung und -austausch handhaben.", "Verständnis der Funktionsweise großer Modelle; Erfahrung mit LLM-API-Integration, Prompt Engineering, Agent-Aufgabenplanung oder Kontextverwaltung ist ein Plus.", "Gutes Debugging: Probleme in Client, Backend und KI-Integration schnell finden und beheben. Erfahrung mit plattformübergreifender Entwicklung oder Performance-Optimierung ist ein Plus."]),
-                     ("SKILLS", "Kenntnisse", ["Frontend / Client: sicher in Flutter / React Native oder iOS (Swift / Objective-C); vertraut mit komponentenbasierter, industrialisierter Entwicklung und UI/UX-Richtlinien.", "Backend: sicher in einer oder mehreren Sprachen aus Go / Python / Java; vertraut mit MySQL, MongoDB und anderen Datenbanken sowie Middleware wie Redis-Cache und Message Queues; API-Design und Performance-Optimierung.", "KI: vertraut mit LLM-API-Aufrufen und Prompt-Design; Kenntnis von Agent-Frameworks wie LangChain und LlamaIndex. Erfahrung mit intelligenten Dialogen, Aufgabenzerlegung oder Multi-Tool-Integration ist ein Plus.", "Sonstiges: sicher mit Git; gute Code- und Dokumentationsstandards; starke Lern-, Kommunikations- und Teamfähigkeit, um mit dem schnellen KI-Tempo Schritt zu halten."]),
-                     ("NICE TO HAVE", "Pluspunkte", ["Full-Stack-Erfahrung mit Assistenten- oder KI-Agent-Produkten oder ein solches Produkt von null bis zum Launch geführt.", "Vertraut mit LLM-Fine-Tuning, Agent-Planungsstrategien oder Optimierung des Kontextgedächtnisses.", "Plattformübergreifende Erfahrung (Mobile + Desktop), einen Client selbstständig auf alle Plattformen bringen.", "Open-Source-Beiträge oder ein eigener Tech-Blog / ein Portfolio technischer Arbeiten."]),
+                     ("WHAT YOU'LL DO", "Aufgaben", [
+                         "Die Full-Stack-Entwicklung eines persönlichen KI-Agent-Assistenten verantworten und Kernfunktionen über Clients, Backend-Dienste und KI-Integrationen hinweg durchgängig ausliefern.",
+                         "Die Entwicklung von Agent-Interaktionen, Aufgabenplanung und Kontextverwaltung leiten, um Dialoge, Aufgabenzerlegung, Werkzeugnutzung und personalisierte Erlebnisse zu ermöglichen.",
+                         "Mit Produkt und QA an technischer Konzeption, Code-Reviews und Produktverbesserungen arbeiten, um plattformübergreifende Nutzererfahrung, Performance und Zuverlässigkeit zu verbessern.",
+                     ]),
+                     ("WHO YOU ARE", "Anforderungen", [
+                         "Bachelorabschluss oder höher in Informatik, Elektrotechnik, Softwaretechnik oder einem verwandten Fach, mindestens 3 Jahre Full-Stack-Erfahrung und sicherer Umgang mit Coding Agents.",
+                         "Sehr gute Kenntnisse in Flutter, React Native oder nativer iOS-Entwicklung sowie die Fähigkeit, Client-Oberflächen und Interaktionen selbstständig nach komponentenbasierten Designprinzipien und UI/UX-Richtlinien umzusetzen.",
+                         "Sehr gute Kenntnisse in mindestens einer Sprache aus Go, Python oder Java; vertraut mit RESTful APIs, Microservices und Datenbanken sowie mit Caching und Message Queues.",
+                         "Verständnis der Funktionsweise großer Sprachmodelle und Vertrautheit mit der Integration von LLM-APIs, Prompt-Design und gängigen Agent-Frameworks.",
+                         "Fähigkeit, Probleme in Clients, Backend-Diensten und KI-Integrationen zu diagnostizieren, sowie gute Praktiken für Git, Code, Dokumentation und Zusammenarbeit.",
+                     ]),
+                     ("NICE TO HAVE", "Pluspunkte", [
+                         "Erfahrung mit der Entwicklung von KI-Agent- oder Assistenten-Produkten oder mit deren Leitung vom Konzept bis zum Launch.",
+                         "Erfahrung mit Modell-Fine-Tuning, Agent-Planungsstrategien oder der Optimierung des Kontextgedächtnisses.",
+                         "Erfahrung mit Mobile- und Desktop-Entwicklung, plattformübergreifender Anpassung oder Performance-Optimierung.",
+                         "Open-Source-Beiträge, ein technischer Blog oder ein Portfolio technischer Arbeiten.",
+                     ]),
                  ])),
     dict(slug="agent-client",
          zh=dict(name="Agent 客户端工程师", tag="社招", meta="社招 · 客户端研发",
                  points=["开发自有模型的 Agent 客户端：Web、iOS、macOS", "从 Figma MCP 到 Coding Agent 的全栈客户端功能开发"],
                  eyebrow="WE ARE HIRING · 社招",
                  sections=[
-                     ("WHAT YOU'LL DO", "职位要求", ["开发自有模型的 Agent 客户端，包括 Web、iOS、macOS", "全栈客户端功能开发，根据 Figma MCP 到 Coding Agent 进行前端页面开发", "服务端逻辑对接，承接 Agentic 架构，也可参与到 Agentic 架构设计和开发中"]),
-                     ("WHO YOU ARE", "希望你是", ["计算机、电子信息、软件工程、人工智能等相关专业，熟练使用 Coding Agent。", "1–3 年客户端项目经验，熟悉至少一种客户端开发技术（iOS / Android / Flutter / React Native / PC 端桌面应用），能独立完成简单界面、交互逻辑开发。", "对 Agentic 架构、大模型有浓厚兴趣，了解其基本工作原理，有大模型 API 集成、Prompt 设计相关实践经验者优先。", "具备良好的学习能力、问题排查能力和逻辑思维，积极主动，乐于接受新挑战，有较强的沟通能力和团队协作意识。"]),
-                     ("NICE TO HAVE", "加分项", ["英文办公", "有 Agent 类产品研发经验"]),
+                     ("WHAT YOU'LL DO", "岗位职责", [
+                         "基于自研模型开发 Agent 客户端，覆盖 Web、iOS 和 macOS。",
+                         "使用 Figma MCP 和 Coding Agents，将设计稿转化为客户端界面与交互功能。",
+                         "对接后端服务与 Agent 能力，参与 Agent 架构设计与功能开发。",
+                     ]),
+                     ("WHO YOU ARE", "任职要求", [
+                         "计算机、电子信息、软件工程、人工智能等相关专业背景，熟练使用 Coding Agents。",
+                         "具备 1–3 年客户端项目经验，熟悉至少一种客户端技术，如 iOS、Android、Flutter、React Native 或桌面应用开发，能独立实现界面与交互。",
+                         "对 Agent 和大模型有浓厚兴趣，了解其基本工作原理。",
+                         "学习主动，善于分析和解决问题，具备良好的沟通与团队协作能力。",
+                     ]),
+                     ("NICE TO HAVE", "加分项", [
+                         "有 Agent 产品研发经验。",
+                         "有大模型 API 集成或 Prompt 设计实践。",
+                         "能使用英语开展日常工作。",
+                     ]),
                  ]),
          en=dict(name="Agent Client Engineer", tag="Experienced hire", meta="Experienced hire · Client engineering",
                  points=["Build the Agent client for our own models: Web, iOS and macOS", "Full-stack client development from Figma MCP to Coding Agent"],
                  eyebrow="WE ARE HIRING · Experienced hire",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsibilities", ["Build the Agent client for our own models, including Web, iOS and macOS", "Full-stack client feature development: front-end pages built from Figma MCP through Coding Agent", "Integrate server-side logic and carry the Agentic architecture; you can also take part in designing and building it"]),
-                     ("WHO YOU ARE", "Requirements", ["Background in computer science, electronic information, software engineering, AI or a related field; fluent with Coding Agents.", "1–3 years of client-side project experience with at least one client stack (iOS / Android / Flutter / React Native / desktop); able to build simple UI and interaction logic on your own.", "Strong interest in Agentic architectures and large models, with an understanding of how they work. Hands-on experience with LLM API integration or prompt design is a plus.", "A fast learner and a capable debugger with clear logical thinking; proactive, open to new challenges, a strong communicator and team player."]),
-                     ("NICE TO HAVE", "Bonus points", ["Comfortable working in English", "Experience building Agent products"]),
+                     ("WHAT YOU'LL DO", "Responsibilities", [
+                         "Build Agent clients powered by our own models across Web, iOS and macOS.",
+                         "Turn designs into client interfaces and interactions using Figma MCP and Coding Agents.",
+                         "Integrate back-end services and Agent capabilities, and contribute to Agent architecture and feature development.",
+                     ]),
+                     ("WHO YOU ARE", "Requirements", [
+                         "A background in computer science, electronic engineering, software engineering, AI or a related field, with proficiency in Coding Agents.",
+                         "1–3 years of client development experience with at least one stack, such as iOS, Android, Flutter, React Native or desktop development, and the ability to build interfaces and interactions independently.",
+                         "A strong interest in Agents and large language models, with an understanding of how they work.",
+                         "A proactive learner and thoughtful problem solver who communicates clearly and works well with others.",
+                     ]),
+                     ("NICE TO HAVE", "Bonus points", [
+                         "Experience building Agent products.",
+                         "Hands-on experience with LLM API integration or prompt design.",
+                         "Comfortable working in English.",
+                     ]),
                  ]),
          fr=dict(name="Ingénieur Client Agent", tag="Expérimenté", meta="Expérimenté · Ingénierie client",
                  points=["Construire le client Agent de nos propres modèles : Web, iOS et macOS", "Développement client full-stack, de Figma MCP au Coding Agent"],
                  eyebrow="WE ARE HIRING · Expérimenté",
                  sections=[
-                     ("WHAT YOU'LL DO", "Responsabilités", ["Construire le client Agent de nos propres modèles, y compris Web, iOS et macOS", "Développement full-stack de fonctionnalités client : pages front-end construites de Figma MCP jusqu'au Coding Agent", "Intégrer la logique serveur et porter l'architecture agentique ; vous pouvez aussi participer à sa conception et à son développement"]),
-                     ("WHO YOU ARE", "Profil recherché", ["Formation en informatique, électronique et information, génie logiciel, IA ou domaine proche ; à l'aise avec les Coding Agents.", "1 à 3 ans d'expérience sur des projets client avec au moins une stack (iOS / Android / Flutter / React Native / desktop) ; capacité à réaliser seul interfaces et interactions simples.", "Fort intérêt pour les architectures agentiques et les grands modèles, avec une compréhension de leur fonctionnement. Une expérience d'intégration d'API LLM ou de conception de prompts est un plus.", "Apprentissage rapide, bon sens du débogage et esprit logique ; proactif, ouvert aux nouveaux défis, bon communicant et esprit d'équipe."]),
-                     ("NICE TO HAVE", "Atouts", ["À l'aise pour travailler en anglais", "Expérience de développement de produits Agent"]),
+                     ("WHAT YOU'LL DO", "Responsabilités", [
+                         "Développer des clients Agent fondés sur nos propres modèles pour le Web, iOS et macOS.",
+                         "Transformer les maquettes en interfaces et interactions côté client à l’aide de Figma MCP et de Coding Agents.",
+                         "Intégrer les services back-end et les capacités des Agents, et contribuer à leur architecture et au développement de leurs fonctionnalités.",
+                     ]),
+                     ("WHO YOU ARE", "Profil recherché", [
+                         "Formation en informatique, électronique, génie logiciel, IA ou dans un domaine connexe, avec une maîtrise des Coding Agents.",
+                         "1 à 3 ans d’expérience en développement client avec au moins une technologie, comme iOS, Android, Flutter, React Native ou le développement d’applications de bureau, et la capacité à réaliser de façon autonome des interfaces et interactions.",
+                         "Fort intérêt pour les Agents et les grands modèles de langage, avec une compréhension de leur fonctionnement.",
+                         "Envie d’apprendre, capacité à analyser et résoudre les problèmes, communication claire et goût du travail en équipe.",
+                     ]),
+                     ("NICE TO HAVE", "Atouts", [
+                         "Expérience du développement de produits Agent.",
+                         "Expérience pratique de l’intégration d’API LLM ou de la conception de prompts.",
+                         "Aisance pour travailler en anglais.",
+                     ]),
                  ]),
          de=dict(name="Agent Client Engineer", tag="Berufserfahren", meta="Berufserfahren · Client-Engineering",
                  points=["Den Agent-Client für unsere eigenen Modelle bauen: Web, iOS und macOS", "Full-Stack-Client-Entwicklung von Figma MCP bis zum Coding Agent"],
                  eyebrow="WE ARE HIRING · Berufserfahren",
                  sections=[
-                     ("WHAT YOU'LL DO", "Aufgaben", ["Den Agent-Client für unsere eigenen Modelle bauen, einschließlich Web, iOS und macOS", "Full-Stack-Entwicklung von Client-Funktionen: Frontend-Seiten von Figma MCP über den Coding Agent", "Serverseitige Logik anbinden und die agentische Architektur tragen; du kannst auch an ihrem Entwurf und Aufbau mitwirken"]),
-                     ("WHO YOU ARE", "Profil", ["Hintergrund in Informatik, Elektronik und Informationstechnik, Softwaretechnik, KI oder einem verwandten Fach; sicher im Umgang mit Coding Agents.", "1–3 Jahre Erfahrung in Client-Projekten mit mindestens einem Client-Stack (iOS / Android / Flutter / React Native / Desktop); einfache Oberflächen und Interaktionen selbstständig umsetzbar.", "Starkes Interesse an agentischen Architekturen und großen Modellen und ein Verständnis ihrer Funktionsweise. Praxis mit LLM-API-Integration oder Prompt-Design ist ein Plus.", "Schnell lernend, gut im Debuggen und logisch denkend; proaktiv, offen für neue Herausforderungen, kommunikationsstark und teamorientiert."]),
-                     ("NICE TO HAVE", "Pluspunkte", ["Sicheres Arbeiten auf Englisch", "Erfahrung im Bau von Agent-Produkten"]),
+                     ("WHAT YOU'LL DO", "Aufgaben", [
+                         "Agent-Clients auf Basis unserer eigenen Modelle für Web, iOS und macOS entwickeln.",
+                         "Mit Figma MCP und Coding Agents Designs in Client-Oberflächen und Interaktionen umsetzen.",
+                         "Backend-Dienste und Agent-Funktionen integrieren und an der Agent-Architektur sowie der Entwicklung von Funktionen mitwirken.",
+                     ]),
+                     ("WHO YOU ARE", "Anforderungen", [
+                         "Hintergrund in Informatik, Elektrotechnik, Softwaretechnik, KI oder einem verwandten Fach und sicherer Umgang mit Coding Agents.",
+                         "1–3 Jahre Erfahrung in der Client-Entwicklung mit mindestens einer Technologie wie iOS, Android, Flutter, React Native oder Desktop-Entwicklung sowie die Fähigkeit, Oberflächen und Interaktionen selbstständig umzusetzen.",
+                         "Großes Interesse an Agents und großen Sprachmodellen sowie Verständnis ihrer Funktionsweise.",
+                         "Eigeninitiative beim Lernen, analytisches Denken und Problemlösungskompetenz sowie klare Kommunikation und Teamfähigkeit.",
+                     ]),
+                     ("NICE TO HAVE", "Pluspunkte", [
+                         "Erfahrung mit der Entwicklung von Agent-Produkten.",
+                         "Praktische Erfahrung mit der Integration von LLM-APIs oder Prompt-Design.",
+                         "Sicheres Arbeiten auf Englisch.",
+                     ]),
                  ])),
 ]
 
