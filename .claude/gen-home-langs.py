@@ -13,7 +13,7 @@ an error instead of silently shipping a half-translated page. All translations a
 translation (user 2026-09-04: 可以先机翻) — refine the translated columns here, never the generated files."""
 import os, re, sys
 
-ROOT = "/Users/zhangouqi/Documents/learning machine/deep-claw-main/official-website"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Footer language menu, in display order: (html lang, label, directory under the site root; "" = English root).
 LANGS = [("en", "English", ""), ("zh-CN", "简体中文", "zh-cn/"), ("fr", "Français", "fr/"), ("de", "Deutsch", "de/")]
@@ -41,15 +41,15 @@ T = [
      '<h1><span class="motion-line">Construire une IA</span><span class="motion-line">qui <em>apprend</em> vraiment</span></h1>',
      '<h1><span class="motion-line">KI bauen,</span><span class="motion-line">die wirklich <em>lernt</em></span></h1>'),
     ('data-words>The ability to learn is the only means to generalize artificial intelligence to all sectors of human intellectual work.</p>',
-     'data-words>学习能力，是让人工智能推广到人类全部智力工作领域的唯一途径。</p>',
+     'data-words>学习能力，是让人工智能推广到人类全部智力工作领域的唯一途径</p>',
      'data-words>La capacité d\'apprendre est le seul moyen de généraliser l\'intelligence artificielle à tous les domaines du travail intellectuel humain.</p>',
      'data-words>Die Fähigkeit zu lernen ist der einzige Weg, künstliche Intelligenz auf alle Bereiche menschlicher geistiger Arbeit zu übertragen.</p>'),
     ('data-words>We are building the first generation of foundation models that can continuously learn, adapt, and improve.</p>',
-     'data-words>我们正在打造第一代能够持续学习、适应并不断进步的基础模型。</p>',
+     'data-words>我们正在打造第一代能够持续学习、适应并不断进步的基础模型</p>',
      'data-words>Nous construisons la première génération de modèles de fondation capables d\'apprendre, de s\'adapter et de s\'améliorer en continu.</p>',
      'data-words>Wir bauen die erste Generation von Foundation-Modellen, die kontinuierlich lernen, sich anpassen und besser werden.</p>'),
     ('>See our approach <img src="assets/figma-107/',
-     '>了解我们的方法 <img src="assets/figma-107/',
+     '>了解我们 <img src="assets/figma-107/',
      '>Découvrir notre approche <img src="assets/figma-107/',
      '>Unser Ansatz <img src="assets/figma-107/'),
     ('light-btn-blue" href="mailto:contact@learning-machine.ai">Join us</a>',
@@ -59,22 +59,22 @@ T = [
     # approach — each h2 line must stay ONE line down to 1024px wide (≈438px at 48px Georgia, measured);
     # "pas seulement répondre" / "statt nur zu antworten" wrapped there, hence the shorter third lines.
     ('<p class="eyebrow kinetic-words" data-words>What makes us different</p><h2><span class="motion-line" data-scramble>Models</span><span class="motion-line">that adapt,</span><span class="motion-line h2-muted">not just respond</span></h2>',
-     '<p class="eyebrow kinetic-words" data-words>我们的不同之处</p><h2><span class="motion-line" data-scramble>模型</span><span class="motion-line">会适应，</span><span class="motion-line h2-muted">而非只会回应</span></h2>',
+     '<p class="eyebrow kinetic-words" data-words>我们的不同之处</p><h2><span class="motion-line" data-scramble>模型</span><span class="motion-line">会适应</span><span class="motion-line h2-muted">而非只会回应</span></h2>',
      '<p class="eyebrow kinetic-words" data-words>Ce qui nous distingue</p><h2><span class="motion-line" data-scramble>Des modèles</span><span class="motion-line">qui s\'adaptent,</span><span class="motion-line h2-muted">plutôt que répondre</span></h2>',
      '<p class="eyebrow kinetic-words" data-words>Was uns unterscheidet</p><h2><span class="motion-line" data-scramble>Modelle,</span><span class="motion-line">die sich anpassen,</span><span class="motion-line h2-muted">nicht nur antworten</span></h2>'),
     ('<div class="light-inference light-inference-a"><p>Our models learn as they work—absorbing new knowledge and mastering new tasks through trial and error. No data pipelines, dedicated training infrastructure, or ML team required. Connect a model to a workflow, and it learns on the job.</p></div>',
-     '<div class="light-inference light-inference-a"><p>我们的模型在工作中学习——一边吸收新知识，一边通过试错掌握新任务。无需数据管线、专用训练基础设施或机器学习团队。把模型接入工作流，它就能在岗位上边做边学。</p></div>',
+     '<div class="light-inference light-inference-a"><p>我们的模型在工作中学习，一边吸收新知识，一边通过试错掌握新任务。无需数据管线、专用训练基础设施或机器学习团队。把模型接入工作流，它就能在岗位上边做边学</p></div>',
      '<div class="light-inference light-inference-a"><p>Nos modèles apprennent en travaillant : ils absorbent de nouvelles connaissances et maîtrisent de nouvelles tâches par essais et erreurs. Aucun pipeline de données, aucune infrastructure d\'entraînement dédiée, aucune équipe ML. Connectez un modèle à un flux de travail, et il apprend sur le tas.</p></div>',
      '<div class="light-inference light-inference-a"><p>Unsere Modelle lernen während der Arbeit: Sie nehmen neues Wissen auf und meistern neue Aufgaben durch Versuch und Irrtum. Keine Datenpipelines, keine eigene Trainingsinfrastruktur, kein ML-Team nötig. Verbinde ein Modell mit einem Workflow, und es lernt im Einsatz.</p></div>'),
     # belief
     ('<span class="kinetic-words" data-words>We believe the future of AI should be diverse and inclusive.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="11">Every business should be able to use its proprietary knowledge to build its own AI. Every person should have an AI experience tailored to them. And by default, their data should stay in their hands.</span>',
-     '<span class="kinetic-words" data-words>我们相信，AI 的未来应当是多元且包容的。</span> <span class="belief-muted kinetic-words" data-words data-word-offset="10">每家企业都应能用自己的专有知识构建属于自己的 AI；每个人都应拥有为其量身定制的 AI 体验；而且在默认情况下，数据应始终掌握在他们自己手中。</span>',
+     '<span class="kinetic-words" data-words>我们相信，AI 的未来应当是多元且包容的。</span> <span class="belief-muted kinetic-words" data-words data-word-offset="10">每家企业都应能用自己的专有知识构建属于自己的 AI；每个人都应拥有为其量身定制的 AI 体验；而且在默认情况下，数据应始终掌握在他们自己手中</span>',
      '<span class="kinetic-words" data-words>Nous croyons que l\'avenir de l\'IA doit être divers et inclusif.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Chaque entreprise devrait pouvoir utiliser son savoir propriétaire pour construire sa propre IA. Chaque personne devrait bénéficier d\'une expérience d\'IA taillée pour elle. Et, par défaut, ses données devraient rester entre ses mains.</span>',
      '<span class="kinetic-words" data-words>Wir glauben, dass die Zukunft der KI vielfältig und inklusiv sein sollte.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Jedes Unternehmen sollte sein eigenes Wissen nutzen können, um seine eigene KI zu bauen. Jeder Mensch sollte eine auf ihn zugeschnittene KI-Erfahrung haben. Und standardmäßig sollten die Daten in den eigenen Händen bleiben.</span>'),
     # join card (light-main only: the legacy dark-main h2 carries an id). Open roles → careers in the same
     # language; French and German fall back to the English careers pages.
     ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
-     '<h2>加入我们</h2><p>我们正在构建 AI 的未来，研究、工程与产品方向都在招人。来和我们一起创造。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
+     '<h2>加入我们</h2><p>我们正在构建 AI 的未来，来和我们一起创造。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
      '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
      '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
     # footer
