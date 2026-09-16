@@ -12,7 +12,7 @@ import html, os, posixpath
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://learning-machine.ai"
-REV = "figma-1617-19731-v48"
+REV = "figma-1617-19731-v49"
 EMAIL = "careers@learning-machine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).
@@ -28,36 +28,40 @@ UI = {
                view="查看详情", back="返回职位列表", back_home="返回首页",
                open_apply=("Open application · 自荐", "没有合适的岗位？直接把简历发给我们", "邮件发送至 {email}，注明你感兴趣的方向。", "自荐投递", "自荐投递"),
                apply=("Apply · 简历投递", "简历投递", "邮件发送至 {email}，主题请注明「{subject}」。", "立即投递"),
+               applicant_notice='投递前，请阅读我们的<a href="{p}applicant-privacy/">候选人隐私声明</a>。',
                index_desc="Learning Machine 开放岗位：Agent 全栈研发、客户端研发。",
                role_title="{name}（{tag}）", role_desc="Learning Machine 招聘：{name}（{tag}）。",
-               footer=("打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。", "探索", "我们的方法", "招聘", "联系我们", "© 2026 Learning Machine Co. 保留所有权利。")),
+               footer=("打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。", "探索", "我们的方法", "招聘", "联系我们", "© 2026 Learning Machine, Inc. 保留所有权利。")),
     "en": dict(html_lang="en", dir="careers", home="../",
                nav_careers="Careers", nav_contact="Contact",
                intro="{n} open roles. Open a role for requirements and how to apply.",
                view="View details", back="Back to open roles", back_home="Back to home",
                open_apply=("Open application", "No matching role? Send us your CV anyway", "Email {email} and tell us which direction interests you.", "Send open application", "Open application"),
                apply=("Apply", "Send your CV", "Email {email} with the subject line “{subject}”.", "Apply now"),
+               applicant_notice='Before applying, please review our <a href="{p}applicant-privacy/">Applicant Privacy Notice</a>.',
                index_desc="Open roles at Learning Machine: Agent full-stack engineering and client engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine is hiring: {name} ({tag}).",
-               footer=("Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.", "Explore", "Approach", "Careers", "Contact", "© 2026 Learning Machine Co. All rights reserved.")),
+               footer=("Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.", "Explore", "Approach", "Careers", "Contact", "© 2026 Learning Machine, Inc. All rights reserved.")),
     "fr": dict(html_lang="fr", dir="fr/careers", home="../",
                nav_careers="Carrières", nav_contact="Contact",
                intro="{n} postes ouverts. Ouvrez un poste pour voir les exigences et comment postuler.",
                view="Voir le poste", back="Retour aux postes", back_home="Retour à l'accueil",
                open_apply=("Candidature spontanée", "Aucun poste ne vous correspond ? Envoyez-nous quand même votre CV", "Écrivez à {email} en précisant le domaine qui vous intéresse.", "Envoyer une candidature spontanée", "Candidature spontanée"),
                apply=("Postuler", "Envoyez votre CV", "Écrivez à {email} avec pour objet « {subject} ».", "Postuler"),
+               applicant_notice='Avant de postuler, veuillez consulter notre <a href="{p}applicant-privacy/">Avis de confidentialité des candidats</a>.',
                index_desc="Postes ouverts chez Learning Machine : ingénierie full-stack Agent et ingénierie client.",
                role_title="{name} ({tag})", role_desc="Learning Machine recrute : {name} ({tag}).",
-               footer=("Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.", "Explorer", "Approche", "Carrières", "Contact", "© 2026 Learning Machine Co. Tous droits réservés.")),
+               footer=("Nous construisons la prochaine génération de modèles d'IA qui apprennent et s'adaptent vraiment au moment de l'inférence — une intelligence adaptative pour chaque entreprise.", "Explorer", "Approche", "Carrières", "Contact", "© 2026 Learning Machine, Inc. Tous droits réservés.")),
     "de": dict(html_lang="de", dir="de/careers", home="../",
                nav_careers="Karriere", nav_contact="Kontakt",
                intro="{n} offene Stellen. Öffne eine Stelle für Anforderungen und Bewerbung.",
                view="Details ansehen", back="Zurück zu den Stellen", back_home="Zur Startseite",
                open_apply=("Initiativbewerbung", "Keine passende Stelle? Schick uns trotzdem deinen Lebenslauf", "Schreib an {email} und nenne die Richtung, die dich interessiert.", "Initiativbewerbung senden", "Initiativbewerbung"),
                apply=("Bewerben", "Schick uns deinen Lebenslauf", "Schreib an {email} mit dem Betreff „{subject}“.", "Jetzt bewerben"),
+               applicant_notice='Bitte lies vor deiner Bewerbung unseren <a href="{p}applicant-privacy/">Datenschutzhinweis für Bewerbende</a>.',
                index_desc="Offene Stellen bei Learning Machine: Agent-Full-Stack-Engineering und Client-Engineering.",
                role_title="{name} ({tag})", role_desc="Learning Machine sucht: {name} ({tag}).",
-               footer=("Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.", "Entdecken", "Ansatz", "Karriere", "Kontakt", "© 2026 Learning Machine Co. Alle Rechte vorbehalten.")),
+               footer=("Wir bauen die nächste Generation von KI-Modellen, die zur Inferenzzeit wirklich lernen und sich anpassen — adaptive Intelligenz für jedes Unternehmen.", "Entdecken", "Ansatz", "Karriere", "Kontakt", "© 2026 Learning Machine, Inc. Alle Rechte vorbehalten.")),
 }
 for ui in UI.values():
     ui["prefix"] = "../" * (ui["dir"].count("/") + 1)
@@ -89,7 +93,7 @@ HEAD = """<!doctype html>
 """
 
 FOOTER = """  </main>
-  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>{f_blurb}</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>{f_explore}</p><a href="{home}#approach">{f_approach}</a><a href="./">{f_careers}</a><a href="mailto:contact@learning-machine.ai">{f_contact}</a></nav></div><div class="footer-bottom"><span>{f_copyright}</span>{langmenu}</div></footer>
+  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>{f_blurb}</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>{f_explore}</p><a href="{home}#approach">{f_approach}</a><a href="./">{f_careers}</a><a href="mailto:contact@learning-machine.ai">{f_contact}</a></nav></div><div class="footer-bottom"><span>{f_copyright}</span><div class="footer-bottom-actions"><nav class="footer-legal-links" aria-label="Legal"><a href="{p}privacy/">Privacy</a><a href="{p}applicant-privacy/">Applicant Privacy</a><a href="{p}terms/">Terms</a><a href="{p}legal/">Legal</a></nav>{langmenu}</div></div></footer>
 {motion}
 {scroll}
 {langscript}
@@ -484,11 +488,12 @@ def page(L, pagefile, title, desc, body):
     return head + body + FOOTER.format(p=ui["prefix"], home=ui["home"], motion=MOTION,
                                        scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]),
                                        langmenu=footer_lang_menu(L, pagefile), langscript=LANG_MENU_SCRIPT,
+                                       applicant_notice=ui["applicant_notice"].format(p=ui["prefix"]),
                                        f_blurb=esc(blurb), f_explore=esc(explore), f_approach=esc(approach),
                                        f_careers=esc(careers), f_contact=esc(contact), f_copyright=esc(copyright))
 
 
-def apply_card(eyebrow, h2, note, btn_label, subject, top=False):
+def apply_card(eyebrow, h2, note, applicant_notice, btn_label, subject, top=False):
     band = "apply-band apply-band-top" if top else "apply-band"
     mail = f"mailto:{EMAIL}?subject={attr(subject)}"
     eyebrow_html = f'        <p class="careers-eyebrow">{esc(eyebrow)}</p>\n' if eyebrow else ""
@@ -496,6 +501,7 @@ def apply_card(eyebrow, h2, note, btn_label, subject, top=False):
       <div class="apply-card">
 {eyebrow_html}        <h2>{esc(h2)}</h2>
         <p>{esc(note)}</p>
+        <p class="applicant-privacy-note">{applicant_notice}</p>
         <div class="apply-actions"><a class="btn-primary" href="{mail}">{esc(btn_label)}&nbsp;&nbsp;→</a></div>
       </div>
     </section>
@@ -532,7 +538,7 @@ def build_index(L):
       <ul class="roles-list">
 {rows}      </ul>
     </section>
-""" + apply_card(eyebrow, h2, note.format(email=EMAIL), btn, subject, top=True)
+""" + apply_card(eyebrow, h2, note.format(email=EMAIL), ui["applicant_notice"].format(p=ui["prefix"]), btn, subject, top=True)
     return page(L, "", "Open roles", ui["index_desc"], body)
 
 
@@ -554,7 +560,7 @@ def build_role(r, L):
     <div class="careers-band careers-sections">
 {secs}
     </div>
-""" + apply_card(None, h2, note.format(email=EMAIL, subject=subject), btn, subject)
+""" + apply_card(None, h2, note.format(email=EMAIL, subject=subject), ui["applicant_notice"].format(p=ui["prefix"]), btn, subject)
     return page(L, f"{r['slug']}.html", ui["role_title"].format(name=d["name"], tag=d["tag"]),
                 ui["role_desc"].format(name=d["name"], tag=d["tag"]), body)
 

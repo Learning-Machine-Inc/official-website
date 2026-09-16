@@ -71,12 +71,12 @@ T = [
      '<span class="kinetic-words" data-words>我们相信，AI 的未来应当是多元且包容的。</span> <span class="belief-muted kinetic-words" data-words data-word-offset="10">每家企业都应能用自己的专有知识构建属于自己的 AI；每个人都应拥有为其量身定制的 AI 体验；而且在默认情况下，数据应始终掌握在他们自己手中</span>',
      '<span class="kinetic-words" data-words>Nous croyons que l\'avenir de l\'IA doit être divers et inclusif.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Chaque entreprise devrait pouvoir utiliser son savoir propriétaire pour construire sa propre IA. Chaque personne devrait bénéficier d\'une expérience d\'IA taillée pour elle. Et, par défaut, ses données devraient rester entre ses mains.</span>',
      '<span class="kinetic-words" data-words>Wir glauben, dass die Zukunft der KI vielfältig und inklusiv sein sollte.</span> <span class="belief-muted kinetic-words" data-words data-word-offset="12">Jedes Unternehmen sollte sein eigenes Wissen nutzen können, um seine eigene KI zu bauen. Jeder Mensch sollte eine auf ihn zugeschnittene KI-Erfahrung haben. Und standardmäßig sollten die Daten in den eigenen Händen bleiben.</span>'),
-    # join card (light-main only: the legacy dark-main h2 carries an id). Open roles → careers in the same
-    # language; French and German fall back to the English careers pages.
-    ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><div class="join-actions"><a class="button button-dark" href="careers/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
-     '<h2>加入我们</h2><p>我们正在构建 AI 的未来，来和我们一起创造。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
-     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><div class="join-actions"><a class="button button-dark" href="careers/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
-     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><div class="join-actions"><a class="button button-dark" href="careers/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
+    # join card (light-main only: the legacy dark-main h2 carries an id). Each localized home page links
+    # to its matching localized careers directory; the English applicant notice remains the canonical policy.
+    ('<h2>Join us</h2><p>We\'re building the future of AI, and we\'re hiring across research, engineering, and product. Come build it with us.</p><p class="join-privacy-note">Before applying, please review our <a href="applicant-privacy/">Applicant Privacy Notice</a>.</p><div class="join-actions"><a class="button button-dark" href="careers/">See open roles</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Get in touch</a></div>',
+     '<h2>加入我们</h2><p>我们正在构建 AI 的未来，来和我们一起创造。</p><p class="join-privacy-note">投递前，请阅读我们的<a href="applicant-privacy/">候选人隐私声明</a>。</p><div class="join-actions"><a class="button button-dark" href="careers/">查看开放岗位</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">联系我们</a></div>',
+     '<h2>Rejoignez-nous</h2><p>Nous construisons l\'avenir de l\'IA et nous recrutons en recherche, en ingénierie et en produit. Venez le bâtir avec nous.</p><p class="join-privacy-note">Avant de postuler, consultez notre <a href="applicant-privacy/">Avis de confidentialité des candidats</a>.</p><div class="join-actions"><a class="button button-dark" href="careers/">Voir les postes ouverts</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Nous contacter</a></div>',
+     '<h2>Komm ins Team</h2><p>Wir bauen die Zukunft der KI und suchen Verstärkung in Forschung, Engineering und Produkt. Bau sie mit uns.</p><p class="join-privacy-note">Bitte lies vor der Bewerbung unseren <a href="applicant-privacy/">Datenschutzhinweis für Bewerbende</a>.</p><div class="join-actions"><a class="button button-dark" href="careers/">Offene Stellen ansehen</a><a class="button button-blue" href="mailto:careers@learning-machine.ai">Kontakt aufnehmen</a></div>'),
     # footer
     ('Learning Machine</a><p>Building the next generation of AI models that truly learn and adapt at inference time — adaptive intelligence for every company.</p>',
      'Learning Machine</a><p>打造新一代能在推理时真正学习与适应的 AI 模型——让每家公司都拥有自适应的智能。</p>',
@@ -86,10 +86,10 @@ T = [
      '<p>探索</p><a href="#approach">我们的方法</a><a href="careers/">招聘</a><a href="mailto:contact@learning-machine.ai">联系我们</a>',
      '<p>Explorer</p><a href="#approach">Approche</a><a href="careers/">Carrières</a><a href="mailto:contact@learning-machine.ai">Contact</a>',
      '<p>Entdecken</p><a href="#approach">Ansatz</a><a href="careers/">Karriere</a><a href="mailto:contact@learning-machine.ai">Kontakt</a>'),
-    ('<span>© 2026 Learning Machine Co. All rights reserved.</span>',
-     '<span>© 2026 Learning Machine Co. 保留所有权利。</span>',
-     '<span>© 2026 Learning Machine Co. Tous droits réservés.</span>',
-     '<span>© 2026 Learning Machine Co. Alle Rechte vorbehalten.</span>'),
+    ('<span>© 2026 Learning Machine, Inc. All rights reserved.</span>',
+     '<span>© 2026 Learning Machine, Inc. 保留所有权利。</span>',
+     '<span>© 2026 Learning Machine, Inc. Tous droits réservés.</span>',
+     '<span>© 2026 Learning Machine, Inc. Alle Rechte vorbehalten.</span>'),
 ]
 COLUMN = {"zh-CN": 1, "fr": 2, "de": 3}
 
@@ -120,6 +120,7 @@ for lang, label, folder in LANGS[1:]:
     # One level below the root: prefix every relative URL (assets/, styles.css, careers/) with ../ but leave
     # anchors, absolute URLs, mailto:, data: and the already-relative ./ and ../ alone.
     out = re.sub(r'\b(href|src|srcset|data-a|data-b)="(?!https?:|mailto:|#|\.\.?/|/|data:)([^"]+)"', r'\1="../\2"', out)
+    out = out.replace('href="../careers/"', 'href="careers/"')
     out = out.replace("from './assets/", "from '../assets/")  # Lenis module import in the inline module script
     assert out.count("../assets/") > 20 and 'href="../styles.css' in out, f"{lang}: path rewrite looks wrong"
     os.makedirs(f"{ROOT}/{folder}", exist_ok=True)

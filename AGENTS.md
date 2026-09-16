@@ -1,7 +1,7 @@
 # Learning Machine 官网 — 协作说明
 
 ## 项目概况
-- 纯静态站点:只有 `index.html`、`styles.css`、`assets/`。无构建步骤、无依赖、无框架。
+- 纯静态站点:包含多语言首页、招聘页与英文法律页。无构建步骤、无包依赖、无框架。
 - 部署:GitHub Pages,`main` 分支发布到 learning-machine.ai。当前开发分支 `feat/website-local`。
 - 本地预览(自带 live-reload,改文件浏览器自动刷新):
 
@@ -89,6 +89,12 @@ PORT=3002 node .claude/serve-official-website.js
   移动 +20px:36px,手机上再缩文字列就太窄了),任何窗口宽度下都保持这个关系;其他区块**只写上下 padding 的 longhand**,别用
   `padding` 简写把左右覆盖成 0(踩过)。列宽/字号按 1440 画布用 `min(400px, 27.778vw)`、
   `clamp(…, 4.444vw, 64px)` 这类公式写,768–1199 之间岗位行改成"名称 | 按钮"两列、亮点落到名称下方。
+
+## 法律与隐私页面(2026-09-15 起)
+- 英文法律页为 `privacy/`、`applicant-privacy/`、`terms/`、`legal/`,均是直接维护的静态 HTML,不由生成器生成。
+- 首页和招聘页页脚都必须链接四个法律页;首页 Join 卡与所有招聘投递卡必须在邮件 CTA 前显示候选人隐私声明链接。
+- 改首页或招聘页的法律链接时,要改 `.claude/gen-home-langs.py` / `.claude/gen-careers.py` 并重新生成,不要只改生成出来的 HTML。
+- 验证命令是 `node tests/check-legal-pages.mjs`;它会检查法律文本、页面可见性、相对链接、外部资源和生成器输出。`.github/workflows/legal-pages.yml` 会在 PR 与main 分支 push 时运行同一检查。
 
 ## 动效架构(重要,改之前先读完)
 所有动效都在 `index.html` 底部的两个 `<script>` 里,没有外部动画库(Lenis 除外):

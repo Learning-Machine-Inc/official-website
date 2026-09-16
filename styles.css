@@ -144,10 +144,14 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
 .footer-main nav p { color:#fff; flex:0 0 100%; font-family:Georgia,serif; font-size:16px; line-height:25.6px; margin-bottom:6px; max-width:none; }
 .footer-main nav a { font-family:"Roboto","Inter",sans-serif; font-size:14px; line-height:22.4px; text-decoration:none; }
 /* Same content band as .footer-main / .light-header; the border-top itself stays full-bleed. */
-.footer-bottom { align-items:center; border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-family:"Roboto","Inter",sans-serif; font-size:13px; height:70px; justify-content:space-between; line-height:20.8px; padding:17px max(72px, calc(50% - 728px)); } /* 70px tall: 36px language button + 17px each side */
+.footer-bottom { align-items:center; border-top:.5px solid rgb(255 255 255 / 50%); display:flex; font-family:"Roboto","Inter",sans-serif; font-size:13px; min-height:70px; justify-content:space-between; line-height:20.8px; padding:13px max(72px, calc(50% - 728px)); }
+.footer-bottom-actions { align-items:center; display:flex; gap:24px; }
+.footer-legal-links { align-items:center; display:flex; flex-wrap:wrap; gap:8px 18px; }
+.footer-legal-links a { align-items:center; color:#d5cec3; display:inline-flex; min-height:44px; white-space:nowrap; }
+.footer-legal-links a:hover,.footer-legal-links a:focus-visible { color:#fff; }
 /* Footer language menu (bottom right, user 2026-09-04): the dark dropdown from the reference — the list opens
    UPWARD and shares one rounded outline with the trigger row, which is a shade lighter. The current language
-   is marked; French and German pages exist for the home page only, careers fall back to English. */
+   is marked; all four languages have matching home and careers pages. */
 .lang-menu { position:relative; }
 .lang-menu-button { align-items:center; background:rgb(255 255 255 / 8%); border:1px solid rgb(255 255 255 / 16%); border-radius:5px; color:#fff; cursor:pointer; display:flex; font:inherit; font-size:14px; gap:10px; height:36px; line-height:20px; padding:0 14px 0 12px; }
 .lang-menu-button:hover,.lang-menu-button:focus-visible { background:rgb(255 255 255 / 12%); }
@@ -159,7 +163,6 @@ footer { background:var(--footer); color:#b3aa9c; height:386px; }
 .lang-menu-list a { color:#fff; display:block; font-size:14px; line-height:20px; padding:10px 20px; text-decoration:none; white-space:nowrap; }
 .lang-menu-list a:hover,.lang-menu-list a:focus-visible { background:rgb(255 255 255 / 8%); outline:none; }
 .lang-menu-list a[aria-current] { color:#aaddd4; }
-.footer-bottom span:last-child { display:flex; gap:24px; }
 .footer-bottom a { text-decoration:none; }
 
 /* White version — Figma node 1617:19731 */
@@ -465,7 +468,7 @@ html[lang="zh-CN"] .light-join-card > p:not(.eyebrow) { position:relative; left:
   .footer-main { padding-top:70px; }
   .footer-main nav { padding-top:2px; }
   .footer-email { min-height:0; padding-top:0; }
-  .footer-bottom span:last-child { gap:20px; }
+  .footer-bottom-actions { gap:20px; }
   /* Eyebrow tracks the inference h3 (same clamp/5vh expression) at 0.53×, capped at the 14px Figma
      value: its uppercase, letter-spaced line is then never wider than "Learning at inference"
      (measured: 0.55 lands within 1px of equal). Spacing/leading are em-based so they scale with it
@@ -563,6 +566,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   footer { height:auto; }
   .footer-main { gap:42px; grid-template-columns:1fr; height:auto; padding:58px 28px; }
   .footer-bottom { align-items:flex-start; flex-direction:column; gap:18px; height:auto; padding:24px 28px; }
+  .footer-bottom-actions { align-items:flex-start; flex-direction:column; gap:18px; width:100%; }
+  .footer-legal-links { gap:10px 18px; }
 }
 
 @media (min-width:480px) and (max-width:767px) {
@@ -650,6 +655,8 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
 .apply-actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding-top:15px; }
 .btn-primary { align-items:center; border-radius:5px; box-sizing:border-box; color:#fff; display:inline-flex; font-family:"Noto Sans SC",var(--careers-sans); font-size:clamp(14px, 1.111vw, 16px); font-weight:400; gap:8px; height:clamp(40px, 3.125vw, 45px); line-height:24px; padding:0 clamp(24px, 2.083vw, 30px); text-decoration:none; white-space:nowrap; } /* 16px text / 45px box at 1440, scales with the window (user 2026-09-04) */
 .btn-primary { background:#33a190; border:1px solid #aaddd4; }
+.applicant-privacy-note { color:#59534d; font-size:16px; line-height:1.6; margin:0 auto; max-width:720px; padding:0; text-align:center; }
+.applicant-privacy-note a { color:#006f63; text-underline-offset:3px; }
 /* Careers text appears once as it enters view; no JS or reduced-motion fallback ever hides content. */
 @media (prefers-reduced-motion:no-preference) {
   .careers-motion-ready .careers-title > *,.careers-motion-ready .role-row,.careers-motion-ready .facts > li,.careers-motion-ready .careers-section,.careers-motion-ready .apply-card { opacity:0; transform:translateY(7px); transition:opacity .75s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms),transform .9s cubic-bezier(.22,1,.36,1) var(--careers-reveal-delay,0ms); }
@@ -705,6 +712,42 @@ html[data-variant="dark"] .join-backdrop { background-image:linear-gradient(180d
   .apply-card h2 { font-size:22px; line-height:30px; }
   .apply-card p { font-size:16px; line-height:1.4; }
   .apply-actions { flex-direction:column; gap:10px; padding-top:10px; width:100%; }
+  .applicant-privacy-note { padding:0; }
+}
+
+/* English legal and privacy pages. These are intentionally quiet, reading-first documents that share the
+   public site's brand, type, color and footer rather than introducing another visual system. */
+.legal-page { background:#f4f0ed; color:#302925; font-family:"Roboto","Inter",sans-serif; padding-top:64px; }
+.legal-page .light-header { background:#f4f0ed; }
+.legal-main { min-height:60vh; }
+.legal-shell { margin:0 auto; max-width:980px; padding:96px 48px 120px; }
+.legal-kicker { color:#5c8982; font-size:13px; font-weight:600; letter-spacing:2.2px; margin:0 0 18px; text-transform:uppercase; }
+.legal-hero { border-bottom:1px solid rgb(102 100 96 / 45%); margin-bottom:48px; padding-bottom:48px; }
+.legal-hero h1 { color:#382d22; font-family:"Gentium Plus",Georgia,serif; font-size:clamp(44px,6vw,72px); font-weight:400; letter-spacing:-1px; line-height:1.05; margin:0 0 20px; }
+.legal-meta,.legal-lead { color:#5d5750; font-size:17px; line-height:1.65; margin:0; max-width:760px; }
+.legal-meta { font-size:16px; margin-top:18px; }
+.legal-content { display:grid; gap:44px; max-width:75ch; }
+.legal-content section { scroll-margin-top:88px; }
+.legal-content h2 { color:#1a1a1a; font-family:"Gentium Plus",Georgia,serif; font-size:30px; font-weight:400; line-height:1.25; margin:0 0 14px; }
+.legal-content h3 { color:#2c2824; font-size:17px; line-height:1.4; margin:24px 0 8px; }
+.legal-content p,.legal-content li,.legal-address { font-size:16px; font-style:normal; font-weight:300; line-height:1.72; }
+.legal-content p { margin:0 0 14px; }
+.legal-content ul { display:grid; gap:8px; margin:12px 0 0; padding-left:22px; }
+.legal-content a { color:#006f63; text-underline-offset:3px; }
+.legal-callout { background:#e8e2dc; border-left:3px solid #33a190; padding:20px 22px; }
+.legal-callout p:last-child,.legal-content section > :last-child { margin-bottom:0; }
+.legal-page footer { height:auto; }
+.legal-page .footer-main { min-height:316px; }
+.light-join-card > p.join-privacy-note { color:#5d5750; font-size:16px; line-height:1.5; margin-top:14px; max-width:520px; }
+.light-join-card > p.join-privacy-note a { color:#006f63; text-underline-offset:3px; }
+@media (max-width:767.98px) {
+  .legal-shell { padding:64px 24px 72px; }
+  .legal-hero { margin-bottom:36px; padding-bottom:36px; }
+  .legal-hero h1 { font-size:42px; }
+  .legal-lead { font-size:16px; }
+  .legal-content { gap:36px; }
+  .legal-content h2 { font-size:27px; }
+  .legal-content p,.legal-content li,.legal-address { font-size:16px; }
 }
 
 /* ≥1.5dppx desktop screens get the full 2752w encodes (the 1920w set would be upscaled ~1.6× on a
