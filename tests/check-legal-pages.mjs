@@ -3,7 +3,7 @@ import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync 
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const legalPages = {
@@ -80,6 +80,21 @@ function assertVisibleElement(html, relativePath, pattern, label) {
   assert.doesNotMatch(attributes, /\b(?:hidden|inert)\b|\baria-hidden=["']true["']/i, `${relativePath}: ${label} must remain visible`);
 }
 
+const legalLocaleModulePath = resolve(root, 'assets/legal-locale.mjs');
+assert.ok(existsSync(legalLocaleModulePath), 'the shared legal-page locale module must exist');
+const { getLegalLocale, localizedPolicyHref, resolveLegalLocale } = await import(pathToFileURL(legalLocaleModulePath));
+assert.equal(resolveLegalLocale('?lang=zh-CN', 'fr'), 'zh-CN', 'the URL language must override the stored preference');
+assert.equal(resolveLegalLocale('', 'de'), 'de', 'the stored preference must apply when the URL has no language');
+assert.equal(resolveLegalLocale('?lang=unsupported', 'fr'), 'fr', 'an unsupported URL language must fall back to the stored preference');
+assert.equal(resolveLegalLocale('', null), 'en', 'English must remain the fallback when no preference exists');
+assert.equal(localizedPolicyHref('../terms/', 'zh-CN'), '../terms/?lang=zh-CN', 'policy links must retain Chinese context');
+assert.equal(localizedPolicyHref('../terms/', 'en'), '../terms/', 'English policy links must keep their clean URL');
+assert.deepEqual(
+  getLegalLocale('zh-CN').policyLabels,
+  ['隐私政策', '候选人隐私声明', '使用条款'],
+  'the legal page must expose the Chinese policy-entry labels',
+);
+
 for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   const html = read(relativePath);
   const pageSlug = relativePath.split('/')[0];
@@ -116,6 +131,7 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
     assert.ok(html.includes(`href="${href}"`), `${relativePath} language menu must link to ${href}`);
   }
   assert.match(html, /localStorage\.setItem\(['"]lm-lang['"]/, `${relativePath} language menu must remember the selected language`);
+  assert.ok(html.includes('<script type="module" src="../assets/legal-locale.mjs"></script>'), `${relativePath} must apply the shared legal-page locale state`);
   assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
   assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
   for (const detail of sensitiveCompanyDetails) {
@@ -152,7 +168,7 @@ assert.ok(!homeGenerator.includes(retiredContactAddress), 'the home-page generat
 assert.match(careersGenerator, /official@learning-machine\.ai/, 'the careers generator must emit the official contact address');
 assert.match(homeGenerator, /official@learning-machine\.ai/, 'the home-page generator must emit the official contact address');
 for (const href of legalHrefs) {
-  assert.ok(careersGenerator.includes(`href="{p}${href}"`), `the careers generator must emit ${href} links`);
+  assert.ok(careersGenerator.includes(`href="{p}${href}{lang_query}"`), `the careers generator must emit language-aware ${href} links`);
 }
 assert.ok(!careersGenerator.includes('href="{p}legal/"'), 'the careers generator must not emit the retired Legal link');
 assert.ok(!homeGenerator.includes('<a href="legal/">Legal</a>'), 'the home generator must not emit the retired Legal link');
@@ -189,9 +205,9 @@ const pageGroups = [
 ];
 
 const localizedLegalLabels = [
-  { pathPrefix: 'zh-cn/', labels: ['隐私政策', '候选人隐私声明', '使用条款'] },
-  { pathPrefix: 'fr/', labels: ['Confidentialité', 'Confidentialité des candidats', 'Conditions d’utilisation'] },
-  { pathPrefix: 'de/', labels: ['Datenschutz', 'Datenschutz für Bewerbende', 'Nutzungsbedingungen'] },
+  { pathPrefix: 'zh-cn/', langQuery: '?lang=zh-CN', labels: ['隐私政策', '候选人隐私声明', '使用条款'] },
+  { pathPrefix: 'fr/', langQuery: '?lang=fr', labels: ['Confidentialité', 'Confidentialité des candidats', 'Conditions d’utilisation'] },
+  { pathPrefix: 'de/', langQuery: '?lang=de', labels: ['Datenschutz', 'Datenschutz für Bewerbende', 'Nutzungsbedingungen'] },
 ];
 
 for (const group of pageGroups) {
@@ -207,16 +223,16 @@ for (const group of pageGroups) {
     assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
     assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
     assert.ok(!html.includes(`${group.prefix}legal/`), `${relativePath} must not link to the retired company-information page`);
-    for (const href of legalHrefs) {
-      const expectedHref = `${group.prefix}${href}`;
-      assert.ok(html.includes(`href="${expectedHref}"`), `${relativePath} must link to ${expectedHref}`);
-      assert.ok(existsSync(resolve(root, dirname(relativePath), expectedHref)), `${relativePath}: ${expectedHref} must resolve on disk`);
-    }
     const localizedLabels = localizedLegalLabels.find(({ pathPrefix }) => relativePath.startsWith(pathPrefix));
+    for (const href of legalHrefs) {
+      const expectedHref = `${group.prefix}${href}${localizedLabels?.langQuery || ''}`;
+      assert.ok(html.includes(`href="${expectedHref}"`), `${relativePath} must link to ${expectedHref}`);
+      assert.ok(existsSync(resolve(root, dirname(relativePath), `${group.prefix}${href}`)), `${relativePath}: ${expectedHref} must resolve on disk`);
+    }
     if (localizedLabels) {
       const legalNav = html.match(/<nav class="footer-legal-links"[^>]*>[\s\S]*?<\/nav>/i)?.[0] || '';
       for (const [index, label] of localizedLabels.labels.entries()) {
-        const expectedHref = `${group.prefix}${legalHrefs[index]}`;
+        const expectedHref = `${group.prefix}${legalHrefs[index]}${localizedLabels.langQuery}`;
         assert.ok(
           legalNav.includes(`<a href="${expectedHref}">${label}</a>`),
           `${relativePath} must label ${expectedHref} as ${JSON.stringify(label)}`,
