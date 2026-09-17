@@ -47,6 +47,15 @@ const LEGAL_LOCALES = Object.freeze({
 
 const POLICY_PATHS = Object.freeze(['../privacy/', '../applicant-privacy/', '../terms/']);
 
+function getSafeStorage(storage) {
+  if (storage !== undefined) return storage;
+  try {
+    return globalThis.localStorage;
+  } catch (error) {
+    return null;
+  }
+}
+
 export function resolveLegalLocale(search = '', storedLanguage = null) {
   let requestedLanguage = null;
   try {
@@ -70,22 +79,30 @@ export function localizedPolicyHref(href, language) {
 export function applyLegalLocale(
   doc = globalThis.document,
   search = globalThis.location?.search || '',
-  storage = globalThis.localStorage,
+  storage,
 ) {
   if (!doc) return 'en';
 
+  const safeStorage = getSafeStorage(storage);
   let storedLanguage = null;
   try {
-    storedLanguage = storage?.getItem('lm-lang');
+    storedLanguage = safeStorage?.getItem('lm-lang');
   } catch (error) {}
 
   const language = resolveLegalLocale(search, storedLanguage);
   const locale = getLegalLocale(language);
-  try {
-    storage?.setItem('lm-lang', language);
-  } catch (error) {}
 
   doc.documentElement.dataset.uiLang = language;
+  const headerBrand = doc.querySelector('.light-brand');
+  if (headerBrand) headerBrand.href = locale.home;
+  const contentPolicyLinks = [...doc.querySelectorAll(
+    '.legal-content a[href^="../privacy/"], .legal-content a[href^="../applicant-privacy/"], .legal-content a[href^="../terms/"]',
+  )];
+  contentPolicyLinks.forEach((link) => {
+    const href = link.getAttribute?.('href') || link.href;
+    link.href = localizedPolicyHref(href, language);
+  });
+
   const footer = doc.querySelector('footer');
   if (!footer) return language;
 
@@ -120,7 +137,6 @@ export function applyLegalLocale(
   const languageItems = [...footer.querySelectorAll('.lang-menu-list a[lang]')];
   languageItems.forEach((link) => {
     link.removeAttribute('aria-current');
-    if (link.lang === language) link.setAttribute('aria-current', 'page');
   });
   const languageLabel = footer.querySelector('.lang-menu-label');
   if (languageLabel) languageLabel.textContent = locale.languageLabel;
@@ -130,11 +146,12 @@ export function applyLegalLocale(
 
 export function setupLegalLanguageMenus(
   doc = globalThis.document,
-  storage = globalThis.localStorage,
+  storage,
   eventTarget = globalThis,
 ) {
   if (!doc) return 0;
 
+  const safeStorage = getSafeStorage(storage);
   const menus = [...doc.querySelectorAll('[data-lang-menu]')];
   menus.forEach((menu) => {
     const button = menu.querySelector('.lang-menu-button');
@@ -151,7 +168,7 @@ export function setupLegalLanguageMenus(
       const link = event.target.closest('a[lang]');
       if (!link) return;
       try {
-        storage?.setItem('lm-lang', link.lang);
+        safeStorage?.setItem('lm-lang', link.lang);
       } catch (error) {}
     });
     eventTarget?.addEventListener('click', (event) => {

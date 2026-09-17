@@ -107,14 +107,15 @@ assert.deepEqual(
 assert.equal(getLegalLocale('unsupported').languageLabel, 'English', 'unsupported locale data must fall back to English');
 assert.equal(applyLegalLocale(null), 'en', 'locale application must tolerate a missing document');
 
-function fakeElement({ lang = '', nextElementSibling = null } = {}) {
+function fakeElement({ href = '', lang = '', nextElementSibling = null } = {}) {
   const attributes = new Map();
   return {
-    href: '',
+    href,
     lang,
     nextElementSibling,
     textContent: '',
     attributes,
+    getAttribute(name) { return name === 'href' ? this.href : attributes.get(name); },
     setAttribute(name, value) { attributes.set(name, value); },
     removeAttribute(name) { attributes.delete(name); },
   };
@@ -130,6 +131,11 @@ function fakeElement({ lang = '', nextElementSibling = null } = {}) {
   const languageItems = ['en', 'zh-CN', 'fr', 'de'].map((lang) => fakeElement({ lang }));
   languageItems[0].setAttribute('aria-current', 'page');
   const languageLabel = fakeElement();
+  const headerBrand = fakeElement();
+  const contentPolicyLinks = [
+    fakeElement({ href: '../privacy/' }),
+    fakeElement({ href: '../applicant-privacy/?lang=de' }),
+  ];
   const exploreNav = {
     querySelector: (selector) => selector === 'p' ? exploreHeading : null,
     querySelectorAll: (selector) => selector === 'a' ? exploreLinks : [],
@@ -149,7 +155,8 @@ function fakeElement({ lang = '', nextElementSibling = null } = {}) {
   };
   const doc = {
     documentElement: { dataset: {} },
-    querySelector: (selector) => selector === 'footer' ? footer : null,
+    querySelector: (selector) => selector === 'footer' ? footer : selector === '.light-brand' ? headerBrand : null,
+    querySelectorAll: (selector) => selector.startsWith('.legal-content a[') ? contentPolicyLinks : [],
   };
   const writes = [];
   const storage = {
@@ -159,7 +166,13 @@ function fakeElement({ lang = '', nextElementSibling = null } = {}) {
 
   assert.equal(applyLegalLocale(doc, '?lang=fr', storage), 'fr', 'the legal footer must apply the URL-selected locale');
   assert.equal(doc.documentElement.dataset.uiLang, 'fr', 'the active UI locale must be exposed on the document root');
-  assert.deepEqual(writes, [['lm-lang', 'fr']], 'the URL-selected locale must become the stored preference');
+  assert.deepEqual(writes, [], 'loading a localized URL must not store a preference without a menu selection');
+  assert.equal(headerBrand.href, '../fr/', 'the header brand must preserve the selected locale without storage');
+  assert.deepEqual(
+    contentPolicyLinks.map(({ href }) => href),
+    ['../privacy/?lang=fr', '../applicant-privacy/?lang=fr'],
+    'inline policy links must preserve the selected locale without storage',
+  );
   assert.equal(brand.href, '../fr/', 'the footer brand must return to the localized home page');
   assert.equal(blurb.textContent, getLegalLocale('fr').blurb, 'the footer blurb must be localized');
   assert.equal(exploreHeading.textContent, 'Explorer', 'the footer section heading must be localized');
@@ -173,12 +186,12 @@ function fakeElement({ lang = '', nextElementSibling = null } = {}) {
     '../terms/?lang=fr',
   ]);
   assert.equal(languageItems[0].attributes.has('aria-current'), false, 'the stale language selection must be cleared');
-  assert.equal(languageItems[2].attributes.get('aria-current'), 'page', 'the active language must be marked current');
+  assert.equal(languageItems[2].attributes.has('aria-current'), false, 'homepage links must not claim to be the current legal page');
   assert.equal(languageLabel.textContent, 'Français', 'the language-menu label must show the active locale');
 }
 
 {
-  const doc = { documentElement: { dataset: {} }, querySelector: () => null };
+  const doc = { documentElement: { dataset: {} }, querySelector: () => null, querySelectorAll: () => [] };
   const unavailableStorage = {
     getItem() { throw new Error('blocked read'); },
     setItem() { throw new Error('blocked write'); },
@@ -188,10 +201,30 @@ function fakeElement({ lang = '', nextElementSibling = null } = {}) {
 }
 
 {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    get() { throw new Error('blocked property access'); },
+  });
+  try {
+    const doc = { documentElement: { dataset: {} }, querySelector: () => null, querySelectorAll: () => [] };
+    assert.doesNotThrow(
+      () => applyLegalLocale(doc, ''),
+      'locale initialization must tolerate browsers that block access to the localStorage property',
+    );
+    assert.equal(setupLegalLanguageMenus({ querySelectorAll: () => [] }), 0);
+  } finally {
+    if (descriptor) Object.defineProperty(globalThis, 'localStorage', descriptor);
+    else delete globalThis.localStorage;
+  }
+}
+
+{
   const sparseFooter = { querySelector: () => null, querySelectorAll: () => [] };
   const doc = {
     documentElement: { dataset: {} },
     querySelector: (selector) => selector === 'footer' ? sparseFooter : null,
+    querySelectorAll: () => [],
   };
   assert.equal(
     applyLegalLocale(doc, '?lang=de', null),
