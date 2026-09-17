@@ -91,8 +91,9 @@ PORT=3002 node .claude/serve-official-website.js
   `clamp(…, 4.444vw, 64px)` 这类公式写,768–1199 之间岗位行改成"名称 | 按钮"两列、亮点落到名称下方。
 
 ## 法律与隐私页面(2026-09-15 起)
-- 英文法律页为 `privacy/`、`applicant-privacy/`、`terms/`、`legal/`,均是直接维护的静态 HTML,不由生成器生成。
-- 首页和招聘页页脚都必须链接四个法律页;首页 Join 卡与所有招聘投递卡必须在邮件 CTA 前显示候选人隐私声明链接。
+- 英文政策页为 `privacy/`、`applicant-privacy/`、`terms/`,均是直接维护的静态 HTML,不由生成器生成。公开公司信息页 `legal/` 已于 2026-09-17 下线,不得恢复其入口或公司注册号、注册地址、代理机构、负责人姓名与职务。
+- 首页和招聘页页脚都必须链接三个政策页;首页 Join 卡与所有招聘投递卡必须在邮件 CTA 前显示候选人隐私声明链接。
+- 三个政策页页脚右下角必须保留语言菜单;由于政策正文当前只有英文,非英语选项链接到对应语言首页并记录 `localStorage["lm-lang"]`。
 - 改首页或招聘页的法律链接时,要改 `.claude/gen-home-langs.py` / `.claude/gen-careers.py` 并重新生成,不要只改生成出来的 HTML。
 - 验证命令是 `node tests/check-legal-pages.mjs`;它会检查法律文本、页面可见性、相对链接、外部资源和生成器输出。`.github/workflows/legal-pages.yml` 会在 PR 与main 分支 push 时运行同一检查。
 
