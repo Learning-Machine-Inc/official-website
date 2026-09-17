@@ -494,7 +494,6 @@ def page(L, pagefile, title, desc, body):
     return head + body + FOOTER.format(p=ui["prefix"], home=ui["home"], motion=MOTION,
                                        scroll=SMOOTH_SCROLL.format(prefix=ui["prefix"]),
                                        langmenu=footer_lang_menu(L, pagefile), langscript=LANG_MENU_SCRIPT,
-                                       applicant_notice=ui["applicant_notice"].format(p=ui["prefix"], lang_query=ui["lang_query"]),
                                        f_blurb=esc(blurb), f_explore=esc(explore), f_approach=esc(approach),
                                        f_careers=esc(careers), f_contact=esc(contact), f_copyright=esc(copyright),
                                        lang_query=ui["lang_query"],

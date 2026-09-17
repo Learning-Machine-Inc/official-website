@@ -128,4 +128,47 @@ export function applyLegalLocale(
   return language;
 }
 
-if (typeof document !== 'undefined') applyLegalLocale();
+export function setupLegalLanguageMenus(
+  doc = globalThis.document,
+  storage = globalThis.localStorage,
+  eventTarget = globalThis,
+) {
+  if (!doc) return 0;
+
+  const menus = [...doc.querySelectorAll('[data-lang-menu]')];
+  menus.forEach((menu) => {
+    const button = menu.querySelector('.lang-menu-button');
+    const list = menu.querySelector('.lang-menu-list');
+    if (!button || !list) return;
+
+    const setOpen = (open) => {
+      menu.dataset.open = String(open);
+      button.setAttribute('aria-expanded', String(open));
+      list.hidden = !open;
+    };
+    button.addEventListener('click', () => setOpen(list.hidden));
+    list.addEventListener('click', (event) => {
+      const link = event.target.closest('a[lang]');
+      if (!link) return;
+      try {
+        storage?.setItem('lm-lang', link.lang);
+      } catch (error) {}
+    });
+    eventTarget?.addEventListener('click', (event) => {
+      if (!menu.contains(event.target)) setOpen(false);
+    });
+    eventTarget?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !list.hidden) {
+        setOpen(false);
+        button.focus();
+      }
+    });
+  });
+
+  return menus.length;
+}
+
+if (typeof document !== 'undefined') {
+  applyLegalLocale();
+  setupLegalLanguageMenus();
+}

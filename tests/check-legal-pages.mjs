@@ -82,18 +82,179 @@ function assertVisibleElement(html, relativePath, pattern, label) {
 
 const legalLocaleModulePath = resolve(root, 'assets/legal-locale.mjs');
 assert.ok(existsSync(legalLocaleModulePath), 'the shared legal-page locale module must exist');
-const { getLegalLocale, localizedPolicyHref, resolveLegalLocale } = await import(pathToFileURL(legalLocaleModulePath));
+const legalLocaleModule = read('assets/legal-locale.mjs');
+const {
+  applyLegalLocale,
+  getLegalLocale,
+  localizedPolicyHref,
+  resolveLegalLocale,
+  setupLegalLanguageMenus,
+} = await import(pathToFileURL(legalLocaleModulePath));
 assert.equal(resolveLegalLocale('?lang=zh-CN', 'fr'), 'zh-CN', 'the URL language must override the stored preference');
 assert.equal(resolveLegalLocale('', 'de'), 'de', 'the stored preference must apply when the URL has no language');
 assert.equal(resolveLegalLocale('?lang=unsupported', 'fr'), 'fr', 'an unsupported URL language must fall back to the stored preference');
 assert.equal(resolveLegalLocale('', null), 'en', 'English must remain the fallback when no preference exists');
+assert.equal(resolveLegalLocale(Symbol('invalid search'), 'fr'), 'fr', 'an unreadable URL query must fall back to the stored preference');
 assert.equal(localizedPolicyHref('../terms/', 'zh-CN'), '../terms/?lang=zh-CN', 'policy links must retain Chinese context');
 assert.equal(localizedPolicyHref('../terms/', 'en'), '../terms/', 'English policy links must keep their clean URL');
+assert.equal(localizedPolicyHref('../terms/?lang=de', 'fr'), '../terms/?lang=fr', 'policy links must replace stale language queries');
+assert.equal(localizedPolicyHref('../terms/', 'unsupported'), '../terms/', 'unsupported languages must use the clean English URL');
 assert.deepEqual(
   getLegalLocale('zh-CN').policyLabels,
   ['隐私政策', '候选人隐私声明', '使用条款'],
   'the legal page must expose the Chinese policy-entry labels',
 );
+assert.equal(getLegalLocale('unsupported').languageLabel, 'English', 'unsupported locale data must fall back to English');
+assert.equal(applyLegalLocale(null), 'en', 'locale application must tolerate a missing document');
+
+function fakeElement({ lang = '', nextElementSibling = null } = {}) {
+  const attributes = new Map();
+  return {
+    href: '',
+    lang,
+    nextElementSibling,
+    textContent: '',
+    attributes,
+    setAttribute(name, value) { attributes.set(name, value); },
+    removeAttribute(name) { attributes.delete(name); },
+  };
+}
+
+{
+  const blurb = fakeElement();
+  const brand = fakeElement({ nextElementSibling: blurb });
+  const exploreHeading = fakeElement();
+  const exploreLinks = [fakeElement(), fakeElement(), fakeElement()];
+  const copyright = fakeElement();
+  const policyLinks = [fakeElement(), fakeElement(), fakeElement()];
+  const languageItems = ['en', 'zh-CN', 'fr', 'de'].map((lang) => fakeElement({ lang }));
+  languageItems[0].setAttribute('aria-current', 'page');
+  const languageLabel = fakeElement();
+  const exploreNav = {
+    querySelector: (selector) => selector === 'p' ? exploreHeading : null,
+    querySelectorAll: (selector) => selector === 'a' ? exploreLinks : [],
+  };
+  const footerMain = {
+    querySelector: (selector) => selector === '.footer-brand' ? brand : selector === 'nav' ? exploreNav : null,
+  };
+  const footer = {
+    querySelector: (selector) => ({
+      '.footer-main': footerMain,
+      '.footer-bottom > span': copyright,
+      '.lang-menu-label': languageLabel,
+    })[selector] || null,
+    querySelectorAll: (selector) => selector === '.footer-legal-links a'
+      ? policyLinks
+      : selector === '.lang-menu-list a[lang]' ? languageItems : [],
+  };
+  const doc = {
+    documentElement: { dataset: {} },
+    querySelector: (selector) => selector === 'footer' ? footer : null,
+  };
+  const writes = [];
+  const storage = {
+    getItem: () => 'de',
+    setItem: (key, value) => writes.push([key, value]),
+  };
+
+  assert.equal(applyLegalLocale(doc, '?lang=fr', storage), 'fr', 'the legal footer must apply the URL-selected locale');
+  assert.equal(doc.documentElement.dataset.uiLang, 'fr', 'the active UI locale must be exposed on the document root');
+  assert.deepEqual(writes, [['lm-lang', 'fr']], 'the URL-selected locale must become the stored preference');
+  assert.equal(brand.href, '../fr/', 'the footer brand must return to the localized home page');
+  assert.equal(blurb.textContent, getLegalLocale('fr').blurb, 'the footer blurb must be localized');
+  assert.equal(exploreHeading.textContent, 'Explorer', 'the footer section heading must be localized');
+  assert.deepEqual(exploreLinks.map(({ textContent }) => textContent), ['Approche', 'Carrières', 'Contact']);
+  assert.deepEqual(exploreLinks.map(({ href }) => href), ['../fr/#approach', '../fr/careers/', '']);
+  assert.equal(copyright.textContent, getLegalLocale('fr').copyright, 'the footer copyright must be localized');
+  assert.deepEqual(policyLinks.map(({ textContent }) => textContent), getLegalLocale('fr').policyLabels);
+  assert.deepEqual(policyLinks.map(({ href }) => href), [
+    '../privacy/?lang=fr',
+    '../applicant-privacy/?lang=fr',
+    '../terms/?lang=fr',
+  ]);
+  assert.equal(languageItems[0].attributes.has('aria-current'), false, 'the stale language selection must be cleared');
+  assert.equal(languageItems[2].attributes.get('aria-current'), 'page', 'the active language must be marked current');
+  assert.equal(languageLabel.textContent, 'Français', 'the language-menu label must show the active locale');
+}
+
+{
+  const doc = { documentElement: { dataset: {} }, querySelector: () => null };
+  const unavailableStorage = {
+    getItem() { throw new Error('blocked read'); },
+    setItem() { throw new Error('blocked write'); },
+  };
+  assert.equal(applyLegalLocale(doc, '', unavailableStorage), 'en', 'blocked storage and a missing footer must degrade to English');
+  assert.equal(doc.documentElement.dataset.uiLang, 'en', 'the no-footer path must still expose the resolved locale');
+}
+
+{
+  const sparseFooter = { querySelector: () => null, querySelectorAll: () => [] };
+  const doc = {
+    documentElement: { dataset: {} },
+    querySelector: (selector) => selector === 'footer' ? sparseFooter : null,
+  };
+  assert.equal(
+    applyLegalLocale(doc, '?lang=de', null),
+    'de',
+    'missing optional footer nodes must not prevent locale resolution',
+  );
+}
+
+{
+  function interactiveElement({ hidden = false } = {}) {
+    const listeners = new Map();
+    const attributes = new Map();
+    return {
+      hidden,
+      attributes,
+      focusCount: 0,
+      addEventListener(type, listener) { listeners.set(type, listener); },
+      dispatch(type, event = {}) { listeners.get(type)?.(event); },
+      focus() { this.focusCount += 1; },
+      setAttribute(name, value) { attributes.set(name, value); },
+    };
+  }
+
+  const button = interactiveElement();
+  const list = interactiveElement({ hidden: true });
+  const insideTarget = {};
+  const menu = {
+    dataset: {},
+    querySelector: (selector) => selector === '.lang-menu-button' ? button : selector === '.lang-menu-list' ? list : null,
+    contains: (target) => target === insideTarget,
+  };
+  const windowListeners = new Map();
+  const writes = [];
+  const storage = {
+    blocked: false,
+    setItem(key, value) {
+      if (this.blocked) throw new Error('blocked write');
+      writes.push([key, value]);
+    },
+  };
+  const doc = { querySelectorAll: (selector) => selector === '[data-lang-menu]' ? [menu] : [] };
+  const eventTarget = { addEventListener: (type, listener) => windowListeners.set(type, listener) };
+  assert.equal(setupLegalLanguageMenus(doc, storage, eventTarget), 1, 'the shared module must initialize the legal-page language menu');
+
+  button.dispatch('click');
+  assert.equal(list.hidden, false, 'clicking the language button must open the menu');
+  assert.equal(button.attributes.get('aria-expanded'), 'true', 'the open menu must expose its expanded state');
+  windowListeners.get('click')({ target: insideTarget });
+  assert.equal(list.hidden, false, 'clicking inside the menu must leave it open');
+  list.dispatch('click', { target: { closest: () => ({ lang: 'de' }) } });
+  assert.deepEqual(writes, [['lm-lang', 'de']], 'choosing a language must persist it before navigation');
+  storage.blocked = true;
+  assert.doesNotThrow(
+    () => list.dispatch('click', { target: { closest: () => ({ lang: 'fr' }) } }),
+    'language selection must tolerate blocked browser storage',
+  );
+  windowListeners.get('click')({ target: {} });
+  assert.equal(list.hidden, true, 'clicking outside the language menu must close it');
+  button.dispatch('click');
+  windowListeners.get('keydown')({ key: 'Escape' });
+  assert.equal(list.hidden, true, 'Escape must close the language menu');
+  assert.equal(button.focusCount, 1, 'Escape must restore focus to the language button');
+}
 
 for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   const html = read(relativePath);
@@ -130,7 +291,6 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   for (const href of ['../', '../zh-cn/', '../fr/', '../de/']) {
     assert.ok(html.includes(`href="${href}"`), `${relativePath} language menu must link to ${href}`);
   }
-  assert.match(html, /localStorage\.setItem\(['"]lm-lang['"]/, `${relativePath} language menu must remember the selected language`);
   assert.ok(html.includes('<script type="module" src="../assets/legal-locale.mjs"></script>'), `${relativePath} must apply the shared legal-page locale state`);
   assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
   assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
@@ -139,6 +299,8 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   }
   assert.doesNotMatch(html, /Where required, we use legally recognized safeguards/i, `${relativePath} must not claim unverified transfer safeguards are already in place`);
 }
+
+assert.match(legalLocaleModule, /setItem\(['"]lm-lang['"]/, 'the shared language menu must remember the selected language');
 
 assert.match(
   read('applicant-privacy/index.html'),
@@ -172,6 +334,10 @@ for (const href of legalHrefs) {
 }
 assert.ok(!careersGenerator.includes('href="{p}legal/"'), 'the careers generator must not emit the retired Legal link');
 assert.ok(!homeGenerator.includes('<a href="legal/">Legal</a>'), 'the home generator must not emit the retired Legal link');
+for (const detail of sensitiveCompanyDetails) {
+  assert.ok(!careersGenerator.includes(detail), `the careers generator must not expose ${JSON.stringify(detail)}`);
+  assert.ok(!homeGenerator.includes(detail), `the home generator must not expose ${JSON.stringify(detail)}`);
+}
 
 const pageGroups = [
   { files: ['index.html'], prefix: '' },
@@ -223,6 +389,9 @@ for (const group of pageGroups) {
     assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
     assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
     assert.ok(!html.includes(`${group.prefix}legal/`), `${relativePath} must not link to the retired company-information page`);
+    for (const detail of sensitiveCompanyDetails) {
+      assert.ok(!html.includes(detail), `${relativePath} must not expose ${JSON.stringify(detail)}`);
+    }
     const localizedLabels = localizedLegalLabels.find(({ pathPrefix }) => relativePath.startsWith(pathPrefix));
     for (const href of legalHrefs) {
       const expectedHref = `${group.prefix}${href}${localizedLabels?.langQuery || ''}`;
