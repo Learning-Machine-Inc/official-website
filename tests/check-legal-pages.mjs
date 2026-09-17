@@ -124,6 +124,12 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   assert.doesNotMatch(html, /Where required, we use legally recognized safeguards/i, `${relativePath} must not claim unverified transfer safeguards are already in place`);
 }
 
+assert.match(
+  read('applicant-privacy/index.html'),
+  /<h2>1\. Who this notice covers<\/h2>[\s\S]*?Contact us at <a href="mailto:official@learning-machine\.ai">official@learning-machine\.ai<\/a>\./i,
+  'the applicant notice introduction must use the official contact address',
+);
+
 for (const selector of ['.footer-bottom-actions', '.footer-legal-links', '.applicant-privacy-note', '.legal-main', '.legal-shell', '.legal-content']) {
   assert.ok(stylesheet.includes(selector), `styles.css must retain ${selector} styling`);
 }
