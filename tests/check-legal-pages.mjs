@@ -14,7 +14,6 @@ const legalPages = {
     'Google Workspace',
     'localStorage',
     'privacy@learning-machine.ai',
-    '3000 El Camino Real, Building 4, Palo Alto, CA 94306',
   ],
   'applicant-privacy/index.html': [
     'Applicant Privacy Notice',
@@ -33,21 +32,25 @@ const legalPages = {
     'employment',
     'privacy@learning-machine.ai',
   ],
-  'legal/index.html': [
-    'Legal Notice',
-    'Delaware File No. 10461530',
-    'January 6, 2026',
-    'Yikang Shen',
-    'Chief Executive Officer and Chief Scientist',
-    'Harvard Business Services, Inc.',
-    '16192 Coastal Highway, Lewes, Delaware 19958',
-  ],
 };
 
-const legalHrefs = ['privacy/', 'applicant-privacy/', 'terms/', 'legal/'];
+const legalHrefs = ['privacy/', 'applicant-privacy/', 'terms/'];
+const sensitiveCompanyDetails = [
+  'RGVsYXdhcmUgRmlsZSBOby4gMTA0NjE1MzA=',
+  'SmFudWFyeSA2LCAyMDI2',
+  'WWlrYW5nIFNoZW4=',
+  'Q2hpZWYgRXhlY3V0aXZlIE9mZmljZXIgYW5kIENoaWVmIFNjaWVudGlzdA==',
+  'SGFydmFyZCBCdXNpbmVzcyBTZXJ2aWNlcywgSW5jLg==',
+  'MTYxOTIgQ29hc3RhbCBIaWdod2F5',
+  'MzAwMCBFbCBDYW1pbm8gUmVhbA==',
+  'UGFsbyBBbHRvLCBDQSA5NDMwNg==',
+].map((value) => Buffer.from(value, 'base64').toString('utf8'));
+const retiredContactAddress = ['contact', 'learning-machine.ai'].join('@');
 const stylesheet = read('styles.css');
 const careersGenerator = read('.claude/gen-careers.py');
 const homeGenerator = read('.claude/gen-home-langs.py');
+
+assert.equal(existsSync(resolve(root, 'legal/index.html')), false, 'the public company-information page must be removed');
 
 function read(relativePath) {
   const absolutePath = resolve(root, relativePath);
@@ -93,6 +96,9 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   assertVisibleElement(html, relativePath, /<article class="legal-shell"([^>]*)>/i, 'legal document');
   assertVisibleElement(html, relativePath, /<div class="legal-content"([^>]*)>/i, 'legal policy content');
   assertVisibleElement(html, relativePath, /<div class="footer-bottom"([^>]*)>/i, 'footer bottom');
+  assertVisibleElement(html, relativePath, /<div class="footer-bottom-actions"([^>]*)>/i, 'footer actions');
+  assertVisibleElement(html, relativePath, /<nav class="footer-legal-links"([^>]*)>[\s\S]*?<\/nav>/i, 'footer legal navigation');
+  assertVisibleElement(html, relativePath, /<div class="lang-menu"([^>]*)\sdata-lang-menu>/i, 'footer language menu');
   for (const text of requiredText) {
     assert.ok(html.includes(text), `${relativePath} must include ${JSON.stringify(text)}`);
   }
@@ -101,10 +107,20 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
     assert.ok(html.includes(`href="${expectedHref}"`), `${relativePath} must link to ${expectedHref}`);
     assert.ok(existsSync(resolve(root, dirname(relativePath), expectedHref)), `${relativePath}: ${expectedHref} must resolve on disk`);
   }
+  assert.ok(!html.includes('href="../legal/"'), `${relativePath} must not link to the retired company-information page`);
   assert.ok(
     html.includes(`href="../${pageSlug}/" aria-current="page"`),
     `${relativePath} must identify the current legal page in its footer navigation`,
   );
+  for (const href of ['../', '../zh-cn/', '../fr/', '../de/']) {
+    assert.ok(html.includes(`href="${href}"`), `${relativePath} language menu must link to ${href}`);
+  }
+  assert.match(html, /localStorage\.setItem\(['"]lm-lang['"]/, `${relativePath} language menu must remember the selected language`);
+  assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
+  assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
+  for (const detail of sensitiveCompanyDetails) {
+    assert.ok(!html.includes(detail), `${relativePath} must not expose ${JSON.stringify(detail)}`);
+  }
   assert.doesNotMatch(html, /Where required, we use legally recognized safeguards/i, `${relativePath} must not claim unverified transfer safeguards are already in place`);
 }
 
@@ -120,9 +136,15 @@ assert.match(careersGenerator, /REV = "figma-1617-19731-v49"/, 'the careers gene
 assert.match(careersGenerator, /class="applicant-privacy-note"[\s\S]*\{applicant_notice\}/, 'the careers generator must emit the localized applicant notice');
 assert.doesNotMatch(careersGenerator, /Learning Machine Co\./, 'the careers generator must not restore the former company name');
 assert.doesNotMatch(homeGenerator, /Learning Machine Co\./, 'the home-page generator must not restore the former company name');
+assert.ok(!careersGenerator.includes(retiredContactAddress), 'the careers generator must not restore the retired contact address');
+assert.ok(!homeGenerator.includes(retiredContactAddress), 'the home-page generator must not restore the retired contact address');
+assert.match(careersGenerator, /official@learning-machine\.ai/, 'the careers generator must emit the official contact address');
+assert.match(homeGenerator, /official@learning-machine\.ai/, 'the home-page generator must emit the official contact address');
 for (const href of legalHrefs) {
   assert.ok(careersGenerator.includes(`href="{p}${href}"`), `the careers generator must emit ${href} links`);
 }
+assert.ok(!careersGenerator.includes('href="{p}legal/"'), 'the careers generator must not emit the retired Legal link');
+assert.ok(!homeGenerator.includes('<a href="legal/">Legal</a>'), 'the home generator must not emit the retired Legal link');
 
 const pageGroups = [
   { files: ['index.html'], prefix: '' },
@@ -165,6 +187,9 @@ for (const group of pageGroups) {
     assertVisibleElement(html, relativePath, /<div class="footer-bottom-actions"([^>]*)>/i, 'footer actions');
     assertVisibleElement(html, relativePath, /<nav class="footer-legal-links"([^>]*)>[\s\S]*?<\/nav>/i, 'footer legal navigation');
     assert.ok(html.includes(`${group.prefix}applicant-privacy/`), `${relativePath} must link to the Applicant Privacy Notice`);
+    assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
+    assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
+    assert.ok(!html.includes(`${group.prefix}legal/`), `${relativePath} must not link to the retired company-information page`);
     for (const href of legalHrefs) {
       const expectedHref = `${group.prefix}${href}`;
       assert.ok(html.includes(`href="${expectedHref}"`), `${relativePath} must link to ${expectedHref}`);

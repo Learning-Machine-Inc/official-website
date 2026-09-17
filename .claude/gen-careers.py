@@ -87,13 +87,13 @@ HEAD = """<!doctype html>
 <body class="careers-page">
   <header class="light-header">
     <a href="{home}" class="light-brand" aria-label="Learning Machine home"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><img class="brand-union" src="{p}assets/figma-106/0fc9ec76b79449656b5cb20fb65111dac0da7f74.svg" alt=""><img class="brand-base" src="{p}assets/figma-106/bb0bb4d59834c3b5c02cce512ab83e6722cc4dc8.svg" alt=""><img class="brand-vector" src="{p}assets/figma-106/e4e75da9be77e4b5d88637388247ffcbc5fbd42b.svg" alt=""></span><span class="brand-wordmark">Learning Machine</span></span></a>
-    <nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:contact@learning-machine.ai">{nav_contact}</a></nav>
+    <nav class="light-nav" aria-label="Primary navigation"><a class="light-nav-contact" href="mailto:official@learning-machine.ai">{nav_contact}</a></nav>
   </header>
   <main class="careers-main">
 """
 
 FOOTER = """  </main>
-  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>{f_blurb}</p><a class="footer-email" href="mailto:contact@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>contact@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>{f_explore}</p><a href="{home}#approach">{f_approach}</a><a href="./">{f_careers}</a><a href="mailto:contact@learning-machine.ai">{f_contact}</a></nav></div><div class="footer-bottom"><span>{f_copyright}</span><div class="footer-bottom-actions"><nav class="footer-legal-links" aria-label="Legal"><a href="{p}privacy/">Privacy</a><a href="{p}applicant-privacy/">Applicant Privacy</a><a href="{p}terms/">Terms</a><a href="{p}legal/">Legal</a></nav>{langmenu}</div></div></footer>
+  <footer><div class="footer-main"><div><a href="{home}" class="footer-brand"><img class="footer-brand-icon" src="{p}assets/icons/lm-icon-white.svg" alt="">Learning Machine</a><p>{f_blurb}</p><a class="footer-email" href="mailto:official@learning-machine.ai"><span class="footer-email-icon-wrap" aria-hidden="true"><img class="footer-email-icon" src="{p}assets/figma-106/a4b3051739e035e1583a24a11a07115ada55bc08.svg" alt=""></span><span>official@learning-machine.ai</span></a></div><nav aria-label="Footer navigation"><p>{f_explore}</p><a href="{home}#approach">{f_approach}</a><a href="./">{f_careers}</a><a href="mailto:official@learning-machine.ai">{f_contact}</a></nav></div><div class="footer-bottom"><span>{f_copyright}</span><div class="footer-bottom-actions"><nav class="footer-legal-links" aria-label="Legal"><a href="{p}privacy/">Privacy</a><a href="{p}applicant-privacy/">Applicant Privacy</a><a href="{p}terms/">Terms</a></nav>{langmenu}</div></div></footer>
 {motion}
 {scroll}
 {langscript}
