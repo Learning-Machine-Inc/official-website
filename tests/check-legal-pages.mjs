@@ -188,6 +188,12 @@ const pageGroups = [
   },
 ];
 
+const localizedLegalLabels = [
+  { pathPrefix: 'zh-cn/', labels: ['隐私政策', '候选人隐私声明', '使用条款'] },
+  { pathPrefix: 'fr/', labels: ['Confidentialité', 'Confidentialité des candidats', 'Conditions d’utilisation'] },
+  { pathPrefix: 'de/', labels: ['Datenschutz', 'Datenschutz für Bewerbende', 'Nutzungsbedingungen'] },
+];
+
 for (const group of pageGroups) {
   for (const relativePath of group.files) {
     const html = read(relativePath);
@@ -205,6 +211,17 @@ for (const group of pageGroups) {
       const expectedHref = `${group.prefix}${href}`;
       assert.ok(html.includes(`href="${expectedHref}"`), `${relativePath} must link to ${expectedHref}`);
       assert.ok(existsSync(resolve(root, dirname(relativePath), expectedHref)), `${relativePath}: ${expectedHref} must resolve on disk`);
+    }
+    const localizedLabels = localizedLegalLabels.find(({ pathPrefix }) => relativePath.startsWith(pathPrefix));
+    if (localizedLabels) {
+      const legalNav = html.match(/<nav class="footer-legal-links"[^>]*>[\s\S]*?<\/nav>/i)?.[0] || '';
+      for (const [index, label] of localizedLabels.labels.entries()) {
+        const expectedHref = `${group.prefix}${legalHrefs[index]}`;
+        assert.ok(
+          legalNav.includes(`<a href="${expectedHref}">${label}</a>`),
+          `${relativePath} must label ${expectedHref} as ${JSON.stringify(label)}`,
+        );
+      }
     }
   }
 }
