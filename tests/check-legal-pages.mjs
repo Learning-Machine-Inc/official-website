@@ -30,7 +30,7 @@ const legalPages = {
     'Learning Machine, Inc.',
     'intellectual property',
     'employment',
-    'privacy@learning-machine.ai',
+    'official@learning-machine.ai',
   ],
 };
 
@@ -128,6 +128,11 @@ assert.match(
   read('applicant-privacy/index.html'),
   /<h2>1\. Who this notice covers<\/h2>[\s\S]*?Contact us at <a href="mailto:official@learning-machine\.ai">official@learning-machine\.ai<\/a>\./i,
   'the applicant notice introduction must use the official contact address',
+);
+assert.match(
+  read('terms/index.html'),
+  /<h2>12\. Changes, severability, and contact<\/h2>[\s\S]*?Questions may be sent to <a href="mailto:official@learning-machine\.ai">official@learning-machine\.ai<\/a>\./i,
+  'the terms contact section must use the official contact address',
 );
 
 for (const selector of ['.footer-bottom-actions', '.footer-legal-links', '.applicant-privacy-note', '.legal-main', '.legal-shell', '.legal-content']) {
