@@ -7,7 +7,8 @@ The site is published with GitHub Pages from the `main` branch.
 ## Public pages
 
 - Multilingual home and careers pages are available in English, Simplified Chinese, French, and German.
-- English legal pages live at `/privacy/`, `/applicant-privacy/`, `/terms/`, and `/legal/`.
+- English policy pages live at `/privacy/`, `/applicant-privacy/`, and `/terms/`.
+- Policy links from localized home and careers pages preserve the selected site language.
 
 ## Validate legal pages
 
