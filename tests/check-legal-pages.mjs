@@ -13,7 +13,7 @@ const legalPages = {
     'GitHub Pages',
     'Google Workspace',
     'localStorage',
-    'privacy@learning-machine.ai',
+    'privacy@learningmachine.ai',
   ],
   'applicant-privacy/index.html': [
     'Applicant Privacy Notice',
@@ -23,14 +23,14 @@ const legalPages = {
     'European Union',
     'China',
     'United States',
-    'privacy@learning-machine.ai',
+    'privacy@learningmachine.ai',
   ],
   'terms/index.html': [
     'Terms of Use',
     'Learning Machine, Inc.',
     'intellectual property',
     'employment',
-    'official@learning-machine.ai',
+    'official@learningmachine.ai',
   ],
 };
 
@@ -46,6 +46,7 @@ const sensitiveCompanyDetails = [
   'UGFsbyBBbHRvLCBDQSA5NDMwNg==',
 ].map((value) => Buffer.from(value, 'base64').toString('utf8'));
 const retiredContactAddress = ['contact', 'learning-machine.ai'].join('@');
+const legacyDomain = 'learning-machine.ai';
 const stylesheet = read('styles.css');
 const careersGenerator = read('.claude/gen-careers.py');
 const homeGenerator = read('.claude/gen-home-langs.py');
@@ -58,6 +59,8 @@ function read(relativePath) {
   return readFileSync(absolutePath, 'utf8');
 }
 
+assert.equal(read('CNAME').trim(), 'learningmachine.ai', 'GitHub Pages must publish the new primary domain');
+
 function assertNoExternalResources(html, relativePath) {
   const resourcePattern = /<(script|img|iframe|link)\b[^>]*?\b(?:src|href)=["']([^"']+)["'][^>]*>/gi;
   for (const match of html.matchAll(resourcePattern)) {
@@ -65,7 +68,7 @@ function assertNoExternalResources(html, relativePath) {
     if (!/^(?:https?:)?\/\//i.test(resource)) continue;
     const isMetadataLink = tag === 'link'
       && /\brel=["'](?:canonical|alternate)["']/i.test(match[0])
-      && /^https:\/\/learning-machine\.ai\//i.test(resource);
+      && /^https:\/\/learningmachine\.ai\//i.test(resource);
     assert.ok(isMetadataLink, `${relativePath} must not load external resource ${resource}`);
   }
   for (const match of html.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -295,7 +298,7 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
   assert.match(html, /<html lang="en"/i, `${relativePath} must be the English canonical page`);
   assert.match(html, /<meta name="viewport"/i, `${relativePath} must be responsive`);
   assert.ok(
-    html.includes(`<link rel="canonical" href="https://learning-machine.ai/${pageSlug}/">`),
+    html.includes(`<link rel="canonical" href="https://learningmachine.ai/${pageSlug}/">`),
     `${relativePath} must declare its public canonical URL`,
   );
   assert.ok(html.includes('href="../styles.css?rev=legal-v1"'), `${relativePath} must load the legal-page stylesheet`);
@@ -325,7 +328,8 @@ for (const [relativePath, requiredText] of Object.entries(legalPages)) {
     assert.ok(html.includes(`href="${href}"`), `${relativePath} language menu must link to ${href}`);
   }
   assert.ok(html.includes('<script type="module" src="../assets/legal-locale.mjs"></script>'), `${relativePath} must apply the shared legal-page locale state`);
-  assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
+  assert.ok(html.includes('official@learningmachine.ai'), `${relativePath} must expose the official contact address`);
+  assert.ok(!html.includes(legacyDomain), `${relativePath} must not expose the legacy domain`);
   assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
   for (const detail of sensitiveCompanyDetails) {
     assert.ok(!html.includes(detail), `${relativePath} must not expose ${JSON.stringify(detail)}`);
@@ -337,12 +341,12 @@ assert.match(legalLocaleModule, /setItem\(['"]lm-lang['"]/, 'the shared language
 
 assert.match(
   read('applicant-privacy/index.html'),
-  /<h2>1\. Who this notice covers<\/h2>[\s\S]*?Contact us at <a href="mailto:official@learning-machine\.ai">official@learning-machine\.ai<\/a>\./i,
+  /<h2>1\. Who this notice covers<\/h2>[\s\S]*?Contact us at <a href="mailto:official@learningmachine\.ai">official@learningmachine\.ai<\/a>\./i,
   'the applicant notice introduction must use the official contact address',
 );
 assert.match(
   read('terms/index.html'),
-  /<h2>12\. Changes, severability, and contact<\/h2>[\s\S]*?Questions may be sent to <a href="mailto:official@learning-machine\.ai">official@learning-machine\.ai<\/a>\./i,
+  /<h2>12\. Changes, severability, and contact<\/h2>[\s\S]*?Questions may be sent to <a href="mailto:official@learningmachine\.ai">official@learningmachine\.ai<\/a>\./i,
   'the terms contact section must use the official contact address',
 );
 
@@ -360,8 +364,10 @@ assert.doesNotMatch(careersGenerator, /Learning Machine Co\./, 'the careers gene
 assert.doesNotMatch(homeGenerator, /Learning Machine Co\./, 'the home-page generator must not restore the former company name');
 assert.ok(!careersGenerator.includes(retiredContactAddress), 'the careers generator must not restore the retired contact address');
 assert.ok(!homeGenerator.includes(retiredContactAddress), 'the home-page generator must not restore the retired contact address');
-assert.match(careersGenerator, /official@learning-machine\.ai/, 'the careers generator must emit the official contact address');
-assert.match(homeGenerator, /official@learning-machine\.ai/, 'the home-page generator must emit the official contact address');
+assert.match(careersGenerator, /official@learningmachine\.ai/, 'the careers generator must emit the official contact address');
+assert.match(homeGenerator, /official@learningmachine\.ai/, 'the home-page generator must emit the official contact address');
+assert.ok(!careersGenerator.includes(legacyDomain), 'the careers generator must not emit the legacy domain');
+assert.ok(!homeGenerator.includes(legacyDomain), 'the home-page generator must not emit the legacy domain');
 for (const href of legalHrefs) {
   assert.ok(careersGenerator.includes(`href="{p}${href}{lang_query}"`), `the careers generator must emit language-aware ${href} links`);
 }
@@ -419,7 +425,8 @@ for (const group of pageGroups) {
     assertVisibleElement(html, relativePath, /<div class="footer-bottom-actions"([^>]*)>/i, 'footer actions');
     assertVisibleElement(html, relativePath, /<nav class="footer-legal-links"([^>]*)>[\s\S]*?<\/nav>/i, 'footer legal navigation');
     assert.ok(html.includes(`${group.prefix}applicant-privacy/`), `${relativePath} must link to the Applicant Privacy Notice`);
-    assert.ok(html.includes('official@learning-machine.ai'), `${relativePath} must expose the official contact address`);
+    assert.ok(html.includes('official@learningmachine.ai'), `${relativePath} must expose the official contact address`);
+    assert.ok(!html.includes(legacyDomain), `${relativePath} must not expose the legacy domain`);
     assert.ok(!html.includes(retiredContactAddress), `${relativePath} must not expose the retired contact address`);
     assert.ok(!html.includes(`${group.prefix}legal/`), `${relativePath} must not link to the retired company-information page`);
     for (const detail of sensitiveCompanyDetails) {
@@ -460,7 +467,7 @@ for (const group of pageGroups.slice(2)) {
     assertVisibleElement(html, relativePath, /<p class="applicant-privacy-note"([^>]*)>[\s\S]*?<\/p>/i, 'applicant privacy notice');
     assert.match(
       html,
-      new RegExp(`<p class="applicant-privacy-note">[\\s\\S]*${expectedNotice}[\\s\\S]*<\\/p>[\\s\\S]*mailto:careers@learning-machine\\.ai`, 'i'),
+      new RegExp(`<p class="applicant-privacy-note">[\\s\\S]*${expectedNotice}[\\s\\S]*<\\/p>[\\s\\S]*mailto:careers@learningmachine\\.ai`, 'i'),
       `${relativePath} must show the applicant notice before the application action`,
     );
   }
@@ -473,7 +480,7 @@ for (const group of pageGroups.slice(0, 2)) {
     assertVisibleElement(html, relativePath, /<p class="join-privacy-note"([^>]*)>[\s\S]*?<\/p>/i, 'homepage applicant privacy notice');
     assert.match(
       html,
-      /<section id="join"[\s\S]*?class="join-privacy-note"[\s\S]*?applicant-privacy\/[\s\S]*?mailto:careers@learning-machine\.ai/i,
+      /<section id="join"[\s\S]*?class="join-privacy-note"[\s\S]*?applicant-privacy\/[\s\S]*?mailto:careers@learningmachine\.ai/i,
       `${relativePath} must show the applicant notice before its direct careers email CTA`,
     );
   }

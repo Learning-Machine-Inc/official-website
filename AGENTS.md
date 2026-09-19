@@ -2,7 +2,7 @@
 
 ## 项目概况
 - 纯静态站点:包含多语言首页、招聘页与英文法律页。无构建步骤、无包依赖、无框架。
-- 部署:GitHub Pages,`main` 分支发布到 learning-machine.ai。当前开发分支 `feat/website-local`。
+- 部署:GitHub Pages,`main` 分支发布到 learningmachine.ai。当前开发分支 `feat/website-local`。
 - 本地预览(自带 live-reload,改文件浏览器自动刷新):
 
 ```bash
