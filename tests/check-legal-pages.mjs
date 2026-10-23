@@ -358,7 +358,7 @@ for (const selector of ['footer-bottom', 'footer-bottom-actions', 'footer-legal-
   assert.doesNotMatch(stylesheet, hidingRule, `styles.css must not hide .${selector}`);
 }
 
-assert.match(careersGenerator, /REV = "figma-1617-19731-v49"/, 'the careers generator must emit the current stylesheet revision');
+assert.match(careersGenerator, /REV = "figma-1617-19731-v50"/, 'the careers generator must emit the current stylesheet revision');
 assert.match(careersGenerator, /class="applicant-privacy-note"[\s\S]*\{applicant_notice\}/, 'the careers generator must emit the localized applicant notice');
 assert.doesNotMatch(careersGenerator, /Learning Machine Co\./, 'the careers generator must not restore the former company name');
 assert.doesNotMatch(homeGenerator, /Learning Machine Co\./, 'the home-page generator must not restore the former company name');
@@ -419,7 +419,7 @@ for (const group of pageGroups) {
   for (const relativePath of group.files) {
     const html = read(relativePath);
     assert.ok(html.includes('Learning Machine, Inc.'), `${relativePath} must use the legal company name`);
-    assert.match(html, /styles\.css\?rev=figma-1617-19731-v49/, `${relativePath} must use the current stylesheet revision`);
+    assert.match(html, /styles\.css\?rev=figma-1617-19731-v50/, `${relativePath} must use the current stylesheet revision`);
     assertNoExternalResources(html, relativePath);
     assertVisibleElement(html, relativePath, /<div class="footer-bottom"([^>]*)>/i, 'footer bottom');
     assertVisibleElement(html, relativePath, /<div class="footer-bottom-actions"([^>]*)>/i, 'footer actions');
