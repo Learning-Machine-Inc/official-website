@@ -304,6 +304,9 @@ html[lang="zh-CN"] .light-join-card > p:not(.eyebrow) { position:relative; left:
 .light-join-card .join-actions { gap:14px; margin-top:14.7px; }
 .light-join-card .button-dark { color:#fff; min-width:136px; padding:0 30px; }
 
+/* Heading line breaks are layout, including when motion or JavaScript is disabled. */
+.light-main .motion-line { display:block; }
+
 /* Scroll-led reveals: restrained, long easing inspired by Ironhill's narrative pacing. */
 .motion-ready .light-main .motion-reveal,
 .motion-ready .light-main .motion-image,
@@ -311,7 +314,7 @@ html[lang="zh-CN"] .light-join-card > p:not(.eyebrow) { position:relative; left:
 .motion-ready .light-main .motion-card { opacity:0; }
 .motion-ready .light-main .motion-reveal { transform:translateY(42px); transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1); }
 .motion-ready .light-main .motion-image { transform:translateY(28px) scale(1.035); transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.4s cubic-bezier(.22,1,.36,1); }
-.motion-ready .light-main .motion-line { display:block; transform:translateY(108%); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1); }
+.motion-ready .light-main .motion-line { transform:translateY(108%); transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1); }
 .motion-ready .light-main .motion-line:nth-child(2) { transition-delay:.14s; }
 .motion-ready .light-main .motion-line:nth-child(3) { transition-delay:.28s; }
 .motion-ready .light-main .light-hero-desc .light-hero-kicker { transition-delay:.7s; }

@@ -12,7 +12,7 @@ import html, os, posixpath
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://learningmachine.ai"
-REV = "figma-1617-19731-v49"
+REV = "figma-1617-19731-v50"
 EMAIL = "careers@learningmachine.ai"
 
 # Footer language menu, in display order: (html lang code, label, UI key).

@@ -10,6 +10,8 @@ The site is published with GitHub Pages from the `main` branch.
 - English policy pages live at `/privacy/`, `/applicant-privacy/`, and `/terms/`.
 - Policy links from localized home and careers pages preserve the selected site language.
 
+Home-page heading line breaks are part of the base layout and remain intact with reduced motion or JavaScript disabled.
+
 ## Validate legal pages
 
 Run the same link, content, and generator checks used by CI:
